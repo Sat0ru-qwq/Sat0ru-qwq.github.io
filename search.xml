@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>SQL注入 二开desu</title>
+    <url>/2024/07/08/SQL%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[<h1 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h1>]]></content>
+      <categories>
+        <category>OWASP</category>
+      </categories>
+      <tags>
+        <tag>bypass</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Burpsuite 从入门到精通desu</title>
     <url>/2024/07/08/Burpsuite%20%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/</url>
     <content><![CDATA[<h1 id="Burpsuite从入门到入土"><a href="#Burpsuite从入门到入土" class="headerlink" title="Burpsuite从入门到入土"></a>Burpsuite从入门到入土</h1><p>在Burp suite的使用中，会出现如下的选项</p>
@@ -222,14 +233,12 @@
 <p> 视图控制（View） 这个选项是用来控制Repeater的视图布局。</p>
 <p> 其他操作（Action） 通过子菜单方式，指向Burp的其他工具组件中</p>
 ]]></content>
+      <categories>
+        <category>Penetration Testing</category>
+      </categories>
       <tags>
         <tag>tools</tag>
       </tags>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2024/07/08/SQL%E6%B3%A8%E5%85%A5/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title></title>
