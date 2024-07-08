@@ -10,7 +10,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="不当了 不当高手！,SQL注入"> 
+    <meta name="description" content="不当了 不当高手！,SQL注入二开本教程基于SQL i-Labs
+基本原理和概念简介SQL注入是黑客攻击最常见的方法，SQL注入作为OWASP中四大Web应用程序十大安全漏洞之一，也可以被一些没有太多网络安全技术“脚本,"> 
     <meta name="author" content="Satoru"> 
     <link rel="alternative" href="atom.xml" title="Sat0ru_G0j0" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -19,7 +20,8 @@
     
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:title" content="SQL注入 二开desu - Sat0ru_G0j0"/>
-    <meta name="twitter:description" content="不当了 不当高手！,SQL注入"/>
+    <meta name="twitter:description" content="不当了 不当高手！,SQL注入二开本教程基于SQL i-Labs
+基本原理和概念简介SQL注入是黑客攻击最常见的方法，SQL注入作为OWASP中四大Web应用程序十大安全漏洞之一，也可以被一些没有太多网络安全技术“脚本,"/>
     
     
     
@@ -27,7 +29,8 @@
     <meta property="og:site_name" content="Sat0ru_G0j0"/>
     <meta property="og:type" content="object"/>
     <meta property="og:title" content="SQL注入 二开desu - Sat0ru_G0j0"/>
-    <meta property="og:description" content="不当了 不当高手！,SQL注入"/>
+    <meta property="og:description" content="不当了 不当高手！,SQL注入二开本教程基于SQL i-Labs
+基本原理和概念简介SQL注入是黑客攻击最常见的方法，SQL注入作为OWASP中四大Web应用程序十大安全漏洞之一，也可以被一些没有太多网络安全技术“脚本,"/>
     
 <link rel="stylesheet" href="/css/diaspora.css">
 
@@ -69,7 +72,55 @@
 
         </div>
         <div class="content markdown">
-            <h1 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h1>
+            <h1 id="SQL注入二开"><a href="#SQL注入二开" class="headerlink" title="SQL注入二开"></a>SQL注入二开</h1><p>本教程基于SQL i-Labs</p>
+<h2 id="基本原理和概念简介"><a href="#基本原理和概念简介" class="headerlink" title="基本原理和概念简介"></a>基本原理和概念简介</h2><p>SQL注入是黑客攻击最常见的方法，SQL注入作为OWASP中四大Web应用程序十大安全漏洞之一，也可以被一些没有太多网络安全技术“脚本小子”利用，因此掌握SQL注入原理和预防机制非常重要</p>
+<h2 id="HOW-to-build-SQLI-Lab"><a href="#HOW-to-build-SQLI-Lab" class="headerlink" title="HOW to build SQLI-Lab"></a>HOW to build SQLI-Lab</h2><h3 id="简单的部署"><a href="#简单的部署" class="headerlink" title="简单的部署"></a>简单的部署</h3><p>图方便的话 直接通过Docker部署就可以了</p>
+<p>也可以部署在Web应用系统平台，</p>
+<h3 id="从０开始部署"><a href="#从０开始部署" class="headerlink" title="从０开始部署"></a>从０开始部署</h3><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708172147084.png" alt="image-20240708172147084"></p>
+<h3 id="Web应用程序系统"><a href="#Web应用程序系统" class="headerlink" title="Web应用程序系统"></a>Web应用程序系统</h3><p>Web应用程序系统的总体体系结构如图一所示</p>
+<p>客户端是浏览器，服务端通常包括了Web服务器，数据库服务器和高级语言解释器，典型的Web服务器架构包括</p>
+<p>Apache+PHP+MySQL</p>
+<p>IIS＋ASP+MYSQL等</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708171810391.png" alt="image-20240708171810391"></p>
+<h2 id="HOW-does-it-form-–SQL-INJECTION"><a href="#HOW-does-it-form-–SQL-INJECTION" class="headerlink" title="HOW does it form –SQL INJECTION"></a>HOW does it form –SQL INJECTION</h2><p>SQL注入本质是攻击者在Web表单或者URL中插入SQL命令或者片段到查询字符串中,当Web服务器没有严格验证输入和传递字符串的有效性时,攻击者就可以达到<strong>欺骗数据库服务器</strong>,执行恶意SQL命令的效果</p>
+<p>在此之前还要了解一个概念’隐式转换’</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708173609585.png" alt="image-20240708173609585"></p>
+<h3 id="SQL-INJECTION-LIST"><a href="#SQL-INJECTION-LIST" class="headerlink" title="SQL INJECTION LIST"></a>SQL INJECTION LIST</h3><p>包括了</p>
+<p>同义SQL注入,联合注入,基于报错的注入,盲注.</p>
+<h4 id="Tautologic-SQL注入-真理SQL"><a href="#Tautologic-SQL注入-真理SQL" class="headerlink" title="Tautologic SQL注入(真理SQL)"></a>Tautologic SQL注入(真理SQL)</h4><p>这是一种简单的攻击方法,在系统原SQL命令中插入了一个tautologic(常为正确的)条件子句,使原SQL语句的条件限定不起作用.</p>
+<h4 id="联合SQL注入"><a href="#联合SQL注入" class="headerlink" title="联合SQL注入"></a>联合SQL注入</h4><p>本质上利用了SQL命令中的联合查询,从而可以执行插入的查询,从特定的数据表中窃取信息</p>
+<p>建议在此之前 先学会基本的SQL注入的增删改查,并清除SQL库表的结构如何</p>
+<h4 id="基于报错的SQL注入"><a href="#基于报错的SQL注入" class="headerlink" title="基于报错的SQL注入"></a>基于报错的SQL注入</h4><p>攻击者将格式错误的SQL命令作为攻击负载使系统返回一些报错,从而使系统返回一些过度暗示的信息</p>
+<p>比如说Order by 1—–n(列溢出报错)</p>
+<h4 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h4><p>对于盲注攻击,攻击者会构造一些SQL查询条件,系统对这些查询条件的不同状态会有不同响应,进而获得系统的内部信息</p>
+<h2 id="SQL-injection-Begin"><a href="#SQL-injection-Begin" class="headerlink" title="SQL injection Begin"></a>SQL injection Begin</h2><h3 id="数字型—最基本的检验"><a href="#数字型—最基本的检验" class="headerlink" title="数字型—最基本的检验"></a>数字型—最基本的检验</h3><p>数字型可以检验程序本身是否有对用户的输入做任何的额外处理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">------------------------测试步骤-----------------------</span><br><span class="line">1.加单引号</span><br><span class="line">URL:www.text.com/text.php?id=1&#x27;]</span><br><span class="line">对应数据服务器响应的SQL命令：</span><br><span class="line">select * from table where id =1&#x27;</span><br><span class="line">这时SQL语句出错，程序无法从数据库中查询出数据，此时可以判断出大概率存在注入，因为只有服务器将对应的单引号一起当作SQL语句执行了才会出现报错，但这也并不绝对，也有可能是程序本身的问题</span><br><span class="line">2.加 and 1=1</span><br><span class="line">URL：www.text.com/text.php?id=1 and 1=1</span><br><span class="line">对应数据服务器响应的SQL命令：</span><br><span class="line">select * from table where id =1 and 1=1</span><br><span class="line">这时语句执行一定是正常的，因为加入了tautologic式的条件子句</span><br><span class="line">3.加 and 1=2</span><br><span class="line">URL：www.text.com/text.php?id=1 and 1=2</span><br><span class="line">对应数据服务器响应的SQL命令</span><br><span class="line">select * from table where id =1 and 1=2</span><br><span class="line">这时语句可以正常执行但无法查询出任何结构，返回数据与原始网页会存在一定的差异</span><br></pre></td></tr></table></figure>
+
+<p>如果这三个payload传入过后同上述代码块中提出的响应是一致的，那么程序本身就是并没有对用户的输入做任何额外处理的，则可以判断该URL存在数字型注入</p>
+<h3 id="字符型"><a href="#字符型" class="headerlink" title="字符型"></a>字符型</h3><p>当传入的参数类型为字符串时，若存在漏洞则称为字符型漏洞，字符型和数字型最大的一个区别在于数字型不需要单引号来闭合而字符串一般需要单引号来闭合对应传入的参数</p>
+<p>字符型语句如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from table where id = ‘admin’</span><br></pre></td></tr></table></figure>
+
+<p>因此在构造payload时通过闭合单引号可以成功执行语句</p>
+<p>比方</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708200640557.png" alt="image-20240708200640557"></p>
+<p>–为什么要这么做</p>
+<p>首先服务端要求我们传入的参数是字符型 在传入的过程中需要将我们自己的恶意指令注入就需要首先满足隐式转换的条件–即先让它接收到需要的字符型变量，然后再通过一些条件子句代入我们自己的语句</p>
+<p>也就是说 我们可以这么做</p>
+<p>原本的查询语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from table where name =&#x27;（用户输入点）&#x27;+后续语句</span><br></pre></td></tr></table></figure>
+
+<p>这个时候我们在输入点输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#x27; or 1=1 #</span><br></pre></td></tr></table></figure>
+
+<p>那么可以如此合成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from table where name =&#x27; 1&#x27; or 1=1 #&#x27;+后续语句</span><br></pre></td></tr></table></figure>
+
+<p>可以发现不但闭合了前面的语句，同时通过条件语句插入了攻击者的语句，并注释（使无效化）后面可能会出现的另外一些条件语句。</p>
+<p>可以用一句话很优雅的总结数字型和字符型</p>
+<p>​                                          <strong>—猎人往往以猎物的方式出现—</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708201225404.png" alt="image-20240708201225404"></p>
+
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
                 <source type="audio/mpeg" src="">
