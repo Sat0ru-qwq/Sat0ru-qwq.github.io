@@ -67,6 +67,940 @@
 
   
     
+    <h3 class="article-title"><a href="/2024/07/10/Untitled/"><span></span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2024/07/10/Untitled/" rel="bookmark">
+        <time class="entry-date published" datetime="2024-07-10T06:38:46.223Z">
+          2024-07-10
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2024/07/10/从0开始的渗透/"><span>信息收集初养成（基础的一些玩法）</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2024/07/10/从0开始的渗透/" rel="bookmark">
+        <time class="entry-date published" datetime="2024-07-10T06:33:00.000Z">
+          2024-07-10
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/source/categories/Penetration-Testing-Basic/">Penetration Testing Basic</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/source/tags/pr0gram/">pr0gram</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2024/07/10/信息泄露与信息收集/"><span>信息收集初养成（基础的一些玩法）</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2024/07/10/信息泄露与信息收集/" rel="bookmark">
+        <time class="entry-date published" datetime="2024-07-10T06:33:00.000Z">
+          2024-07-10
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>想要学好渗透测试，需要很多努力，不同于以往的学习体系抛给你漏洞原理和payload那么简单，是从底层慢慢摸索，甚至站在运维的角度，站在开发者站在甲方的角度去看问题，自然所要掌握的知识会多得多，但学会渗透测试其实并不难，市面上流通的工具和套路足够你成为所谓的脚本小子了，那么我们就从学会做一个脚本小子开始，依靠调试几个参数和市面上给定的脚本完成最基本的渗透吧！</p>
+<h1 id="Web之信息泄露"><a href="#Web之信息泄露" class="headerlink" title="Web之信息泄露"></a>Web之信息泄露</h1><p>这里不好意思通篇复制，可以转到这里看看信息泄露是怎么样的</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/a597934448/article/details/105431367">CTFHUBWeb技能树——信息泄露writeup_ctfhub web writeup-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/cx17775140296/article/details/130500741">CTFSHOW信息泄露</a></p>
+<p>掌握了最基本的一些信息过后，下面以运维者的角度将一些需要注意的点罗列出来</p>
+<h1 id="漏洞扫描技术"><a href="#漏洞扫描技术" class="headerlink" title="漏洞扫描技术"></a>漏洞扫描技术</h1><p>**</p>
+<p><strong>目前，国内大多数单位都采用静态和动态两种方式进行漏洞扫描。</strong>静态扫描是指利用事先编写好的程序和相应的测试模板，对被测系统或信息系统进行全面的检查，得出系统或信息系统存在漏洞、缺陷或不足等结论；动态扫描则是在计算机运行时对其进行扫描，从计算机运行状态发现系统、信息系统中存在的问题。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608162000454.png" alt="image-20240608162000454"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608162022673.png" alt="image-20240608162022673"></p>
+<p>主动扫描和被动扫描</p>
+<p>主动扫描就是最简单的大量发包根据响应判断是否存在漏洞</p>
+<p>被动扫描则使工具作为中间人篡改参数,通讯双方则都认为是自己在与对方对话</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608170139818.png" alt="image-20240608170139818"></p>
+<h3 id="漏洞扫描的作用"><a href="#漏洞扫描的作用" class="headerlink" title="漏洞扫描的作用"></a><strong>漏洞扫描的作用</strong></h3><p>（1）扫描被测系统存在的安全漏洞，了解其安全现状，以便及时修补漏洞，防止漏洞被利用。</p>
+<p>（2）扫描被测系统的漏洞是为了提高其安全性。对于应用层的系统来说，当其<strong>操作系统版本较低</strong>时，由于其自身的一些漏洞会影响到其他软件功能的实现，如文件操作、访问权限、数据处理等功能。针对这种情况，<strong>需要进行漏洞扫描。</strong></p>
+<p>（3）通过扫描，可以发现被测系统、信息系统中存在的安全隐患和不足，提出相应的修补建议，并通过测试验证该建议的可行性。</p>
+<p>（4）为网络管理人员提供信息。在对被测系统进行漏洞扫描时，如果发现被测系统存在安全漏洞，就需要对其进行修补。如果发现了新的安全漏洞，就需要根据新发现的安全漏洞及时制定相应的安全策略和补丁措施。</p>
+<p>（5）为黑客提供攻击目标。通过对被测系统进行漏洞扫描，可以发现黑客可能采用的攻击目标，为黑客提供攻击目标。</p>
+<h3 id="扫描工具"><a href="#扫描工具" class="headerlink" title="扫描工具"></a><strong>扫描工具</strong></h3><p>漏洞扫描工具是利用软件工具对被测系统、信息系统进行的一种扫描。常见的漏洞扫描工具主要有：<strong>漏洞报告平台、渗透测试工具等。</strong></p>
+<p><strong>漏洞报告是一个检测工具</strong>，它根据已知的网络和信息系统安全漏洞信息，按照一定的程序自动生成报告。渗透测试工具主要有：<strong>渗透测试平台、渗透测试器等。</strong></p>
+<p>入侵检测是一种<strong>主动的网络安全技术</strong>，它能通过对网络数据包的分析和处理，发现网络系统中存在的各种安全隐患和风险，并对可能出现的威胁进行分析和判断，从而采取有效措施进行防范。入侵检测系统有：<strong>入侵检测分析软件、入侵检测服务器等。</strong></p>
+<h3 id="漏洞评估"><a href="#漏洞评估" class="headerlink" title="漏洞评估"></a><strong>漏洞评估</strong></h3><p><strong>漏洞评估是指利用漏洞扫描工具对系统或信息系统进行扫描，发现可能存在的漏洞、安全风险，并对漏洞的安全性进行评估。</strong></p>
+<p>常见的漏洞评估工具有：端口扫描工具、命令检测工具、服务检测工具等。在实际操作中，利用漏洞扫描工具对被测系统或信息系统进行全面的扫描，可以发现系统或信息系统中存在的问题。</p>
+<p>常见的漏洞评估方法有：<strong>漏洞优先级评估法、漏洞利用风险评估法、入侵检测技术和模糊测试技术</strong>。</p>
+<p>由于各种安全评估方法之间存在一定的差异，因此在实际应用中应根据被测系统或信息系统的实际情况进行选择，不能盲目照搬其他方法。<strong>如端口扫描工具是利用端口号来查找被测系统或信息系统中可能存在的安全问题，它能帮助用户发现那些已经被证明是不安全的端口，并对其进行屏蔽，从而避免了使用其他方法存在的缺陷。</strong></p>
+<h3 id="漏洞扫描流程"><a href="#漏洞扫描流程" class="headerlink" title="漏洞扫描流程"></a><strong>漏洞扫描流程</strong></h3><p>漏洞扫描的基本流程一般包括以下几个步骤：</p>
+<p>（1）发现系统存在的漏洞，了解系统存在的安全隐患；</p>
+<p>（2）针对系统漏洞提出攻击策略，设计扫描工具，并生成可执行的扫描程序；</p>
+<p>（3）发送扫描程序到目标网络；</p>
+<p>（4）目标网络向扫描程序反馈信息；</p>
+<p>（5）扫描程序根据信息进行漏洞攻击，并生成可执行的攻击代码；</p>
+<p>（6）将攻击代码发送到被攻击的主机；</p>
+<p>（7）被攻击的主机收到攻击代码后进行响应，修复漏洞。</p>
+<p>其中，漏洞扫描技术一般采用<strong>渗透测试技术、漏洞挖掘技术和安全扫描技术三种方法进行</strong>。安全扫描技术一般包括主机安全扫描、应用安全扫描和服务安全扫描三种方法。目前，大多数单位都采用多种方法相结合的方式进行漏洞扫描。</p>
+<h3 id="扫描步骤"><a href="#扫描步骤" class="headerlink" title="扫描步骤"></a><strong>扫描步骤</strong></h3><p>1、对目标系统或信息系统进行扫描，确定其是否存在安全漏洞。</p>
+<p>2、编写测试脚本，从用户输入或系统配置文件中找到漏洞。</p>
+<p>3、将找到的漏洞提交给漏洞挖掘工具或其他安全工具。</p>
+<p>4、将扫描到的漏洞信息通知给被扫描单位。</p>
+<p>5、被扫描单位根据扫描结果进行安全修复，或在主机上安装补丁程序，或采取其他相应的安全措施。</p>
+<p>6、测试结束后，进行相关记录的保存工作。</p>
+<p>7、根据收集到的信息，将报告发送给网络管理员进行处理。</p>
+<p>8、对用户提出的改进建议及时回复给用户，并对用户提供相关技术支持。</p>
+<p>漏洞挖掘工具会自动生成漏洞报告，记录扫描发现的所有信息并进行安全分析。<br>6.安全扫描类型<br>安全扫描有很多类型，常见的有：</p>
+<p>1.基于操作系统的扫描：这种扫描主要是针对系统中存在的漏洞进行扫描，比如系统漏洞、配置漏洞、系统漏洞等，它能够发现用户可能忽略的潜在安全问题，并提供相关建议，其优点是简单易用，但是缺点是由于操作系统的限制，不能发现用户难以察觉到的高级安全问题。</p>
+<p>2.基于应用程序的扫描：这种扫描主要是针对一些应用程序进行扫描，比如 Web应用程序、 WEB服务器、数据库等。它能够发现和分析应用程序中存在的安全问题，同时能够提供相关建议。其优点是能够发现比较隐蔽的安全问题，其缺点是不能发现高级安全问题。</p>
+<p>3.基于协议的扫描：这种扫描主要是针对一些协议进行扫描。比如 TCP&#x2F;IP、 HTTP、 FTP、 SMTP等协议。</p>
+<p>7.常见的漏洞类型及对应的扫描方法<br>（一）缓冲区溢出漏洞<br>这种漏洞在系统或应用中最常见，它的危害表现在用户会因为无意中访问了一些错误的数据包而造成严重的后果。我们可以利用在 Web服务器中常见的各种手段来发现这些问题，具体方法是：</p>
+<p>1、将一个或多个用户名和密码存储在文件中，并对其进行加密。当用户输入密码时，这些信息就会被加密。如果系统存在缓冲区溢出漏洞，黑客就可以通过对文件进行直接拷贝或修改来获得密码，从而达到窃取用户信息的目的。</p>
+<p>2、如果用户在网络连接时使用了外网 IP地址，则可以通过反向代理服务器来获得 IP地址。</p>
+<p>（二）权限提升漏洞<br>这种漏洞可以通过以下方法来进行扫描：</p>
+<p>1、通过网络向目标主机发送一个探测包。</p>
+<p>2、在探测包中将包含一个伪造的 IP地址或域名作为密码，然后发送回探测包。</p>
+<p>3、探测包中包含一个与目标主机建立连接的参数，并将其返回给管理员。</p>
+<p>4、管理员可以根据收到的数据包来判断该主机是否存在权限提升漏洞，如果存在，则将该主机加入到目标主机的白名单中。</p>
+<h1 id="域名信息"><a href="#域名信息" class="headerlink" title="域名信息"></a>域名信息</h1><h2 id="Whois"><a href="#Whois" class="headerlink" title="Whois"></a>Whois</h2><p><a target="_blank" rel="noopener" href="https://www.whois.com/">Whois</a> 可以查询域名是否被注册，以及注册域名的详细信息的数据库，其中可能会存在一些有用的信息，例如域名所有人、域名注册商、邮箱等。</p>
+<h2 id="搜索引擎搜索"><a href="#搜索引擎搜索" class="headerlink" title="搜索引擎搜索"></a>搜索引擎搜索</h2><p>搜索引擎通常会记录域名信息，可以通过 <code>site: domain</code> 的语法来查询。</p>
+<h2 id="第三方查询"><a href="#第三方查询" class="headerlink" title="第三方查询"></a>第三方查询</h2><p>网络中有相当多的第三方应用提供了子域的查询功能，下面有一些例子，更多的网站可以在 8.1 工具列表 中查找。</p>
+<h3 id="Whois信息"><a href="#Whois信息" class="headerlink" title="Whois信息"></a>Whois信息</h3><p>站长之家：<a target="_blank" rel="noopener" href="http://whois.chinaz.com/">http://whois.chinaz.com</a> </p>
+<p>万商数源：<a target="_blank" rel="noopener" href="https://www.wanshangdata.com/domainrelated/index.html">https://www.wanshangdata.com/domainrelated/index.html</a> </p>
+<p>1.域名对应的邮箱； </p>
+<p>2.该邮箱注册的所有域名； </p>
+<p>3.企业CEO名称注册的域名；</p>
+<p> SRC：安全应急响应中心（漏洞、情报）</p>
+<h2 id="ASN信息关联"><a href="#ASN信息关联" class="headerlink" title="ASN信息关联"></a>ASN信息关联</h2><p>在网络中一个自治系统 (Autonomous System, AS) 是一个<strong>有权自主地决定在本系统中应采用何种路由协议的小型单位</strong>。这个网络单位可以是一个简单的网络也可以是一个由一个或多个普通的网络管理员来控制的网络群体，它是一个单独的可管理的网络单元 (例如一所大学，一个企业或者一个公司个体) 。</p>
+<p><strong>一个自治系统有时也被称为是一个路由选择域</strong> (routing domain) 。一个自治系统将会分配一个全局的唯一的16位号码，这个号码被称为自治系统号 (ASN) 。因此可以通过ASN号来查找可能相关的IP，例如：</p>
+<h2 id="域名相关性"><a href="#域名相关性" class="headerlink" title="域名相关性"></a>域名相关性</h2><p>同一个企业&#x2F;个人注册的多个域名通常具有一定的相关性，例如使用了同一个邮箱来注册、使用了同一个备案、同一个负责人来注册等，可以使用这种方式来查找关联的域名。一种操作步骤如下：</p>
+<ul>
+<li>查询<strong>域名注册邮箱</strong></li>
+<li>通过域名查询<strong>备案号</strong></li>
+<li>通过<strong>备案号查询域名</strong></li>
+<li>反查<strong>注册邮箱</strong></li>
+<li>反查<strong>注册人</strong></li>
+<li>通过注册人查询到的域名在查询邮箱</li>
+<li>通过上一步邮箱去查询域名</li>
+<li>查询以上获取出的域名的子域名</li>
+</ul>
+<h2 id="多级域名"><a href="#多级域名" class="headerlink" title="多级域名"></a>多级域名</h2><p>域名：URL</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">一级：ｅｘａｍｐｌｅ．ｃｏｍ</span><br><span class="line"></span><br><span class="line">　　　．ｃｎ　．ｕｓ／．ｃｏｍ　．ｏｒｇ</span><br><span class="line">   　．ｎｅｔ等</span><br><span class="line"></span><br><span class="line">二级域名：ｗｗｗ．ｅｘａｍｐｌｅ．ｃｏｍ</span><br><span class="line"></span><br><span class="line">三级域名：　</span><br><span class="line"></span><br><span class="line">ｂｂｓ．ａｂｃ．ｅｘａｍｐｌｅ．ｃｏｍ</span><br><span class="line"></span><br><span class="line">为ａｂｃ．ｅｘａｍｐｌｅ．ｃｏｍ的子域名</span><br><span class="line"></span><br><span class="line">同理为ｅｘａｍｐｌｅ．ｃｏｍ的子域名</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="网站信息利用"><a href="#网站信息利用" class="headerlink" title="网站信息利用"></a>网站信息利用</h2><p>网站中有相当多的信息，网站本身、各项安全策略、设置等都可能暴露出一些信息。</p>
+<p><strong>网站本身的交互通常不囿于单个域名，会和其他子域交互。对于这种情况，可以通过爬取网站，收集站点中的其他子域信息。这些信息通常出现在JavaScript文件、资源文件链接等位置。</strong></p>
+<p>网站的安全策略如跨域策略、CSP规则等通常也包含相关域名的信息。有时候多个域名为了方便会使用同一个SSL&#x2F;TLS证书，因此有时可通过证书来获取相关域名信息。</p>
+<h2 id="HTTPS证书"><a href="#HTTPS证书" class="headerlink" title="HTTPS证书"></a>HTTPS证书</h2><h3 id="证书透明度"><a href="#证书透明度" class="headerlink" title="证书透明度"></a>证书透明度</h3><p>为了保证HTTPS证书不会被误发或伪造，CA会将证书记录到可公开验证、不可篡改且只能附加内容的日志中，任何感兴趣的相关方都可以查看由授权中心签发的所有证书。<strong>因此可以通过查询已授权证书的方式来获得相关域名。</strong></p>
+<h3 id="SAN"><a href="#SAN" class="headerlink" title="SAN"></a>SAN</h3><p>主题备用名称 (Subject Alternate Name, SAN)，简单来说，在需要多个域名，并将其用于各项服务时，多使用SAN证书。<strong>SAN允许在安全证书中使用subjectAltName字段将多种值与证书关联，这些值被称为主题备用名称。</strong></p>
+<h2 id="域传送漏洞"><a href="#域传送漏洞" class="headerlink" title="域传送漏洞"></a>域传送漏洞</h2><p>DNS域传送 (zone transfer) 指的是冗余备份服务器使用来自主服务器的数据刷新自己的域 (zone) 数据库。这是为了防止主服务器因意外不可用时影响到整个域名的解析。</p>
+<p>一般来说，<strong>域传送操作应该只允许可信的备用DNS服务器发起，但是如果错误配置了授权，那么任意用户都可以获得整个DNS服务器的域名信息。这种错误授权被称作是DNS域传送漏洞。</strong></p>
+<h2 id="Passive-DNS"><a href="#Passive-DNS" class="headerlink" title="Passive DNS"></a>Passive DNS</h2><p>Passive DNS<strong>被动的从递归域名服务器记录来自不同域名服务器的响应，形成数据库。利用Passive DNS数据库可以知道域名曾绑定过哪些IP，IP曾关联到哪些域名，</strong>域名最早&#x2F;最近出现的时间，为测试提供较大的帮助。Virustotal、passivetotal、CIRCL等网站都提供了Passive DNS数据库的查询。</p>
+<h2 id="泛解析"><a href="#泛解析" class="headerlink" title="泛解析"></a>泛解析</h2><p>泛解析是把 *.example.com 的所有A记录都解析到某个IP 地址上，在子域名枚举时需要处理这种情况以防生成大量无效的记录。</p>
+<h2 id="重要记录"><a href="#重要记录" class="headerlink" title="重要记录"></a>重要记录</h2><h3 id="CNAME"><a href="#CNAME" class="headerlink" title="CNAME"></a>CNAME</h3><p>CNAME即Canonical name，又称alias，<strong>将域名指向另一个域名。其中可能包含其他关联业务的信息。很多网站使用的CDN加速功能利用了该记录。</strong></p>
+<h3 id="MX记录"><a href="#MX记录" class="headerlink" title="MX记录"></a>MX记录</h3><p>MX记录即Mail Exchanger，记录了<strong>发送电子邮件时域名对应的服务器地址</strong>。<strong>可以用来寻找SMTP服务器信息。</strong></p>
+<h3 id="NS记录"><a href="#NS记录" class="headerlink" title="NS记录"></a>NS记录</h3><p>NS (Name Server) 记录是域名服务器的记录，用来指定域名由哪个DNS服务器来进行解析。</p>
+<h3 id="SPF记录"><a href="#SPF记录" class="headerlink" title="SPF记录"></a>SPF记录</h3><p>SPF (Sender Policy Framework) 是<strong>为了防止垃圾邮件而提出来的一种DNS记录类型</strong>，是一种TXT类型的记录，用于登记某个域名拥有的用来外发邮件的所有IP地址。通过SPF记录可以获取相关的IP信息，常用命令为 <code>dig example.com txt</code> 。</p>
+<h2 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h2><p>CDN就是依靠部署在各地的CDN节点边缘服务器，使各地用户访问时通过中心分流分发数据的，减少了延迟。</p>
+<p>不过当一个网站上了CDN就出现了问题，真实ｉｐ自此被掩盖。这个时候就只能查找一些DNS解析历史记录</p>
+<h3 id="CDN验证"><a href="#CDN验证" class="headerlink" title="CDN验证"></a>CDN验证</h3><p>可通过多地ping的方式确定目标是否使用了CDN，常用的网站有 </p>
+<p><code>http://ping.chinaz.com/</code> <code>https://asm.ca.com/en/ping.php</code> 等。</p>
+<h3 id="域名查找"><a href="#域名查找" class="headerlink" title="域名查找"></a>域名查找</h3><p>使用了CDN的域名的父域或者子域名不一定使用了CDN，可以通过这种方式去查找对应的IP</p>
+<h3 id="历史记录查找"><a href="#历史记录查找" class="headerlink" title="历史记录查找"></a>历史记录查找</h3><p>CDN可能是在网站上线一段时间后才上线的，可以通过查找域名解析记录的方式去查找真实IP。</p>
+<h3 id="邮件信息"><a href="#邮件信息" class="headerlink" title="邮件信息"></a>邮件信息</h3><p>通过社会工程学的方式进行邮件沟通，从邮件头中获取IP地址，IP地址可能是网站的真实IP或者是目标的出口IP。</p>
+<h2 id="子域爆破"><a href="#子域爆破" class="headerlink" title="子域爆破"></a>子域爆破</h2><p>在内网等不易用到以上技巧的环境，或者想监测新域名上线时，可以通过批量尝试的方式，找到有效的域名。</p>
+<h2 id="域名-子域名"><a href="#域名-子域名" class="headerlink" title="域名&amp;子域名"></a>域名&amp;子域名</h2><p>RappidDns：<a target="_blank" rel="noopener" href="https://rapiddns.io/subdomain">https://rapiddns.io/subdomain</a> （在线）</p>
+<p>查子域&#x2F;备案：<a target="_blank" rel="noopener" href="https://chaziyu.com/">https://chaziyu.com/</a> （在线）</p>
+<p>子域名挖掘机</p>
+<p>OneForAll：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/shmilylty/OneForAll">https://github.com/shmilylty/OneForAll</a></p>
+<p>ksubdomain：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/knownsec/ksubdomain">https://github.com/knownsec/ksubdomain</a></p>
+<p>subDomainsBrute：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/lijiejie/subDomainsBrute">https://github.com/lijiejie/subDomainsBrute</a></p>
+<p>Sublist3r：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/aboul3la/Sublist3r">https://github.com/aboul3la/Sublist3r</a></p>
+<h2 id="缓存探测技术"><a href="#缓存探测技术" class="headerlink" title="缓存探测技术"></a>缓存探测技术</h2><p>在企业网络中通常都会配置DNS服务器为网络内的主机提供域名解析服务。域名缓存侦测（DNS Cache Snooping）技术就是向这些服务器发送域名解析请求，但并不要求使用递归模式，用于探测是否请求过某个域名。这种方式可以用来探测是否使用了某些软件，尤其是安全软件。</p>
+<h1 id="端口信息"><a href="#端口信息" class="headerlink" title="端口信息"></a>端口信息</h1><h2 id="常见端口及其脆弱点"><a href="#常见端口及其脆弱点" class="headerlink" title="常见端口及其脆弱点"></a>常见端口及其脆弱点</h2><ul>
+<li><ul>
+<li><p>FTP (21&#x2F;TCP)</p>
+<p>默认用户名密码 <code>anonymous:anonymous</code>暴力破解密码VSFTP某版本后门</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>SSH (22&#x2F;TCP)</p>
+<p>部分版本SSH存在漏洞可枚举用户名暴力破解密码</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>Telent (23&#x2F;TCP)</p>
+<p>暴力破解密码嗅探抓取明文密码</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>SMTP (25&#x2F;TCP)</p>
+<p>无认证时可伪造发件人</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>DNS (53&#x2F;UDP &amp; 53&#x2F;TCP)</p>
+<p>域传送漏洞DNS劫持DNS缓存投毒DNS欺骗SPF &#x2F; DMARC CheckDDoSDNS Query FloodDNS 反弹DNS 隧道</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>DHCP 67&#x2F;68</p>
+<p>劫持&#x2F;欺骗</p>
+</li>
+</ul>
+</li>
+<li><p>TFTP (69&#x2F;TCP)</p>
+</li>
+<li><p>HTTP (80&#x2F;TCP)</p>
+</li>
+<li><ul>
+<li><p>Kerberos (88&#x2F;TCP)</p>
+<p>主要用于监听KDC的票据请求用于进行黄金票据和白银票据的伪造</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>POP3 (110&#x2F;TCP &amp; 995&#x2F;TCP)</p>
+<p>爆破</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>RPC (135&#x2F;TCP)</p>
+<p>wmic 服务利用</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>NetBIOS (137&#x2F;UDP &amp; 138&#x2F;UDP)</p>
+<p>未授权访问弱口令</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>NetBIOS &#x2F; Samba (139&#x2F;TCP)</p>
+<p>未授权访问弱口令</p>
+</li>
+</ul>
+</li>
+<li><p>IMAP (143&#x2F;TCP &amp; 993&#x2F;TCP)</p>
+</li>
+<li><ul>
+<li><p>SNMP (161&#x2F;TCP &amp; 161&#x2F;UDP)</p>
+<p>Public 弱口令</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>LDAP (389&#x2F;TCP)</p>
+<p>用于域上的权限验证服务匿名访问注入</p>
+</li>
+</ul>
+</li>
+<li><p>HTTPS (443&#x2F;TCP)</p>
+</li>
+<li><ul>
+<li><p>SMB (445&#x2F;TCP)</p>
+<p>Windows 协议簇，主要功能为文件共享服务<code>net use \\192.168.1.1 /user:xxx\username password</code></p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>Linux Rexec (512&#x2F;TCP &amp; 513&#x2F;TCP &amp; 514&#x2F;TCP)</p>
+<p>弱口令</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>Rsync (873&#x2F;TCP)</p>
+<p>未授权访问</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>RPC (1025&#x2F;TCP)</p>
+<p>NFS匿名访问</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>Java RMI (1090&#x2F;TCP &amp; 1099&#x2F;TCP)</p>
+<p>反序列化远程命令执行漏洞</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>MSSQL (1433&#x2F;TCP)</p>
+<p>弱密码差异备份 GetShellSA 提权</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>Oracle (1521&#x2F;TCP)</p>
+<p>弱密码</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>NFS (2049&#x2F;TCP)</p>
+<p>权限设置不当<code>showmount &lt;host&gt;</code></p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>ZooKeeper (2171&#x2F;TCP &amp; 2375&#x2F;TCP)</p>
+<p>无身份认证</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>Docker Remote API (2375&#x2F;TCP)</p>
+<p>未限制IP &#x2F; 未启用TLS身份认证<code>http://docker.addr:2375/version</code></p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>MySQL (3306&#x2F;TCP)</p>
+<p>弱密码日志写WebShellUDF提权MOF提权</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>RDP &#x2F; Terminal Services (3389&#x2F;TCP)</p>
+<p>弱密码</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>Postgres (5432&#x2F;TCP)</p>
+<p>弱密码执行系统命令</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>VNC (5900&#x2F;TCP)</p>
+<p>弱密码</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>CouchDB (5984&#x2F;TCP)</p>
+<p>未授权访问</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>WinRM (5985&#x2F;TCP)</p>
+<p>Windows对WS-Management的实现在Vista上需要手动启动，在Windows Server 2008中服务是默认开启的</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>Redis (6379&#x2F;TCP)</p>
+<p>无密码或弱密码绝对路径写 WebShell计划任务反弹 Shell写 SSH 公钥主从复制 RCEWindows 写启动项</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>Kubernetes API Server (6443&#x2F;TCP &amp;&amp; 10250&#x2F;TCP)</p>
+<p><code>https://Kubernetes:10250/pods</code></p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>JDWP (8000&#x2F;TCP)</p>
+<p>远程命令执行</p>
+</li>
+</ul>
+</li>
+<li><p>ActiveMQ (8061&#x2F;TCP)</p>
+</li>
+<li><ul>
+<li><p>Jenkin (8080&#x2F;TCP)</p>
+<p>未授权访问</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>Elasticsearch (9200&#x2F;TCP)</p>
+<p>代码执行<code>http://es.addr:9200/_plugin/head/``http://es.addr:9200/_nodes</code></p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>Memcached (11211&#x2F;TCP &amp; 11211&#x2F;UDP)</p>
+<p>未授权访问</p>
+</li>
+</ul>
+</li>
+<li><p>RabbitMQ (15672&#x2F;TCP &amp; 15692&#x2F;TCP &amp; 25672&#x2F;TCP)</p>
+</li>
+<li><ul>
+<li><p>MongoDB (27017&#x2F;TCP)</p>
+<p>无密码或弱密码</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>Hadoop (50070&#x2F;TCP &amp; 50075&#x2F;TCP)</p>
+<p>未授权访问</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>除了以上列出的可能出现的问题，暴露在公网上的服务若不是最新版，都可能存在已经公开的漏洞</p>
+<h2 id="常见端口扫描技术"><a href="#常见端口扫描技术" class="headerlink" title="常见端口扫描技术"></a>常见端口扫描技术</h2><h3 id="全扫描"><a href="#全扫描" class="headerlink" title="全扫描"></a>全扫描</h3><p>扫描主机尝试使用三次握手与目标主机的某个端口建立正规的连接，若成功建立连接，则端口处于开放状态，反之处于关闭状态。</p>
+<p>全扫描实现简单，且以较低的权限就可以进行该操作。但是在流量日志中会有大量明显的记录。</p>
+<h3 id="半扫描"><a href="#半扫描" class="headerlink" title="半扫描"></a>半扫描</h3><p>半扫描也称SYN扫描，在半扫描中，仅发送SYN数据段，如果应答为RST，则端口处于关闭状态，若应答为SYN&#x2F;ACK，则端口处于监听状态。不过这种方式需要较高的权限，而且现在的大部分防火墙已经开始对这种扫描方式做处理。</p>
+<h3 id="FIN扫描"><a href="#FIN扫描" class="headerlink" title="FIN扫描"></a>FIN扫描</h3><p>FIN扫描是向目标发送一个FIN数据包，如果是开放的端口，会返回RST数据包，关闭的端口则不会返回数据包，可以通过这种方式来判断端口是否打开。</p>
+<p>这种方式并不在TCP三次握手的状态中，所以不会被记录，相对SYN扫描要更隐蔽一些。</p>
+<h2 id="Web服务（旁站＋真实IP＋端口-指纹信息-路径）"><a href="#Web服务（旁站＋真实IP＋端口-指纹信息-路径）" class="headerlink" title="Web服务（旁站＋真实IP＋端口+指纹信息+路径）"></a>Web服务（旁站＋真实IP＋端口+指纹信息+路径）</h2><h4 id="旁站信息"><a href="#旁站信息" class="headerlink" title="旁站信息"></a>旁站信息</h4><ul>
+<li><p>一个服务器可以起多个web服务，开不同的端口即可，相当于一个IP映射给多个域名。</p>
+<p>在线：<a target="_blank" rel="noopener" href="http://stool.chinaz.com/same">http://stool.chinaz.com/same</a></p>
+<p>在线：<a target="_blank" rel="noopener" href="https://site.ip138.com/">https://site.ip138.com</a></p>
+<p><strong>ipc横向</strong>,从侧面其他服务入手绕后拿下核心的安全业务–旁站攻击</p>
+<p><strong>旁站的查询涉及到CDN的问题，所以为了查询到准确的旁站信息，我们需要找到目标的真实IP</strong></p>
+<h4 id="真实ip"><a href="#真实ip" class="headerlink" title="真实ｉｐ"></a>真实ｉｐ</h4><p>全球ping：<a target="_blank" rel="noopener" href="http://tool.zhiduopc.com/ping">http://tool.zhiduopc.com/ping</a></p>
+<p>17CE：<a target="_blank" rel="noopener" href="http://www.17ce.com/">http://www.17ce.com/</a></p>
+<p>DNS检测：<a target="_blank" rel="noopener" href="https://tools.ipip.net/dns.php**%EF%BC%88%E8%BF%98%E5%8F%AF%E4%BB%A5%E6%9F%A5%E8%AF%A2IP%E7%B2%BE%E5%87%86%E4%BF%A1%E6%81%AF%EF%BC%89">https://tools.ipip.net/dns.php**（还可以查询IP精准信息）</a>**</p>
+<p>IP查询：<a target="_blank" rel="noopener" href="https://ipchaxun.com/">https://ipchaxun.com/</a></p>
+<p>BOCE：<a target="_blank" rel="noopener" href="https://www.boce.com/%EF%BC%88DNS%E6%A3%80%E6%B5%8B%E3%80%81%E5%8A%AB%E6%8C%81%E6%A3%80%E6%B5%8B%EF%BC%89">https://www.boce.com/（DNS检测、劫持检测）</a></p>
+<p> ITDOG：<a target="_blank" rel="noopener" href="https://www.itdog.cn/ping/it">https://www.itdog.cn/ping/it</a></p>
+<p>Ping.cn：<a target="_blank" rel="noopener" href="https://www.ping.cn/dns/">https://www.ping.cn/dns/</a></p>
+<h4 id="端口-指纹信息-路径"><a href="#端口-指纹信息-路径" class="headerlink" title="端口+指纹信息+路径"></a>端口+指纹信息+路径</h4><p>fscan：探测神器</p>
+<p>Nmap：<a target="_blank" rel="noopener" href="https://nmap.org/">https://nmap.org</a></p>
+<p>Goby：<a target="_blank" rel="noopener" href="https://gobies.org/">https://gobies.org/</a></p>
+<p>御剑：<a target="_blank" rel="noopener" href="https://github.com/foryujian/yujianportscan">https://github.com/foryujian/yujianportscan</a> 推荐在虚拟机里玩一玩dirsearch</p>
+</li>
+</ul>
+<h1 id="站点信息"><a href="#站点信息" class="headerlink" title="站点信息"></a>站点信息</h1><ul>
+<li><ul>
+<li><p>判断网站操作系统</p>
+<p>Linux大小写敏感Windows大小写不敏感</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>扫描敏感文件</p>
+<p>robots.txtcrossdomain.xmlsitemap.xmlxx.tar.gzxx.bak等</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>确定网站采用的语言</p>
+<p>如PHP &#x2F; Java &#x2F; Python等找后缀，比如php&#x2F;asp&#x2F;jsp</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>前端框架</p>
+<p>如jQuery &#x2F; BootStrap &#x2F; Vue &#x2F; React &#x2F; Angular等查看源代码</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>中间服务器</p>
+<p>如 Apache &#x2F; Nginx &#x2F; IIS 等查看header中的信息根据报错信息判断根据默认页面判断</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>Web容器服务器</p>
+<p>如Tomcat &#x2F; Jboss &#x2F; Weblogic等</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>后端框架</p>
+<p>根据Cookie判断根据CSS &#x2F; 图片等资源的hash值判断根据URL路由判断如wp-admin根据网页中的关键字判断根据响应头中的X-Powered-By</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>CDN信息</p>
+<p>常见的有Cloudflare、yunjiasu</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>探测有没有WAF，如果有，什么类型的</p>
+<p>有WAF，找绕过方式没有，进入下一步</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>扫描敏感目录，看是否存在信息泄漏</p>
+<p>扫描之前先自己尝试几个的url，人为看看反应</p>
+</li>
+</ul>
+</li>
+<li><p>使用爬虫爬取网站信息</p>
+</li>
+<li><p>拿到一定信息后，通过拿到的目录名称，文件名称及文件扩展名了解网站开发人员的命名思路，确定其命名规则，推测出更多的目录及文件名</p>
+</li>
+<li><ul>
+<li><p>常见入口目标</p>
+<p>关注度低的系统业务线较长的系统</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="搜索引擎利用"><a href="#搜索引擎利用" class="headerlink" title="搜索引擎利用"></a>搜索引擎利用</h1><p>恰当地使用搜索引擎（Google&#x2F;Bing&#x2F;Yahoo&#x2F;Baidu等）可以获取目标站点的较多信息。</p>
+<h2 id="搜索引擎处理流程"><a href="#搜索引擎处理流程" class="headerlink" title="搜索引擎处理流程"></a>搜索引擎处理流程</h2><ul>
+<li><ul>
+<li><p>数据预处理</p>
+<p>长度截断大小写转化去标点符号简繁转换数字归一化，中文数字、阿拉伯数字、罗马字同义词改写拼音改写</p>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><p>处理</p>
+<p>分词关键词抽取非法信息过滤</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="搜索技巧"><a href="#搜索技巧" class="headerlink" title="搜索技巧"></a>搜索技巧</h2><ul>
+<li><ul>
+<li><p>当然，下面是对这些搜索操作符的图解说明，帮助你更好地理解它们的用法。</p>
+<h3 id="图解说明"><a href="#图解说明" class="headerlink" title="图解说明"></a>图解说明</h3><h4 id="1-site"><a href="#1-site" class="headerlink" title="1. site:"></a>1. <strong>site:</strong></h4><p><strong>作用</strong>：限定搜索结果在特定网站内。<br><strong>示例</strong>：</p>
+<ul>
+<li><code>site:www.hao123.com</code></li>
+<li>返回结果：该网站上被搜索引擎收录的所有内容。</li>
+</ul>
+<p><img src="https://i.imgur.com/6tA6w7c.png" alt="site: 操作符"></p>
+<h4 id="2-site-keyword"><a href="#2-site-keyword" class="headerlink" title="2. site: + keyword"></a>2. <strong>site: + keyword</strong></h4><p><strong>作用</strong>：在特定网站内搜索包含某关键词的所有页面。<br><strong>示例</strong>：</p>
+<ul>
+<li><code>site:www.hao123.com 密码修改</code></li>
+<li>返回结果：hao123.com网站内包含“密码修改”关键词的页面。</li>
+</ul>
+<p><img src="https://i.imgur.com/MLYd18n.png" alt="site: + keyword"></p>
+<h4 id="3-site-inurl"><a href="#3-site-inurl" class="headerlink" title="3. site: + inurl:"></a>3. <strong>site: + inurl:</strong></h4><p><strong>作用</strong>：在特定网站内搜索URL中包含特定词语的页面。<br><strong>示例</strong>：</p>
+<ul>
+<li><code>site:www.hao123.com inurl:admin.php</code></li>
+<li>返回结果：hao123.com网站内URL中包含“admin.php”的页面。</li>
+</ul>
+<p><img src="https://i.imgur.com/NmPtyU8.png" alt="site: + inurl:"></p>
+<h4 id="4-link"><a href="#4-link" class="headerlink" title="4. link:"></a>4. <strong>link:</strong></h4><p><strong>作用</strong>：返回所有包含目标站点链接的页面。<br><strong>示例</strong>：</p>
+<ul>
+<li><code>link:www.hao123.com</code></li>
+<li>返回结果：所有包含<a target="_blank" rel="noopener" href="http://www.hao123.com链接的页面./">www.hao123.com链接的页面。</a></li>
+</ul>
+<p><img src="https://i.imgur.com/Mw4XeWd.png" alt="link: 操作符"></p>
+<h4 id="5-related"><a href="#5-related" class="headerlink" title="5. related:"></a>5. <strong>related:</strong></h4><p><strong>作用</strong>：返回与目标站点相似的页面。<br><strong>示例</strong>：</p>
+<ul>
+<li><code>related:www.hao123.com</code></li>
+<li>返回结果：所有与hao123.com相似的页面。</li>
+</ul>
+<p><img src="https://i.imgur.com/Bak8V2r.png" alt="related: 操作符"></p>
+<h4 id="6-intitle"><a href="#6-intitle" class="headerlink" title="6. intitle:"></a>6. <strong>intitle:</strong></h4><p><strong>作用</strong>：搜索页面标题中包含特定词语的页面。<br><strong>示例</strong>：</p>
+<ul>
+<li><code>intitle:&quot;500 Internal Server Error&quot; &quot;server at&quot;</code></li>
+<li>返回结果：页面标题中包含这些词语的页面，通常用来查找出错页面。</li>
+</ul>
+<p><img src="https://i.imgur.com/RW3jTqG.png" alt="intitle: 操作符"></p>
+<h4 id="7-inurl"><a href="#7-inurl" class="headerlink" title="7. inurl:"></a>7. <strong>inurl:</strong></h4><p><strong>作用</strong>：搜索URL中包含特定词语的页面。<br><strong>示例</strong>：</p>
+<ul>
+<li><code>inurl:&quot;nph-proxy.cgi&quot; &quot;Start browsing&quot;</code></li>
+<li>返回结果：URL中包含这些词语的页面，通常用来查找代理服务器。</li>
+</ul>
+<p><img src="https://i.imgur.com/EnuPYdm.png" alt="inurl: 操作符"></p>
+<h4 id="8-allintitle"><a href="#8-allintitle" class="headerlink" title="8. allintitle:"></a>8. <strong>allintitle:</strong></h4><p><strong>作用</strong>：搜索页面标题中包含所有给定词语的页面。<br><strong>示例</strong>：</p>
+<ul>
+<li><code>allintitle:keyword1 keyword2</code></li>
+<li>返回结果：标题中同时包含keyword1和keyword2的页面。</li>
+</ul>
+<p><img src="https://i.imgur.com/XCJpfo5.png" alt="allintitle: 操作符"></p>
+<h4 id="9-allinurl"><a href="#9-allinurl" class="headerlink" title="9. allinurl:"></a>9. <strong>allinurl:</strong></h4><p><strong>作用</strong>：搜索URL中包含所有给定词语的页面。<br><strong>示例</strong>：</p>
+<ul>
+<li><code>allinurl:keyword1 keyword2</code></li>
+<li>返回结果：URL中同时包含keyword1和keyword2的页面。</li>
+</ul>
+<p><img src="https://i.imgur.com/MLWxkjc.png" alt="allinurl: 操作符"></p>
+<h4 id="10-allintext"><a href="#10-allintext" class="headerlink" title="10. allintext:"></a>10. <strong>allintext:</strong></h4><p><strong>作用</strong>：搜索页面正文中包含所有给定词语的页面。<br><strong>示例</strong>：</p>
+<ul>
+<li><code>allintext:keyword1 keyword2</code></li>
+<li>返回结果：正文中同时包含keyword1和keyword2的页面。</li>
+</ul>
+<p><img src="https://i.imgur.com/5W4z0Ft.png" alt="allintext: 操作符"></p>
+<h4 id="11-inanchor"><a href="#11-inanchor" class="headerlink" title="11. inanchor:"></a>11. <strong>inanchor:</strong></h4><p><strong>作用</strong>：搜索链接锚文本中包含特定词语的页面。<br><strong>示例</strong>：</p>
+<ul>
+<li><code>inanchor:keyword</code></li>
+<li>返回结果：链接文本中包含keyword的页面。</li>
+</ul>
+<p><img src="https://i.imgur.com/mqdpYJG.png" alt="inanchor: 操作符"></p>
+<h4 id="12-intext"><a href="#12-intext" class="headerlink" title="12. intext:"></a>12. <strong>intext:</strong></h4><p><strong>作用</strong>：搜索页面正文中包含特定词语的页面。<br><strong>示例</strong>：</p>
+<ul>
+<li><code>intext:keyword</code></li>
+<li>返回结果：正文中包含keyword的页面。</li>
+</ul>
+<p><img src="https://i.imgur.com/bznljFV.png" alt="intext: 操作符"></p>
+<h4 id="13-filetype"><a href="#13-filetype" class="headerlink" title="13. filetype:"></a>13. <strong>filetype:</strong></h4><p><strong>作用</strong>：搜索特定文件类型。<br><strong>示例</strong>：</p>
+<ul>
+<li><code>filetype:pdf keyword</code></li>
+<li>返回结果：包含keyword的PDF文件。</li>
+</ul>
+<p><img src="https://i.imgur.com/JLXEL9t.png" alt="filetype: 操作符"></p>
+<h4 id="14-info"><a href="#14-info" class="headerlink" title="14. info:"></a>14. <strong>info:</strong></h4><p><strong>作用</strong>：返回关于某个URL的信息页面。<br><strong>示例</strong>：</p>
+<ul>
+<li><code>info:www.hao123.com</code></li>
+<li>返回结果：关于<a target="_blank" rel="noopener" href="http://www.hao123.com的信息./">www.hao123.com的信息。</a></li>
+</ul>
+<p><img src="https://i.imgur.com/rXodN8L.png" alt="info: 操作符"></p>
+<h4 id="15-numrange"><a href="#15-numrange" class="headerlink" title="15. numrange:"></a>15. <strong>numrange:</strong></h4><p><strong>作用</strong>：搜索特定数字范围内的内容。<br><strong>示例</strong>：</p>
+<ul>
+<li><code>numrange:100..200</code></li>
+<li>返回结果：包含100到200之间数字的页面。</li>
+</ul>
+<p><img src="https://i.imgur.com/jFxdeUk.png" alt="numrange: 操作符"></p>
+<h4 id="16-cache"><a href="#16-cache" class="headerlink" title="16. cache:"></a>16. <strong>cache:</strong></h4><p><strong>作用</strong>：查看搜索引擎缓存的页面版本。<br><strong>示例</strong>：</p>
+<ul>
+<li><code>cache:www.hao123.com</code></li>
+<li>返回结果：<a target="_blank" rel="noopener" href="http://www.hao123.com的缓存版本./">www.hao123.com的缓存版本。</a></li>
+</ul>
+<p><img src="https://i.imgur.com/VtpQbg0.png" alt="cache: 操作符"></p>
+<p>通过这些图解，你可以更直观地理解每个操作符的作用和用法。希望这些信息对你有帮助！</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608141716536.png" alt="image-20240608141716536"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h2><p>在Github中，可能会存在源码泄露、AccessKey泄露、密码、服务器配置泄露等情况，常见的搜索技巧有：</p>
+<ul>
+<li><code>@example.com password/pass/pwd/secret/credentials/token</code></li>
+<li><code>@example.com username/user/key/login/ftp/</code></li>
+<li><code>@example.com config/ftp/smtp/pop</code></li>
+<li><code>@example.com security_credentials/connetionstring</code></li>
+<li><code>@example.com JDBC/ssh2_auth_password/send_keys</code></li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608142344463.png" alt="image-20240608142344463"></p>
+<h2 id="网盘引擎"><a href="#网盘引擎" class="headerlink" title="网盘引擎"></a>网盘引擎</h2><p>盘多多：<a target="_blank" rel="noopener" href="http://www.panduoduo.top/">http://www.panduoduo.top/</a></p>
+<p> UP云搜：<a target="_blank" rel="noopener" href="https://www.upyunso.com/">https://www.upyunso.com/</a></p>
+<p>学搜搜：<a target="_blank" rel="noopener" href="https://www.xuesousou.net/">https://www.xuesousou.net/</a></p>
+<p>猫狸盘搜：<a target="_blank" rel="noopener" href="https://www.alipansou.com/">https://www.alipansou.com/</a></p>
+<p>云盘4K：<a target="_blank" rel="noopener" href="https://www.codelicence.cn/">https://www.codelicence.cn/</a></p>
+<p>聚合搜索引擎：<a target="_blank" rel="noopener" href="https://www.xiongbeng.com/">https://www.xiongbeng.com/</a></p>
+<h2 id="空间搜索引擎"><a href="#空间搜索引擎" class="headerlink" title="空间搜索引擎"></a>空间搜索引擎</h2><p>FOFA：<a target="_blank" rel="noopener" href="https://fofa.info/">https://fofa.info/</a> 之前被禁用，目前已恢复，但是功能阉割严重</p>
+<p>Quake：<a target="_blank" rel="noopener" href="https://quake.360.cn/quake/#/index">https://quake.360.cn/quake/#/index</a></p>
+<p>ZoomEye：<a target="_blank" rel="noopener" href="https://www.zoomeye.org/">https://www.zoomeye.org/</a></p>
+<p>Shadon：<a target="_blank" rel="noopener" href="https://www.shodan.io/">https://www.shodan.io</a></p>
+<p>基础语法：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Vdieoo/article/details/109622838">https://blog.csdn.net/Vdieoo/article/details/109622838</a></p>
+<p>切记：<strong>搜索到敏感信息之后，不要随意下载和传播，属于违法行为！应该主动进行报备</strong>。</p>
+<h2 id="历史漏洞"><a href="#历史漏洞" class="headerlink" title="历史漏洞"></a>历史漏洞</h2><p><strong>CNVD</strong>：<a target="_blank" rel="noopener" href="https://www.cnvd.org.cn/">https://www.cnvd.org.cn/</a>  </p>
+<p><strong>CNNVD</strong>：<a target="_blank" rel="noopener" href="https://www.cnnvd.org.cn/home/childHome">https://www.cnnvd.org.cn/home/childHome</a>  </p>
+<p><strong>Seebug</strong>：<a target="_blank" rel="noopener" href="https://www.seebug.org/">https://www.seebug.org</a>  </p>
+<p><strong>Exploit</strong> <strong>Database</strong>：<a target="_blank" rel="noopener" href="https://www.exploit-db.com/">https://www.exploit-db.com</a>  </p>
+<h2 id="公众号"><a href="#公众号" class="headerlink" title="公众号"></a>公众号</h2><p>微信直接搜索</p>
+<p>搜狗：<a target="_blank" rel="noopener" href="https://weixin.sogou.com/">https://weixin.sogou.com</a></p>
+<h2 id="小程序"><a href="#小程序" class="headerlink" title="小程序"></a>小程序</h2><p>微信直接搜索  </p>
+<h2 id="信息深度收集"><a href="#信息深度收集" class="headerlink" title="信息深度收集"></a>信息深度收集</h2><p>指纹识别</p>
+<p>火狐插件：Wappalyzer(网站技术嗅探工具）</p>
+<p>云悉：<a target="_blank" rel="noopener" href="http://www.yunsee.cn/">http://www.yunsee.cn</a></p>
+<p>潮汐：<a target="_blank" rel="noopener" href="http://finger.tidesec.net/">http://finger.tidesec.net/</a></p>
+<p>Nuclei：<a target="_blank" rel="noopener" href="https://github.com/projectdiscovery/nuclei">https://github.com/projectdiscovery/nuclei</a> </p>
+<p>Whatweb：<a target="_blank" rel="noopener" href="https://morningstarsecurity.com/research/whatweb">https://morningstarsecurity.com/research/whatweb</a></p>
+<h1 id="社会工程学"><a href="#社会工程学" class="headerlink" title="社会工程学"></a>社会工程学</h1><h2 id="企业信息收集"><a href="#企业信息收集" class="headerlink" title="企业信息收集"></a>企业信息收集</h2><p>一些网站如天眼查等，可以提供企业关系挖掘、工商信息、商标专利、企业年报等信息查询，可以提供企业的较为细致的信息。</p>
+<p>公司主站中会有业务方向、合作单位等信息。</p>
+<p>企查查：<a target="_blank" rel="noopener" href="https://www.qichacha.com/">https://www.qichacha.com</a> </p>
+<p>天眼查：<a target="_blank" rel="noopener" href="https://www.tianyancha.com/">https://www.tianyancha.com</a> 企业的工程师不一定比白帽子更了解企业自身的状况。 </p>
+<h2 id="人员信息收集"><a href="#人员信息收集" class="headerlink" title="人员信息收集"></a>人员信息收集</h2><p>针对人员的信息收集考虑对目标重要人员、组织架构、社会关系的收集和分析。其中重要人员主要指高管、系统管理员、开发、运维、财务、人事、业务人员的个人电脑。</p>
+<p>人员信息收集较容易的入口点是网站，网站中可能包含网站的开发、管理维护等人员的信息。从网站联系功能中和代码的注释信息中都可能得到的所有开发及维护人员的姓名和邮件地址及其他联系方式。</p>
+<p><strong>在获取这些信息后，可以在Github&#x2F;Linkedin等社交、招聘网站中进一步查找这些人在互联网上发布的与目标站点有关的一切信息，分析并发现有用的信息。</strong></p>
+<p>此外，<strong>可以对获取到的邮箱进行密码爆破的操作，获取对应的密码。</strong></p>
+<h2 id="钓鱼"><a href="#钓鱼" class="headerlink" title="钓鱼"></a>钓鱼</h2><p>基于之前收集到的信息，可以使用Office&#x2F;CHM&#x2F;RAR&#x2F;EXE&#x2F;快捷方式等文件格式制作钓鱼邮件发送至目标，进一步收集信息。</p>
+<p>其中Office可以使用Office漏洞、宏、OLE对象、PPSX等方式构造利用文件。</p>
+<p>Exe可以使用特殊的Unicode控制字符如RLO (Right-to-Left Override) 等来构建容易混淆的文件名。</p>
+<p>RAR主要是利用自解压等方式来构建恶意文件，同样加密的压缩包也在一定程度上可以逃逸邮件网关的检测。</p>
+<p>如果前期信息收集获取到了运维等人员的邮箱，可以使用运维人员的邮箱发送，如果未收集到相关的信息，可以使用伪造发送源的方式发送邮件。</p>
+<p>需要注意的是，钓鱼测试也需要注意合规问题，不能冒充监管单位、不能发送违法违规信息。具体可以参考《中华人民共和国电信条例》、《中华人民共和国互联网电子邮件服务管理办法》等法律法规。</p>
+<h2 id="其他信息"><a href="#其他信息" class="headerlink" title="其他信息"></a>其他信息</h2><p>公司的公众号、企业号、网站，员工的网盘、百度文库等可能会存在一些敏感信息，如VPN&#x2F;堡垒机账号、TeamViewer账号、网络设备默认口令、服务器默认口令等。</p>
+<h1 id="信息收集流程"><a href="#信息收集流程" class="headerlink" title="信息收集流程"></a>信息收集流程</h1><p>表层信息:</p>
+<ol>
+<li><p><strong>域名,邮箱,注册人,电话,备案号</strong></p>
+</li>
+<li><p><strong>域名,子域名,旁站</strong></p>
+</li>
+<li><p><strong>是否真实IP,判断有没有部署CDN</strong></p>
+</li>
+</ol>
+<p>深层信息:</p>
+<ol>
+<li><strong>指纹识别</strong></li>
+</ol>
+<h1 id="NMAP"><a href="#NMAP" class="headerlink" title="NMAP"></a>NMAP</h1><p>Nmap（“Network Mapper&lt;网络映射器&gt;”）是一款开放源代码的网络探测和安全审核的工具。它的设计目标是快速扫描大型网络，当然用它扫描单个主机也没有问题。Nmap以新颖的方式使用原始IP报文来发现网络上有哪些主机，这些主机提供什么服务（应用程序名和版本），这些服务运行在什么操作系统中， 它们使用什么类型的报文过滤器&#x2F;防火墙，以及一堆其它功能。虽然Nmap通常用于安全审核，许多系统管理员和网络管理员也用它来做一些日常的工作，比如查看整个网络的信息， 管理服务升级计划，以及监视主机和服务的运行。</p>
+<p>Nmap输出的是扫描目标的列表，以及每个目标的补充信息，至于是哪些补充信息则依赖于所使用的选项。通常会列出端口号，协议，服务名称和状态。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608112437845.png" alt="image-20240608112437845"></p>
+<h2 id="一个典型的Nmap扫描"><a href="#一个典型的Nmap扫描" class="headerlink" title="一个典型的Nmap扫描"></a>一个典型的Nmap扫描</h2><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608113336508.png" alt="image-20240608113336508"></p>
+<p>nmap简介<br>nmap是一款非常强大的主机发现和端口扫描工具，而且nmap运用自带的脚本，还能完成漏洞检测，同时支持多平台。</p>
+<p>nmap常用命令<br>主机发现 </p>
+<p>iR                                                                随机选择目标</p>
+<p>-iL                                                                从文件中加载IP地址</p>
+<p>-sL                                                               简单的扫描目标</p>
+<p>-sn                                                               Ping扫描-禁用端口扫描</p>
+<p>-Pn                                                              将所有主机视为在在线，跳过主机发现</p>
+<p>-PS[portlist]                                              （TCP SYN ping） 需要root权限</p>
+<p>-PA[portlist]                                              （TCP ACK ping）</p>
+<p>-PU[portlist]                                              （UDP  ping）</p>
+<p>-PY [portlist]                                             （SCTP ping）</p>
+<p>-PE&#x2F;PP&#x2F;PM                                                 ICMP回显，时间戳和网络掩码请求探测</p>
+<p>-PO[协议列表]                                            IP协议Ping</p>
+<p>-n&#x2F;-R                                                           从不执行DNS解析&#x2F;始终解析[默认：有时]</p>
+<p>–dns-servers                                              指定自定义DNS服务器</p>
+<p>–system-dns                                              使用OS的dns服务器</p>
+<p>–traceroute                                                跟踪到每个主机的跃点路径</p>
+<p>扫描技术</p>
+<p>-sS                                                             使用TCP的SYN进行扫描</p>
+<p>-sT                                                             使用TCP进行扫描</p>
+<p>-sA                                                            使用TCP的ACK进行扫描</p>
+<p>-sU                                                            UDP扫描</p>
+<p>-sI                                                             Idle扫描</p>
+<p>-sF                                                            FIN扫描</p>
+<p>-b&lt;FTP中继主机&gt;                                     FTP反弹扫描</p>
+<p>端口规格和扫描顺序</p>
+<p>-p                                                              扫描指定端口</p>
+<p>–exclude-ports                                         从扫描中排除指定端口</p>
+<p>-f                                                               快速模式-扫描比默认扫描更少的端口</p>
+<p>-r                                                               连续扫描端口-不随机化</p>
+<p>–top-ports                                                 扫描<number>最常用的端口</p>
+<p>服务&#x2F;版本探测</p>
+<p>-sV                                                            探测服务&#x2F;版本信息</p>
+<p>–version-intensity                                     设置版本扫描强度（0-9）</p>
+<p>–version-all                                              尝试每个强度探测</p>
+<p>–version-trace                                          显示详细的版本扫描活动（用于调试）</p>
+<p>脚本扫描</p>
+<p>-SC                                                           等效于 –script&#x3D;defult</p>
+<p>–script &#x3D; <lua scripts>,<lua scripts>        以逗号分隔的目录，脚本文件或脚本类别</p>
+<p>–script-args &#x3D; &lt;n1&#x3D;v1, n2&#x3D;v2&gt;               为脚本提供参数</p>
+<p>–script-args-file&#x3D;文件名                          从文件名中加载脚本参数</p>
+<p>–script-trace                                            显示发送和接受的所有数据</p>
+<p>–script-updatedb                                     更新脚本数据库</p>
+<p>–script-help&#x3D;<lua scripts>                      显示有关脚本的帮助</p>
+<p>操作系统检测</p>
+<p>-o                                                            启用os检测</p>
+<p>–osscan-limit                                          将os检测限制为可能的目标</p>
+<p>–osscan-guess                                       推测操作系统检测结果</p>
+<p>时间和性能</p>
+<p>–host-timeout                                         设置超时时间</p>
+<p>–scan-delay                                           设置探测之间的时间间隔</p>
+<p>-T  &lt;0-5&gt;                                                设置时间模板,值越小，IDS报警几率越低</p>
+<p>防火墙&#x2F;IDS规避和欺骗</p>
+<p>-f                                                             报文分段</p>
+<p>-s                                                             欺骗源地址</p>
+<p>-g                                                            使用指定的本机端口</p>
+<p>–proxies &lt;url,port&gt;                                 使用HTTP&#x2F;SOCK4代理</p>
+<p>-data<hex string>                                   想发送的数据包中追加自定义的负载</p>
+<p>–data-string                                            将自定义的ACSII字符串附加到发送数据包中   </p>
+<p>–data-length                                           发送数据包时，附加随机数据</p>
+<p>–spoof-mac                                            MAC地址欺骗</p>
+<p>–badsum                                                发送带有虚假TCP&#x2F;UNP&#x2F;STCP校验和的数据包</p>
+<p>输出</p>
+<p>-oN                                                         标准输出</p>
+<p>-oX                                                         XMl输出</p>
+<p>-oS                                                         script jlddi3</p>
+<p>-oG                                                        grepable</p>
+<p>-oA                                                         同时输出三种主要格式</p>
+<p>-v                                                           信息详细级别</p>
+<p>-d                                                           调试级别</p>
+<p>–packet-trace                                        跟踪发送和接收的报文</p>
+<p>–reason                                                 显示端口处于特殊状态的原因</p>
+<p>–open                                                    仅显示开放的端口</p>
+<p>杂项</p>
+<p>-6                                                          启动Ipv6扫描</p>
+<p>-A                                                          启动Os检测，版本检测，脚本扫描和traceroute</p>
+<p>-V                                                          显示版本号</p>
+<p>-h                                                          帮助信息</p>
+<h2 id="端口扫描目标"><a href="#端口扫描目标" class="headerlink" title="端口扫描目标"></a>端口扫描目标</h2><p>除了nmap选项，所有出现在Nmap命令行上的内容都被视为对目标主机的说明。最简单的情况是指定一个目标IP地址或主机名。</p>
+<p>有时候我们希望<strong>扫描整个网络的相邻主机</strong>。为此，Nmap支持CIDR风格的地址。可以附加一个&#x2F;在一个IP地址或主机名后面， Nmap将会扫描所有和该参考IP地址具有 相同比特的所有IP地址或主机。 <strong>例如， 192.168.10.0&#x2F;24将会扫描192.168.10.0 (二进制格式: 11000000 10101000 00001010 00000000)和192.168.10.255 (二进制格式: 11000000 10101000 00001010 11111111)之间的256台主机。</strong></p>
+<p>192.168.10.40&#x2F;24 代表同样的意义</p>
+<p>假设主机scanme.nmap.org的<strong>IP地址是205.217.153.62</strong>,scanme.nmap.org&#x2F;16 将扫描205.217.0.0和205.217.255.255之间的65,536 个IP地址。 <strong>所允许的最小值是&#x2F;1， 这将会扫描半个互联网。最大值是&#x2F;32，这将会扫描该主机或IP地址， 因为所有的比特都固定了</strong>  </p>
+<p>假设主机scanme.nmap.org的IP地址是205.217.153.62，scanme.nmap.org&#x2F;16 将扫描205.217.0.0和205.217.255.255之间的65,536 个IP地址。 所允许的最小值是&#x2F;1， 这将会扫描半个互联网。最大值是&#x2F;32，这将会扫描该主机或IP地址， 因为所有的比特都固定了  </p>
+<p><strong>IPv6地址只能用规范的IPv6地址或主机名指定。 CIDR 和八位字节范围不支持IPv6，因为它们对于IPv6几乎没什么用。</strong></p>
+<p>Nmap命令行接受多个主机说明，它们不必是相同类型，如：nmap scanme.nmap.org 192.168.0.0&#x2F;8 10.0.0.1</p>
+<p>虽然目标通常在命令行指定，下列选项也可用来控制目标的选择：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608112813496.png" alt="image-20240608112813496"></p>
+<h2 id="主机发现（思考一下可以用来做什么？）"><a href="#主机发现（思考一下可以用来做什么？）" class="headerlink" title="主机发现（思考一下可以用来做什么？）"></a>主机发现（思考一下可以用来做什么？）</h2><p>任何网络探测任务的最初几个步骤之一就是把一组IP范围（有时该范围是巨大的）缩小为一列活动的或 者感兴趣的主机。扫描每个IP的每个端口很慢，通常也没必要。 当然，什么样的主机令您感兴趣主要依 赖于扫描的目的。网管也许只对运行特定服务的主机感兴趣，而从事安全的人员则可能对每一个主机都 感兴趣，只要它有IP地址:-)。一个系统管理员也许仅仅使用Ping来定位内网上的主机，而一个外部入侵 测试人员则可能绞尽脑汁用各种方法试图突破防火墙的封锁。</p>
+<p>由于主机发现的需求五花八门，Nmap提供了一箩筐的选项来定制需求。主机发现有时候也叫做ping扫 描，但它远超越世人皆知的ping工具发送简单的ICMP回声请求报文。用户完全可以通过使用列表扫描(- sL)或者通过关闭ping (-P0)跳过ping的步骤，也可以使用多个端口把TCP SYN&#x2F;ACK，UDP和ICMP 任意组 合起来玩一玩。这些探测的目的是获得响应以显示某个IP地址是否是活动的（正在被某主机或者网络设 备使用）。在许多网络上，在给定的时间，往往只有小部分的IP地址是活动的。这种情况在私有地址空间如10.0.0.0&#x2F;8尤其普遍。私有网络有16,000,000个IP，<strong>但一些使用它的公司连1000台机器都没有。主 机发现能够找到零星分布于IP地址海洋上的机器。</strong></p>
+<p>如果没有给出主机发现的选项，Nmap 就发送一个TCP ACK报文到80端口和一个ICMP回声请求到每台目 标机器。 一个例外是ARP扫描用于局域网上的任何目标机器。对于非特权UNIX shell用户，使用 connect()系统调用会发送一个SYN报文而不是ACK。这些默认行为和使用-PA -PE选项的效果相同。 扫描 局域网时，这种主机发现一般够用了，但是对于安全审核，建议进行更加全面的探测。</p>
+<p>-P选项（用于选择ping的类型）可以被结合使用，可以通过使用不同的TCP端口&#x2F;标志位和ICMP码发送许 多探测报文来增加穿透防守严密的防火墙的机会。另外要注意的是即使指定了其它 -P*选项，ARP发现(- PR)对于局域网上的目标而言是默认行为，因为它总是更快更有效。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608113001057.png" alt="image-20240608113001057"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608113012283.png" alt="image-20240608113012283"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608113022813.png" alt="image-20240608113022813"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608113038109.png" alt="image-20240608113038109"></p>
+<h2 id="端口扫描基础"><a href="#端口扫描基础" class="headerlink" title="端口扫描基础"></a><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608113046355.png" alt="image-20240608113046355">端口扫描基础</h2><p>虽然Nmap这些年来功能越来越多，但它最初也是从一个端口扫描器开始的，并且这仍然是它的核心功 能。 nmap **这个简单的命令会扫描主机上的超过1660个TCP端口。许多传统的端口扫描器只列出所有 端口是开放还是关闭的，Nmap的信息粒度比它们要细得多。它把端口分成六个状态: open(开放的)， closed(关闭的)，filtered(被过滤的)， unfiltered(未被过滤的)， open|filtered(开放或者被过滤的)，或 者 closed|filtered(关闭或者被过滤的)。</p>
+<p><strong>这些状态并非端口本身的性质，而是描述Nmap怎样看待它们。例如，对于同样的目标机器的135&#x2F;tcp端 口，从同网络扫描显示它是开放的，而跨网络进行完全相同的扫描则可能显示它是filtered(被过滤的).</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608113146628.png" alt="image-20240608113146628"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608113153000.png" alt="image-20240608113153000"></p>
+<h2 id="端口扫描技术"><a href="#端口扫描技术" class="headerlink" title="端口扫描技术"></a>端口扫描技术</h2><p>大部分扫描类型只对特权用户可用，这是因为他们发送接收原始报文，在Unix系统需要root权限。在Windows上推荐使用administrator账户，但是当WinPcap已经被加载到操作系统时，非特权用户也可以正常使用Nmap。当Nmap在1997年发布时，需要root权限是一个严重的局限，因为很多用户只有共享的shell账户。现在，世界变了，计算机便宜了，更多人拥有互联网连接 ，桌面UNIX系统 (包括Linux和MAC OS X)很普遍了。Windows版本的Nmap现在也有了，这使它可以运行在更多的桌面上。 由于所有这些原因，用户不再需要用有限的共享shell账户运行Nmap。 这是很幸运的，因为特权选项让Nmap强大得多也灵活得多。</p>
+<p>虽然Nmap努力产生正确的结果，但请记住所有结果都是基于目标机器(或者它们前面的防火墙)返回的报文的。这些主机也许是不值得信任的，它们可能响应以迷惑或误导Nmap的报文。 更普遍的是非RFC兼容的主机以不正确的方式响应Nmap探测，FIN，Null和Xmas扫描特别容易遇到这个问题，这些是特定扫描类型的问题。</p>
+<p>这一节讨论Nmap支持的大约十几种扫描技术。一般一次只用一种方法，除了UDP扫描(-sU)可能和任何一种TCP扫描类型结合使用。友情提示一下，端口扫描类型的选项格式是-s， 其中是个显眼的字符，通常是第一个字符，一个例外是deprecated FTP bounce扫描(-b)。默认情况下，Nmap执行一个SYN扫描，但是如果用户没有权限发送原始报文(在UNIX上需要root权限)或者如果指定的是IPv6目标，Nmap调用connect()。本节列出的扫描中，非特权用户只能执行connect()和ftp bounce扫描</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608114250340.png" alt="image-20240608114250340"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608114259668.png" alt="image-20240608114259668"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608114311915.png" alt="image-20240608114311915"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608114327336.png" alt="image-20240608114327336"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608114347555.png" alt="image-20240608114347555"></p>
+<h2 id="端口说明和扫描顺序"><a href="#端口说明和扫描顺序" class="headerlink" title="端口说明和扫描顺序"></a>端口说明和扫描顺序</h2><p>除了所有前面讨论的扫描方法， Nmap提供选项说明哪些端口被扫描以及扫描是随机还是顺序进行。 默认情况下，Nmap用指定的协议对端口 1~1024 以及 nmap-services 文件中列出的更高的端口进行扫描。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608114424923.png" alt="image-20240608114424923"></p>
+<p>把Nmap指向一个远程机器，它可能告诉您端口25&#x2F;tcp，80&#x2F;tcp，和53&#x2F;udp是开放的，使用包含大约2,200个著名的服务的nmap-services数据库。Nmap可以报告哪些端口可能分别对应于一个邮件服务器 (SMTP)，web服务器(HTTP)，和域名服务器(DNS)。这种查询通常是正确的。事实上，绝大多数在TCP端口25监听的守护进程是邮件服务器。然而，您不应该把赌注押在这上面！管理员完全可以在一些奇怪的端口上运行服务。</p>
+<p>即使Nmap是对的，假设运行服务的确实是 SMTP，HTTP和DNS，那也不是特别多的信息。 当为您的公司或者客户作安全评估(或者甚至简单的网络明细清单)时，您确实想知道正在运行什么邮件和域名服务器以及它们的版本，有一个精确的版本号对了解服务器有什么漏洞有巨大帮助，版本探测可以帮您获得该信息。</p>
+<p>在用某种其它类型的扫描方法发现TCP 和&#x2F;或者UDP端口后，版本探测会询问这些端口，确定到底什么服务正在运行。nmap-service-probes 数据库包含查询不同服务的探测报文和解析识别响应的匹配表达式。Nmap试图确定服务协议 (如 ftp，ssh，telnet，http)，应用程序名(如ISC Bind，Apache httpd， Solaris telnetd)，版本号，主机名，设备类型(如打印机，路由器)，操作系统 (如Windows，Linux)以及其它的细节，如是否可以连接X server，SSH协议版本，或者KaZaA用户名。当然，并非所有服务都提供所有这些信息。 如果Nmap被编译成支持OpenSSL，它将连接到SSL服务器，推测什么服务在加密层后面监听。当发现RPC服务时，Nmap RPC grinder (-sR)会自动被用于确定RPC程序和它的版本号。如果在扫描某个UDP端口后仍然无法确定该端口是开放的还是被过滤的，那么该端口状态就被标记为open|filtered。 版本探测将试图从这些端口引发一个响应(就像它对开放端口做的一样)， 如果成功，就把状态改为开放。open|filtered TCP端口用同样的方法对待。注意Nmap -A选项在其它情况下打开版本探测。有一篇关于版本探测的原理，使用文章在<a target="_blank" rel="noopener" href="http://www.insecure.org/nmap/vscan/">http://www.insecure.org/nmap/vscan/</a></p>
+<p>当Nmap从某个服务收到响应，但不能在数据库中找到匹配时，它就打印一个特殊的fingerprint和一个URL给您提交。如果您知道什么服务运行在端口，请花两分钟提交您的发现，让每个人受益。由于这些提交，Nmap有350种以上协议，如smtp，ftp，http等大约3,000条模式匹配。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608114513196.png" alt="image-20240608114513196"></p>
+<h2 id="操作系统探测"><a href="#操作系统探测" class="headerlink" title="操作系统探测"></a>操作系统探测</h2><p>Nmap最著名的功能之一是用TCP&#x2F;IP协议栈fingerprinting进行远程操作系统探测。Nmap发送一系列TCP和UDP报文到远程主机，检查响应中的每一个比特。在进行一打测试如TCP ISN采样、TCP选项支持和排序、IPID采样和初始窗口大小检查之后，Nmap把结果和数据库nmap-os-fingerprints中超过1500个已知的操作系统的fingerprints进行比较，如果有匹配，就打印出操作系统的详细信息。 每个fingerprint包括一个自由格式的关于OS的描述文本和一个分类信息，它提供供应商名称(如Sun)，下面的操作系统(如Solaris)，OS版本(如10)，设备类型(通用设备，路由器，switch，游戏控制台等)</p>
+<p>。</p>
+<p>如果</p>
+<p>Nmap不能猜出操作系统，并且有些好的已知条件(如至少发现了一个开放端口和一个关闭端口)， Nmap会提供一个URL，如果您确知运行的操作系统，您可以把fingerprint提交到那个URL。这样您就扩大了Nmap的操作系统知识库，从而让每个Nmap用户都受益。</p>
+<p>操作系统检测可以进行其它一些测试，这些测试可以利用处理过程中收集到的信息。例如运行时间检测，使用TCP时间戳选项(RFC 1323) 来估计主机上次重启的时间，这仅适用于提供这类信息的主机。另一种是TCP序列号预测分类，用于测试针对远程主机建立一个伪造的TCP连接的可能难度。这对于利用基于源IP地址的可信关系(rlogin，防火墙过滤等) 或者隐含源地址的攻击非常重要。这一类欺骗攻击现在很少见，但一些主机仍然存在这方面的漏洞。实际的难度值基于统计采样，因此可能会有一些波动。通常采用英国的分类较好，如“worthy challenge”或者 “trivial joke”。在详细模式(-v)下只以普通的方式输出，如果同时使用-O，还报告IPID序列产生号。很多主机的序列号是“增加”类别，即在每个发送包的IP头中增加ID域值， 这对一些先进的信息收集和欺骗攻击来说是个漏洞</p>
+<p><a target="_blank" rel="noopener" href="http://nmap.org/book/osdetect.html">http://nmap.org/book/osdetect.html</a> 文档使用多种语言描述了版本检测的方式、使用和定制  </p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608114609507.png" alt="image-20240608114609507"></p>
+<h2 id="时间和性能"><a href="#时间和性能" class="headerlink" title="时间和性能"></a>时间和性能</h2><p>Nmap开发的最高优先级是性能。在本地网络对一个主机的默认扫描(nmap **)需要0.2秒，而仅仅眨眼的时间，就可以扫描上万甚至几十万的主机。此外，一些特定的扫描选项会明显增加扫描时间，如UDP扫描和版本检测。同样，防火墙配置以及特殊的响应速度限制也会增加时间。Nmap使用了并行算法和许多先进的算法来加速扫描，用户对Nmap如何工作有最终的控制权。高级用户可以仔细地调整Nmap命令，在满足时间要求的同时获得他们所关心的信息  </p>
+<p>改善扫描时间的技术有：忽略非关键的检测、升级最新版本的Nmap(性能增强不断改善)。 优化时间参数也会带来实质性的变化，这些参数如下。  </p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608114651328.png" alt="image-20240608114651328"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608114703908.png" alt="image-20240608114703908"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608114712037.png" alt="image-20240608114712037"></p>
+<h2 id="防火墙-IDS躲避和欺骗"><a href="#防火墙-IDS躲避和欺骗" class="headerlink" title="防火墙&#x2F;IDS躲避和欺骗"></a>防火墙&#x2F;IDS躲避和欺骗</h2><p>很多Internet先驱们设想了一个全球开放的网络，使用全局的IP地址空间，使得任何两个节点之间都有虚拟连接，这使得主机间可以作为真正的对等体，相互间提供服务和获取信息。</p>
+<p>然而，这些全球连接的设想受到了地址空间短缺和安全考虑的限制。在90年代早期，各种机构开始部署防火墙来实现减少连接的目的，大型网络通过代理、NAT和包过滤器与未过滤的Internet隔离。不受限的信息流被严格控制的可信通信通道信息流所替代。</p>
+<p>类似防火墙的网络隔离使得对网络的搜索更加困难，随意的搜索变得不再简单。然而，Nmap提供了很多特性用于理解这些复杂的网络，并且检验这些过滤器是否正常工作。此外，Nmap提供了绕过某些较弱的防范机制的手段。检验网络安全状态最有效的方法之一是尝试欺骗网络，将自己想象成一个攻击者，使用本节提供的技术来攻击自己的网络。如使用FTP bounce扫描、Idle扫描、分片攻击或尝试穿透自己的代理。</p>
+<p>有时也会出现不同的意见，比如建议Nmap不应该提供躲闭防火墙规则或欺骗IDS的功能， 这些功能可能会被攻击者滥用，然而管理员却可以利用这些功能来增强安全性。实际上，即便是关闭Nmap绕过或者欺骗的功能，其他的攻击方法仍可被攻击者利用，他们可以发现其它工具或Nmap的补丁程序。同时，管理员发现攻击者的工作更加困难，相较于采取措施来预防执行FTP Bounce攻击的工具而言，部署先进的、打过补丁的FTP服务器更加有效。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608114904271.png" alt="image-20240608114904271"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608114952078.png" alt="image-20240608114952078"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608114959829.png" alt="image-20240608114959829"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608115029119.png" alt="image-20240608115029119"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608115036669.png" alt="image-20240608115036669"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240608115042227.png" alt="image-20240608115042227"></p>
+<p><strong>探测目录的过程中要时常维护字典</strong></p>
+<h1 id="盲打平台"><a href="#盲打平台" class="headerlink" title="盲打平台"></a>盲打平台</h1><p><a target="_blank" rel="noopener" href="http://www.dnslog.cn/">www.dnslog.cn</a></p>
+<p>在构造的payload中使被控制服务器访问该平台,如果有回显则证明成功控制.</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44029310/article/details/125694514">Web—信息收集(非常全)_web info hunter-CSDN博客</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/source/categories/Penetration-Testing-Basic/">Penetration Testing Basic</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/source/tags/pr0gram/">pr0gram</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2024/07/09/vscode和html，javascript和Docker/"><span>更底层更方便的一些部署</span></a></h3>
     
   
@@ -87,7 +1021,8 @@
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="WHAT-IS-蜜罐"><a href="#WHAT-IS-蜜罐" class="headerlink" title="WHAT IS 蜜罐"></a>WHAT IS 蜜罐</h1><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240512091639288.png" alt="image-20240512091639288"></p>
+        <p>WARNING ：<strong>请先有一定的linux命令基础再接触并进行部署</strong></p>
+<h1 id="WHAT-IS-蜜罐"><a href="#WHAT-IS-蜜罐" class="headerlink" title="WHAT IS 蜜罐"></a>WHAT IS 蜜罐</h1><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240512091639288.png" alt="image-20240512091639288"></p>
 <p>蜜罐是一种安全威胁的主动防御技术，<strong>它通过模拟一个或多个易受攻击的主机或服务来吸引攻击者，捕获攻击流量与样本，发现网络威胁、提取威胁特征，</strong>蜜罐的价值在于被探测、攻陷。其在本质上来说，<strong>是一个与攻击者进行攻防博弈的过程。</strong>蜜罐提供服务，攻击者提供访问，通过蜜罐对攻击者的吸引，攻击者对蜜罐进行攻击，在攻击的过程中，有经验的攻击者也可能识别出目标是一个蜜罐。为此，<strong>为更好的吸引攻击者，蜜罐也需要提供强悍的攻击诱骗能力。</strong></p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240512092050232.png" alt="image-20240512092050232"></p>
 <h1 id="Web服务中间件"><a href="#Web服务中间件" class="headerlink" title="Web服务中间件"></a><strong>Web服务中间件</strong></h1><p>类似Apache  Tomcat  Nginx将用户的HTTP请求解析，并返回到浏览器</p>
@@ -1007,7 +1942,7 @@
 
     <span class="post-categories">
       <i class="icon-categories"></i>
-        <a href="/source/categories/Penetration-Testing/">Penetration Testing</a>
+        <a href="/source/categories/Penetration-Testing-Basic/">Penetration Testing Basic</a>
     </span>
     
 
