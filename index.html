@@ -67,6 +67,113 @@
 
   
     
+    <h3 class="article-title"><a href="/2024/07/10/从0开始的渗透/"><span></span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2024/07/10/从0开始的渗透/" rel="bookmark">
+        <time class="entry-date published" datetime="2024-07-10T13:30:00.630Z">
+          2024-07-10
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="基础入门-操作系统-名词-文件下载-反弹shell-防火墙绕过"><a href="#基础入门-操作系统-名词-文件下载-反弹shell-防火墙绕过" class="headerlink" title="基础入门-操作系统&amp;名词&amp;文件下载&amp;反弹shell&amp;防火墙绕过"></a>基础入门-操作系统&amp;名词&amp;文件下载&amp;反弹shell&amp;防火墙绕过</h1><h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sunny11/p/13583083.html">https://www.cnblogs.com/sunny11/p/13583083.html</a></p>
+<h1 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h1><p><a target="_blank" rel="noopener" href="https://forum.ywhack.com/bountytips.php?download">https://forum.ywhack.com/bountytips.php?download</a></p>
+<p><strong>在渗透的过程中，如果我们要在对方的服务里面下载我们制作好的病毒文件等，是不可能通过打开对方的浏览器进而进行下载的，因此弹出shell后我们也要掌握一些基本的文件下载命令，并且自己搭建一个小型的渗透站点用于传输一些安全脚本或者安全文件作为攻击手段。</strong></p>
+<h1 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h1><p>反弹shell主要用于<strong>命令发送后无回显的情况</strong>，<strong>大部分 的安全工具都是一条命令发送过后便了无音讯</strong>，服务器接收了但并没有给我们对应的反馈，这个时候就需要反弹shell。</p>
+<p>同时反弹shell能够解决一些需要交互式问答的命令的执行问题，一般情况下<strong>webshell是无法进一步验证我们的命令的</strong>，如果我们需要进行一些高权限的操作，这时服务器要求我们验证root权限，即使我们有root密码也是无济于事的，<strong>因为交互式命令的进一步交互并没有反馈到所谓的webshell这里</strong>，这个时候就更需要反弹shell了</p>
+<h1 id="防火墙绕过"><a href="#防火墙绕过" class="headerlink" title="防火墙绕过"></a>防火墙绕过</h1><p>案例</p>
+<h2 id="1-内网："><a href="#1-内网：" class="headerlink" title="1.内网："></a>1.内网：</h2><p>内网**–&gt;**xzb666-hub</p>
+<p>xzb666-hub**!–&gt;**内网</p>
+<p>这里的xzb666-hub可以代指类似本博客这样部署在公网上的站点</p>
+<p>这块的监听可以用nc做实验，分别以xzb666-hub为代表的公网以及以虚拟机为代表的内网作为被监听端和监听端</p>
+<p>发现此时监听成立，能够弹shell</p>
+<p>但反过来，以xzb666-hubd为代表的公网想要监听内网是不成立的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/008jCdW0gy1hriyt8rqkwj30xd0xinbv.jpg" alt="img"></p>
+<p>那么这就是一个很生草的问题了</p>
+<p>下面我们来解释下这个问题</p>
+<p>内网能够主动找到外网地址，但外网地址想要找内网地址却很难，下面扒取一段解释，可以作为参考</p>
+<ol>
+<li><p><strong>内网可以直接访问外网么？</strong></p>
+<p>答案是<code>不能</code>，内网IP访问外网必须要通过路由器来中转 ，路由器只有连上了电信服务器，分配有外网IP才能访问外网。但内网通过路由器的中继是可以精准找到外网的。</p>
+</li>
+<li><p><strong>外网能否访问内网？</strong></p>
+<p>答案是外网设备不能直接访问内网设备。这是因为内网（局域网）和外网（广域网）之间存在一个隔离层，通常由路由器或防火墙来维持。这种隔离是为了保护内网设备不受外部攻击和未经授权的访问</p>
+<p>————————————————————————————————————</p>
+<ol>
+<li><strong>NAT（网络地址转换）</strong>：路由器通常使用NAT技术，将内网IP地址转换为外网IP地址。外部设备无法直接访问内网IP，因为这些IP在外网中是不可见的。</li>
+<li><strong>防火墙</strong>：路由器或专用防火墙通常会阻止外部未授权的访问请求进入内网，以保护内网设备的安全。</li>
+</ol>
+<p>尽管如此，外网访问内网设备并非完全不可能。通过配置端口转发（Port Forwarding）或使用VPN（虚拟专用网络），你可以允许外部设备访问特定的内网设备或服务。不过，这些配置需要手动设置，并且通常仅用于特定用途，例如远程桌面访问或托管网络服务。</p>
+<p>————————————————————————————————————</p>
+<p><strong>如何解决外网无法访问内网的问题？</strong></p>
+<p>端口映射</p>
+<p>这个又叫虚拟映射，这个方法就是在连接外网的路由器上做一个端口映射的设置，具体说将访问该路由器外网地址和特定端口的服务映射到内网的一台电脑的某一个端口上。</p>
+<p><strong>其实是很通俗易懂的,外网访问的过程中将流量转发到路由器上的某个端口，这个端口又映射到内网主机的某个端口上实现流量从外网到内网主机的精准转发desu喵</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/008jCdW0gy1hfdyq4d43tj30u00u0q74.jpg" alt="img"></p>
+<p>具体上面来说，<strong>就是在光猫+路由器上做一个虚拟映射的设置，例如，将访问122.15.244.39，端口10101的访问映射到192.168.2.2的端口10101上。</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240711112852515.png" alt="image-20240711112852515"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240711112917706.png" alt="image-20240711112917706"></p>
+<p>设置完成后，在外网浏览器输入：122.15.244.39:10101，则可以直接访问到服务器。<br>需要注意的是：<br>(1)<strong>公网映射时，选择的外部端口最好不选择常用的80，21等，因为路由器会屏蔽这些！！！</strong><br>(2) 服务器需要连接到包含公网IP的服务器上！</p>
+<p><strong>如何获得公网IP</strong><br>实际当中，你的光猫+路由器的那个IP地址（可以在登录路由器界面后看到）不一定是公网IP，如果不是，则以上无法完成。因为IP地址很有限，所以很多运营商给你的是私网IP。例如，你看到你的那个地址是通过PPOE得来的，就是私有的。可以参见这里<a target="_blank" rel="noopener" href="https://blog.csdn.net/hongkaihua1987/article/details/106046819%E3%80%82%E8%A6%81%E8%8E%B7%E5%BE%97%E5%85%AC%E7%BD%91IP%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%89%BE%E8%BF%90%E8%90%A5%E5%95%86%EF%BC%8C%E8%A6%81%E6%B1%82%E7%BB%99%E5%85%AC%E7%BD%91IP%EF%BC%8C%E4%BB%96%E4%BB%AC%E4%BC%9A%E5%9C%A8%E5%90%8E%E5%8F%B0%E8%AE%BE%E7%BD%AE%EF%BC%8C%E8%AE%BE%E7%BD%AE%E5%AE%8C%E5%90%8E%E5%B0%B1%E6%98%AF%E5%85%AC%E7%BD%91%E7%9A%84%E4%BA%86%E3%80%82">https://blog.csdn.net/hongkaihua1987/article/details/106046819。要获得公网IP，可以找运营商，要求给公网IP，他们会在后台设置，设置完后就是公网的了。</a></p>
+<p>**</p>
+<p><strong>公网IP是动态的怎么办</strong><br>你的公网IP有了，但是他通常是动态的（登录路由器，如果是DHCP获得的，就是动态的）。所谓动态就是分给你的是变化的，当你路由器重新加电或复位后就会重新分配一个。这就有点傻了，总不能每次去查路由器吧。这里有两个办法：</p>
+<p><strong>申请固定IP</strong><br>（1）找运营商，申请一个固定的公网IP。但是有个前提，运营商只对公司分配固定IP，对个人用户是不可以的。同时公司用户必须申请公司宽带，不能是个人宽带。公司宽带的资费要比个人的贵一些。同时，如果想要申请固定IP，还需要额外收一笔费用，按月计费。</p>
+<p>转载自<a target="_blank" rel="noopener" href="https://blog.csdn.net/kevinshift/article/details/122148573#31__25">从外网访问局域网服务器的六种方法_内部服务如何才能外部访问-CSDN博客</a></p>
+<p>————————————————————————————————————</p>
+</li>
+<li><p><strong>路由器的作用是什么，什么是路由？</strong></p>
+<p>比如说我们手机要访问<a href="https://link.zhihu.com/?target=http://baidu.com">http://baidu.com</a> ，必须先经过路由中转然后路由外网IP对<a href="https://link.zhihu.com/?target=http://baidu.com">http://baidu.com</a> 发送请求，百度收到后对路由响应一个网页或者 数据之类的东东。</p>
+<p>路由器接收到 <a href="https://link.zhihu.com/?target=http://baidu.com">http://baidu.com</a> 的页面后，把页面发送给你的电脑或手机。路由器知道如何给这些信息指路，路由器就是一个指路人，这就是「路由」两个字的来历。</p>
+<p>路，就是「必由之路」中的路。由，就是「必由之路」中的由（由是经过、缘由的意思）。所有的信息都要经过路由器，然后被指向一条它该去的路。<br>也就是说内网和外网就像两个隔绝的空间，无法互通，唯一的联通点就是路由器（因为路由器既有外网 IP 也有内网 IP），所以路由器有时候也被叫做「网关」，这个「关」是「一夫当关，万夫莫开」的「关」。如果路由器到电信的连接中断了，那么内网中所有的设备也就无法上网了。（这很好理解，相当于唯一一条出去的路断了）</p>
+</li>
+<li><p><strong>内网能访问内网么？</strong></p>
+<p>内网中的设备可以互相访问（比如你可以用电脑或手机进入 <a href="https://link.zhihu.com/?target=http://192.168.1.1">http://192.168.1.1</a> 来查看你的路由器），但是不能直接访问外网，内网设备想要访问外网，就必须经过路由器中转。</p>
+</li>
+<li><p><strong>外网能访问外网么？</strong></p>
+<p>外网中的设备可以互相访问（比如 <a href="https://link.zhihu.com/?target=http://qq.com">http://qq.com</a> 可以把首页发送给你的路由器，你的路由器有外网 IP），但是外网中的设备无法访问你的内网设备（这很好理解，内网是一个封闭的网络，外人进不来，所以实际上 <a href="https://link.zhihu.com/?target=http://qq.com">http://qq.com</a> 无法直接把首页放送给你的电脑和手机</p>
+<p><strong>来源于<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/34521011">HTTP访问要素：IP 与 端口 - 知乎 (zhihu.com)</a></strong></p>
+</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240711110331630.png" alt="image-20240711110331630"></p>
+<h2 id="2-防火墙："><a href="#2-防火墙：" class="headerlink" title="2.防火墙："></a>2.防火墙：</h2><p>xzb666-hub <strong>&lt;–&gt;</strong> aliyun</p>
+<p>xzb666-hub防火墙 <strong>–&gt;</strong> aliyun</p>
+<p>aliyun <strong>!- &gt;</strong> xzb666防火墙</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2024/07/10/Untitled/"><span></span></a></h3>
     
   
@@ -112,65 +219,6 @@
 
   
     
-    <h3 class="article-title"><a href="/2024/07/10/从0开始的渗透/"><span>信息收集初养成（基础的一些玩法）</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2024/07/10/从0开始的渗透/" rel="bookmark">
-        <time class="entry-date published" datetime="2024-07-10T06:33:00.000Z">
-          2024-07-10
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/source/categories/Penetration-Testing-Basic/">Penetration Testing Basic</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/source/tags/pr0gram/">pr0gram</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
     <h3 class="article-title"><a href="/2024/07/10/信息泄露与信息收集/"><span>信息收集初养成（基础的一些玩法）</span></a></h3>
     
   
@@ -192,6 +240,7 @@
     <div class="entry">
       
         <p>想要学好渗透测试，需要很多努力，不同于以往的学习体系抛给你漏洞原理和payload那么简单，是从底层慢慢摸索，甚至站在运维的角度，站在开发者站在甲方的角度去看问题，自然所要掌握的知识会多得多，但学会渗透测试其实并不难，市面上流通的工具和套路足够你成为所谓的脚本小子了，那么我们就从学会做一个脚本小子开始，依靠调试几个参数和市面上给定的脚本完成最基本的渗透吧！</p>
+<p>这篇文章主要是讲解通常情况下的一些信息泄露和渗透者如何进行各方面的信息收集的，信息泄露和信息收集二者所指的概念统一却又相互分离，等到具体接触就会明白这是什么了</p>
 <h1 id="Web之信息泄露"><a href="#Web之信息泄露" class="headerlink" title="Web之信息泄露"></a>Web之信息泄露</h1><p>这里不好意思通篇复制，可以转到这里看看信息泄露是怎么样的</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/a597934448/article/details/105431367">CTFHUBWeb技能树——信息泄露writeup_ctfhub web writeup-CSDN博客</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/cx17775140296/article/details/130500741">CTFSHOW信息泄露</a></p>
