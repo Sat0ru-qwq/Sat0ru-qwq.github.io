@@ -263,7 +263,7 @@
 <p>因此SQL注入分类总结可以如下</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.根据查询字段：数字型，字符型</span><br><span class="line">2.根据查询方式：Union注入、堆叠注入</span><br><span class="line">3.根据回显：报错、盲注</span><br></pre></td></tr></table></figure>
 
-<h2 id="二次注入"><a href="#二次注入" class="headerlink" title="二次注入"></a>二次注入</h2><p>二次注入是指存入存出的过程中,存入数据库的时候做了过滤但是去取出来的时候没有坐果率,而产生的数据库注入.</p>
+<h2 id="二次注入"><a href="#二次注入" class="headerlink" title="二次注入"></a>二次注入</h2><p>二次注入是指存入存出的过程中,存入数据库的时候做了过滤但是去取出来的时候没有做过滤z,而产生的数据库注入.</p>
 <h3 id="插入恶意数据"><a href="#插入恶意数据" class="headerlink" title="插入恶意数据"></a>插入恶意数据</h3><p>在第一次想数据库插入数据时,使用addslashes对其中的特殊字符进行转义,但是addslashes函数有一个特点;虽然参数过滤后添加\进行转义,但是\并不会插入到数据库中,写入时还是保留了原来的数据.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在MySQL中，反斜线在字符串中属于是转义字符，经过语法解析器解析时会进行一次转义，所以当我们插入反斜线也就是通过insert“\”时，如insert “\”在数据库中只会存储“”，第一个反斜线（\)被当作转义字符处理</span><br></pre></td></tr></table></figure>
 
