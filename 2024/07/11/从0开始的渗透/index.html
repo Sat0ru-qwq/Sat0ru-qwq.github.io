@@ -49,8 +49,6 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">首页</a></li>
-      
         <li><a href="/archives">文档</a></li>
       
         <li><a href="/categories">分类</a></li>
@@ -86,7 +84,7 @@
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="基础入门-操作系统-名词-文件下载-反弹shell-防火墙绕过"><a href="#基础入门-操作系统-名词-文件下载-反弹shell-防火墙绕过" class="headerlink" title="基础入门-操作系统&amp;名词&amp;文件下载&amp;反弹shell&amp;防火墙绕过"></a>基础入门-操作系统&amp;名词&amp;文件下载&amp;反弹shell&amp;防火墙绕过</h1><h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sunny11/p/13583083.html">https://www.cnblogs.com/sunny11/p/13583083.html</a></p>
+        <h1 id="Day1-基础入门-操作系统-名词-文件下载-反弹shell-防火墙绕过"><a href="#Day1-基础入门-操作系统-名词-文件下载-反弹shell-防火墙绕过" class="headerlink" title="Day1:基础入门-操作系统&amp;名词&amp;文件下载&amp;反弹shell&amp;防火墙绕过"></a>Day1:基础入门-操作系统&amp;名词&amp;文件下载&amp;反弹shell&amp;防火墙绕过</h1><h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sunny11/p/13583083.html">https://www.cnblogs.com/sunny11/p/13583083.html</a></p>
 <h1 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h1><p><a target="_blank" rel="noopener" href="https://forum.ywhack.com/bountytips.php?download">https://forum.ywhack.com/bountytips.php?download</a></p>
 <p><strong>在渗透的过程中，如果我们要在对方的服务里面下载我们制作好的病毒文件等，是不可能通过打开对方的浏览器进而进行下载的，因此弹出shell后我们也要掌握一些基本的文件下载命令，并且自己搭建一个小型的渗透站点用于传输一些安全脚本或者安全文件作为攻击手段。</strong></p>
 <h1 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h1><p>反弹shell主要用于<strong>命令发送后无回显的情况</strong>，<strong>大部分 的安全工具都是一条命令发送过后便了无音讯</strong>，服务器接收了但并没有给我们对应的反馈，这个时候就需要反弹shell。</p>
@@ -168,6 +166,35 @@
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240711153516754.png" alt="image-20240711153516754"></p>
 <p>–后续不具体做展示desu</p>
 <p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQozfTZKNXRTR0quy3Ca3nmSgkKsfM76uQn_g&s" alt="永雏塔菲手机壁纸- 抖音"></p>
+<h1 id="Day2-Web应用-架构搭建-漏洞-HTTP数据包-代理服务器"><a href="#Day2-Web应用-架构搭建-漏洞-HTTP数据包-代理服务器" class="headerlink" title="Day2:Web应用-架构搭建-漏洞-HTTP数据包-代理服务器"></a>Day2:Web应用-架构搭建-漏洞-HTTP数据包-代理服务器</h1><h1 id="网站搭建前置知识"><a href="#网站搭建前置知识" class="headerlink" title="网站搭建前置知识"></a>网站搭建前置知识</h1><p>#域名，子域名，DNS，HTTP&#x2F;HTTPS，证书等</p>
+<p>第一步：准备域名，可以通过阿里云购买，服务器同理</p>
+<p>PS：倘若域名没有经过备案，那么这个域名在运营过程中只能对大陆以外的服务器进行解析，这个时候服务器可以选择香港、新加坡等离国内较近的服务器desu，（备案是需要很长时间的，如果比较急的话就没必要）</p>
+<p>第二步：将服务器基本配置配好过后，对域名进行解析，并利用阿里云自带的管理系统开始搭建网站</p>
+<p>第三步：这个时候小白可以通过宝塔平台一键搭建网站</p>
+<h2 id="一些进阶的参考资料"><a href="#一些进阶的参考资料" class="headerlink" title="一些进阶的参考资料"></a>一些进阶的参考资料</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhyl8157121/article/details/100551592">如何给你的网站套上Cloudflare（以阿里云为例）_如何套用cloudlfare-CSDN博客</a></p>
+<h1 id="Web应用环境的架构"><a href="#Web应用环境的架构" class="headerlink" title="Web应用环境的架构"></a>Web应用环境的架构</h1><p>理解不同WEB应用组成角色功能架：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712094332684.png" alt="image-20240712094332684"></p>
+<p>不同的架构自然可能出现的安全漏洞不同</p>
+<h1 id="Web安全漏洞分类"><a href="#Web安全漏洞分类" class="headerlink" title="Web安全漏洞分类"></a>Web安全漏洞分类</h1><p>这里不过多赘述</p>
+<p>但需要明白一个原理</p>
+<p>如图的这些漏洞都是代码实现功能过程中代码不够完善从而出现的</p>
+<h1 id=""><a href="#" class="headerlink" title=""></a><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712094451574.png" alt="image-20240712094451574"></h1><p>同时，根据上述架构的分类：从语言上，中间件层面上，服务器操作系统等不同层面上都会出现一些安全问题。</p>
+<h1 id="HTTP数据包和代理"><a href="#HTTP数据包和代理" class="headerlink" title="HTTP数据包和代理"></a>HTTP数据包和代理</h1><p>图示是一个最基本的请求图示</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712095029242.png" alt="image-20240712095029242"></p>
+<p>加入所谓的代理拦截后</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712095104496.png" alt="image-20240712095104496"></p>
+<p>浏览器先传入代理，代理再传入服务器，对应的返回的过程也需要经过代理的中转。 </p>
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p><strong>比方说我们对某个网站点赞</strong></p>
+<p>这里找到了pax学长的博客，随便点开一篇博文，发现其评论区功能正常运营，并且有点赞功能。Satoru打算套上Sherlock的马甲干点坏事情，发现Pax所用的butterfly框架甚至连头像都自动爬取上传好了（替你造马甲的框架，他真的，我哭死） 接下来准备进行对评论刷赞，看看是否成立</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712100613082.png" alt="image-20240712100613082"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712110446321.png" alt="image-20240712110446321"></p>
+<p>这里对点赞请求进行抓包，本想通过User-Agent在不同的浏览器中对同一个id点赞，但发现由于token机制，以作者当前的水平想实现python脚本自动化抓取token是很困难的，因此转换另一个思路，抓取评论时的请求，通过Burp Intruder不断构造新的评论，开始炸库。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712111235234.png" alt="image-20240712111235234"></p>
+<p>不断构造评论显然是可以实现的，毕竟是评论区自带的功能，不过利用这点依然是可以搞一些事情的</p>
+<p>首先这个评论区功能是支持上传文件的，如果我上传一系列很大的文件进去，是否有可能拖垮pax博客的负载？</p>
+<p>同时这个马甲是支持信息伪造的，假设我传入一些有害网站作为个人马甲，这是否又是一层攻击？</p>
+<p>再不济，我挂着Burp Intruder模块批量发包，积少成多的同时并且在pax的所有文章下发送一些无用信息，这只是拖累负载而已，但假设我传入的是有害的信息呢？这也是需要考虑的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712111940495.png" alt="image-20240712111940495"></p>
 
       
     </div>
