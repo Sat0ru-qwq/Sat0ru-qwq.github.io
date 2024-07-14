@@ -1,6 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Burpsuite 从入门到精通desu</title>
+    <url>/2024/07/08/Burpsuite%20%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/</url>
+    <content><![CDATA[<h1 id="Burpsuite从入门到入土"><a href="#Burpsuite从入门到入土" class="headerlink" title="Burpsuite从入门到入土"></a>Burpsuite从入门到入土</h1><p>在Burp suite的使用中，会出现如下的选项</p>
+<h2 id="Raw："><a href="#Raw：" class="headerlink" title="Raw："></a>Raw：</h2><p>视图主要显示web请求的真实格式，包含请求地址，http协议版本，主机头。浏览器信息，Accept可接受的内容类型，字符集，编码方式，cookie等。通过手工修改这些信息可以完成一些渗透测试的工作</p>
+<h2 id="Params"><a href="#Params" class="headerlink" title="Params:"></a>Params:</h2><p>主要显示客户端请求的参数信息 ，包括GET和POST传参aders：</p>
+<p>这个视图显示的信息和Raw的信息类似，只不过这个更加直观</p>
+<h2 id="Hex："><a href="#Hex：" class="headerlink" title="Hex："></a>Hex：</h2><p>这个视图显示Raw的十六进制内容</p>
+<p>一般开启Burp Proxy是不会拦截静态文件的，同时用户可以修改拦截作用域个性化Burp的使用效果。所有拦截到的信息和历史信息都可以通过右击弹出菜单，发送到其他组件。，<strong>如Scanner、Repeater、Intruder、Sequencer、Decoder、 Comparer、Extender等</strong></p>
+<h2 id="数据拦截与控制"><a href="#数据拦截与控制" class="headerlink" title="数据拦截与控制"></a>数据拦截与控制</h2><p>较为基础</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240706203308670.png" alt="image-20240706203308670"></p>
+<h1 id="Burp的相关配置"><a href="#Burp的相关配置" class="headerlink" title="Burp的相关配置"></a>Burp的相关配置</h1><p>当我们打开可选项设置选项卡Options，从界面显示来看，常用的部分主要包括以下几大板块（涉及 https的功能不包含在本章内容里，后面会一章专门叙述）：</p>
+<h2 id="客户端请求消息拦截"><a href="#客户端请求消息拦截" class="headerlink" title="客户端请求消息拦截"></a>客户端请求消息拦截</h2><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240706203532487.png" alt="image-20240706203532487"></p>
+<p>这个可以通过添加一些个性化的条件语句</p>
+<h3 id="有四个选项"><a href="#有四个选项" class="headerlink" title="有四个选项"></a>有四个选项</h3><p>操作符的与或非</p>
+<p>匹配类型（可以基于域名 IP地址 协议 请求方法 URL  文件类型 参数 cookies 头部</p>
+<p>内容 状态码）</p>
+<p>关系：关系则是匹配或不匹配</p>
+<p>条件：条件则是对关键字的一些要求</p>
+<p><a href="https://blog.csdn.net/YuiJar/article/details/81316478">正则表达式的语法及匹配规则（基础）_正则匹配位不定长度的-CSDN博客</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240706204059953.png" alt="image-20240706204059953"></p>
+<p>勾选自动修复丢失行可以防止一些用户在修改数据包过程中的失误，比如请求空行忘记给出等</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240706204227208.png" alt="image-20240706204227208"></p>
+<p>如果 自动更新文本长度被选中，则当请求消息被修改后，Content-Length也 会自动被修改，替换为与之相对应的值。</p>
+<h2 id="服务端返回消息拦截"><a href="#服务端返回消息拦截" class="headerlink" title="服务端返回消息拦截"></a>服务端返回消息拦截</h2><p> 基本和代理拦截规则一致</p>
+<h2 id="服务端返回消息修改"><a href="#服务端返回消息修改" class="headerlink" title="服务端返回消息修改"></a>服务端返回消息修改</h2><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240706204353108.png" alt="image-20240706204353108"></p>
+<h2 id="正则表达式配置"><a href="#正则表达式配置" class="headerlink" title="正则表达式配置"></a>正则表达式配置</h2><p>正则表达式主要用于自动替换请求信息或者响应包返回信息的某些值和文本</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240706204545884.png" alt="image-20240706204545884"></p>
+<h1 id="历史记录"><a href="#历史记录" class="headerlink" title="历史记录"></a>历史记录</h1><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240706204640322.png" alt="image-20240706204640322"></p>
+<p>HTTP history界面由筛选过滤器、历史记录列表、消息详情3个部分组成。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240706204755399.png" alt="image-20240706204755399"></p>
+<p>单击可以查看请求包和响应包</p>
+<p><strong>在消息上双击则会弹出此条消息的详细对话框</strong></p>
+<p>当我们在做系统的安全评估过程中，会在HTTP history中保存了大量的日志记录，为了更便捷的管理历 史消息，Burp提供了筛选过滤器功能。当我们点击HTTP history标签下的Filter时，将弹出筛选过滤器界 面。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240706204953362.png" alt="image-20240706204953362"></p>
+<p>按照过滤条件的不同，筛选过滤器划分出7个子板块，分别是 </p>
+<h2 id="按照请求类型过滤："><a href="#按照请求类型过滤：" class="headerlink" title="按照请求类型过滤："></a>按照请求类型过滤：</h2><p>你可以选择仅显示当前作用域的、仅显示有服务端响应的和仅显示带有请求参 数的消息。当你勾选“仅显示当前作用域”时，此作用域需要在Burp Target的Scope选项中进行配 置，需要搭配Burp Target使用（后面会说）。 </p>
+<h2 id="按照MIME类型（多用途互联网邮件扩展类型）过滤："><a href="#按照MIME类型（多用途互联网邮件扩展类型）过滤：" class="headerlink" title="按照MIME类型（多用途互联网邮件扩展类型）过滤："></a>按照MIME类型（多用途互联网邮件扩展类型）过滤：</h2><p>你可以控制是否显示服务端返回的不同文件 类型的消息，比如只显示HTML、CSS或者图片。过滤器目前支持HTML、Script、XML、CSS、其 他文本、图片、Flash、二进制文件8种形式。 </p>
+<h2 id="按照服务器返回的HTTP状态码过滤："><a href="#按照服务器返回的HTTP状态码过滤：" class="headerlink" title="按照服务器返回的HTTP状态码过滤："></a>按照服务器返回的HTTP状态码过滤：</h2><p>Burp根据服务器的状态码，按照2XX，3XX，4XX，5XX分别 进行过滤。比如，如果你只想显示返回状态码为200的请求成功消息，则勾选2XX。</p>
+<h2 id="按照查找条件过滤："><a href="#按照查找条件过滤：" class="headerlink" title="按照查找条件过滤："></a>按照查找条件过滤：</h2><p>此过滤器是针对服务端返回的消息内容，与输入的关键字进行匹配，具体的匹 配方式，你可以选择 （1）正则表达式 （2）大小写敏感 （3）否定查找 三种方式可以任意组合，前面两种匹配方式容易理解，第3种匹配方式是指与关键字匹配上的将不 再显示。 </p>
+<h2 id="按照文件类型过滤："><a href="#按照文件类型过滤：" class="headerlink" title="按照文件类型过滤："></a>按照文件类型过滤：</h2><p>通过文件类型在过滤消息列表，这里有两个选择可供操作。一是仅显示哪些， 另一个是不显示哪些。如果是仅显示哪些，在show only的输入框中填写显示的文件类型，同样， 如果不显示哪些文件类型，只要在hide的输入框中填写不需要显示的文件类型即可。</p>
+<h2 id="按照注解过滤："><a href="#按照注解过滤：" class="headerlink" title="按照注解过滤："></a>按照注解过滤：</h2><p>此过滤器的功能是指，根据每一个消息拦截时候的备注或者是否高亮来作为筛选条 件控制哪些消息在历史列表中显示。 </p>
+<h2 id="按照监听端口过滤："><a href="#按照监听端口过滤：" class="headerlink" title="按照监听端口过滤："></a>按照监听端口过滤：</h2><p>此过滤器通常使用于当我们在Proxy Listeners中多个监听端口时，仅仅显示某 个监听端口通信的消息，一般情况下，搭配中间件、数据库等漏洞使用。</p>
+<h1 id="SSL和Proxy高级选项"><a href="#SSL和Proxy高级选项" class="headerlink" title="SSL和Proxy高级选项"></a>SSL和Proxy高级选项</h1><h2 id="HTTP协议信息的拦截和处理："><a href="#HTTP协议信息的拦截和处理：" class="headerlink" title="HTTP协议信息的拦截和处理："></a>HTTP协议信息的拦截和处理：</h2><h2 id="监听设置"><a href="#监听设置" class="headerlink" title="监听设置"></a>监听设置</h2><p>监听设置包含三块功能:</p>
+<ol>
+<li><h1 id="Binding（端口绑定模式）"><a href="#Binding（端口绑定模式）" class="headerlink" title="Binding（端口绑定模式）"></a>Binding（端口绑定模式）</h1><p>Binding绑定的端口是指Burp Proxy代理服务监听的端口，绑定IP地址 分为本地回路、所有接口、指定地址三种模式，在渗透测试中，无论选择哪种模式，需要明白一 点，当选择非本地回路IP地址时，同局域网内的其他电脑也可以访问你的监听地址</p>
+<p>—也就是说,其他电脑的数据包也会被你的burpsuite拦截.但不要因此形成认知上的误区</p>
+<p>虽然Burp Suite无法自动实现对整个局域网所有流量的监听，但通过手动配置代理或设置透明代理，可以在一定程度上实现对局域网内多个设备流量的拦截。需要注意的是，这些操作通常需要管理员权限和详细的网络配置</p>
+</li>
+<li><h1 id="Request-Handling（请求处理）"><a href="#Request-Handling（请求处理）" class="headerlink" title="Request Handling（请求处理）"></a>Request Handling（请求处理）</h1><p>主要是用来控制接收到Burp Proxy监听端口的请求后，如何对 请求进行处理的，即使用Burp再次转发。 </p>
+<p>其具体配置可分为：主机名&#x2F;域名的转发、端口的转发、强制使用SSL和隐形代理4个部分。当我们 配置了主机或域名的转发，则所有的请求会转发到指定的主机或域名上；如果我们配置了端口的转 发时，所有的请求都会被转发到指定端口上。同时我们可以配置，通过Burp Proxy的消息是否强制 使用SSL，如果设置了此项，则请求若是http协议，经Burp Proxy代理后将转换为https协议。隐形 代理主要是用于测试富客户端应用或者是非浏览器代理方式的应用，当我们设置了它，访问这些应 用时，将通过<strong>非代理的方式，直接连接Burp Proxy的监听端口</strong>。</p>
+<p>不挂代理的方式有其独特的意义和应用场景，特别是在一些特殊情况下，无法直接通过设置代理来拦截和分析流量。以下是一些不挂代理的方式及其意义：</p>
+<h3 id="意义和应用场景"><a href="#意义和应用场景" class="headerlink" title="意义和应用场景"></a>意义和应用场景</h3><ol>
+<li><strong>移动应用测试</strong>：有些移动应用不提供代理设置选项，或者应用的流量硬编码到特定的IP地址或域名。在这种情况下，使用代理进行流量拦截变得非常困难，通过非代理方式（如DNS欺骗或网络重定向）可以解决这个问题。</li>
+<li><strong>嵌入式设备测试</strong>：一些嵌入式设备（如物联网设备、智能家居设备）不允许配置代理设置。通过网络设备（如路由器、防火墙）上的规则重定向流量，可以实现对这些设备流量的拦截和分析。</li>
+<li><strong>绕过代理检测</strong>：某些系统或应用可能会检测并拒绝代理流量，使用非代理方式可以避免这种检测，从而进行更隐蔽的流量分析。</li>
+<li><strong>网络设备测试</strong>：在测试一些需要透明代理或中间设备（如网关、VPN）的场景下，非代理方式可以帮助实现透明的流量拦截和分析，而不会对客户端配置造成影响。</li>
+</ol>
+</li>
+</ol>
+<h1 id="Burp-Target"><a href="#Burp-Target" class="headerlink" title="Burp Target"></a>Burp Target</h1><p>1. </p>
+<p>Burp Target 组件主要包含<strong>站点地图、目标域、风险定义</strong>三部分组成</p>
+<p>当前工作涉及哪些目标域、可能存在的攻击面等信息，下面我们就分别来看看 Burp Target的三个组成部分。</p>
+<p>本章的主要内容有：</p>
+<h2 id="目标域设置-Target-Scope"><a href="#目标域设置-Target-Scope" class="headerlink" title="目标域设置 Target Scope"></a>目标域设置 Target Scope</h2><p>Target Scope中作用域的定义比较宽泛，通常来说，在对某个系统进行渗透测试时，可以通过域名或者 主机名去限制拦截内容，这里的域名或主机名就是我们说的作用域。如果我们想限制得更为细粒度化， 比如，你只想拦截login目录下的所有请求，也可以在此设置，此时，作用域就是目录。总体来说， Target Scope主要使用于下面几种场景中：</p>
+<p>限制站点地图和Proxy历史中的显示结果</p>
+<p> 告诉Burp Proxy拦截哪些请求 </p>
+<p>Burp Spider抓取哪些内容 </p>
+<p>Burp Scan自动扫描哪些作用域的安全漏洞 </p>
+<p>在Burp Intruder和Burp Repeater中指定URL 通过Target Scope我们能方便地控制Burp的拦截范围、操作对象，减少无效的噪音（此处演示一下）。 </p>
+<h2 id="站点地图-Site-Map"><a href="#站点地图-Site-Map" class="headerlink" title="站点地图 Site Map"></a>站点地图 Site Map</h2><p>当我们设置了 Target Scope（默认全部为允许），使用Burp Proxy进行代理拦截，通过浏览器代理浏览 应用时，Burp会自动将浏览信息记录下来，包含每一个请求和应答的详细信息，保存在Target站点地图 中。</p>
+<p>Site Map的左边为访问的URL，按照网站的层级和深度，树形展示整个网站的目 录结构和关联其他域的URL情况；</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707084335435.png" alt="image-20240707084335435"></p>
+<p>对该树状结构进行扫描，还可以进行进一步的主动扫描，从而发现一些潜在的风险</p>
+<h2 id="Target-工具的使用"><a href="#Target-工具的使用" class="headerlink" title="Target 工具的使用"></a>Target 工具的使用</h2><p>Target 工具的使用的使用主要包括以下部分：</p>
+<h3 id="手工获取站点地图"><a href="#手工获取站点地图" class="headerlink" title="手工获取站点地图"></a>手工获取站点地图</h3><p>1、设置浏览器代理和Burp Proxy代理，并使之能正常工作。</p>
+<p> 2、关闭Burp Proxy的拦截功能。</p>
+<p> 3、手工浏览网页，这时，Target会自动记录站点地图信息。</p>
+<p>手工获取站点地图可以使用户根据自己的需要和分析自主控制访问的内容。</p>
+<p>记录的信息比较准确，但对于大型的系统而言依次点击一遍对渗透测试人员而言成本比较大</p>
+<h3 id="站点比较"><a href="#站点比较" class="headerlink" title="站点比较"></a>站点比较</h3><p>站点比较更为简单,本质就是将站点的结构进行对比</p>
+<h4 id="攻击面分析"><a href="#攻击面分析" class="headerlink" title="攻击面分析"></a>攻击面分析</h4><p>右击对应的站点，能够通过相关工具中的分析选项做攻击面分析</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707085712514.png" alt="image-20240707085712514"></p>
+<p>概况视图主要展示当前站点动态URL数量、静态URL数量、参数的总数、唯一的参数名数目，通过这些 信息，可以快速帮助我们对当前站点的总体状况建立粗线条的了解。</p>
+<p>动态URL和静态URL对应的都可以查看详细的请求包和响应包</p>
+<p>参数视图有上中下三部分组成，上部为参数和参数计数统计区，你可以对参数的使用次数进行排序， 从而找出使用频繁的参数进行分析；中部为参数对应的使用情况列表，记录对应的参数每一次的使用记 录；下部为某一次使用过程中，请求消息和应答消息的详细信息。</p>
+<p>实际使用中很多站点使用伪静态，如果请求的URL中不带有参数，则分析时无法区别，只能当作静态URL来分析</p>
+<h2 id="Discover-Content"><a href="#Discover-Content" class="headerlink" title="Discover Content"></a>Discover Content</h2><p>存在于Burp Target中的站点信息,我们可以直接发送到spider中进行站点信息的爬取.在Burp1.7版本中,存在一个独立模块,叫做Burp Spider,而Burp2.0更新后的本本后,该模块被整合为Targe相关工具中的Discover Content</p>
+<p>Discover Content主要用于大型操应用系统的测试</p>
+<p>Discover Content的使用主要包含三个方面</p>
+<h3 id="控制"><a href="#控制" class="headerlink" title="控制"></a>控制</h3><p>Discover Content 控制界面由发现会话状态（Discovery Session Status）和排列任务（Queued Tasks）两部分组成。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707091342086.png" alt="image-20240707091342086"></p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>配置界面由Target,Filenames,File Extensions,Discovery Engine四个功能组成</p>
+<p>对应的可以根据自己的需要进行一些筛选配置</p>
+<h3 id="站点地图"><a href="#站点地图" class="headerlink" title="站点地图"></a>站点地图</h3><p>站点地图（Site Map） 爬取完成后形成的站点地图，和Target模块中的站点地图类似。</p>
+<h1 id="Burp-Scan"><a href="#Burp-Scan" class="headerlink" title="Burp Scan"></a>Burp Scan</h1><p>Burp Scan的功能主要是用来自动检测Web系统的各种漏洞，可以使用Burp Scan代替测试人员手工去对 系统进行普通漏洞类型的渗透测试，从而使得测试人员能把更多精力放在那些需要人工验证的漏洞上。</p>
+<p>BurpScan是很传统的扫描器,没有什么需要额外提及的</p>
+<p>不过这里还是有一些点需要额外考虑</p>
+<p>Burp使用被动扫描时为了使流量更接近于普通用户,几乎不额外构造请求进行爬虫或扫描,它基于已经存在的请求和响应进行简单的分析</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707092650449.png" alt="image-20240707092650449"></p>
+<p>Burp使用主动扫描模式时则会对应用发送新的请求并通过payload验证漏洞,这种模式下的操作回产生大量的请求和响应数据,直接影响系统的性能,通常适用于非生产环境</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707095413391.png" alt="image-20240707095413391"></p>
+<h2 id="扫描配置"><a href="#扫描配置" class="headerlink" title="扫描配置"></a>扫描配置</h2><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707095705268.png" alt="image-20240707095705268"></p>
+<p>Scan Type：扫描类型，分为 Crawl and audit 和 Crawl，即爬虫和审计，或者仅爬虫。</p>
+<p> URLs to Scan：扫描目标URL Detailed scope configuration：详细的范围配置，通过 Included URL prefixes（包括URL前缀）和 Excluded URL prefixes（不包括URL前缀）来配置扫描。</p>
+<p> Use advanced scope control：使用高级的范围控制，如果勾选，将配置 Included URLs（包含的 URL）和Excluded URLs（不包含的URL）来配置扫描。 </p>
+<p>点击 Add，弹出配置窗口：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707100020676.png" alt="image-20240707100020676"></p>
+<p>**PS:**协议:包含HTTP和HTTPS或者任意</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707100240814.png" alt="image-20240707100240814"></p>
+<p>如果需要登录,可以提前配置username和password</p>
+<p>导出扫描报告</p>
+<p> 1.在Target-&gt;Site Map，选择某个URL，右侧Issues按ctrl+a全选，右键，点击Report selected issues</p>
+<p>2.选择报告格式 HTML：生成HTML格式的报告，以便在浏览器中打印或查看。 XML：生成XML格式的报告，适合导入其他工具或报告框架</p>
+<h1 id="Burp-Intruder"><a href="#Burp-Intruder" class="headerlink" title="Burp Intruder"></a>Burp Intruder</h1><p>在渗透测试过程中，我们经常使用Burp Intruder，它的工作原理是：Intruder在原始请求数据的基础 上，通过修改各种请求参数，以获取不同的应答。每一次请求中，Intruder都会携带一个或多个有效攻 击载荷（payload），在不同位置进行攻击重放，通过应答数据的比对分析来获得需要的特征数据。</p>
+<h2 id="Intruder使用场景"><a href="#Intruder使用场景" class="headerlink" title="Intruder使用场景"></a>Intruder使用场景</h2><h3 id="标识符枚举"><a href="#标识符枚举" class="headerlink" title="标识符枚举"></a>标识符枚举</h3><p>Web应用程序经常使用标识来引用用户,账户,资产等数据信息. 例如用户名 文件ID和账户密码</p>
+<h3 id="提取有用数据"><a href="#提取有用数据" class="headerlink" title="提取有用数据"></a>提取有用数据</h3><p>在某些场景下,并非简单的识别有效标识符.而是通过识别标识符提取一些其他的数据.比如单个用户的个人空间ID,获取所欲用户在个人空间的昵称和年龄</p>
+<h3 id="模糊测试"><a href="#模糊测试" class="headerlink" title="模糊测试"></a>模糊测试</h3><p>很多输入型的漏洞,如SQL注入,跨站脚本和文本路径遍历等都可以通过修改请求参数提交各种测试字符串. 可以通过Intruder的自动化来实现对Web应用的模糊测试</p>
+<p>通常来说</p>
+<p>BurpIntruder的测试主要遵循以下步骤</p>
+<ol>
+<li><p>确认BurpSuite安装正确并正常启动，且完成了浏览器的代理设置。</p>
+</li>
+<li><p>进入Burp Proxy选项卡，关闭代理拦截功能。</p>
+</li>
+<li><p>进行历史日志（History）子选项卡，查找可能存在问题的请求日志，并通过右击菜单，发送到 Intruder。 </p>
+</li>
+<li><p>进入 Intruder 选项卡，打开 Target 和 Positions 子选项卡。这时，你会看到上一步发送过来的请 求消息。</p>
+</li>
+<li><p>Burp Intrude<strong>r 攻击的基础是围绕刚刚发送过来的原始请求信息，在原始信息指定的位置上设置一 定数量的攻击载荷 Payload</strong>，通过替换 Payload 来发送不同的请求以获取应答消息。默认情况下<strong>， Burp Intruder 会对请求参数和 Cookie 参数设置成 Payload position，前缀添加 $ 进行标识，如 上图红色标注位置所示。当发送请求时，会将$标识的参数替换为 Payload 。</strong></p>
+</li>
+<li><p>在光标对应位置选择右侧选项,就可以添加或删除<strong>预留出的payload位置</strong></p>
+<p>预留出payload位置则是为了使Intruder在对应位置中遍历预设的payload集,发送大批数据包</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707104227760.png" alt="image-20240707104227760"></p>
+</li>
+<li><p>在payload子选项卡中可以选择payload的生成策略,比如id&#x3D;1-100不断遍历</p>
+</li>
+<li><p>最后做一遍检查,便可以开始爆破,后续可以开始阅览Intruder返回的通信信息,查看是否有自己需要的信息</p>
+</li>
+<li><p>有些时候为了防止应答信息太多无法检索出我们需要的信息,通常在进行攻击前,会进行Options选项的相关配置,使用最多的是正则表达式匹配</p>
+</li>
+<li><p>攻击结果也是可以将展示出的信息做一些指定的,比如攻击时间和是否存在Error等</p>
+</li>
+</ol>
+<h2 id="Payload类型与处理"><a href="#Payload类型与处理" class="headerlink" title="Payload类型与处理"></a>Payload类型与处理</h2><p>payload类型足足有18种可供选择,这里挑选常用的几种记录</p>
+<h3 id="简单列表"><a href="#简单列表" class="headerlink" title="简单列表:"></a>简单列表:</h3><p>通过配置一个字符串列表作为payload,也可以手动添加字符串列表或者从文件加载字符串列表</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707111535806.png" alt="image-20240707111535806"></p>
+<p>对应的 burp预设了很多组简单payload列表</p>
+<p>包括XSS脚本 CGI脚本 SQL注入脚本 数字 大写小写字母  用户名 密码 表单域的字段名 IIS文件名和目录名等</p>
+<h3 id="指定文件"><a href="#指定文件" class="headerlink" title="指定文件"></a>指定文件</h3><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707111717409.png" alt="image-20240707111717409">可以指定文件作为相对应payload位置上的列表</p>
+<h3 id="自定义迭代器"><a href="#自定义迭代器" class="headerlink" title="自定义迭代器"></a>自定义迭代器</h3><p>这是一款功能强大的Payload，它共有8个占位，每一个占位 可以指定简单列表的Payload类型，然后根据占位的多少，与每一个简单列表的Payload进行笛卡 尔积（集合相乘的结果），生成最终的Payload列表</p>
+<h4 id="payload设置"><a href="#payload设置" class="headerlink" title="payload设置"></a>payload设置</h4><p>如图例</p>
+<p>位置1 –从列表选择用户名带入</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707114033155.png" alt="image-20240707114033155"></p>
+<p>位置2 –可以直接设置值 比方说@@</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707114135696.png" alt="image-20240707114135696"></p>
+<p>位置3 –也可以从文件加载</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707114300016.png" alt="image-20240707114300016"></p>
+<p>最后攻击时生成的payload则会按照迭代的占位依次排列</p>
+<p>如图所示</p>
+<img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707115021293.png" alt="image-20240707115021293" style="zoom:200%;" />
+
+<h3 id="字符串替换"><a href="#字符串替换" class="headerlink" title="字符串替换"></a>字符串替换</h3><p>– 顾名思义，<strong>该Payload的类型是对预定义的字符串进行替换后生成新的字符串。</strong>比如说，预定义字符串为ABCD，按照下图的替换规则设置后，将对AB的值 进行枚举后生成新的字符串</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707153759117.png" alt="image-20240707153759117"></p>
+<p><strong>如图攻击,如果满足替换条件,它则会将原payload和修改后的payload一起发送到服务端.</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707153954509.png" alt="image-20240707153954509"></p>
+<h3 id="大小写替换"><a href="#大小写替换" class="headerlink" title="大小写替换"></a>大小写替换</h3><p>对预定义的字符串，按照<strong>大小写规则进行替换</strong>。比如，预定义 的字符串为Peter Wiener，则按照下图的设置后，会生成新的Payload。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707154240220.png" alt="image-20240707154240220"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707154302311.png" alt="image-20240707154302311"></p>
+<p>生成规则由上而下依次是：</p>
+<p> No change（不改变，使用原始字符串）</p>
+<p> To lower case（转为小写字母） </p>
+<p>To upper case（转为大写字母） </p>
+<p>To Propername（首字母大写，其他小写） </p>
+<p>To ProperName（单词首字母大写，其他不改变)</p>
+<p> 在实际使用中，可以根据自己的使用规则进行勾选设置。</p>
+<h3 id="字符块"><a href="#字符块" class="headerlink" title="字符块"></a>字符块</h3><p>这种类型的Payload是指使用一个给出的输入字符串，根据指定设 置产生指定大小的字符块，表现形式为生成指定长度的字符串。它通常是用来绕过应用防火墙 （WAF）。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707154649754.png" alt="image-20240707154649754"></p>
+<h3 id="数字类型"><a href="#数字类型" class="headerlink" title="数字类型"></a>数字类型</h3><p>这种类型的payload是根据配置,生成一系列的数字作为payload.它的设置界面如下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707154817322.png" alt="image-20240707154817322"></p>
+<p>数字范围部分就是确定最大和最小值以及最大值和最小值所构成的范围中如何取数字,类型分为按顺序和随机遍历给出的数字集合</p>
+<h3 id="日期类型"><a href="#日期类型" class="headerlink" title="日期类型"></a>日期类型</h3><p>根据配置生成一系列的日期</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707155611480.png" alt="image-20240707155611480"></p>
+<p>配置比较简单 不过多赘述</p>
+<h3 id="暴力字典（Brute-forcer）"><a href="#暴力字典（Brute-forcer）" class="headerlink" title="暴力字典（Brute forcer）"></a>暴力字典（Brute forcer）</h3><p>此类Payload生成包含一个指定字符集的所有特定长度排列的有效载 荷，通常用于枚举字典的生成，其设置界面如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707160307554.png" alt="image-20240707160307554"> </p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707160255421.png" alt="image-20240707160255421"></p>
+<p>空类型（Null payloads）</p>
+<p>这种负载类型产生的Payload，其值是一个空字符串。在攻击时，<strong>如果 需要同样的请求反复被执行</strong>，在不任何修改原始请求的场景下此Payload是非常有用的。<strong>它可用于 各种攻击，例如应用层DOS、或保持活会话令牌、资源竞争等。</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707160640648.png" alt="image-20240707160640648"></p>
+<p><strong>这样就近似于实现了单台机的DOS攻击</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707160655083.png" alt="image-20240707160655083"></p>
+<h3 id="字符扮演者（Character-frobber）"><a href="#字符扮演者（Character-frobber）" class="headerlink" title="字符扮演者（Character frobber）"></a>字符扮演者（Character frobber）</h3><p>依次修改指定字符串在每 个字符位置的值（不做特殊说明的情况下就是指十进制），每次都是在原字符上递增1个该字符的 ASCII码。</p>
+<h3 id="用户名生成器"><a href="#用户名生成器" class="headerlink" title="用户名生成器"></a>用户名生成器</h3><p>这种类型的Payload主要用于用户名和Email账号的自动 生成，其设置界面如下图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707160956758.png" alt="image-20240707160956758"></p>
+<h2 id="攻击类型"><a href="#攻击类型" class="headerlink" title="攻击类型"></a>攻击类型</h2><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707161315912.png" alt="image-20240707161315912"></p>
+<h2 id="可选项设置"><a href="#可选项设置" class="headerlink" title="可选项设置"></a>可选项设置</h2><h3 id="请求消息头设置"><a href="#请求消息头设置" class="headerlink" title="请求消息头设置"></a>请求消息头设置</h3><p>请求消息头设置中包含<strong>自动更新Content-Length</strong>和<strong>Set Connection: close</strong></p>
+<p>如果选中了设置Connection报头,那么Burp Intruder则会在每个消息中都更新对应的Connection Close报头</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707162113734.png" alt="image-20240707162113734"></p>
+<h3 id="攻击结果设置"><a href="#攻击结果设置" class="headerlink" title="攻击结果设置"></a>攻击结果设置</h3><p>这个设置主要用来控制从响应信息中提取结果项,如果 匹配,则在攻击结果中添加新列进行标明</p>
+<p>比如在”密码不正确”攻击中遍历一个大字典,这个时候payload数量过大,这个时假设还无法从可疑的对话长度等方面入手,就chenggongv可以通过扫描诸如”Incorrect password”等等找到成功的登录.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707161925846.png" alt="image-20240707161925846"></p>
+<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><p>这些设置是主要用于控制执行攻击时Burp如何处理重定向,在实际使用中必须遵循重定向才能实现目的</p>
+<p>比如密码猜测攻击中,如果密码错误可能会重定向响应到密码错误的提示界面,密码正确则会重定向到用户中心首页等</p>
+<h3 id="Intruder攻击和结果分析"><a href="#Intruder攻击和结果分析" class="headerlink" title="Intruder攻击和结果分析"></a>Intruder攻击和结果分析</h3><p>攻击的发起分为两种方式,一种是经过对应的Target ,Positions,payloads,options等再经过启动进行攻击,另一种则是通过预攻击文件直接发起攻击,攻击结果页面如下所示</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707170729022.png" alt="image-20240707170729022"></p>
+<p>从上图我们可以看出，其界面主要有菜单区、过滤区、消息记录区、请求&#x2F;响应区四部分组成。</p>
+<p>菜单区——包含Attack菜单、Save菜单、Columns菜单。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707170959048.png" alt="image-20240707170959048"></p>
+<p>过滤区——可以通过查询条件、服务器响应的状态码、注释对消息记录区的信息进行过滤。</p>
+<p>消息记录区，又称结果列表（Results Table），记录Payload执行时请求和响应的所有信息，</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707171015761.png" alt="image-20240707171015761"></p>
+<p>在对攻击结果的分析中，你可以通过单击任一列标题（升序排序，降序排序和未排序）重新排序表的内 容。有效的应答通常可以通过以下存在差异的内容进行判断：</p>
+<h1 id="Burp-Repeater"><a href="#Burp-Repeater" class="headerlink" title="Burp Repeater"></a>Burp Repeater</h1><p> Repeater是对消息的手动改动和迭代的进程,在渗透测试过程中我们经常使用Repeater来进行请求与响应的消息验证分析,比如修改请求参数 验证输入的漏洞 验证逻辑越权等</p>
+<p>其设置主要包括以下内容： </p>
+<p>更新（Update Content-Length） 这个选项是用于控制Burp是否自动更新请求消息头中的 Content-Length。 </p>
+<p>解压和压缩（Unpack gzip &#x2F; deflate） 这个选项主要用于控制Burp是否自动解压或压缩服务端响 应的内容。</p>
+<p> 跳转控制（Follow redirections） 这个选项主要用于控制Burp是否自动跟随服务端进行请求跳 转，比如服务端返回状态码为302，是否跟着应答跳转到302指向的URL地址。 它有4个选项，分别 是永不跳转（Never），站内跳转（On-site only）、目标域内跳转（In-scope only）、始终跳转 （Always）。其中永不跳转、始终跳转比较好理解，站内跳转是指当前的同一站点内跳转，目标域 跳转是指Target scope中配置的域可以跳转。 </p>
+<p>跳转中处理Cookie（Process cookies in redirections） 这个选项如果选中，则在跳转过程中设置 的Cookie信息，将会被带到跳转指向的URL页面，可以进行提交。</p>
+<p> 视图控制（View） 这个选项是用来控制Repeater的视图布局。</p>
+<p> 其他操作（Action） 通过子菜单方式，指向Burp的其他工具组件中</p>
+]]></content>
+      <categories>
+        <category>Penetration Testing Basic</category>
+      </categories>
+      <tags>
+        <tag>tools</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SQL注入 二开desu</title>
     <url>/2024/07/08/SQL%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<h1 id="SQL注入二开"><a href="#SQL注入二开" class="headerlink" title="SQL注入二开"></a>SQL注入二开</h1><p>本教程基于SQL i-Labs,pikachu,dvwa等靶场做拓展</p>
@@ -291,234 +520,641 @@
       </tags>
   </entry>
   <entry>
-    <title></title>
-    <url>/2024/07/10/Untitled/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>Burpsuite 从入门到精通desu</title>
-    <url>/2024/07/08/Burpsuite%20%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/</url>
-    <content><![CDATA[<h1 id="Burpsuite从入门到入土"><a href="#Burpsuite从入门到入土" class="headerlink" title="Burpsuite从入门到入土"></a>Burpsuite从入门到入土</h1><p>在Burp suite的使用中，会出现如下的选项</p>
-<h2 id="Raw："><a href="#Raw：" class="headerlink" title="Raw："></a>Raw：</h2><p>视图主要显示web请求的真实格式，包含请求地址，http协议版本，主机头。浏览器信息，Accept可接受的内容类型，字符集，编码方式，cookie等。通过手工修改这些信息可以完成一些渗透测试的工作</p>
-<h2 id="Params"><a href="#Params" class="headerlink" title="Params:"></a>Params:</h2><p>主要显示客户端请求的参数信息 ，包括GET和POST传参aders：</p>
-<p>这个视图显示的信息和Raw的信息类似，只不过这个更加直观</p>
-<h2 id="Hex："><a href="#Hex：" class="headerlink" title="Hex："></a>Hex：</h2><p>这个视图显示Raw的十六进制内容</p>
-<p>一般开启Burp Proxy是不会拦截静态文件的，同时用户可以修改拦截作用域个性化Burp的使用效果。所有拦截到的信息和历史信息都可以通过右击弹出菜单，发送到其他组件。，<strong>如Scanner、Repeater、Intruder、Sequencer、Decoder、 Comparer、Extender等</strong></p>
-<h2 id="数据拦截与控制"><a href="#数据拦截与控制" class="headerlink" title="数据拦截与控制"></a>数据拦截与控制</h2><p>较为基础</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240706203308670.png" alt="image-20240706203308670"></p>
-<h1 id="Burp的相关配置"><a href="#Burp的相关配置" class="headerlink" title="Burp的相关配置"></a>Burp的相关配置</h1><p>当我们打开可选项设置选项卡Options，从界面显示来看，常用的部分主要包括以下几大板块（涉及 https的功能不包含在本章内容里，后面会一章专门叙述）：</p>
-<h2 id="客户端请求消息拦截"><a href="#客户端请求消息拦截" class="headerlink" title="客户端请求消息拦截"></a>客户端请求消息拦截</h2><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240706203532487.png" alt="image-20240706203532487"></p>
-<p>这个可以通过添加一些个性化的条件语句</p>
-<h3 id="有四个选项"><a href="#有四个选项" class="headerlink" title="有四个选项"></a>有四个选项</h3><p>操作符的与或非</p>
-<p>匹配类型（可以基于域名 IP地址 协议 请求方法 URL  文件类型 参数 cookies 头部</p>
-<p>内容 状态码）</p>
-<p>关系：关系则是匹配或不匹配</p>
-<p>条件：条件则是对关键字的一些要求</p>
-<p><a href="https://blog.csdn.net/YuiJar/article/details/81316478">正则表达式的语法及匹配规则（基础）_正则匹配位不定长度的-CSDN博客</a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240706204059953.png" alt="image-20240706204059953"></p>
-<p>勾选自动修复丢失行可以防止一些用户在修改数据包过程中的失误，比如请求空行忘记给出等</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240706204227208.png" alt="image-20240706204227208"></p>
-<p>如果 自动更新文本长度被选中，则当请求消息被修改后，Content-Length也 会自动被修改，替换为与之相对应的值。</p>
-<h2 id="服务端返回消息拦截"><a href="#服务端返回消息拦截" class="headerlink" title="服务端返回消息拦截"></a>服务端返回消息拦截</h2><p> 基本和代理拦截规则一致</p>
-<h2 id="服务端返回消息修改"><a href="#服务端返回消息修改" class="headerlink" title="服务端返回消息修改"></a>服务端返回消息修改</h2><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240706204353108.png" alt="image-20240706204353108"></p>
-<h2 id="正则表达式配置"><a href="#正则表达式配置" class="headerlink" title="正则表达式配置"></a>正则表达式配置</h2><p>正则表达式主要用于自动替换请求信息或者响应包返回信息的某些值和文本</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240706204545884.png" alt="image-20240706204545884"></p>
-<h1 id="历史记录"><a href="#历史记录" class="headerlink" title="历史记录"></a>历史记录</h1><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240706204640322.png" alt="image-20240706204640322"></p>
-<p>HTTP history界面由筛选过滤器、历史记录列表、消息详情3个部分组成。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240706204755399.png" alt="image-20240706204755399"></p>
-<p>单击可以查看请求包和响应包</p>
-<p><strong>在消息上双击则会弹出此条消息的详细对话框</strong></p>
-<p>当我们在做系统的安全评估过程中，会在HTTP history中保存了大量的日志记录，为了更便捷的管理历 史消息，Burp提供了筛选过滤器功能。当我们点击HTTP history标签下的Filter时，将弹出筛选过滤器界 面。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240706204953362.png" alt="image-20240706204953362"></p>
-<p>按照过滤条件的不同，筛选过滤器划分出7个子板块，分别是 </p>
-<h2 id="按照请求类型过滤："><a href="#按照请求类型过滤：" class="headerlink" title="按照请求类型过滤："></a>按照请求类型过滤：</h2><p>你可以选择仅显示当前作用域的、仅显示有服务端响应的和仅显示带有请求参 数的消息。当你勾选“仅显示当前作用域”时，此作用域需要在Burp Target的Scope选项中进行配 置，需要搭配Burp Target使用（后面会说）。 </p>
-<h2 id="按照MIME类型（多用途互联网邮件扩展类型）过滤："><a href="#按照MIME类型（多用途互联网邮件扩展类型）过滤：" class="headerlink" title="按照MIME类型（多用途互联网邮件扩展类型）过滤："></a>按照MIME类型（多用途互联网邮件扩展类型）过滤：</h2><p>你可以控制是否显示服务端返回的不同文件 类型的消息，比如只显示HTML、CSS或者图片。过滤器目前支持HTML、Script、XML、CSS、其 他文本、图片、Flash、二进制文件8种形式。 </p>
-<h2 id="按照服务器返回的HTTP状态码过滤："><a href="#按照服务器返回的HTTP状态码过滤：" class="headerlink" title="按照服务器返回的HTTP状态码过滤："></a>按照服务器返回的HTTP状态码过滤：</h2><p>Burp根据服务器的状态码，按照2XX，3XX，4XX，5XX分别 进行过滤。比如，如果你只想显示返回状态码为200的请求成功消息，则勾选2XX。</p>
-<h2 id="按照查找条件过滤："><a href="#按照查找条件过滤：" class="headerlink" title="按照查找条件过滤："></a>按照查找条件过滤：</h2><p>此过滤器是针对服务端返回的消息内容，与输入的关键字进行匹配，具体的匹 配方式，你可以选择 （1）正则表达式 （2）大小写敏感 （3）否定查找 三种方式可以任意组合，前面两种匹配方式容易理解，第3种匹配方式是指与关键字匹配上的将不 再显示。 </p>
-<h2 id="按照文件类型过滤："><a href="#按照文件类型过滤：" class="headerlink" title="按照文件类型过滤："></a>按照文件类型过滤：</h2><p>通过文件类型在过滤消息列表，这里有两个选择可供操作。一是仅显示哪些， 另一个是不显示哪些。如果是仅显示哪些，在show only的输入框中填写显示的文件类型，同样， 如果不显示哪些文件类型，只要在hide的输入框中填写不需要显示的文件类型即可。</p>
-<h2 id="按照注解过滤："><a href="#按照注解过滤：" class="headerlink" title="按照注解过滤："></a>按照注解过滤：</h2><p>此过滤器的功能是指，根据每一个消息拦截时候的备注或者是否高亮来作为筛选条 件控制哪些消息在历史列表中显示。 </p>
-<h2 id="按照监听端口过滤："><a href="#按照监听端口过滤：" class="headerlink" title="按照监听端口过滤："></a>按照监听端口过滤：</h2><p>此过滤器通常使用于当我们在Proxy Listeners中多个监听端口时，仅仅显示某 个监听端口通信的消息，一般情况下，搭配中间件、数据库等漏洞使用。</p>
-<h1 id="SSL和Proxy高级选项"><a href="#SSL和Proxy高级选项" class="headerlink" title="SSL和Proxy高级选项"></a>SSL和Proxy高级选项</h1><h2 id="HTTP协议信息的拦截和处理："><a href="#HTTP协议信息的拦截和处理：" class="headerlink" title="HTTP协议信息的拦截和处理："></a>HTTP协议信息的拦截和处理：</h2><h2 id="监听设置"><a href="#监听设置" class="headerlink" title="监听设置"></a>监听设置</h2><p>监听设置包含三块功能:</p>
-<ol>
-<li><h1 id="Binding（端口绑定模式）"><a href="#Binding（端口绑定模式）" class="headerlink" title="Binding（端口绑定模式）"></a>Binding（端口绑定模式）</h1><p>Binding绑定的端口是指Burp Proxy代理服务监听的端口，绑定IP地址 分为本地回路、所有接口、指定地址三种模式，在渗透测试中，无论选择哪种模式，需要明白一 点，当选择非本地回路IP地址时，同局域网内的其他电脑也可以访问你的监听地址</p>
-<p>—也就是说,其他电脑的数据包也会被你的burpsuite拦截.但不要因此形成认知上的误区</p>
-<p>虽然Burp Suite无法自动实现对整个局域网所有流量的监听，但通过手动配置代理或设置透明代理，可以在一定程度上实现对局域网内多个设备流量的拦截。需要注意的是，这些操作通常需要管理员权限和详细的网络配置</p>
-</li>
-<li><h1 id="Request-Handling（请求处理）"><a href="#Request-Handling（请求处理）" class="headerlink" title="Request Handling（请求处理）"></a>Request Handling（请求处理）</h1><p>主要是用来控制接收到Burp Proxy监听端口的请求后，如何对 请求进行处理的，即使用Burp再次转发。 </p>
-<p>其具体配置可分为：主机名&#x2F;域名的转发、端口的转发、强制使用SSL和隐形代理4个部分。当我们 配置了主机或域名的转发，则所有的请求会转发到指定的主机或域名上；如果我们配置了端口的转 发时，所有的请求都会被转发到指定端口上。同时我们可以配置，通过Burp Proxy的消息是否强制 使用SSL，如果设置了此项，则请求若是http协议，经Burp Proxy代理后将转换为https协议。隐形 代理主要是用于测试富客户端应用或者是非浏览器代理方式的应用，当我们设置了它，访问这些应 用时，将通过<strong>非代理的方式，直接连接Burp Proxy的监听端口</strong>。</p>
-<p>不挂代理的方式有其独特的意义和应用场景，特别是在一些特殊情况下，无法直接通过设置代理来拦截和分析流量。以下是一些不挂代理的方式及其意义：</p>
-<h3 id="意义和应用场景"><a href="#意义和应用场景" class="headerlink" title="意义和应用场景"></a>意义和应用场景</h3><ol>
-<li><strong>移动应用测试</strong>：有些移动应用不提供代理设置选项，或者应用的流量硬编码到特定的IP地址或域名。在这种情况下，使用代理进行流量拦截变得非常困难，通过非代理方式（如DNS欺骗或网络重定向）可以解决这个问题。</li>
-<li><strong>嵌入式设备测试</strong>：一些嵌入式设备（如物联网设备、智能家居设备）不允许配置代理设置。通过网络设备（如路由器、防火墙）上的规则重定向流量，可以实现对这些设备流量的拦截和分析。</li>
-<li><strong>绕过代理检测</strong>：某些系统或应用可能会检测并拒绝代理流量，使用非代理方式可以避免这种检测，从而进行更隐蔽的流量分析。</li>
-<li><strong>网络设备测试</strong>：在测试一些需要透明代理或中间设备（如网关、VPN）的场景下，非代理方式可以帮助实现透明的流量拦截和分析，而不会对客户端配置造成影响。</li>
-</ol>
-</li>
-</ol>
-<h1 id="Burp-Target"><a href="#Burp-Target" class="headerlink" title="Burp Target"></a>Burp Target</h1><p>1. </p>
-<p>Burp Target 组件主要包含<strong>站点地图、目标域、风险定义</strong>三部分组成</p>
-<p>当前工作涉及哪些目标域、可能存在的攻击面等信息，下面我们就分别来看看 Burp Target的三个组成部分。</p>
-<p>本章的主要内容有：</p>
-<h2 id="目标域设置-Target-Scope"><a href="#目标域设置-Target-Scope" class="headerlink" title="目标域设置 Target Scope"></a>目标域设置 Target Scope</h2><p>Target Scope中作用域的定义比较宽泛，通常来说，在对某个系统进行渗透测试时，可以通过域名或者 主机名去限制拦截内容，这里的域名或主机名就是我们说的作用域。如果我们想限制得更为细粒度化， 比如，你只想拦截login目录下的所有请求，也可以在此设置，此时，作用域就是目录。总体来说， Target Scope主要使用于下面几种场景中：</p>
-<p>限制站点地图和Proxy历史中的显示结果</p>
-<p> 告诉Burp Proxy拦截哪些请求 </p>
-<p>Burp Spider抓取哪些内容 </p>
-<p>Burp Scan自动扫描哪些作用域的安全漏洞 </p>
-<p>在Burp Intruder和Burp Repeater中指定URL 通过Target Scope我们能方便地控制Burp的拦截范围、操作对象，减少无效的噪音（此处演示一下）。 </p>
-<h2 id="站点地图-Site-Map"><a href="#站点地图-Site-Map" class="headerlink" title="站点地图 Site Map"></a>站点地图 Site Map</h2><p>当我们设置了 Target Scope（默认全部为允许），使用Burp Proxy进行代理拦截，通过浏览器代理浏览 应用时，Burp会自动将浏览信息记录下来，包含每一个请求和应答的详细信息，保存在Target站点地图 中。</p>
-<p>Site Map的左边为访问的URL，按照网站的层级和深度，树形展示整个网站的目 录结构和关联其他域的URL情况；</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707084335435.png" alt="image-20240707084335435"></p>
-<p>对该树状结构进行扫描，还可以进行进一步的主动扫描，从而发现一些潜在的风险</p>
-<h2 id="Target-工具的使用"><a href="#Target-工具的使用" class="headerlink" title="Target 工具的使用"></a>Target 工具的使用</h2><p>Target 工具的使用的使用主要包括以下部分：</p>
-<h3 id="手工获取站点地图"><a href="#手工获取站点地图" class="headerlink" title="手工获取站点地图"></a>手工获取站点地图</h3><p>1、设置浏览器代理和Burp Proxy代理，并使之能正常工作。</p>
-<p> 2、关闭Burp Proxy的拦截功能。</p>
-<p> 3、手工浏览网页，这时，Target会自动记录站点地图信息。</p>
-<p>手工获取站点地图可以使用户根据自己的需要和分析自主控制访问的内容。</p>
-<p>记录的信息比较准确，但对于大型的系统而言依次点击一遍对渗透测试人员而言成本比较大</p>
-<h3 id="站点比较"><a href="#站点比较" class="headerlink" title="站点比较"></a>站点比较</h3><p>站点比较更为简单,本质就是将站点的结构进行对比</p>
-<h4 id="攻击面分析"><a href="#攻击面分析" class="headerlink" title="攻击面分析"></a>攻击面分析</h4><p>右击对应的站点，能够通过相关工具中的分析选项做攻击面分析</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707085712514.png" alt="image-20240707085712514"></p>
-<p>概况视图主要展示当前站点动态URL数量、静态URL数量、参数的总数、唯一的参数名数目，通过这些 信息，可以快速帮助我们对当前站点的总体状况建立粗线条的了解。</p>
-<p>动态URL和静态URL对应的都可以查看详细的请求包和响应包</p>
-<p>参数视图有上中下三部分组成，上部为参数和参数计数统计区，你可以对参数的使用次数进行排序， 从而找出使用频繁的参数进行分析；中部为参数对应的使用情况列表，记录对应的参数每一次的使用记 录；下部为某一次使用过程中，请求消息和应答消息的详细信息。</p>
-<p>实际使用中很多站点使用伪静态，如果请求的URL中不带有参数，则分析时无法区别，只能当作静态URL来分析</p>
-<h2 id="Discover-Content"><a href="#Discover-Content" class="headerlink" title="Discover Content"></a>Discover Content</h2><p>存在于Burp Target中的站点信息,我们可以直接发送到spider中进行站点信息的爬取.在Burp1.7版本中,存在一个独立模块,叫做Burp Spider,而Burp2.0更新后的本本后,该模块被整合为Targe相关工具中的Discover Content</p>
-<p>Discover Content主要用于大型操应用系统的测试</p>
-<p>Discover Content的使用主要包含三个方面</p>
-<h3 id="控制"><a href="#控制" class="headerlink" title="控制"></a>控制</h3><p>Discover Content 控制界面由发现会话状态（Discovery Session Status）和排列任务（Queued Tasks）两部分组成。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707091342086.png" alt="image-20240707091342086"></p>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>配置界面由Target,Filenames,File Extensions,Discovery Engine四个功能组成</p>
-<p>对应的可以根据自己的需要进行一些筛选配置</p>
-<h3 id="站点地图"><a href="#站点地图" class="headerlink" title="站点地图"></a>站点地图</h3><p>站点地图（Site Map） 爬取完成后形成的站点地图，和Target模块中的站点地图类似。</p>
-<h1 id="Burp-Scan"><a href="#Burp-Scan" class="headerlink" title="Burp Scan"></a>Burp Scan</h1><p>Burp Scan的功能主要是用来自动检测Web系统的各种漏洞，可以使用Burp Scan代替测试人员手工去对 系统进行普通漏洞类型的渗透测试，从而使得测试人员能把更多精力放在那些需要人工验证的漏洞上。</p>
-<p>BurpScan是很传统的扫描器,没有什么需要额外提及的</p>
-<p>不过这里还是有一些点需要额外考虑</p>
-<p>Burp使用被动扫描时为了使流量更接近于普通用户,几乎不额外构造请求进行爬虫或扫描,它基于已经存在的请求和响应进行简单的分析</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707092650449.png" alt="image-20240707092650449"></p>
-<p>Burp使用主动扫描模式时则会对应用发送新的请求并通过payload验证漏洞,这种模式下的操作回产生大量的请求和响应数据,直接影响系统的性能,通常适用于非生产环境</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707095413391.png" alt="image-20240707095413391"></p>
-<h2 id="扫描配置"><a href="#扫描配置" class="headerlink" title="扫描配置"></a>扫描配置</h2><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707095705268.png" alt="image-20240707095705268"></p>
-<p>Scan Type：扫描类型，分为 Crawl and audit 和 Crawl，即爬虫和审计，或者仅爬虫。</p>
-<p> URLs to Scan：扫描目标URL Detailed scope configuration：详细的范围配置，通过 Included URL prefixes（包括URL前缀）和 Excluded URL prefixes（不包括URL前缀）来配置扫描。</p>
-<p> Use advanced scope control：使用高级的范围控制，如果勾选，将配置 Included URLs（包含的 URL）和Excluded URLs（不包含的URL）来配置扫描。 </p>
-<p>点击 Add，弹出配置窗口：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707100020676.png" alt="image-20240707100020676"></p>
-<p>**PS:**协议:包含HTTP和HTTPS或者任意</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707100240814.png" alt="image-20240707100240814"></p>
-<p>如果需要登录,可以提前配置username和password</p>
-<p>导出扫描报告</p>
-<p> 1.在Target-&gt;Site Map，选择某个URL，右侧Issues按ctrl+a全选，右键，点击Report selected issues</p>
-<p>2.选择报告格式 HTML：生成HTML格式的报告，以便在浏览器中打印或查看。 XML：生成XML格式的报告，适合导入其他工具或报告框架</p>
-<h1 id="Burp-Intruder"><a href="#Burp-Intruder" class="headerlink" title="Burp Intruder"></a>Burp Intruder</h1><p>在渗透测试过程中，我们经常使用Burp Intruder，它的工作原理是：Intruder在原始请求数据的基础 上，通过修改各种请求参数，以获取不同的应答。每一次请求中，Intruder都会携带一个或多个有效攻 击载荷（payload），在不同位置进行攻击重放，通过应答数据的比对分析来获得需要的特征数据。</p>
-<h2 id="Intruder使用场景"><a href="#Intruder使用场景" class="headerlink" title="Intruder使用场景"></a>Intruder使用场景</h2><h3 id="标识符枚举"><a href="#标识符枚举" class="headerlink" title="标识符枚举"></a>标识符枚举</h3><p>Web应用程序经常使用标识来引用用户,账户,资产等数据信息. 例如用户名 文件ID和账户密码</p>
-<h3 id="提取有用数据"><a href="#提取有用数据" class="headerlink" title="提取有用数据"></a>提取有用数据</h3><p>在某些场景下,并非简单的识别有效标识符.而是通过识别标识符提取一些其他的数据.比如单个用户的个人空间ID,获取所欲用户在个人空间的昵称和年龄</p>
-<h3 id="模糊测试"><a href="#模糊测试" class="headerlink" title="模糊测试"></a>模糊测试</h3><p>很多输入型的漏洞,如SQL注入,跨站脚本和文本路径遍历等都可以通过修改请求参数提交各种测试字符串. 可以通过Intruder的自动化来实现对Web应用的模糊测试</p>
-<p>通常来说</p>
-<p>BurpIntruder的测试主要遵循以下步骤</p>
-<ol>
-<li><p>确认BurpSuite安装正确并正常启动，且完成了浏览器的代理设置。</p>
-</li>
-<li><p>进入Burp Proxy选项卡，关闭代理拦截功能。</p>
-</li>
-<li><p>进行历史日志（History）子选项卡，查找可能存在问题的请求日志，并通过右击菜单，发送到 Intruder。 </p>
-</li>
-<li><p>进入 Intruder 选项卡，打开 Target 和 Positions 子选项卡。这时，你会看到上一步发送过来的请 求消息。</p>
-</li>
-<li><p>Burp Intrude<strong>r 攻击的基础是围绕刚刚发送过来的原始请求信息，在原始信息指定的位置上设置一 定数量的攻击载荷 Payload</strong>，通过替换 Payload 来发送不同的请求以获取应答消息。默认情况下<strong>， Burp Intruder 会对请求参数和 Cookie 参数设置成 Payload position，前缀添加 $ 进行标识，如 上图红色标注位置所示。当发送请求时，会将$标识的参数替换为 Payload 。</strong></p>
-</li>
-<li><p>在光标对应位置选择右侧选项,就可以添加或删除<strong>预留出的payload位置</strong></p>
-<p>预留出payload位置则是为了使Intruder在对应位置中遍历预设的payload集,发送大批数据包</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707104227760.png" alt="image-20240707104227760"></p>
-</li>
-<li><p>在payload子选项卡中可以选择payload的生成策略,比如id&#x3D;1-100不断遍历</p>
-</li>
-<li><p>最后做一遍检查,便可以开始爆破,后续可以开始阅览Intruder返回的通信信息,查看是否有自己需要的信息</p>
-</li>
-<li><p>有些时候为了防止应答信息太多无法检索出我们需要的信息,通常在进行攻击前,会进行Options选项的相关配置,使用最多的是正则表达式匹配</p>
-</li>
-<li><p>攻击结果也是可以将展示出的信息做一些指定的,比如攻击时间和是否存在Error等</p>
-</li>
-</ol>
-<h2 id="Payload类型与处理"><a href="#Payload类型与处理" class="headerlink" title="Payload类型与处理"></a>Payload类型与处理</h2><p>payload类型足足有18种可供选择,这里挑选常用的几种记录</p>
-<h3 id="简单列表"><a href="#简单列表" class="headerlink" title="简单列表:"></a>简单列表:</h3><p>通过配置一个字符串列表作为payload,也可以手动添加字符串列表或者从文件加载字符串列表</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707111535806.png" alt="image-20240707111535806"></p>
-<p>对应的 burp预设了很多组简单payload列表</p>
-<p>包括XSS脚本 CGI脚本 SQL注入脚本 数字 大写小写字母  用户名 密码 表单域的字段名 IIS文件名和目录名等</p>
-<h3 id="指定文件"><a href="#指定文件" class="headerlink" title="指定文件"></a>指定文件</h3><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707111717409.png" alt="image-20240707111717409">可以指定文件作为相对应payload位置上的列表</p>
-<h3 id="自定义迭代器"><a href="#自定义迭代器" class="headerlink" title="自定义迭代器"></a>自定义迭代器</h3><p>这是一款功能强大的Payload，它共有8个占位，每一个占位 可以指定简单列表的Payload类型，然后根据占位的多少，与每一个简单列表的Payload进行笛卡 尔积（集合相乘的结果），生成最终的Payload列表</p>
-<h4 id="payload设置"><a href="#payload设置" class="headerlink" title="payload设置"></a>payload设置</h4><p>如图例</p>
-<p>位置1 –从列表选择用户名带入</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707114033155.png" alt="image-20240707114033155"></p>
-<p>位置2 –可以直接设置值 比方说@@</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707114135696.png" alt="image-20240707114135696"></p>
-<p>位置3 –也可以从文件加载</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707114300016.png" alt="image-20240707114300016"></p>
-<p>最后攻击时生成的payload则会按照迭代的占位依次排列</p>
-<p>如图所示</p>
-<img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707115021293.png" alt="image-20240707115021293" style="zoom:200%;" />
+    <title>更底层更方便的一些部署</title>
+    <url>/2024/07/09/vscode%E5%92%8Chtml%EF%BC%8Cjavascript%E5%92%8CDocker/</url>
+    <content><![CDATA[<p>WARNING ：<strong>请先有一定的linux命令基础再接触并进行部署</strong></p>
+<h1 id="WHAT-IS-蜜罐"><a href="#WHAT-IS-蜜罐" class="headerlink" title="WHAT IS 蜜罐"></a>WHAT IS 蜜罐</h1><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240512091639288.png" alt="image-20240512091639288"></p>
+<p>蜜罐是一种安全威胁的主动防御技术，<strong>它通过模拟一个或多个易受攻击的主机或服务来吸引攻击者，捕获攻击流量与样本，发现网络威胁、提取威胁特征，</strong>蜜罐的价值在于被探测、攻陷。其在本质上来说，<strong>是一个与攻击者进行攻防博弈的过程。</strong>蜜罐提供服务，攻击者提供访问，通过蜜罐对攻击者的吸引，攻击者对蜜罐进行攻击，在攻击的过程中，有经验的攻击者也可能识别出目标是一个蜜罐。为此，<strong>为更好的吸引攻击者，蜜罐也需要提供强悍的攻击诱骗能力。</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240512092050232.png" alt="image-20240512092050232"></p>
+<h1 id="Web服务中间件"><a href="#Web服务中间件" class="headerlink" title="Web服务中间件"></a><strong>Web服务中间件</strong></h1><p>类似Apache  Tomcat  Nginx将用户的HTTP请求解析，并返回到浏览器</p>
+<h1 id="钓鱼网站制作"><a href="#钓鱼网站制作" class="headerlink" title="钓鱼网站制作"></a>钓鱼网站制作</h1><p>ctrl+s保存当前全部静态网页 并本地部署</p>
+<p><strong>开始测试 打开本地网站发包</strong> </p>
+<p>观察自身请求 <strong>可以发送请求后打开F12</strong></p>
+<p>然后<strong>点击network并观察对应路径名–即可知请求发向文件</strong></p>
+<p><strong>全局检索对应路径 然后直接替换接收数据文件</strong></p>
+<h1 id="Javascript"><a href="#Javascript" class="headerlink" title="Javascript"></a>Javascript</h1><p><a href="https://www.runoob.com/js/js-tutorial.html">JavaScript 教程 | 菜鸟教程 (runoob.com)</a></p>
+<p>不会就查就行了</p>
+<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p><a href="https://docker-practice.github.io/zh-cn/">前言 · Docker – 从入门到实践 (docker-practice.github.io)</a></p>
+<p>Docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任意一个搭载windows或者linux的机器上</p>
+<p><strong>也可以实现虚拟化，容器完全使用沙箱机制，相互之间并无接口</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240525111213269.png" alt="image-20240525111213269"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240525111358970.png" alt="image-20240525111358970"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240525111550258.png" alt="image-20240525111550258"></p>
+<h2 id="更新kali-apt源"><a href="#更新kali-apt源" class="headerlink" title="更新kali apt源"></a>更新kali apt源</h2><p>编辑 &#x2F;etc&#x2F;apt&#x2F;sources.list 文件， 在文件最前面添加以下条目：</p>
+<p>**#**<strong>中科大稳定版分支</strong> <strong>Kali</strong> <strong>源</strong> </p>
+<p>deb <a href="https://mirrors.ustc.edu.cn/kali">https://mirrors.ustc.edu.cn/kali</a> kali-rolling main non-free non-free-firmware contrib</p>
+<p>deb-src <a href="https://mirrors.ustc.edu.cn/kali">https://mirrors.ustc.edu.cn/kali</a> kali-rolling main non-free non-free-firmware contrib</p>
+<p>sudo nano &#x2F;etc&#x2F;apt&#x2F;sources.list</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/12790161/1716608995166-e9089a93-d685-4257-bb94-0822a054dd55.png" alt="img"></p>
+<p>sudo apt update</p>
+<h2 id="Linux安装docker"><a href="#Linux安装docker" class="headerlink" title="Linux安装docker"></a>Linux安装docker</h2><p>以kali 2024.1 为例，安装docker</p>
+<h3 id="添加使用-HTTPS-传输的软件包以及-CA-证书"><a href="#添加使用-HTTPS-传输的软件包以及-CA-证书" class="headerlink" title="添加使用 HTTPS 传输的软件包以及 CA 证书"></a>添加使用 HTTPS 传输的软件包以及 CA 证书</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install \</span><br><span class="line">     apt-transport-https \</span><br><span class="line">     ca-certificates \</span><br><span class="line">     curl \</span><br><span class="line">     gnupg \</span><br><span class="line">     lsb-release</span><br></pre></td></tr></table></figure>
 
-<h3 id="字符串替换"><a href="#字符串替换" class="headerlink" title="字符串替换"></a>字符串替换</h3><p>– 顾名思义，<strong>该Payload的类型是对预定义的字符串进行替换后生成新的字符串。</strong>比如说，预定义字符串为ABCD，按照下图的替换规则设置后，将对AB的值 进行枚举后生成新的字符串</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707153759117.png" alt="image-20240707153759117"></p>
-<p><strong>如图攻击,如果满足替换条件,它则会将原payload和修改后的payload一起发送到服务端.</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707153954509.png" alt="image-20240707153954509"></p>
-<h3 id="大小写替换"><a href="#大小写替换" class="headerlink" title="大小写替换"></a>大小写替换</h3><p>对预定义的字符串，按照<strong>大小写规则进行替换</strong>。比如，预定义 的字符串为Peter Wiener，则按照下图的设置后，会生成新的Payload。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707154240220.png" alt="image-20240707154240220"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707154302311.png" alt="image-20240707154302311"></p>
-<p>生成规则由上而下依次是：</p>
-<p> No change（不改变，使用原始字符串）</p>
-<p> To lower case（转为小写字母） </p>
-<p>To upper case（转为大写字母） </p>
-<p>To Propername（首字母大写，其他小写） </p>
-<p>To ProperName（单词首字母大写，其他不改变)</p>
-<p> 在实际使用中，可以根据自己的使用规则进行勾选设置。</p>
-<h3 id="字符块"><a href="#字符块" class="headerlink" title="字符块"></a>字符块</h3><p>这种类型的Payload是指使用一个给出的输入字符串，根据指定设 置产生指定大小的字符块，表现形式为生成指定长度的字符串。它通常是用来绕过应用防火墙 （WAF）。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707154649754.png" alt="image-20240707154649754"></p>
-<h3 id="数字类型"><a href="#数字类型" class="headerlink" title="数字类型"></a>数字类型</h3><p>这种类型的payload是根据配置,生成一系列的数字作为payload.它的设置界面如下</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707154817322.png" alt="image-20240707154817322"></p>
-<p>数字范围部分就是确定最大和最小值以及最大值和最小值所构成的范围中如何取数字,类型分为按顺序和随机遍历给出的数字集合</p>
-<h3 id="日期类型"><a href="#日期类型" class="headerlink" title="日期类型"></a>日期类型</h3><p>根据配置生成一系列的日期</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707155611480.png" alt="image-20240707155611480"></p>
-<p>配置比较简单 不过多赘述</p>
-<h3 id="暴力字典（Brute-forcer）"><a href="#暴力字典（Brute-forcer）" class="headerlink" title="暴力字典（Brute forcer）"></a>暴力字典（Brute forcer）</h3><p>此类Payload生成包含一个指定字符集的所有特定长度排列的有效载 荷，通常用于枚举字典的生成，其设置界面如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707160307554.png" alt="image-20240707160307554"> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707160255421.png" alt="image-20240707160255421"></p>
-<p>空类型（Null payloads）</p>
-<p>这种负载类型产生的Payload，其值是一个空字符串。在攻击时，<strong>如果 需要同样的请求反复被执行</strong>，在不任何修改原始请求的场景下此Payload是非常有用的。<strong>它可用于 各种攻击，例如应用层DOS、或保持活会话令牌、资源竞争等。</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707160640648.png" alt="image-20240707160640648"></p>
-<p><strong>这样就近似于实现了单台机的DOS攻击</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707160655083.png" alt="image-20240707160655083"></p>
-<h3 id="字符扮演者（Character-frobber）"><a href="#字符扮演者（Character-frobber）" class="headerlink" title="字符扮演者（Character frobber）"></a>字符扮演者（Character frobber）</h3><p>依次修改指定字符串在每 个字符位置的值（不做特殊说明的情况下就是指十进制），每次都是在原字符上递增1个该字符的 ASCII码。</p>
-<h3 id="用户名生成器"><a href="#用户名生成器" class="headerlink" title="用户名生成器"></a>用户名生成器</h3><p>这种类型的Payload主要用于用户名和Email账号的自动 生成，其设置界面如下图：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707160956758.png" alt="image-20240707160956758"></p>
-<h2 id="攻击类型"><a href="#攻击类型" class="headerlink" title="攻击类型"></a>攻击类型</h2><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707161315912.png" alt="image-20240707161315912"></p>
-<h2 id="可选项设置"><a href="#可选项设置" class="headerlink" title="可选项设置"></a>可选项设置</h2><h3 id="请求消息头设置"><a href="#请求消息头设置" class="headerlink" title="请求消息头设置"></a>请求消息头设置</h3><p>请求消息头设置中包含<strong>自动更新Content-Length</strong>和<strong>Set Connection: close</strong></p>
-<p>如果选中了设置Connection报头,那么Burp Intruder则会在每个消息中都更新对应的Connection Close报头</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707162113734.png" alt="image-20240707162113734"></p>
-<h3 id="攻击结果设置"><a href="#攻击结果设置" class="headerlink" title="攻击结果设置"></a>攻击结果设置</h3><p>这个设置主要用来控制从响应信息中提取结果项,如果 匹配,则在攻击结果中添加新列进行标明</p>
-<p>比如在”密码不正确”攻击中遍历一个大字典,这个时候payload数量过大,这个时假设还无法从可疑的对话长度等方面入手,就chenggongv可以通过扫描诸如”Incorrect password”等等找到成功的登录.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707161925846.png" alt="image-20240707161925846"></p>
-<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><p>这些设置是主要用于控制执行攻击时Burp如何处理重定向,在实际使用中必须遵循重定向才能实现目的</p>
-<p>比如密码猜测攻击中,如果密码错误可能会重定向响应到密码错误的提示界面,密码正确则会重定向到用户中心首页等</p>
-<h3 id="Intruder攻击和结果分析"><a href="#Intruder攻击和结果分析" class="headerlink" title="Intruder攻击和结果分析"></a>Intruder攻击和结果分析</h3><p>攻击的发起分为两种方式,一种是经过对应的Target ,Positions,payloads,options等再经过启动进行攻击,另一种则是通过预攻击文件直接发起攻击,攻击结果页面如下所示</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707170729022.png" alt="image-20240707170729022"></p>
-<p>从上图我们可以看出，其界面主要有菜单区、过滤区、消息记录区、请求&#x2F;响应区四部分组成。</p>
-<p>菜单区——包含Attack菜单、Save菜单、Columns菜单。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707170959048.png" alt="image-20240707170959048"></p>
-<p>过滤区——可以通过查询条件、服务器响应的状态码、注释对消息记录区的信息进行过滤。</p>
-<p>消息记录区，又称结果列表（Results Table），记录Payload执行时请求和响应的所有信息，</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240707171015761.png" alt="image-20240707171015761"></p>
-<p>在对攻击结果的分析中，你可以通过单击任一列标题（升序排序，降序排序和未排序）重新排序表的内 容。有效的应答通常可以通过以下存在差异的内容进行判断：</p>
-<h1 id="Burp-Repeater"><a href="#Burp-Repeater" class="headerlink" title="Burp Repeater"></a>Burp Repeater</h1><p> Repeater是对消息的手动改动和迭代的进程,在渗透测试过程中我们经常使用Repeater来进行请求与响应的消息验证分析,比如修改请求参数 验证输入的漏洞 验证逻辑越权等</p>
-<p>其设置主要包括以下内容： </p>
-<p>更新（Update Content-Length） 这个选项是用于控制Burp是否自动更新请求消息头中的 Content-Length。 </p>
-<p>解压和压缩（Unpack gzip &#x2F; deflate） 这个选项主要用于控制Burp是否自动解压或压缩服务端响 应的内容。</p>
-<p> 跳转控制（Follow redirections） 这个选项主要用于控制Burp是否自动跟随服务端进行请求跳 转，比如服务端返回状态码为302，是否跟着应答跳转到302指向的URL地址。 它有4个选项，分别 是永不跳转（Never），站内跳转（On-site only）、目标域内跳转（In-scope only）、始终跳转 （Always）。其中永不跳转、始终跳转比较好理解，站内跳转是指当前的同一站点内跳转，目标域 跳转是指Target scope中配置的域可以跳转。 </p>
-<p>跳转中处理Cookie（Process cookies in redirections） 这个选项如果选中，则在跳转过程中设置 的Cookie信息，将会被带到跳转指向的URL页面，可以进行提交。</p>
-<p> 视图控制（View） 这个选项是用来控制Repeater的视图布局。</p>
-<p> 其他操作（Action） 通过子菜单方式，指向Burp的其他工具组件中</p>
+<h3 id="添加软件源的-GPG-密钥"><a href="#添加软件源的-GPG-密钥" class="headerlink" title="添加软件源的 GPG 密钥"></a>添加软件源的 GPG 密钥</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</span><br></pre></td></tr></table></figure>
+
+<h3 id="sources-list-中添加-Docker-软件源"><a href="#sources-list-中添加-Docker-软件源" class="headerlink" title="sources.list 中添加 Docker 软件源"></a>sources.list 中添加 Docker 软件源</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> \</span><br><span class="line">  <span class="string">&quot;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/debian \</span></span><br><span class="line"><span class="string">  buster stable&quot;</span> | sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line"></span><br><span class="line">$ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin</span><br></pre></td></tr></table></figure>
+
+<p>如果无需体验最新版的docker，也可以直接执行下面命令安装</p>
+<p>apt install docker.io</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://docker-practice.github.io/zh-cn/install/debian.html">https://docker-practice.github.io/zh-cn/install/debian.html</a></p>
+<h3 id="Docker部署"><a href="#Docker部署" class="headerlink" title="Docker部署"></a><strong>Docker部署</strong></h3><p><a href="https://hub.docker.com/?_gl=1*1k7v6iz*_ga*MTg4MjkxMTk4MS4xNzE2NjA3NDU1*_ga_XJWPQMJYHQ*MTcxNjYxODY3OC4yLjEuMTcxNjYxODY5Ni40Mi4wLjA.">Dockerhub</a></p>
+<h2 id="Docker命令"><a href="#Docker命令" class="headerlink" title="Docker命令"></a>Docker命令</h2><h4 id="三件套"><a href="#三件套" class="headerlink" title="三件套"></a><strong>三件套</strong></h4><p>docker search 寻找想要的镜像 同时可以标签筛选</p>
+<p>docker pull 拉取想要的镜像</p>
+<p>docker run 运行镜像</p>
+<p>docker stop {container id}</p>
+<p><strong>查看对应容器信息</strong></p>
+<p>docker ps </p>
+<p><em>里面就有包含</em></p>
+<h4 id="删除对应镜像"><a href="#删除对应镜像" class="headerlink" title="删除对应镜像"></a>删除对应镜像</h4><p>docker rmi {container id}</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240525144321937.png" alt="image-20240525144321937"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240525151120882.png" alt="image-20240525151120882"></p>
+<p><a href="https://www.runoob.com/docker/docker-command-manual.html">Docker 命令大全 | 菜鸟教程 (runoob.com)</a></p>
+<p><strong>创建镜像后能做什么</strong> <strong>镜像的特性是什么</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240529201943078.png" alt="image-20240529201943078"></p>
+<h1 id="VS-Code-Remote-ssh-远程控制Windows主机-免密登录-内网穿透"><a href="#VS-Code-Remote-ssh-远程控制Windows主机-免密登录-内网穿透" class="headerlink" title="VS Code Remote-ssh 远程控制Windows主机 + 免密登录 + 内网穿透"></a>VS Code Remote-ssh 远程控制Windows主机 + 免密登录 + 内网穿透</h1><h2 id="VS-Code-Remote-ssh-远程控制Windows主机-免密登录-内网穿透-1"><a href="#VS-Code-Remote-ssh-远程控制Windows主机-免密登录-内网穿透-1" class="headerlink" title="VS Code Remote-ssh 远程控制Windows主机 + 免密登录 + 内网穿透"></a>VS Code Remote-ssh 远程控制Windows主机 + 免密登录 + 内网穿透</h2><p>1 我们为什么需要远程连接服务器？（使用需求+场景）<br>炼丹的研究生：在我们炼丹过程中，经常需要连接远程的服务器（通常是实验室的服务器）进行炼丹。通常情况下，我们会使用Pycharm的远程开发功能，同步服务器与本地的项目文件，使用远程解释器进行开发。但是使用过的同学都知道，重量级的Pycharm每次远程同步、加载远程解释器都需要相当长的时间。如果我们想要随时切换工位、宿舍、家里的各个场景，Pycharm的同步、加载就成了一场噩梦。特别是当我们的python环境安装了很多依赖包，项目生成了大量文件的时候更是这样。<strong>直到VS Code推出了Remote Development开发包，便完全解决了这个问题。让我可以在不同的场景快速切换，无需等待同步文件、环境。</strong>因为VS Code远程开发完全是运行在服务器上的，我们本地的VS Code只是一个前端界面，所以<strong>根本无需同步服务器上的文件</strong>、解释器依赖库就可以体验到与本地开发完全相同的体验。在远程连接服务器后，只需要使用可以随身携带的笔记本进行Coding，而炼丹就交由服务器来完成。优雅！<br>2 远程办公：<strong>将自己的台式机当成一个服务器在服务器上训练&#x2F;测试模型。这样自己远程办公时，可以通过ssh远程连接到自己的台式机在公司开会时，用笔记本远程连接自己的台式机</strong><br>3 以上只是列举出来的一些常见的使用场景，但具体到每个人都是不尽相同的，但是需求都是相似的——优化我们的工作流。</p>
+<h2 id="为什么需要内网穿透？"><a href="#为什么需要内网穿透？" class="headerlink" title="为什么需要内网穿透？"></a>为什么需要内网穿透？</h2><p>通常<strong>服务器是在一个局域网下的，没有公网ip，需要通过局域网内的NAT</strong>（Network Address Translation）讲局域网内的私有IP地址转换为公网IP才能正常通信。如果想要远程连接，要么和服务器处在同一个局域网下，但这通常限制了我们使用场景，如果离开这个局域网，就没法远程开发了。因此需要内网穿透，解决处于使用了NAT设备的私有TCP&#x2F;IP网络中的主机之间建立连接的问题。但是如果你有公网IP，就没有这么多b事了。但是99%的可能你都没有公网IP，其中的原因也比较简单，公网IP地址是一种稀缺的有限的资源，而Internet是老美搞的，简单讲有人多了，就一定会有人少了，就得通各种各样的方式来提高我们为数不多的公网IP地址的利用率，以满足我国人民日益增长的上网需求doge。<br>什么是内网穿透？<br>内网穿透是一种网络技术，它允许在私有局域网（内网）中的设备或服务可以通过公共网络（如互联网）进行访问。通常情况下，内网设备由于NAT 设备屏蔽或防火墙等网络设备所保护，无法直接从公网访问。通过使用内网穿透技术，可以建立起公网和内网之间的通道，使得外部用户可以通过公网连接到内网中的设备，就像这些设备直接连接在公网上一样。内网穿透简单来说就是<strong>将内网外网通过隧道打通,让内网的数据让外网可以获取</strong>。</p>
+<h3 id="什么是SSH？"><a href="#什么是SSH？" class="headerlink" title="什么是SSH？"></a>什么是SSH？</h3><p>安全外壳协议（Secure Shell Protocol，简称SSH）<strong>是一种运行在应用层的（默认端口号为22）加密的网络传输协议，可在不安全的网络中为网络服务提供安全的传输环境。</strong>SSH通过在网络中建立安全隧道来实现SSH客户端与服务器之间的连接。最早的时候，互联网通信都是明文通信，一旦被截获，内容就暴露无疑。SSH最常见的用途是远程登录系统，人们通常利用SSH来传输命令行界面和远程执行命令。SSH使用频率最高的场合是类Unix系统，但是Windows操作系统也能有限度地使用SSH。<strong>2015年，微软宣布将在未来的操作系统中提供原生SSH协议支持，Windows 10 1803版本已提供OpenSSH工具。</strong><br>SSH以非对称加密实现身份验证。身份验证有多种途径：</p>
+<p>其中一种方法是使用自<strong>动生成的公钥-私钥对来简单地加密网络连接，随后使用密码认证进行登录</strong>；<br>另一种方法是<strong>人工生成一对公钥和私钥，通过生成的密钥进行认证，这样就可以在不输入密码的情况下登录。任何人都可以自行生成密钥。</strong>公钥需要放在待访问的电脑之中，而对应的私钥需要由用户自行保管。认证过程基于生成出来的私钥，但整个认证过程中私钥本身不会传输到网络中。其中公钥用于让对方加密信息，而自己的私钥可以解密经过自己公钥加密后的信息，这就是非对称加密。</p>
+<p>SSH以非对称加密实现身份验证。身份验证有多种途径：</p>
+<p>其中一种方法是使用自动生成的公钥-私钥对来简单地加密网络连接，随后使用密码认证进行登录；<br>另一种方法是人工生成一对公钥和私钥，通过生成的密钥进行认证，这样就可以在不输入密码的情况下登录。任何人都可以自行生成密钥。公钥需要放在待访问的电脑之中，而对应的私钥需要由用户自行保管。认证过程基于生成出来的私钥，但整个认证过程中私钥本身不会传输到网络中。其中公钥用于让对方加密信息，而自己的私钥可以解密经过自己公钥加密后的信息，这就是非对称加密。</p>
+<h3 id="SSH远程连接之后能干什么？"><a href="#SSH远程连接之后能干什么？" class="headerlink" title="SSH远程连接之后能干什么？"></a>SSH远程连接之后能干什么？</h3><p>SSH远程连接之后，就可以像操作本地的机器一样操作远程机器。当需要操控的机器不在本地时就可以使用ssh协议远程连接操控。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240606153525709.png" alt="image-20240606153525709"></p>
+<p><strong>在Powershell（管理员）中确保添加了防火墙规则</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在Powershell（管理员）中确保添加了防火墙规则</span><br><span class="line"></span><br><span class="line"># 启动sshd服务</span><br><span class="line">Start-Service sshd</span><br><span class="line"></span><br><span class="line"># 将sshd服务设置为自动启动，若不设置需要在每次重启后重新开启sshd</span><br><span class="line">Set-Service -Name sshd -StartupType &#x27;Automatic&#x27;</span><br><span class="line"></span><br><span class="line"># 确认防火墙规则，一般在安装时会配置好</span><br><span class="line">Get-NetFirewallRule -Name *ssh*</span><br><span class="line"></span><br><span class="line"># 若安装时未添加防火墙规则&quot;OpenSSH-Server-In-TCP&quot;，则通过以下命令添加</span><br><span class="line">New-NetFirewallRule -Name sshd -DisplayName &#x27;OpenSSH Server (sshd)&#x27; -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>第二步：连接到 OpenSSH 服务器<br><strong>在第一次连接之前，我们先来了解两个概念</strong>：<strong>username和servername&#x2F;hostname。在windows的SSH服务器中也就是在你的远程主机中</strong></p>
+<p>username可以用你激活电脑时使用的用户名，即文件资源管理器中C:\Users\username的username。<br>而servername则是“设置”&gt;“系统”&gt;“关于”里的“设备名称”<br>其中输入密码应该是你的远程主机的开机密码，并且这一次连接应该确保是在同一网络下进行的，因为我们并没有进行内网穿透操作</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240606154856346.png" alt="image-20240606154856346"></p>
+<p><strong>如果你成果的看到了以下输出，恭喜你成功的连接上了你的远程主机，并且已经成功了一大半了。接下来我们去VS Code中连接，操作都是类似的。</strong></p>
+<h3 id="在VS-Code中连接你的远程主机"><a href="#在VS-Code中连接你的远程主机" class="headerlink" title="在VS Code中连接你的远程主机"></a>在VS Code中连接你的远程主机</h3><p>这部分内容遵循VS Code的官方教程，但在此基础上做了精简，官方教程写的好的部分会直接贴出来。这一次的连接同样应该确保是在同一网络下进行的，因为我们并没有进行内网穿透操作。<br><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240606155050660.png" alt="image-20240606155050660"></p>
+<h1 id="Vscode远程连接Docker"><a href="#Vscode远程连接Docker" class="headerlink" title="Vscode远程连接Docker"></a>Vscode远程连接<strong>Docker</strong></h1><p>Author ：探姬</p>
+<p>原文于语雀发布，地址为：<a href="https://www.yuque.com/probius/cs_wp/fegz0w">https://www.yuque.com/probius/cs_wp/fegz0w</a></p>
+<p>本文也有配套视频，建议结合食用：(给个三连吧www)</p>
+<p><a href="https://www.bilibili.com/video/BV1684y1z7L6">https://www.bilibili.com/video/BV1684y1z7L6</a></p>
+<h2 id="About"><a href="#About" class="headerlink" title="About"></a>About</h2><p>本文档完整的流程可以帮助您在<strong>Kali Linux</strong>上完成Docker环境，并且基于Vscode的Remote功能，利用SSH协议，构建 VSCODE + SSH + Docker 的工作流，提高效率。</p>
+<p>同样，本文档也考虑了非Kali，用于开发&#x2F;生产环境的 <strong>Ubuntu &#x2F; Debian</strong> 系统 ，如果您想要在开发&#x2F;生产中使用该工作流，可以直接从<strong>Get Docker</strong> 或者 <strong>Build SSH＋vscode + docker Workflow</strong> 章节开始。</p>
+<p>笔者水平有限，错误疏漏之处在所难免，烦请各位师傅斧正。</p>
+<p>以及非常感谢 <strong>陈橘墨(@<strong>Randark_JMT</strong>)师傅</strong>提供的帮助。</p>
+<h2 id="Get-Kali"><a href="#Get-Kali" class="headerlink" title="Get Kali"></a>Get Kali</h2><h3 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h3><p>在Kali官网下载即可，建议直接下载封装好的虚拟机版本：</p>
+<p><a href="https://www.kali.org/get-kali/#kali-virtual-machines">https://www.kali.org/get-kali/#kali-virtual-machines</a></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665941610725-938968ad-7947-4e8b-9030-e3758268b763.png" alt="img"></p>
+<p>解压下载好的压缩包到您想要放置虚拟机的位置，然后双击配置文件直接打开自动添加，或者在VMware中手动添加：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665941724211-28de32c3-f423-4a93-9834-e73779c30df1.png" alt="img"></p>
+<p>添加完成后，启动即可：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665941756080-5769f591-f33d-4acb-bc6d-d3e6b05d214f.png" alt="img"></p>
+<p>（当然，作为DockerRuner，您可能需要设置一个稍微大点的内存值）</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665941814497-37c98101-8d6b-4c1d-80c1-a63fc7952de8.png" alt="img"></p>
+<h3 id="ChangeResource？"><a href="#ChangeResource？" class="headerlink" title="ChangeResource？"></a>ChangeResource？</h3><p>笔者并不建议换源，Kali官方源的速度还是不错的，换源可能会导致您软件管理出现问题。</p>
+<h1 id="虚拟机迁移发现远程连接消失"><a href="#虚拟机迁移发现远程连接消失" class="headerlink" title="虚拟机迁移发现远程连接消失?"></a>虚拟机迁移发现远程连接消失?</h1><p>VM虚拟机移动后IP修改，要做一些什么操作，就可以在自己电脑上使用了<br>第一步：我们打开虚拟机<br>你要在虚拟机文件的里面打开你创建保存的虚拟机文件：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240609004828634.png" alt="image-20240609004828634"></p>
+<p>打开后是这样的：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240609004907612.png" alt="image-20240609004907612"></p>
+<p>你可以打开并且允许虚拟机了，但是他就是连不上xshell，这个是问题是你的那个虚拟编辑器上面的网关和xshell之前的网关不一样，所以他就连接不上。<br>打开虚拟编辑器</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240609004921035.png" alt="image-20240609004921035"><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240609004934951.png" alt="image-20240609004934951"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240609004955897.png" alt="image-20240609004955897"></p>
+<p>看看上面箭头的有没有钩选上。其中将主机虚拟机适配器连接到网络和使用本地DHCP必须选择上，不然你的虚拟机就是另外一个问题。</p>
+<p>记住自己的子网ip:192.168.xxx.xxx</p>
+<p>我们先:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 dhclient  自己获取IP的一个命令</span><br><span class="line">2 然后 ip add</span><br><span class="line">3 查看自动获取的ip地址</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240609005029453.png" alt="image-20240609005029453"></p>
+<p>我们输入下面这个可以修改网关的ip的命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 vi /etc/sysconfig/network-scripts/ifcfg-ens33</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240609005049558.png" alt="image-20240609005049558"></p>
+<p>上这个图片是和7有个参考，如果你是拷贝其他人的虚拟机，就改那个IPADDR就行，因为，其他的别人都改好的。</p>
+<p>IPPADDR，我们最好改成我们刚刚ip add 自动获取的那个ip.</p>
+<p>改好后我们保存退出：</p>
+<p>按esc wq保存退出：</p>
+<p>下面我们开始重新启动网卡：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 systemctl restart network.service</span><br><span class="line">2 如果这个命令不行就用：service network restart 重新启动网关</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>重新启动后面，我们就再</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 ip add</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>后面，我试试虚拟机连接网络：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ping www.baidu.com</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="Get-Docker"><a href="#Get-Docker" class="headerlink" title="Get Docker"></a>Get Docker</h2><h3 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h3><p>docker安装目前有两个版本，一个是官方的<strong>docker.ce</strong>版本，一个是有Debian团队维护的<strong>docker.io</strong>版本。</p>
+<p>之前有争议说 docker.io 是旧版本的docker 而新版的docker是 dockers.ce</p>
+<p>然而docker.io的版本有时会比docker.ce高，事实上，两者只是负责维护的组织不同，前者是Debian官方维护，后者则为Docker官方维护，并没后新旧之分：</p>
+<p><a href="https://stackoverflow.com/questions/45023363/what-is-docker-io-in-relation-to-docker-ce-and-docker-ee-now-called-mirantis-k">https://stackoverflow.com/questions/45023363/what-is-docker-io-in-relation-to-docker-ce-and-docker-ee-now-called-mirantis-k</a></p>
+<h4 id="docker-io"><a href="#docker-io" class="headerlink" title="docker.io"></a>docker.io</h4><p>该版本由Debian团队维护，采用 apt 的方式管理依赖</p>
+<p>安装过程：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665991778767-3780c1b4-c778-4896-b0eb-70651e627778.png" alt="img"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install docker.io</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665991813089-2477e73a-9650-4eae-b3b4-0f338801b331.png" alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665991905446-84b04c96-1d8d-46b7-a569-945ed7041921.png" alt="img"></p>
+<h4 id="docker-ce"><a href="#docker-ce" class="headerlink" title="docker.ce"></a>docker.ce</h4><p> 由docker官方维护的版本，采用 go 的方式管理依赖，如果您要在开发&#x2F;生产环境中使用docker，推荐使用该版本。</p>
+<p>如果您的Linux版本为Ubuntu&#x2F;Debian，可以使用一下命令自动安装：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -qO- https://get.docker.com/ | sh</span><br></pre></td></tr></table></figure>
+
+<p>（注意，Docker并不支持Kali一键安装，同样笔者也不推荐您用kali作为开发生产环境，Kali满足日常需要，使用io版本即可，当然您也可以使用.ce版本的手动安装）</p>
+<p>手动安装：</p>
+<p>可以参考Docker官方的 Docker Engine安装步骤：</p>
+<p><a href="https://docs.docker.com/engine/install/debian/">https://docs.docker.com/engine/install/debian/</a></p>
+<p>但是该步骤在 Kali Linux上面可能会存在一定问题，以Kali为例，完整的按照流程如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install \</span><br><span class="line">    ca-certificates \</span><br><span class="line">    curl \</span><br><span class="line">    gnupg \</span><br><span class="line">    lsb-release</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666080331410-5ec0dec8-2032-404b-82a4-ae31e0ad436d.png" alt="img"></p>
+<p>选项选择Yes就好。</p>
+<p>然后按照官网提示，添加Docker官方的 GPG key：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> -p /etc/apt/keyrings</span><br><span class="line">curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg</span><br></pre></td></tr></table></figure>
+
+<p>然后设置仓库：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> \</span><br><span class="line">  <span class="string">&quot;deb [arch=<span class="subst">$(dpkg --print-architecture)</span> signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \</span></span><br><span class="line"><span class="string">  <span class="subst">$(lsb_release -cs)</span> stable&quot;</span> | sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br></pre></td></tr></table></figure>
+
+<p>然后开始安装：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin</span><br></pre></td></tr></table></figure>
+
+<p>随后，如果您是Kali Linux，您可能会遭遇以下报错：</p>
+<p><a href="https://unix.stackexchange.com/questions/630643/how-to-install-docker-ce-in-kali-linux">How to install docker-ce in kali-linux?</a></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666080964792-ad4bf959-2049-4979-9924-48c11bc2641d.png" alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666080978683-d1a1900c-fea3-4134-b2cb-98ed2d2c5a42.png" alt="img"></p>
+<p>这是由于Docker官方并没有提供直接支持Kali的源，所以我们使用Debian的源就好：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span> <span class="string">&quot;%s\n&quot;</span> <span class="string">&quot;deb [arch=amd64] https://download.docker.com/linux/debian buster stable&quot;</span> |\</span><br><span class="line">sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/docker-ce.list</span><br></pre></td></tr></table></figure>
+
+<p>并且添加对应的密钥：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -</span><br></pre></td></tr></table></figure>
+
+<p>注意不要忘了给密钥相应权限：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> a+r /etc/apt/keyrings/docker.gpg</span><br></pre></td></tr></table></figure>
+
+<p>此时再跑一次 <code>sudo apt-get update</code>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<p>您可能会遇到一个找不到的源，这个是正常的。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666081542730-3abaa686-0c14-4ee9-835b-c9244e7a601c.png" alt="img"></p>
+<p>接下来安装docker：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin</span><br></pre></td></tr></table></figure>
+
+<p>就能正常获取了：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666081606647-ba60b180-36d3-4d71-9696-63ff6fb0068f.png" alt="img"></p>
+<p>安装完成后，执行hello-world，得到图示则安装成功。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo docker run hello-world</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666083076099-29da6da2-2c69-4862-a93b-0d343b5e78f7.png" alt="img"></p>
+<h3 id="DockerHub"><a href="#DockerHub" class="headerlink" title="DockerHub"></a>DockerHub</h3><p><a href="https://hub.docker.com/">https://hub.docker.com/</a></p>
+<p>尝试登录您的<code>**DockerHub**</code>账号：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665992062442-9121927b-e352-4d24-8494-e073942e856a.png" alt="img"></p>
+<p>如果出现类似错误，请手动配置DNS：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/resolv.conf</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665992104653-95449c6a-2e19-49a3-8ccc-f57ecf3b0b93.png" alt="img"></p>
+<p>保存，再次尝试即可成功登录：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665992136237-ce188b31-9008-4375-95ef-f06d4ac013a7.png" alt="img"></p>
+<h2 id="Build-SSH＋vscode-docker-Workflow"><a href="#Build-SSH＋vscode-docker-Workflow" class="headerlink" title="Build SSH＋vscode + docker Workflow"></a>Build SSH＋vscode + docker Workflow</h2><p>该步骤适用于支持SSH协议的Linux（废话，哪个Linux没有个SSH），除了在本地的Kali或者其他Linux上面构建，也支持远程构建该工作流。</p>
+<h3 id="Start-SSH-Service"><a href="#Start-SSH-Service" class="headerlink" title="Start SSH Service"></a>Start SSH Service</h3><h4 id="Kali-Linux"><a href="#Kali-Linux" class="headerlink" title="Kali Linux"></a>Kali Linux</h4><p>Kali虚拟机默认是没有开启ssh服务的 （ssh状态：<code>/etc/init.d/ssh status</code>）</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665992570893-88f65a45-ca5e-4295-a9fb-932fc2f9db2f.png" alt="img"></p>
+<p>所以需要手动启动一下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo /etc/init.d/ssh start </span><br></pre></td></tr></table></figure>
+
+<p>当然，为了方便，我们将ssh添加到开机自启中：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo update-rc.d ssh <span class="built_in">enable</span></span><br><span class="line"><span class="comment"># Or use:</span></span><br><span class="line">systemctl <span class="built_in">enable</span> ssh.service</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665992653697-a499a2eb-da24-435e-87f3-4fda32a2669d.png" alt="img"></p>
+<p>启动之后就可以开始后面的步骤了。</p>
+<h4 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h4><p>由于ubuntu默认不自带openssh-server，所以这里需要手动安装。</p>
+<p>安装openssh-server：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后启动服务：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service ssh start</span><br></pre></td></tr></table></figure>
+
+<h3 id="Get-Remote-SSH"><a href="#Get-Remote-SSH" class="headerlink" title="Get Remote - SSH"></a>Get Remote - SSH</h3><p>为了使用vscode的远程ssh功能 您可能需要在扩展中安装<code> Remote - SSH</code>插件：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666002987439-4e307846-0b99-4578-9b54-ddd628aefd77.png" alt="img"></p>
+<h3 id="Let-Vscode-Connect-to-host"><a href="#Let-Vscode-Connect-to-host" class="headerlink" title="Let Vscode Connect to host"></a>Let Vscode Connect to host</h3><p>连接方式有两种：<code>密码连接</code> 和 <code>ssh的公私钥</code>。</p>
+<p>一般情况下我们使用密码连接，这样的方法安全性较低，而且每次连接和每次切换目录的时候都会要求输入密码，所以在确保能够密码连接情况下，我们可以进一步使用公私钥验证的方式来提升安全性和优化操作友好性。</p>
+<h4 id="Using-password-connection"><a href="#Using-password-connection" class="headerlink" title="Using password connection"></a>Using password connection</h4><p>打开vscode，点击左下角的远程连接（绿色的部分）</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665992886788-3aa8ff94-7d9f-461a-a1fb-4e108cffd83d.png" alt="img"></p>
+<p>接着在弹出的窗口中选择 Connect to Host</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665992849406-4490a1c9-c017-4952-9930-c7845e7efd7e.png" alt="img"></p>
+<p>选择 <code>Add New SSH Host</code>：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665992979730-8b19217b-f803-4298-8537-fcd5af749130.png" alt="img"></p>
+<p>按照要求输入对应的指令：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993031322-111547cb-b185-4ca5-a767-e8c3ee49506f.png" alt="img"></p>
+<p>IP可通过 <code>ip a</code> 获取</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993103994-c44e4858-ef69-45d9-9b5d-38150e83f710.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh kali@192.168.28.145 -A</span><br></pre></td></tr></table></figure>
+
+<p>保存位置默认第一个就好：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993185976-069830bf-af5d-4a79-9a1d-3958e9b99274.png" alt="img"></p>
+<p>然后连接：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993196349-e231aea3-bdd0-422d-b475-c4669252a75d.png" alt="img"></p>
+<p>选择对应的系统：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993227789-8b0ec6b0-d9eb-4bcb-b0fd-94368350a908.png" alt="img"></p>
+<p>选择继续：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993257173-dfc7b2ab-a5ee-4821-9e7e-3a7af8ac7cc7.png" alt="img"></p>
+<p>输入密码：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993277058-231f6520-9afc-4375-9bf4-7c42f1718163.png" alt="img"></p>
+<p>初始化完成后就连接上了：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993334466-214c5073-08fc-4492-9674-29b9e6e8fff3.png" alt="img"></p>
+<h4 id="Using-public-and-private-keys"><a href="#Using-public-and-private-keys" class="headerlink" title="Using public and private keys"></a>Using public and private keys</h4><h5 id="Create-public-and-private-keys"><a href="#Create-public-and-private-keys" class="headerlink" title="Create public and private keys"></a>Create public and private keys</h5><p>首先在本机上生成对应的公钥私钥：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666022363207-1faad277-da27-4d65-9a77-7f65f22cc0d3.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Enter file in which to save the key (C:\Users\Probius/.ssh/id_rsa):</span><br></pre></td></tr></table></figure>
+
+<p>输入保存路径，如果为空默认为 <code>C:\Users\USERNAME/.ssh/id_rsa</code>，这里笔者直接输入了名字，让其以该名字直接保存在当前目录</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Enter passphrase (empty for no passphrase):</span><br></pre></td></tr></table></figure>
+
+<p>输入私钥密码，为空则没有</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Enter same passphrase again:</span><br></pre></td></tr></table></figure>
+
+<p>注意：如果您使用了私钥密码，那么在进行ssh登录的时候，会提示您输入私钥密码，相当于再使用公私钥登录的情况下又加了一层密码，安全性有很大的提升，但是这样会变得和密码登录一样每次都要输入，这里笔者建议，如果是本地一路回车就好了，如果是远程资源的管理，可以综合安全性考虑</p>
+<p>生成过后，得到的<code>id_rsa.pub</code>(Kali_test.pub)是<strong>公钥</strong>，<code>id_rsa</code>(Kali_test)是<strong>私钥</strong> </p>
+<p>将得到的私钥放在我们的.ssh(C:\Users\USERNAME.ssh)中。</p>
+<p>(您也可以在生成的时候就让他防止在此，当然这并不是重点）</p>
+<h5 id="Configuring-Remote-Host"><a href="#Configuring-Remote-Host" class="headerlink" title="Configuring Remote Host"></a>Configuring Remote Host</h5><p>将得到的公钥上传到 Kali&#x2F;服务器中对应用户的.ssh文件夹中(请确保该文件夹至少有700的权限)：</p>
+<p>（注意 kali默认没有该文件夹，需要用户手动创建，并且赋700权限 <code>mkdir ~/.ssh</code> ）</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666023486280-3163a1ad-2809-44a8-a9e2-a8f29b452de3.png" alt="img"></p>
+<p>在此处打开终端，用公钥文件来生成 authorized_keys：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cat</span> id_ras.pub &gt;&gt; authorized_keys</span><br><span class="line"><span class="comment"># 此处既 cat Kali_test.pub &gt;&gt; authorized_keys</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666023722693-73b3cecc-1273-4a42-88f8-9ed336a90588.png" alt="img"></p>
+<p>由于Linux系统对.ssh拥有比较严格的权限限制，请确保权限配置正确：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> 600 authorized_keys</span><br><span class="line">sudo <span class="built_in">chmod</span> 700 ~/.ssh</span><br></pre></td></tr></table></figure>
+
+<p>编辑ssh配置文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
+<p>确保拥有以下条目：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">RSAAuthentication <span class="built_in">yes</span></span><br><span class="line">PubkeyAuthentication <span class="built_in">yes</span></span><br></pre></td></tr></table></figure>
+
+<p>注意Kali的ssh默认配置是没有上诉两项的，需要自行添加：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666026484050-a32d3cb9-76dc-4635-bfa1-087cc833ee2d.png" alt="img"></p>
+<p>然后搞定一切后 重启SSH服务：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service ssh restart</span><br></pre></td></tr></table></figure>
+
+<p>Linux部分的配置这样就搞定啦~</p>
+<p>（在您确保您的连接无误后，如果是服务器等远程设备，可以在config中关闭密码登录以提升安全性：</p>
+<p><code>PasswordAuthentication no</code>）</p>
+<h5 id="Configuring-Local-Host"><a href="#Configuring-Local-Host" class="headerlink" title="Configuring Local Host"></a>Configuring Local Host</h5><p>然后是Windows，也就是vscode这边的配置：</p>
+<p>添加NewHost：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666028378220-501e16a9-549c-4312-8afd-3e73b559abe5.png" alt="img"></p>
+<p>使用：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh USERNAME@IP -i C:\\Users\\Probius\\.ssh\\RAS_ID</span><br></pre></td></tr></table></figure>
+
+<p>（注意使用指令添加时，务必使用双斜杠）</p>
+<p>当然，也可以在已经添加的配置文件上改：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Host 192.168.28.145</span><br><span class="line">	HostName 192.168.28.145</span><br><span class="line">	User kali</span><br><span class="line">	IdentityFile C:\Users\Probius\.ssh\Kali_test</span><br></pre></td></tr></table></figure>
+
+<p>如果操作无误，且没有设置私钥密码，那么点击连接之后无需其他额外操作即可连接；如果设置了私钥密码，那么按照提示输入即可。</p>
+<h5 id="Other-About-SSH-key-login"><a href="#Other-About-SSH-key-login" class="headerlink" title="Other_About SSH key login"></a>Other_About SSH key login</h5><p>关于ssh密钥登录的更多知识可以看这一篇文章：</p>
+<p><a href="https://wangdoc.com/ssh/key.html">https://wangdoc.com/ssh/key.html</a></p>
+<h3 id="Get-The-Docker-Extension"><a href="#Get-The-Docker-Extension" class="headerlink" title="Get The Docker Extension"></a>Get The Docker Extension</h3><h4 id="Install-extension"><a href="#Install-extension" class="headerlink" title="Install extension"></a>Install extension</h4><p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993503285-4cad91c3-c5be-42f1-949b-b06dd63b3dce.png" alt="img"></p>
+<p>（当然 如果显示的是 <code>安装</code>也是一样的）</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993640582-33e0292d-1a01-4a4e-bdb4-5052a3cc658d.png" alt="img"></p>
+<h4 id="Solve-error"><a href="#Solve-error" class="headerlink" title="Solve error"></a>Solve error</h4><p>如果您使用自动安装，应该不会遇到该问题，自动安装的sh会自动完成用户组添加的操作。</p>
+<p>由于权限原因，我们可能无法访问到  <code>/var/run/docker.sock</code></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666085731016-37a5a8a0-770c-4759-ac00-4c124fcd5165.png" alt="img"></p>
+<h5 id="By-add-user-group"><a href="#By-add-user-group" class="headerlink" title="By add user group"></a>By add user group</h5><p>一劳永逸的解决权限问题，将当前用户组添加到docker组即可。</p>
+<p>创建docker用户组，默认安装时就会自动创建，所以执行可能会显示<code>exist</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo groupadd docker </span><br></pre></td></tr></table></figure>
+
+<p>添加当前用户到该组：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo usermod -aG docker <span class="variable">$&#123;USER&#125;</span> </span><br></pre></td></tr></table></figure>
+
+<p>然后重新启动容器服务：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo systemctl restart docker </span><br></pre></td></tr></table></figure>
+
+<p>再次重新登入即可，如果重新登录之后依旧报错无法读取，请尝试重启：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<h5 id="By-chmod"><a href="#By-chmod" class="headerlink" title="By chmod"></a>By chmod</h5><p>也可以使用<code> sudo chmod 777 /var/run/docker.sock</code>，但是每次重启之后权限都会重置，不推荐</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993792130-55218849-ff43-4565-8b31-b7a7d81a99f6.png" alt="img"></p>
+<p>然后就能正常访问了：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993848043-242f6244-7db2-4cd0-bfe4-5f1c5456ce0b.png" alt="img"></p>
+<h3 id="Start-Use"><a href="#Start-Use" class="headerlink" title="Start Use"></a>Start Use</h3><p>（以下操作使用<strong>DockerHub</strong>演示）</p>
+<p>因为在安装Docker的时候登录过DockerHub所以这里连接之后，系统会自动获取您的凭证，您可以在这查看您的DockerHub仓库：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665994063185-82918af8-46ea-43a3-a524-f5a66280d2b2.png" alt="img"></p>
+<p>当然，您也可以添加其他仓库，具体的用法可以参考官方文档：</p>
+<p><a href="https://code.visualstudio.com/docs/containers/quickstart-container-registries">https://code.visualstudio.com/docs/containers/quickstart-container-registries</a></p>
+<h4 id="Pull-Image"><a href="#Pull-Image" class="headerlink" title="Pull Image"></a>Pull Image</h4><p>当然 对于自己仓库的镜像还是比较方便的233：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665995599834-3c92a723-9476-43d9-aa8f-9553055a3403.png" alt="img"></p>
+<p>当然如果是公开镜像的话 还是免不了指令啦，不过还是比较方便的，旁边就是终端：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665995757090-9bd04c4b-fb0b-47a1-b96c-c6393e110ba4.png" alt="img"></p>
+<p>完成之后就能在IMAGES栏看到了：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665995915572-4b40f768-d4d5-4f32-a536-ffadb2421c86.png" alt="img"></p>
+<h4 id="Run-Docker"><a href="#Run-Docker" class="headerlink" title="Run Docker"></a>Run Docker</h4><p>运行容器有两个选项Run &#x2F; Run Ineractive</p>
+<h5 id="Run"><a href="#Run" class="headerlink" title="Run"></a>Run</h5><p>默认后台运行，Run执行后效果和在Linux执行 -d的效果相同：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666116092112-5dc775b4-197e-48b1-a345-3bde2132a8ac.png" alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665997253030-26e1cb0b-0014-4c19-b2e6-f219945e510a.png" alt="img"></p>
+<h5 id="Run-Interacitve"><a href="#Run-Interacitve" class="headerlink" title="Run Interacitve"></a>Run Interacitve</h5><p>该选项运行执行后，除了运行容器，还会跳到容器的汇总shell处，这里会实时打印容器日志，</p>
+<p>效果和 <code>View Log</code>效果相同：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666116324737-328fd245-853d-416c-acf7-6adfd5f1e7e3.png" alt="img"></p>
+<h4 id="View-Log"><a href="#View-Log" class="headerlink" title="View Log"></a>View Log</h4><p>直达容器后台日志，如果在运行的时候选择<code>Run Interacitve</code>那么也会跳转到该log页面。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665998996602-944ea384-cf80-4711-9989-b937c4bd02a6.png" alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665999366319-2a41bc0f-4f89-4b63-9cd5-253b54bcd031.png" alt="img"></p>
+<h4 id="Attach-Shell"><a href="#Attach-Shell" class="headerlink" title="Attach Shell"></a>Attach Shell</h4><p>右键选中之后可以直接建立一个容器内部的shell，省去<code>docker exec -i -t  ID /bin/bash</code></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665998911154-243825b7-d7be-47fa-9a30-214d7591f75f.png" alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665999322527-061fab7c-02b4-471c-92bd-b64a716ee583.png" alt="img"></p>
+<h4 id="Edit-Container"><a href="#Edit-Container" class="headerlink" title="Edit Container"></a>Edit Container</h4><p>在CONTAINERS中下拉一个容器的file可以对其进行查看和编辑：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665997210054-cc018f63-7e66-4201-a27c-2aa6c78d7b0a.png" alt="img"></p>
+<p>可以看到对于容器来说 修改是即时的（支持热更新的）</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665997987509-8642ebda-72c7-45a8-b2f4-9e1ef04ac2da.png" alt="img"></p>
+<h4 id="Attach-Container（Advanced-Edit？）"><a href="#Attach-Container（Advanced-Edit？）" class="headerlink" title="Attach Container（Advanced Edit？）"></a>Attach Container（Advanced Edit？）</h4><p>我们也可以用Vscode建立类似SSH的连接，直接连接到整个容器：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665998467833-cf59f140-9f33-43c1-a2b2-c635c6662598.png" alt="img"></p>
+<p>并且操作同步：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665998565856-6d6953de-1afd-4a98-b99f-a9076387a9b3.png" alt="img"></p>
+<p>而且容器支持文件拖拽，相比单纯的COPY指令 拥有更好的体验（个人感觉</p>
+<h4 id="Port-Forward"><a href="#Port-Forward" class="headerlink" title="Port Forward"></a>Port Forward</h4><p>通过SSH直接将远程端口转发到本地，免除防火墙困扰ww</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665999460970-c81a131d-6712-4ab9-9b30-d0fd0084a6cb.png" alt="img"></p>
+<p>一般来讲在您启动容器的时候 vscode会自动配置 当然为了更好的区分和避免冲突 也可以手动分配</p>
+<p>配置如图：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666000511669-34c924ab-ac4a-42d5-92cb-8b658afe39f1.png" alt="img"></p>
+<h4 id="Open-in-Borrow"><a href="#Open-in-Borrow" class="headerlink" title="Open in Borrow"></a>Open in Borrow</h4><p>如果您配置完成了端口转发(或者vscode自动为您完成配置）那么点击Open in Borrow将在您的默认浏览器中快速打开该端口对应的页面：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666117172873-9d4b7fb4-574d-426d-8dd3-b62b5c1b71e1.png" alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666117247770-7b5c5b4c-a8f9-4c70-9bdc-61b21790fb28.png" alt="img"></p>
+<h4 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h4><p>其他用法，就请佬们自行探索啦ww</p>
+<h2 id="ExtensionRecommend"><a href="#ExtensionRecommend" class="headerlink" title="ExtensionRecommend"></a>ExtensionRecommend</h2><h3 id="Thunder-Client"><a href="#Thunder-Client" class="headerlink" title="Thunder Client"></a>Thunder Client</h3><p>Thunder Client is a lightweight Rest API Client Extension for Visual Studio Code, hand-crafted by Ranga Vadhineni with simple and clean design.</p>
+<p>要注意的是 该插件基于远程运行（既本体在虚拟机&#x2F;服务器上），在测试的时候请确保url指向正确。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666002204613-bd552d8b-851a-4528-baf0-fbe018d7ad51.png" alt="img"></p>
+<h1 id="win11虚拟机部署pikachu"><a href="#win11虚拟机部署pikachu" class="headerlink" title="win11虚拟机部署pikachu"></a>win11虚拟机部署pikachu</h1><p>Phpstudy，Phpstorm，pikachu、外加的话浏览器别太老。<br>Phpstudy：<a href="https://www.xp.cn/">https://www.xp.cn/</a><br>Phpstorm：<a href="https://www.jetbrains.com/zh-cn/phpstorm/">https://www.jetbrains.com/zh-cn/phpstorm/</a><br>pikachu：<a href="https://github.com/zhuifengshaonianhanlu/pikachu">https://github.com/zhuifengshaonianhanlu/pikachu</a></p>
+<p>这里我并没有一步一步截图，因为碰壁很多次，所以，我将针对我所遇到的问题以及解决方法展开阐述，仅供参考。<br>1、win11本机搭建步骤</p>
+<p>1、安装Phpstudy以及Phpstorm软件，并启动apacha以及mysql<br><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240530151311289.png" alt="image-20240530151311289"><br>其实，这里一个版本就行。</p>
+<p>2、这下去pikachu的那个文件进行把mysql的root密码写进去，这里如果你的密码不是初始密码root的话，那么这里则需要修改两个Php中的密码：</p>
+<p>3、修改密码</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240530151238531.png" alt="image-20240530151238531"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240530151250834.png" alt="image-20240530151250834"></p>
+<p>4、ctrl+c以及ctrl+v将修改之后的pikachu文件放在phpstudy安装之后文件夹的www文件目录中；</p>
+<p>5、修改完之后我就又碰见了问题四，也就是执行127.0.0.1&#x2F;pikachu之后报错<br>说有个文件的14行有错误。详见问题四：</p>
+<p>6、直接进入浏览器输入127.0.0.1&#x2F;pikachu<br><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240530151224015.png" alt="image-20240530151224015"><br>7、当然，这里是win主机搭建的靶机，而且即使到这一步依旧没有结束<br>因为还要进行安装初始化：<br>所以，在URL输入框中，我们输入127.0.0.1&#x2F;pikachu&#x2F;install.php<br>然后回车就可以看到安装以及初始化了：<br><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240530151158114.png" alt="image-20240530151158114"><br>我所碰见的问题以及解决方式：</p>
+<p>1、文件打不开，也就是pikachu的那个ins配置文件直接打不开，这个我觉得和电脑以及环境有关，我使用的是win11，之前win10还没碰见过这种情况：<br>解决方式：<br>这里我采用的是直接关机重启，这里注意进程，最好别有什么系统程序执行</p>
+<p>2、至于上面pikachu配置文件更改，也就是给那个里面写入root的密码，双击那个文件直接卡住的情况：<br>解决方式：<br>这里直接打开Phpstorm软件进行选中文件打开，这里自己找到文件的路径进行打开。<br>这里路径不好找？可以去搜everthing官网进行下载（搜索文件很快）。<br><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240530150821979.png" alt="image-20240530150821979"></p>
+<p>3、主机与虚拟机win2012进行连接实现文件传输达不到，使用moba以及winSCP都无法连接到，那么文件该如何传输到虚拟机中？<br><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240530150808530.png" alt="image-20240530150808530"><br>解决方式：<br>这里用到了VMware tools，首先，我们将win2012先关闭客户机：<br>然后点击编辑虚拟机设置——&gt;选项——&gt;共享文件夹<br><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240530150759674.png" alt="image-20240530150759674">这里创建一个共享文件夹实现本机与win2012的文件互通。</p>
+<p>4、这里浏览器输出127.0.0.1&#x2F;pikachu的图像，这里报错了，很明显可以看到是mysql的密码导致的错误，可这里并没有出错，两个文件都配置的是root用户名以及root密码：<br>解决方式：<br>这里在小皮也就是Phpstudy中添加创建一个数据库：<br><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240530150749344.png" alt="image-20240530150749344"><br>点击上面的创建数据库，如果出现了root密码未修改，那么一修改，然后继续创建数据库，同样设置6位以上的密码，没什么讲究的。这下即可成功进入靶场。</p>
+<p>5、我进行安装以及初始化之后，浏览器中改变URL之后回车，链接后面便加上一个#号，同时界面是一个固定的界面，不能进行跳转界面：<br>解决方法：<br>嗯······我当时使用的是win2012的浏览器，这里换个浏览器重新在虚拟机访问127.0.0.1&#x2F;pikachu便好······没什么技术要求，以及在本机访问中，也就不会出现这样的情况了。</p>
+<p>好了，pikachu靶场搭建就分享到这，希望能帮到各位。<br>————————————————</p>
+<p>原文链接：<a href="https://blog.csdn.net/weixin_63172698/article/details/131498908">https://blog.csdn.net/weixin_63172698/article/details/131498908</a></p>
+<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><p><a href="https://www.runoob.com/mysql/mysql-tutorial.html">MySQL 教程 | 菜鸟教程 (runoob.com)</a></p>
+<p>可以使用phpstudy自带的sql_front或navicat通过pikachu数据库进行一系列实践</p>
+<p>或者我之前的个人笔记也有的</p>
+<h1 id="Docker网络"><a href="#Docker网络" class="headerlink" title="Docker网络"></a>Docker网络</h1><h2 id="Docker网络理论"><a href="#Docker网络理论" class="headerlink" title="Docker网络理论"></a>Docker网络理论</h2><p>容器网络实际上是<strong>由Docker为应用程序所创造的虚拟环境的一部分，它能够使应用从宿主机操作系统的网络系统中独立出来。</strong>形成容器自有的网络设备、IP 协议栈、端口套接字、IP 路由表、防火墙等等与网络相关的模块。</p>
+<h3 id="CNM"><a href="#CNM" class="headerlink" title="CNM"></a><strong>CNM</strong></h3><p>Docker 网络架构采用的设计规范是 CNM（Container Network Model）：<strong>CNM 中规定了 Docker 网络的基础组成要素：Sandbox、Endpoint、Network。如图所示，</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240604004145261.png" alt="image-20240604004145261"></p>
+<ul>
+<li>Sandbox，提供了<strong>容器的虚拟网络栈</strong>，也即端口套接字、IP 路由表、防火墙、DNS 配置等内容。<strong>主要用于隔离容器网络与宿主机网络</strong>，形成了完全独立的容器网络环境。</li>
+<li>Network，Docker 内部的虚拟子网，网络内的参与者相互可见并能够进行通讯。<strong>Docker 的虚拟网路和宿主机网络是存在隔离关系的，其目的主要是形成容器间的安全通讯环境。</strong></li>
+<li>Endpoint，<strong>就是虚拟网络的接口</strong>，就像普通网络接口一样，Endpoint 的主要职责是<strong>负责创建连接。在 CNM 中，终端负责将沙盒连接到网络。</strong>个人理解：Endpoint 与常见的网络适配器类似，也就意味着 Endpoint 只能接入某一个网络。<strong>因此，如果容器需要接入到多个网络，就需要多个 Endpoint。</strong></li>
+</ul>
+<h3 id="Libnetwork"><a href="#Libnetwork" class="headerlink" title="Libnetwork"></a><strong>Libnetwork</strong></h3><p>Libnetwork 是 CNM 的标准实现。Libnetwork 是开源库，采用 Go 语言编写（跨平台的），也是 Docker 所使用的库，Docker 网络架构的核心代码都在这个库中。</p>
+<h2 id="驱动"><a href="#驱动" class="headerlink" title="驱动"></a><strong>驱动</strong></h2><p>“驱动”在计算机和电子设备领域中，通常指的是设备驱动程序（Device Driver），是一种特殊的软件程序，负责控制硬件设备的操作并与操作系统进行通信。<strong>驱动程序充当硬件与操作系统或应用程序之间的中介，</strong>使得软件可以通过标准化的接口与硬件设备进行交互，而无需了解硬件设备的具体实现细节。</p>
+<h3 id="驱动的主要功能"><a href="#驱动的主要功能" class="headerlink" title="驱动的主要功能"></a>驱动的主要功能</h3><ol>
+<li><p><strong>硬件初始化</strong>：</p>
+<ul>
+<li>驱动程序在设备启动时初始化硬件，使其处于可以正常工作的状态。</li>
+</ul>
+</li>
+<li><p><strong>中断处理</strong>：</p>
+<ul>
+<li>处理来自硬件设备的中断信号，并将相应的信息传递给操作系统或应用程序。</li>
+</ul>
+</li>
+<li><p><strong>数据传输</strong>：</p>
+<ul>
+<li>管理硬件设备的数据传输，包括读取和写入操作。比如，从硬盘读取数据或向打印机发送打印作业。</li>
+</ul>
+</li>
+<li><p><strong>提供接口</strong>：</p>
+<ul>
+<li>提供标准化的接口，使得操作系统和应用程序能够通过统一的方法访问硬件设备的功能。</li>
+</ul>
+</li>
+</ol>
+<h3 id="驱动程序的类型"><a href="#驱动程序的类型" class="headerlink" title="驱动程序的类型"></a>驱动程序的类型</h3><p>驱动程序可以根据不同的设备类型进行分类，以下是一些常见的驱动程序类型：</p>
+<ol>
+<li><p><strong>设备驱动程序</strong>：</p>
+<ul>
+<li>控制特定硬件设备的驱动程序，如键盘、鼠标、打印机、硬盘等。</li>
+</ul>
+</li>
+<li><p><strong>内核驱动程序</strong>：</p>
+<ul>
+<li>运行在操作系统内核中的驱动程序，<strong>提供低级别的硬件控制和管理。</strong></li>
+</ul>
+</li>
+<li><p><strong>文件系统驱动程序</strong>：</p>
+<ul>
+<li>负责管理文件系统的驱动程序，使得操作系统能够读取和写入存储设备上的文件。</li>
+</ul>
+</li>
+<li><p><strong>网络驱动程序</strong>：</p>
+<ul>
+<li>管理网络接口卡（NIC）或其他网络设备的驱动程序，负责网络通信和数据传输。</li>
+</ul>
+</li>
+</ol>
+<h3 id="驱动程序的安装与更新"><a href="#驱动程序的安装与更新" class="headerlink" title="驱动程序的安装与更新"></a>驱动程序的安装与更新</h3><p>驱动程序通常由硬件设备制造商提供，可以通过以下几种方式安装和更新：</p>
+<ol>
+<li><p><strong>操作系统自带</strong>：</p>
+<ul>
+<li>操作系统通常自带一些常用硬件设备的驱动程序，安装操作系统时会自动安装这些驱动程序。</li>
+</ul>
+</li>
+<li><p><strong>设备制造商提供</strong>：</p>
+<ul>
+<li>硬件设备通常附带驱动程序安装光盘或下载链接，用户可以通过制造商的网站下载最新的驱动程序。</li>
+</ul>
+</li>
+<li><p><strong>自动更新</strong>：</p>
+<ul>
+<li>现代操作系统（如Windows Update）提供自动更新功能，可以自动检测并安装最新的驱动程序。</li>
+</ul>
+</li>
+</ol>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>以下是一些具体的驱动程序示例：</p>
+<ol>
+<li><p><strong>显卡驱动程序（Graphics Driver）</strong>：</p>
+<ul>
+<li>控制显卡硬件，提供图形显示和渲染功能。例如，NVIDIA或AMD提供的显卡驱动程序。</li>
+</ul>
+</li>
+<li><p><strong>声卡驱动程序（Audio Driver）</strong>：</p>
+<ul>
+<li>控制声卡硬件，提供音频输入和输出功能。例如，Realtek声卡驱动程序。</li>
+</ul>
+</li>
+<li><p><strong>网络适配器驱动程序（Network Adapter Driver）</strong>：</p>
+<ul>
+<li>控制网络适配器硬件，提供网络连接和数据传输功能。例如，Intel或Broadcom网络适配器驱动程序。</li>
+</ul>
+</li>
+</ol>
+<h3 id="驱动程序的工作原理"><a href="#驱动程序的工作原理" class="headerlink" title="驱动程序的工作原理"></a>驱动程序的工作原理</h3><p>驱动程序通常包括以下几个主要部分：</p>
+<ol>
+<li><p><strong>硬件接口</strong>：</p>
+<ul>
+<li>直接与硬件设备交互，发送命令和接收数据。</li>
+</ul>
+</li>
+<li><p><strong>操作系统接口</strong>：</p>
+<ul>
+<li>提供给操作系统的标准化接口，使得操作系统能够通过系统调用与硬件设备交互。</li>
+</ul>
+</li>
+<li><p><strong>中断处理</strong>：</p>
+<ul>
+<li>处理硬件设备发出的中断信号，并通知操作系统进行相应的处理。</li>
+</ul>
+</li>
+<li><p><strong>内存管理</strong>：</p>
+<ul>
+<li>管理硬件设备使用的内存空间，包括数据缓冲区和控制寄存器。</li>
+</ul>
+</li>
+</ol>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p><strong>驱动程序在计算机系统中扮演着关键角色，通过提供标准化的接口，使得操作系统和应用程序能够高效、安全地与各种硬件设备进行交互。</strong>了解驱动程序的基本原理和类型，有助于更好地管理和维护计算机系统，确保硬件设备的正常运行和最佳性能。</p>
+<h3 id="驱动-for-Docker"><a href="#驱动-for-Docker" class="headerlink" title="驱动　 for　Ｄｏｃｋｅｒ"></a>驱动　 for　Ｄｏｃｋｅｒ</h3><p>驱动就负责实现数据层。比如<strong>网络的连通性和隔离性是由驱动来处理的</strong>。驱动通过实现特定网络类型的方式扩展了 Docker 网络栈，例如桥接网络和覆盖网络。</p>
+<p>Docker 内置了若干驱动，通常被称作原生驱动或者本地驱动。比如 <strong>Bridge Driver</strong>、<strong>Host Driver</strong>、<strong>Overlay Driver</strong>、<strong>MacLan Driver</strong>、<strong>None Driver</strong> 等等。第三方也可以编写 Docker 网络驱动，这些驱动被叫做远程驱动，例如 Calico、Contiv、Kuryr 以及 Weave 等。每个驱动负责创建其上所有网络资源的创建和管理。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240604004633142.png" alt="image-20240604004633142"></p>
+<p>在 Docker 安装时，会自动安装一块 Docker 网卡称为 docker0，用于 Docker 各容器及宿主机的网络通信。</p>
+<h1 id="桥接网络基本概念"><a href="#桥接网络基本概念" class="headerlink" title="桥接网络基本概念"></a>桥接网络基本概念</h1><p>桥接网络（Bridging Network）是一种网络配置方法，通过使用网络桥接（network bridging）技术将两个或多个网络段连接在一起，使它们能够作为一个统一的网络进行通信。这种技术常用于局域网（LAN）环境中，以扩展网络的覆盖范围或连接不同的网络类型。</p>
+<h4 id="网络桥接的基本概念"><a href="#网络桥接的基本概念" class="headerlink" title="网络桥接的基本概念"></a>网络桥接的基本概念</h4><p>网络桥接的基本概念包括以下几个方面：</p>
+<ol>
+<li><p><strong>网络桥（Bridge）</strong>：</p>
+<ul>
+<li>网络桥是一种网络设备，可以是专用硬件设备或软件实现的虚拟桥。<strong>其主要功能是连接两个或多个网络段，使它们能够互相通信</strong>。</li>
+<li>桥接设备会在<strong>不同的网络段之间转发数据包</strong>，使用媒体访问控制（MAC）地址来决定数据包的转发路径。</li>
+</ul>
+</li>
+<li><p><strong>透明桥（Transparent Bridge）</strong>：</p>
+<ul>
+<li>透明桥是最常见的一种网络桥，它在连接的网络段之间转发数据包，而不会对网络协议进行任何修改。</li>
+<li>透明桥通过学习网络设备的MAC地址来建立内部地址表，从而智能地转发数据包，仅将数据包发送到目标网络段。</li>
+</ul>
+</li>
+</ol>
+<h4 id="桥接网络的用途"><a href="#桥接网络的用途" class="headerlink" title="桥接网络的用途"></a>桥接网络的用途</h4><p>桥接网络可以用于多种用途，包括但不限于：</p>
+<ol>
+<li><p><strong>扩展网络覆盖范围</strong>：</p>
+<ul>
+<li>通过将两个或多个物理分开的网络段桥接在一起，可以扩展网络的覆盖范围，使更多的设备能够互相通信。</li>
+</ul>
+</li>
+<li><p><strong>连接不同类型的网络</strong>：</p>
+<ul>
+<li>桥接可以<strong>连接不同类型的网络，例如以太网和无线网络</strong>，使得有线设备和无线设备能够在同一个网络中通信。</li>
+</ul>
+</li>
+<li><p><strong>增强网络性能</strong>：</p>
+<ul>
+<li>通过合理的桥接配置，可以减少网络中的广播域，从而减少网络拥塞，提高整体网络性能。</li>
+</ul>
+</li>
+</ol>
+<h4 id="桥接网络的类型"><a href="#桥接网络的类型" class="headerlink" title="桥接网络的类型"></a>桥接网络的类型</h4><p>桥接网络可以有多种配置方式，以下是几种常见的类型：</p>
+<ol>
+<li><p><strong>以太网桥接（Ethernet Bridging）</strong>：</p>
+<ul>
+<li>通过以太网桥将多个以太网段连接在一起，使它们成为一个逻辑上的单一网络。</li>
+</ul>
+</li>
+<li><p><strong>无线桥接（Wireless Bridging）</strong>：</p>
+<ul>
+<li>使用无线设备（如无线接入点）将两个或多个无线网络段连接在一起，常用于扩展无线网络的覆盖范围。</li>
+</ul>
+</li>
+<li><p><strong>混合桥接（Hybrid Bridging）</strong>：</p>
+<ul>
+<li>结合有线和无线桥接，将有线网络段和无线网络段连接在一起。</li>
+</ul>
+</li>
+</ol>
+<h4 id="桥接网络的实现"><a href="#桥接网络的实现" class="headerlink" title="桥接网络的实现"></a>桥接网络的实现</h4><p>桥接网络可以通过硬件设备或软件配置来实现：</p>
+<ol>
+<li><p><strong>硬件实现</strong>：</p>
+<ul>
+<li>使用专用的网络桥设备或交换机（具有桥接功能）来连接不同的网络段。</li>
+</ul>
+</li>
+<li><p><strong>软件实现</strong>：</p>
+<ul>
+<li>在操作系统中使用虚拟桥接软件（如Linux的<code>brctl</code>工具或Windows的网络桥接功能）来实现桥接网络。</li>
+</ul>
+</li>
+</ol>
+<h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h4><p>假设有两个局域网（LAN），分别位于两个不同的楼层，每个楼层都有一个交换机连接所有的计算机。通过在两个交换机之间连接一个网络桥，可以使两个楼层的计算机互相通信，如同它们在同一个网络中一样。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>桥接网络是一种有效的网络配置方法，可以扩展网络的覆盖范围、连接不同类型的网络和增强网络性能。通过使用网络桥设备或软件实现桥接网络，可以将多个物理上分离的网络段连接在一起，形成一个逻辑上的统一网络。</p>
+<p><strong>Docker 的 bridge 网络采用内置的 bridge 驱动，而 bridge 的底层采用的是</strong> <strong>Linux</strong> <strong>内核中 Linux bridge 技术</strong>（这意味着 bridge 是高性能并且是非常稳定的）。</p>
+<h2 id="桥接网络-for-Docker"><a href="#桥接网络-for-Docker" class="headerlink" title="桥接网络 for Docker"></a>桥接网络 for Docker</h2><p>Docker 的 bridge 网络采用内置的 bridge 驱动，而 bridge 的底层采用的是 Linux 内核中 Linux bridge 技术（这意味着 bridge 是高性能并且是非常稳定的）。</p>
+<p><strong>由于容器运行在自己单独的 network namespace 中，所以有单独的协议栈。</strong>容器中配置网关为 172.17.0.1，发出去的数据包<strong>先到达 br0</strong>，然后交给主机的协议栈，由于<strong>目的 IP 是外网 IP</strong>，且主机会开启 IP forward 功能，于是<strong>数据包通过主机的 eth0 发出去</strong>。由于 172.17.0.1 是内网 IP ，所以一般发出去之前会做 NAT 转换。由于要进过主机的协议栈并且要做 NAT 转换，所以性能上可能会差点，<strong>但是优点就是容器处于内网中，安全性相对要高点。</strong></p>
+<p>默认情况下，创建的容器在没有使用 –network 参数指定要加入的 docker 网络时，默认都是加入 Docker 默认的单机桥接网络，也就是下面的 name 为 bridge 的网络。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ docker network ls</span><br><span class="line">NETWORK ID          NAME                DRIVER              SCOPE</span><br><span class="line">0dda6f303b8b        bridge              bridge              local</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建新的单机桥接网络"><a href="#创建新的单机桥接网络" class="headerlink" title="创建新的单机桥接网络"></a><strong>创建新的单机桥接网络</strong></h4><p>使用 <code>docker network create</code> 命令，我们可创建一个名为 “localnet” 的单机桥接网络，并且在内核中还会多出一个新的 Linux 网桥。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ docker network create -d bridge localnet</span><br><span class="line"></span><br><span class="line">$ docker network ls</span><br><span class="line">NETWORK ID          NAME                DRIVER              SCOPE</span><br><span class="line">			......</span><br><span class="line">f55943e20201        localnet            bridge              local</span><br></pre></td></tr></table></figure>
+
+<p>在创建完之后，我们可以通过 brctl 工具来查看系统中的 Linux 网桥。可以看到，<strong>输出的内容中包含了两个网桥，docker0 是默认的 Docker bridge 网络所使用的网桥，br-f55943e20201 是 Docker localnet 网络所使用的网桥。</strong>这两个网桥目前都没有任何设备接入（看 interface 列）。这两个网桥所处的网段是不同的，</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240604084900918.png" alt="image-20240604084900918"></p>
+<h4 id="同个网络中的容器间通信"><a href="#同个网络中的容器间通信" class="headerlink" title="同个网络中的容器间通信"></a><strong>同个网络中的容器间通信</strong></h4><p>使用下面这条命令即可运行一个新的容器，并且让这个新容器加入到 localnet 这个网络中的。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ docker container run -d --name demo1 --network localnet alpine sleep 3600</span><br></pre></td></tr></table></figure>
+
+<p>我们查看网桥的情况，<strong>demo1</strong> 的网络接口连接到了网桥 br-f55943e20201 上，如图所示。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ brctl show</span><br><span class="line">bridge name     bridge id               STP enabled     interfaces</span><br><span class="line">br-f55943e20201 8000.02421d9aa3e1       no              vethf6a3fba</span><br><span class="line">docker0         8000.0242be6b61dc       no</span><br></pre></td></tr></table></figure>
+
+<p>如果在<strong>相同的网络中继续接入新的容器，那么新接入的容器是可以通过 demo1 这个名称来 ping 通的</strong>。如下所示，我们创建了一个新的容器（demo2），并且在这个容器中直接 ping demo1 发现可以的 ping 通的。<strong>这是因为，demo2 运行了一个本地 DNS 解析器，该解析器会将该请求转发到 Docker 内部 DNS 服务器中。</strong>DNS 服务器中记录了容器启动时通过 –name 或者 –net-alias 参数指定的名称和容器之间的和映射关系。</p>
+<h5 id="详细解释"><a href="#详细解释" class="headerlink" title="详细解释"></a>详细解释</h5><p>在你提供的例子中，<code>demo2</code> 容器中可以 <code>ping</code> 通 <code>demo1</code> 容器。这意味着 <code>demo2</code> 容器能够通过网络与 <code>demo1</code> 容器进行通信，<code>demo2</code> 可以成功发送 ICMP 回显请求数据包到 <code>demo1</code>，并接收到 <code>demo1</code> 的应答数据包。这种情况表明：</p>
+<ol>
+<li>两个容器处于同一个网络（如同一个 Docker 网络中）。</li>
+<li>容器之间的 DNS 解析功能正常，<code>demo2</code> 能够通过容器名称 <code>demo1</code> 找到其对应的 IP 地址。</li>
+<li>容器之间的网络连通性是正常的，没有防火墙等网络设备阻碍两者通信。</li>
+</ol>
+<p>下面是你提供的示例中的具体过程：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">javascript复制代码# ping demo1</span><br><span class="line">PING demo1 (172.18.0.2): 56 data bytes</span><br><span class="line">64 bytes from 172.18.0.2: seq=0 ttl=64 time=0.230 ms</span><br><span class="line">64 bytes from 172.18.0.2: seq=1 ttl=64 time=0.161 ms</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中：</p>
+<ul>
+<li>你在 <code>demo2</code> 容器中执行 <code>ping demo1</code> 命令。</li>
+<li><code>demo2</code> 容器通过内部 DNS 解析 <code>demo1</code> 的名称并找到其 IP 地址 <code>172.18.0.2</code>。</li>
+<li><code>demo2</code> 容器向 <code>172.18.0.2</code> 发送 ICMP 回显请求。</li>
+<li><code>demo1</code> 容器接收到请求并返回 ICMP 回显应答。</li>
+<li><code>demo2</code> 容器接收到应答，表明 <code>demo1</code> 容器是可达的，网络连通性正常。</li>
+</ul>
+<p>这就是为什么你可以在 <code>demo2</code> 中 <code>ping</code> 通 <code>demo1</code>。</p>
+<hr>
+<p>除此之外，我们可以看到 demo1 的 IP 地址是 172.18.0.2，这个与网桥 br-f55943e20201 是处于同一个网段内的。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/ # ls</span><br><span class="line">bin    dev    etc    home   lib    media  mnt    opt    proc   root   run    sbin   srv    sys    tmp    usr    var</span><br><span class="line">/ # ping demo1</span><br><span class="line">PING demo1 (172.18.0.2): 56 data bytes</span><br><span class="line">64 bytes from 172.18.0.2: seq=0 ttl=64 time=0.230 ms</span><br><span class="line">64 bytes from 172.18.0.2: seq=1 ttl=64 time=0.161 ms</span><br></pre></td></tr></table></figure>
+
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><h2 id="ping的解释"><a href="#ping的解释" class="headerlink" title="ping的解释"></a>ping的解释</h2><p>当然，以下是对 <code>ping</code> 命令作用以及 “ping 通” 解释的详细说明：</p>
+<h3 id="ping-命令的作用"><a href="#ping-命令的作用" class="headerlink" title="ping 命令的作用"></a><code>ping</code> 命令的作用</h3><p><code>ping</code>（Packet Internet Groper）是一个用于测试网络连接的命令行工具。其主要作用如下：</p>
+<ol>
+<li><p><strong>检测网络连通性</strong>：<code>ping</code> 可以用来检查一个设备是否能够与另一个设备进行网络通信。通过向目标地址发送ICMP（Internet Control Message Protocol）回显请求数据包，并等待回显应答来判断网络是否连通。</p>
+</li>
+<li><p><strong>测量网络延迟</strong>：<code>ping</code> 会显示从发送请求到接收应答所需的时间。这有助于测量网络的响应时间或延迟。</p>
+</li>
+<li><p><strong>诊断网络问题</strong>：通过观察 <code>ping</code> 的结果，可以帮助诊断网络中可能存在的问题。例如，如果 <code>ping</code> 不通，可能意味着网络不通、目标设备关闭或防火墙阻止了 ICMP 数据包。</p>
+</li>
+<li><h4 id="-1"><a href="#-1" class="headerlink" title=""></a></h4></li>
+</ol>
+<h3 id="“ping-通”-的解释"><a href="#“ping-通”-的解释" class="headerlink" title="“ping 通” 的解释"></a>“ping 通” 的解释</h3><p>“ping 通” 指的是通过 <code>ping</code> 命令成功发送 ICMP 回显请求并收到目标设备的回显应答。这表明两个设备之间的网络连接正常，能够相互通信。具体来说：</p>
+<ul>
+<li>当你运行 <code>ping</code> 命令时，系统会向目标 IP 地址或域名发送 ICMP 回显请求数据包。</li>
+<li>如果目标设备接收到这个数据包并回送一个回显应答数据包，那么 <code>ping</code> 命令就会在控制台上显示应答的信息，包括应答时间、数据包大小和 TTL（生存时间）。</li>
+<li>多次 <code>ping</code> 通表示网络连接稳定，并且没有丢包或超时的情况。</li>
+</ul>
+<p>在你提供的示例中，<code>demo2</code> 容器通过 <code>ping demo1</code> 命令发送 ICMP 回显请求，并成功收到 <code>demo1</code> 容器的回显应答。这说明 <code>demo2</code> 和 <code>demo1</code> 之间的网络连接是正常的，可以相互通信。</p>
+<h2 id="暴露端口"><a href="#暴露端口" class="headerlink" title="暴露端口"></a><strong>暴露端口</strong></h2><p>同一个网络中的容器之间虽然可以互相 ping 通，但是并不意味着可以任意访问容器中的任何服务。Docker 为容器增加了一套安全机制，<strong>只有容器自身允许的端口，才能被其他容器所访问。如下所示，我们可以通过 <code>docker container ls</code> 命令可以看到容器暴露给其他容器访问的端口是 80，那么我们只能容器的 80 端口进行访问，而不能对没有开放的 22 端口进行访问。</strong></p>
+<p>我们可以在<strong>镜像创建的时候定义要暴露的端口，也可以在容器创建时定义要暴露的端口</strong>，使用 –expose。如下所示，就额外暴露了 20、22 这两个端口。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ docker container run -d --name web --expose 22 --expose 20 nginx</span><br><span class="line"></span><br><span class="line">$ docker container ls</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES</span><br><span class="line">4749dac32711        nginx               &quot;/docker-entrypoint.…&quot;   12 seconds ago      Up 10 seconds       20/tcp, 22/tcp, 80/tcp   web</span><br></pre></td></tr></table></figure>
+
+<h4 id="端口映射"><a href="#端口映射" class="headerlink" title="端口映射"></a><strong>端口映射</strong></h4><p>上面提到的桥接网络中的容器只能与位于相同网络中的容器进行通信，假如一个容器想对外提供服务的话，需要进行端口映射。端口映射将容器的某个端口映射到 Docker 主机端口上。那么任何发送到该端口的流量，都会被转发到容器中。如图所示，容器内部开放端口为 80，该端口被映射到了 Docker 主机的 10.0.0.15 的 5000 端口上。最终访问 10.0.0.15:5000 的所有流量都会被转发到容器的 80 端口。</p>
+<h3 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a><strong>相关命令</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 列出运行在本地 docker 主机上的全部网络</span><br><span class="line">docker network ls</span><br><span class="line"></span><br><span class="line"># 提供 Docker 网络的详细配置信息</span><br><span class="line">docker network inspect &lt;NETWORK_NAME&gt;</span><br><span class="line"></span><br><span class="line"># 创建新的单机桥接网络，名为 localnet，其中 -d 不指定的话，默认是 bridge 驱动。并且主机内核中也会创建一个新的网桥。</span><br><span class="line">docker network create -d bridge localnet</span><br><span class="line"></span><br><span class="line"># 删除 Docker 主机上指定的网络</span><br><span class="line">docker network rm</span><br><span class="line"></span><br><span class="line"># 删除主机上全部未使用的网络</span><br><span class="line">docker network prune</span><br><span class="line"></span><br><span class="line"># 运行一个新的容器，并且让这个容器加入 Docker 的 localnet 这个网络中</span><br><span class="line">docker container run -d --name demo1 --network localnet alpine sleep 3600</span><br><span class="line"></span><br><span class="line"># 运行一个新的容器，并且让这个容器暴露 22、20 两个端口</span><br><span class="line">docker container run -d --name web --expose 22 --expose 20 nginx</span><br><span class="line"></span><br><span class="line"># 运行一个新的容器，并且将这个容器的 80 端口映射到主机的 5000 端口</span><br><span class="line">docker container run -d --name web --network localnet -p 5000:80 nginx</span><br><span class="line"></span><br><span class="line"># 查看系统中的网桥</span><br><span class="line">brctl show</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
-        <category>Penetration Testing Basic</category>
+        <category>Penetration Testing</category>
       </categories>
       <tags>
         <tag>tools</tag>
@@ -614,6 +1250,7 @@
 <p>PS：倘若域名没有经过备案，那么这个域名在运营过程中只能对大陆以外的服务器进行解析，这个时候服务器可以选择香港、新加坡等离国内较近的服务器desu，（备案是需要很长时间的，如果比较急的话就没必要）</p>
 <p>第二步：将服务器基本配置配好过后，对域名进行解析，并利用阿里云自带的管理系统开始搭建网站</p>
 <p>第三步：这个时候小白可以通过宝塔平台一键搭建网站</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712161427668.png" alt="image-20240712161427668"></p>
 <h2 id="一些进阶的参考资料"><a href="#一些进阶的参考资料" class="headerlink" title="一些进阶的参考资料"></a>一些进阶的参考资料</h2><p><a href="https://blog.csdn.net/zhyl8157121/article/details/100551592">如何给你的网站套上Cloudflare（以阿里云为例）_如何套用cloudlfare-CSDN博客</a></p>
 <h1 id="Web应用环境的架构"><a href="#Web应用环境的架构" class="headerlink" title="Web应用环境的架构"></a>Web应用环境的架构</h1><p>理解不同WEB应用组成角色功能架：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712094332684.png" alt="image-20240712094332684"></p>
@@ -627,17 +1264,173 @@
 <p>加入所谓的代理拦截后</p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712095104496.png" alt="image-20240712095104496"></p>
 <p>浏览器先传入代理，代理再传入服务器，对应的返回的过程也需要经过代理的中转。 </p>
-<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p><strong>比方说我们对某个网站点赞</strong></p>
+<h2 id="案例–pax学长的评论区desu！！"><a href="#案例–pax学长的评论区desu！！" class="headerlink" title="案例–pax学长的评论区desu！！"></a>案例–pax学长的评论区desu！！</h2><p><strong>比方说我们对某个网站点赞</strong></p>
 <p>这里找到了pax学长的博客，随便点开一篇博文，发现其评论区功能正常运营，并且有点赞功能。Satoru打算套上Sherlock的马甲干点坏事情，发现Pax所用的butterfly框架甚至连头像都自动爬取上传好了（替你造马甲的框架，他真的，我哭死） 接下来准备进行对评论刷赞，看看是否成立</p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712100613082.png" alt="image-20240712100613082"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712110446321.png" alt="image-20240712110446321"></p>
 <p>这里对点赞请求进行抓包，本想通过User-Agent在不同的浏览器中对同一个id点赞，但发现由于token机制，以作者当前的水平想实现python脚本自动化抓取token是很困难的，因此转换另一个思路，抓取评论时的请求，通过Burp Intruder不断构造新的评论，开始炸库。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712111235234.png" alt="image-20240712111235234"></p>
 <p>不断构造评论显然是可以实现的，毕竟是评论区自带的功能，不过利用这点依然是可以搞一些事情的</p>
-<p>首先这个评论区功能是支持上传文件的，如果我上传一系列很大的文件进去，是否有可能拖垮pax博客的负载？</p>
+<p>首先这个评论区功能是支持上传文件的，如果我上传一系列图片进去，是否有可能拖垮pax博客的负载？</p>
 <p>同时这个马甲是支持信息伪造的，假设我传入一些有害网站作为个人马甲，这是否又是一层攻击？</p>
 <p>再不济，我挂着Burp Intruder模块批量发包，积少成多的同时并且在pax的所有文章下发送一些无用信息，这只是拖累负载而已，但假设我传入的是有害的信息呢？这也是需要考虑的</p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712111940495.png" alt="image-20240712111940495"></p>
+<h1 id="Day3-基础入门-抓包-封包-APP-小程序-PC应用-Web应用"><a href="#Day3-基础入门-抓包-封包-APP-小程序-PC应用-Web应用" class="headerlink" title="Day3:基础入门-抓包&amp;封包&amp;APP&amp;小程序&amp;PC应用&amp;Web应用"></a>Day3:基础入门-抓包&amp;封包&amp;APP&amp;小程序&amp;PC应用&amp;Web应用</h1><h1 id="学会对不同对象采用不同抓包封包抓取"><a href="#学会对不同对象采用不同抓包封包抓取" class="headerlink" title="学会对不同对象采用不同抓包封包抓取"></a>学会对不同对象采用不同抓包封包抓取</h1><p>什么是抓包：</p>
+<p>抓包就是抓取相关应用的一些数据，如果我们进行安全测试的话，有些应用的目标是会直接给到你的，但有些目标却是未知的</p>
+<p>对于这些看不见的目标，我们可以通过抓取数据包来解决。</p>
+<p>很经典的web流程，在任意一个浏览器通过F12打开网络（或者叫做networkl）</p>
+<p>这个时候浏览器会起一个监听的进程，用于抓取基本的数据包</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240714153412205.png" alt="image-20240714153412205"></p>
+<p>这就是很经典的一个单纯抓包，并没有对数据包做任何的额外操作。</p>
+<p>同时对应的它也会展示一些加载的资源，比如前端展示的js或css等</p>
+<p>还有一种可能，数据包是会被封装在微信小程序，app或者一些电脑的应用中，这个时候就需要一些专门的工具用于模拟对应的环境</p>
+<h1 id="抓包应用对象"><a href="#抓包应用对象" class="headerlink" title="抓包应用对象"></a>抓包应用对象</h1><h2 id="WEB应用站点（网站）"><a href="#WEB应用站点（网站）" class="headerlink" title="WEB应用站点（网站）"></a>WEB应用站点（网站）</h2><p>浏览器审查查看元素网络监听</p>
+<h2 id="APP-小程序-PC抓包-HTTP-S数据-—Burpsuite-Charles-Fiddler"><a href="#APP-小程序-PC抓包-HTTP-S数据-—Burpsuite-Charles-Fiddler" class="headerlink" title="APP&amp;小程序&amp;PC抓包-HTTP&#x2F;S数据  —Burpsuite&amp;Charles&amp;Fiddler"></a>APP&amp;小程序&amp;PC抓包-HTTP&#x2F;S数据  —Burpsuite&amp;Charles&amp;Fiddler</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">环境配置</span><br><span class="line">1、安卓模拟器安装搭建：</span><br><span class="line">雷电、逍遥、夜神等自行安装</span><br><span class="line">2、工具相关证书安装</span><br><span class="line">Burpsuite&amp;Charles&amp;Fiddler</span><br><span class="line">这三样工具看自己使用的是哪一样，对应的看工具官方手册或一些教程即可安装对应的证书</span><br><span class="line">3.封包抓取</span><br></pre></td></tr></table></figure>
+
+<p>对应的记得安装证书，修改模拟器代理即可</p>
+<p>在这里个人建议使用Charles配合Burpsuite，对小程序和app等进行抓包也可以直接配合手机使用，这里也有配套的教程.</p>
+<h2 id="程序进程-网络接口-其他协议抓包-–-Wireshark-科来网络分析系统"><a href="#程序进程-网络接口-其他协议抓包-–-Wireshark-科来网络分析系统" class="headerlink" title="程序进程&amp;网络接口&amp;其他协议抓包 – Wireshark&amp;科来网络分析系统"></a>程序进程&amp;网络接口&amp;其他协议抓包 – Wireshark&amp;科来网络分析系统</h2><p>当有一些程序走的是非web协议，这个时候burp和charles本质上是派不上用场的，这个时候我们也可以选择使用wireshark抓到类似UDP协议和IDMP协议等。</p>
+<h2 id="通讯类应用封包分析发送接收-–WPE四件套封包-科来网络分析系统"><a href="#通讯类应用封包分析发送接收-–WPE四件套封包-科来网络分析系统" class="headerlink" title="通讯类应用封包分析发送接收 –WPE四件套封包&amp;科来网络分析系统"></a>通讯类应用封包分析发送接收 –WPE四件套封包&amp;科来网络分析系统</h2><p>封包和抓包是两个本质不同的概念，对通讯类应用，比如游戏这类实时交互的进程，在不断产生流量交互的应用，使用对应的网络分析系统对本机的流量包进行分析，然后对协议的状态进行对应的观察</p>
+<p>比方说<strong>打开模拟器，想要抓取某传奇手游的数据包</strong>。</p>
+<p>这个时候利用科来网络分析系统对模拟器网段流量进行分析，可以通过TCP的状态发掘正在运行的进程，通过排除法（在模拟器中开始畅玩游戏（），发现相对较活跃的流量）可以发现当前运行的数据包中哪个是对应游戏的数据包喵</p>
+<p><strong>类似这种游戏，一般走的都是TCP协议</strong>，因为HTTP使用请求-响应模型，客户端发送请求，服务器返回响应。因此HTTP模型适合于Web浏览中一次性数据获取的场景却不适用于游戏。</p>
+<p>可能这个时候就会有人问了：SatoruSatoru，<strong>这哪里是Web渗透啊？分明就是抓包而已，这能有啥？</strong></p>
+<p>Satoru这个时候就会说了：<strong>抓个包其实是很简单的事，但是拿到真实IP开始扫描资产，看看端口上其他的服务这种操作就要考虑的很多了（套用公式就是快）</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240714210927280.png" alt="image-20240714210927280"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240714210940142.png" alt="image-20240714210940142"></p>
+<h2 id="真正意义上的封包技术"><a href="#真正意义上的封包技术" class="headerlink" title="真正意义上的封包技术"></a>真正意义上的封包技术</h2><p>详解wpe封包：</p>
+<p>WPE是一个强大的网络封包编辑器，它可以截取网络上的信息，修改封包的数据，一般在安全测试中可以用来调试数据通讯的地址</p>
+<p>封包指将网络传输过程中封片传输的数据，比方说一个游戏中，回城由十个数据包组成，那么WPE对我们发送的数据包进行整合封装，将分片传输的数据重新整合成一套数据包，然后重新发送，达到在游戏外实现功能的效果</p>
+<h3 id="封包概念解释"><a href="#封包概念解释" class="headerlink" title="封包概念解释"></a>封包概念解释</h3><p><strong>封包（Packet）</strong> 是指在网络通信中，数据被分割成小块并通过网络传输的基本单位。每个封包通常包括头部（Header）和数据（Data）部分：</p>
+<ul>
+<li><strong>头部</strong>：包含控制信息，例如源地址、目的地址、序列号、协议信息等。</li>
+<li><strong>数据</strong>：实际传输的数据内容。</li>
+</ul>
+<p>封包在网络中传输时，通过路由器和交换机等设备进行传递，最终到达目的地。封包技术是网络通信的基础，通过将大块数据分割成小块，可以实现高效和可靠的传输。</p>
+<h3 id="封包编辑（Packet-Editing）"><a href="#封包编辑（Packet-Editing）" class="headerlink" title="封包编辑（Packet Editing）"></a>封包编辑（Packet Editing）</h3><p>封包编辑指的是捕获、分析、修改和重放网络封包的过程。这通常用于网络调试、性能测试、漏洞利用等场景。WPE（Winsock Packet Editor）是常用的封包编辑工具之一。</p>
+<h3 id="WPE（Winsock-Packet-Editor）封包编辑技术"><a href="#WPE（Winsock-Packet-Editor）封包编辑技术" class="headerlink" title="WPE（Winsock Packet Editor）封包编辑技术"></a>WPE（Winsock Packet Editor）封包编辑技术</h3><p>WPE Pro 是一种流行的网络封包编辑工具，用于捕获和修改通过 Windows 网络堆栈传输的数据包。以下是使用 WPE 进行封包编辑的步骤：</p>
+<h4 id="1-下载并安装-WPE-Pro"><a href="#1-下载并安装-WPE-Pro" class="headerlink" title="1.下载并安装 WPE Pro"></a>1.下载并安装 WPE Pro</h4><p>首先，从可信的来源下载并安装 WPE Pro。</p>
+<h4 id="2-打开目标程序"><a href="#2-打开目标程序" class="headerlink" title="2. 打开目标程序"></a>2. 打开目标程序</h4><p>启动你想要捕获和编辑封包的应用程序。例如，一个网络游戏或聊天程序。</p>
+<h4 id="3-启动-WPE-Pro"><a href="#3-启动-WPE-Pro" class="headerlink" title="3. 启动 WPE Pro"></a>3. 启动 WPE Pro</h4><p>启动 WPE Pro，并在工具界面中选择“Target Program”按钮，选择你要监控的目标程序。</p>
+<h4 id="4-捕获封包"><a href="#4-捕获封包" class="headerlink" title="4. 捕获封包"></a>4. 捕获封包</h4><p>在 WPE Pro 中，点击“Play”按钮开始捕获封包。然后在目标程序中执行一些操作（如发送消息、移动角色等）。</p>
+<h4 id="5-停止捕获并分析封包"><a href="#5-停止捕获并分析封包" class="headerlink" title="5. 停止捕获并分析封包"></a>5. 停止捕获并分析封包</h4><p>完成操作后，点击“Stop”按钮停止捕获。你将看到捕获到的封包列表。</p>
+<h4 id="6-修改封包"><a href="#6-修改封包" class="headerlink" title="6. 修改封包"></a>6. 修改封包</h4><p>选中你想要修改的封包，右键选择“Send”或“Send to Send List”。在“Send List”中，你可以编辑封包的数据内容。修改完成后，点击“Send”按钮发送修改后的封包。</p>
+<h4 id="示例步骤："><a href="#示例步骤：" class="headerlink" title="示例步骤："></a>示例步骤：</h4><p>假设你在一个在线游戏中想要修改发送的聊天消息：</p>
+<ol>
+<li>在游戏中发送一条消息（如“Hello”）。</li>
+<li>在 WPE Pro 中捕获到相应的封包。</li>
+<li>找到包含“Hello”消息的封包，右键选择“Send”或“Send to Send List”。</li>
+<li>在编辑器中将“Hello”修改为其他内容（如“Hi there”）。</li>
+<li>点击“Send”按钮发送修改后的封包，观察游戏中的变化。</li>
+</ol>
+<p>也可以封装一个回城功能（doge）,然后通过发送整合后的数据包就可以实现游戏外回城的功能（doge）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240714213902020.png" alt="image-20240714213902020"></p>
+<p>所以封包和wireshark监听查找进程的本质区别在于封包是一组整合的数据包，wireshark查找进程是一堆零散的数据包</p>
+<p>步骤：</p>
+<p>1.首先在模拟器中先装上代理机器人</p>
+<p>2.对应的打开ccproxy设置代理</p>
+<h1 id="抓包应用协议"><a href="#抓包应用协议" class="headerlink" title="抓包应用协议"></a>抓包应用协议</h1><p>分为Web协议和非Web协议</p>
+<h1 id="抓包应用支持"><a href="#抓包应用支持" class="headerlink" title="抓包应用支持"></a>抓包应用支持</h1><h1 id="抓包应用意义"><a href="#抓包应用意义" class="headerlink" title="抓包应用意义"></a>抓包应用意义</h1><p>把app中的一些数据或者一些信息提取出来，就是这么简单，然后将这些信息用于对应的安全攻防。</p>
+<h1 id="封包应用意义"><a href="#封包应用意义" class="headerlink" title="封包应用意义"></a>封包应用意义</h1><p><strong>WPE四件套封包&amp;科来网络分析系统  Wireshark</strong></p>
+<p><strong>Burpsuite&amp;Charles&amp;Fiddler</strong></p>
+]]></content>
+      <categories>
+        <category>Penetration Testing Basic</category>
+      </categories>
+      <tags>
+        <tag>pr0gram</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>WX小程序抓包&amp;游戏封包技术</title>
+    <url>/2024/07/11/%E6%89%8B%E6%9C%BA+charles+burpsuite%E9%85%8D%E5%90%88%E6%8A%93%E5%8C%85/</url>
+    <content><![CDATA[<h1 id="微信小程序-公众号抓包的主流方式"><a href="#微信小程序-公众号抓包的主流方式" class="headerlink" title="微信小程序&#x2F;公众号抓包的主流方式"></a>微信小程序&#x2F;公众号抓包的主流方式</h1><p>目前有以下几种：</p>
+<p>1、Windows+Burp+Proxifier（配置困难，数据包卡顿)</p>
+<p>2、Burp+安卓模拟器（模拟器卡顿）</p>
+<p>3、Burp+Charles（本文测试，抓包完整，放包流畅）</p>
+<p>一、下载</p>
+<h4 id="1、Charles官网下载安装包"><a href="#1、Charles官网下载安装包" class="headerlink" title="1、Charles官网下载安装包"></a>1、Charles官网下载安装包</h4><p><a href="https://www.charlesproxy.com/download/latest-release/">https://www.charlesproxy.com/download/latest-release/</a></p>
+<h4 id="2、Burpsuite下载"><a href="#2、Burpsuite下载" class="headerlink" title="2、Burpsuite下载"></a>2、Burpsuite下载</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://portswigger.net/burp/releases</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、Charles破解"><a href="#3、Charles破解" class="headerlink" title="3、Charles破解"></a>3、Charles破解</h4><p>进入链接，输入任意内容作为用户名，获取注册码。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://www.zzzmode.com/mytools/charles/</span><br></pre></td></tr></table></figure>
+
+<p>打开Charles,打开上方工具栏中Help—Register Charles，输入用户名和激活码</p>
+<p>打开Charles,打开上方工具栏中Help—Register Charles，输入用户名和激活码</p>
+<h3 id="二、Charles设置"><a href="#二、Charles设置" class="headerlink" title="二、Charles设置"></a>二、Charles设置</h3><h4 id="1、Charles设置代理"><a href="#1、Charles设置代理" class="headerlink" title="1、Charles设置代理"></a>1、Charles设置代理</h4><p>打开工具栏中Proxy-Proxy Settings</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/d8c24248e8ee40169178ecc42a62836f.png" alt="img"></p>
+<p>设置为如下格式</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/03f1ce83357c4a478a1c23b3a573ef16.png" alt="img"></p>
+<p>然后，抓取包的规则配置（*是代表抓取任意端口和域名，如果只抓取固定的端口or域名可自行设置。）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/60e3b14ad74f45e2af485fd4a1d13c00.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/f844baa2145b4ce182af424db5651b7b.png" alt="img"></p>
+<p>接下来配置Charles代理到burpsuit的规则（我这里偷懒，配置的burp默认的8080端口，为避免端口冲突，可自行想想1-65535之内的端口，与burp协同配置即可）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/57635112886a4064955e578ed29e42b4.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/ee5d8a67623a4979a5b0bbaf772dde94.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/41cb4950910e481c8ed2b31f31ed58d8.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/4f367272290a44edac26e6f90f6286ea.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/4fb4ca3b468a4e32a82bdf13c28f5091.png" alt="img"></p>
+<h4 id="2、关闭对windows端的抓包（每次打开软件都是默认开启的，记得关闭）"><a href="#2、关闭对windows端的抓包（每次打开软件都是默认开启的，记得关闭）" class="headerlink" title="2、关闭对windows端的抓包（每次打开软件都是默认开启的，记得关闭）"></a>2、关闭对windows端的抓包（每次打开软件都是默认开启的，记得关闭）</h4><p>因为主要是联动手机对微信抓包，所以可以关闭windows端的抓包，避免干扰。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/a9aed4740923446fbb449694c92f5a13.png" alt="img"></p>
+<h4 id="3、配置PC端证书"><a href="#3、配置PC端证书" class="headerlink" title="3、配置PC端证书"></a>3、配置PC端证书</h4><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/b5ef86e515634c1099c51d03f981eae0.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/c7f39dd9529940e59a8c97313062e2b9.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/e6604a88a8a44b6d9152d69c24520b1e.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/c7750c91696b40e9b555f08b270c0501.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/10cd0da8757444da9fd7ef640f1c2169.png" alt="img"></p>
+<p>点击下一步，再点击完成，PC显示导入完成就完成PC端证书配置了。</p>
+<h4 id="4-移动端证书配置（我这里使用苹果手机测试）"><a href="#4-移动端证书配置（我这里使用苹果手机测试）" class="headerlink" title="4.移动端证书配置（我这里使用苹果手机测试）"></a>4.移动端证书配置（我这里使用苹果手机测试）</h4><p>在这里出现了两种可能性，依次进行即可：</p>
+<h5 id="4-1手机连接电脑热点，并配置端口"><a href="#4-1手机连接电脑热点，并配置端口" class="headerlink" title="4.1手机连接电脑热点，并配置端口"></a>4.1手机连接电脑热点，并配置端口</h5><p>开启电脑热点</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/4c3aea78624043ee81d75414ffa5d693.png" alt="img"></p>
+<p>手机连接热点，然后在Charles中进行如下操作：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/506f55c1d8b843bfaf4eff5c4f57a0e1.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/186401f5edfa444fbb4dcea3daf5b8de.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/d754328f2a1f433a84ca9d9fd52be0f2.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/41b6e5105fac43e8a77eaf56d2d422d6.jpeg" alt="img"></p>
+<h5 id="4-2证书下载后手机能直接识别"><a href="#4-2证书下载后手机能直接识别" class="headerlink" title="4.2证书下载后手机能直接识别"></a>4.2证书下载后手机能直接识别</h5><p>在手机上使用chrome浏览器访问下面这个网址</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chls.pro/ssl</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/fcdc424fd5874c5d8af17e280e4dbff4.jpeg" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/64dae3270ca34e04adbefe605f610378.jpeg" alt="img"></p>
+<p>在手机中的设置路径去设置证书：<strong>设置—&gt;通用—&gt;关于本机—&gt;证书信任设置</strong>中打开对根证书启用完全信任。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/7817da8b93ae48c2b33435669110182e.jpeg" alt="img"></p>
+<p>所有的流程配置完成，现在就可以抓包了。</p>
+<p>三、抓包<br>上面配置好了以后就可以开始抓包了，以后如果再有小程序、微信抓包需求直接进行以下流程即可。</p>
+<p>1.打开Charles.</p>
+<p>2.打开burp。on&#x2F;off拦截或者放包。</p>
+<p>3.打开电脑热点，手机连接电脑热点。（如果生活中正常使用电脑热点记得把ip代理改回自动）</p>
+<p>4.手机访问小程序或者公众号，在Charles和burp都可以看到包。</p>
+<h3 id="同样的-我们也可以在模拟器如此部署"><a href="#同样的-我们也可以在模拟器如此部署" class="headerlink" title="同样的　我们也可以在模拟器如此部署"></a>同样的　我们也可以在模拟器如此部署</h3><p><a href="https://blog.csdn.net/weixin_43910861/article/details/123851267">burp+逍遥模拟器 app抓包 （导入证书到系统的解决方案）_逍遥导入证书失败-CSDN博客</a></p>
+<h1 id="游戏封包技术"><a href="#游戏封包技术" class="headerlink" title="游戏封包技术"></a>游戏封包技术</h1><p>第一步：下载所需要的环境</p>
+<p>雷电模拟器</p>
+<p>雷电安卓模拟器-手游模拟器安卓版_android手机模拟器电脑版_雷电模拟器官网</p>
+<p>ProxyDroid</p>
+<p>链接：<a href="https://pan.baidu.com/s/1F8Yv9aDZuoN3yUgDCOVRBQ">https://pan.baidu.com/s/1F8Yv9aDZuoN3yUgDCOVRBQ</a>     提取码：s4ds </p>
+<p>CCProxy+WPE</p>
+<p>链接: <a href="https://pan.baidu.com/s/1HxVDuglgsEzXKsDZrSXS1Q">https://pan.baidu.com/s/1HxVDuglgsEzXKsDZrSXS1Q</a> 提取码: jti8 </p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210704231129143.png" alt="img"></p>
+<p>第二步：代理环境的配置</p>
+<p>首先adb 命令查看自己的ip 在终端输入    ipconfig ,就可以查看到自己的ip, 我这里连接的是wifi,</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222428167.png" alt="img"></p>
+<p>在雷电模拟器上打开安装好的  ProxyDroid.apk  ，将自己的电脑的 ip  填写在 HOST 里面，端口自己设置，不要超过 65535  ，</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/fde7482c47e14fecaf60d1662b38aa16.png" alt="img"></p>
+<p> 设置好 之后  再将上面 这个开关打开</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/2ecd9200873346db9206fdb169b8981b.png" alt="img"></p>
+<p>然后 在pc 端打开 CCProxy, 打开设置，端口  是 上面 app  里面填写的端口，IP 和代理app 的保持一直 都是自己电脑上的ip 。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222522362.png" alt="img"></p>
+<p>在点击下面的   高级   ，把ip改成和自己电脑的一至，再点击确定。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222527721.png" alt="img"></p>
+<p>ccproxy 还要开启账户里面的允许所有。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210704230543369.png" alt="img"></p>
+<p>我们再打开模拟器上的游戏，看到ccp 中有这样一条线，就能看到代理成功。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222548577.png" alt="img"></p>
+<p>接下来我们就打开 ，WPE , 在目标程序中找到ccp 的进程。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222608143.png" alt="img"></p>
+<p>在视图里面可以设置 拦截发送的数据包，还是接受到的数据包，我这里只拦截发送的数据包。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/2021060522262510.png" alt="img"></p>
+<p>设置好之后，我们进入游戏，找到游戏的中角色的升级，我们打开wpe, 点击 黑色的运行按钮，我们就能看到扇形的数据包中开始变化，点击一次升级，我们就暂停拦截，我们就取分析，拦截到的数据包，在如下的列表中我们可以很快浏览一下，我们 找到规律了，  </p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222656425.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222711573.png" alt="img"></p>
+<p>总结： 我们设置的ip: 172.20.4.153  我们现在就查看，只要来源和目标 ip 都是一样的。这就说明是本地和本地的发送，我们就将这些直接过滤掉， 我们剩下的也不多，就一个一个的试试，</p>
 ]]></content>
       <categories>
         <category>Penetration Testing Basic</category>
@@ -1427,647 +2220,6 @@
       </categories>
       <tags>
         <tag>pr0gram</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>更底层更方便的一些部署</title>
-    <url>/2024/07/09/vscode%E5%92%8Chtml%EF%BC%8Cjavascript%E5%92%8CDocker/</url>
-    <content><![CDATA[<p>WARNING ：<strong>请先有一定的linux命令基础再接触并进行部署</strong></p>
-<h1 id="WHAT-IS-蜜罐"><a href="#WHAT-IS-蜜罐" class="headerlink" title="WHAT IS 蜜罐"></a>WHAT IS 蜜罐</h1><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240512091639288.png" alt="image-20240512091639288"></p>
-<p>蜜罐是一种安全威胁的主动防御技术，<strong>它通过模拟一个或多个易受攻击的主机或服务来吸引攻击者，捕获攻击流量与样本，发现网络威胁、提取威胁特征，</strong>蜜罐的价值在于被探测、攻陷。其在本质上来说，<strong>是一个与攻击者进行攻防博弈的过程。</strong>蜜罐提供服务，攻击者提供访问，通过蜜罐对攻击者的吸引，攻击者对蜜罐进行攻击，在攻击的过程中，有经验的攻击者也可能识别出目标是一个蜜罐。为此，<strong>为更好的吸引攻击者，蜜罐也需要提供强悍的攻击诱骗能力。</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240512092050232.png" alt="image-20240512092050232"></p>
-<h1 id="Web服务中间件"><a href="#Web服务中间件" class="headerlink" title="Web服务中间件"></a><strong>Web服务中间件</strong></h1><p>类似Apache  Tomcat  Nginx将用户的HTTP请求解析，并返回到浏览器</p>
-<h1 id="钓鱼网站制作"><a href="#钓鱼网站制作" class="headerlink" title="钓鱼网站制作"></a>钓鱼网站制作</h1><p>ctrl+s保存当前全部静态网页 并本地部署</p>
-<p><strong>开始测试 打开本地网站发包</strong> </p>
-<p>观察自身请求 <strong>可以发送请求后打开F12</strong></p>
-<p>然后<strong>点击network并观察对应路径名–即可知请求发向文件</strong></p>
-<p><strong>全局检索对应路径 然后直接替换接收数据文件</strong></p>
-<h1 id="Javascript"><a href="#Javascript" class="headerlink" title="Javascript"></a>Javascript</h1><p><a href="https://www.runoob.com/js/js-tutorial.html">JavaScript 教程 | 菜鸟教程 (runoob.com)</a></p>
-<p>不会就查就行了</p>
-<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p><a href="https://docker-practice.github.io/zh-cn/">前言 · Docker – 从入门到实践 (docker-practice.github.io)</a></p>
-<p>Docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任意一个搭载windows或者linux的机器上</p>
-<p><strong>也可以实现虚拟化，容器完全使用沙箱机制，相互之间并无接口</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240525111213269.png" alt="image-20240525111213269"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240525111358970.png" alt="image-20240525111358970"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240525111550258.png" alt="image-20240525111550258"></p>
-<h2 id="更新kali-apt源"><a href="#更新kali-apt源" class="headerlink" title="更新kali apt源"></a>更新kali apt源</h2><p>编辑 &#x2F;etc&#x2F;apt&#x2F;sources.list 文件， 在文件最前面添加以下条目：</p>
-<p>**#**<strong>中科大稳定版分支</strong> <strong>Kali</strong> <strong>源</strong> </p>
-<p>deb <a href="https://mirrors.ustc.edu.cn/kali">https://mirrors.ustc.edu.cn/kali</a> kali-rolling main non-free non-free-firmware contrib</p>
-<p>deb-src <a href="https://mirrors.ustc.edu.cn/kali">https://mirrors.ustc.edu.cn/kali</a> kali-rolling main non-free non-free-firmware contrib</p>
-<p>sudo nano &#x2F;etc&#x2F;apt&#x2F;sources.list</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/12790161/1716608995166-e9089a93-d685-4257-bb94-0822a054dd55.png" alt="img"></p>
-<p>sudo apt update</p>
-<h2 id="Linux安装docker"><a href="#Linux安装docker" class="headerlink" title="Linux安装docker"></a>Linux安装docker</h2><p>以kali 2024.1 为例，安装docker</p>
-<h3 id="添加使用-HTTPS-传输的软件包以及-CA-证书"><a href="#添加使用-HTTPS-传输的软件包以及-CA-证书" class="headerlink" title="添加使用 HTTPS 传输的软件包以及 CA 证书"></a>添加使用 HTTPS 传输的软件包以及 CA 证书</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install \</span><br><span class="line">     apt-transport-https \</span><br><span class="line">     ca-certificates \</span><br><span class="line">     curl \</span><br><span class="line">     gnupg \</span><br><span class="line">     lsb-release</span><br></pre></td></tr></table></figure>
-
-<h3 id="添加软件源的-GPG-密钥"><a href="#添加软件源的-GPG-密钥" class="headerlink" title="添加软件源的 GPG 密钥"></a>添加软件源的 GPG 密钥</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</span><br></pre></td></tr></table></figure>
-
-<h3 id="sources-list-中添加-Docker-软件源"><a href="#sources-list-中添加-Docker-软件源" class="headerlink" title="sources.list 中添加 Docker 软件源"></a>sources.list 中添加 Docker 软件源</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> \</span><br><span class="line">  <span class="string">&quot;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/debian \</span></span><br><span class="line"><span class="string">  buster stable&quot;</span> | sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br></pre></td></tr></table></figure>
-
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line"></span><br><span class="line">$ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin</span><br></pre></td></tr></table></figure>
-
-<p>如果无需体验最新版的docker，也可以直接执行下面命令安装</p>
-<p>apt install docker.io</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://docker-practice.github.io/zh-cn/install/debian.html">https://docker-practice.github.io/zh-cn/install/debian.html</a></p>
-<h3 id="Docker部署"><a href="#Docker部署" class="headerlink" title="Docker部署"></a><strong>Docker部署</strong></h3><p><a href="https://hub.docker.com/?_gl=1*1k7v6iz*_ga*MTg4MjkxMTk4MS4xNzE2NjA3NDU1*_ga_XJWPQMJYHQ*MTcxNjYxODY3OC4yLjEuMTcxNjYxODY5Ni40Mi4wLjA.">Dockerhub</a></p>
-<h2 id="Docker命令"><a href="#Docker命令" class="headerlink" title="Docker命令"></a>Docker命令</h2><h4 id="三件套"><a href="#三件套" class="headerlink" title="三件套"></a><strong>三件套</strong></h4><p>docker search 寻找想要的镜像 同时可以标签筛选</p>
-<p>docker pull 拉取想要的镜像</p>
-<p>docker run 运行镜像</p>
-<p>docker stop {container id}</p>
-<p><strong>查看对应容器信息</strong></p>
-<p>docker ps </p>
-<p><em>里面就有包含</em></p>
-<h4 id="删除对应镜像"><a href="#删除对应镜像" class="headerlink" title="删除对应镜像"></a>删除对应镜像</h4><p>docker rmi {container id}</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240525144321937.png" alt="image-20240525144321937"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240525151120882.png" alt="image-20240525151120882"></p>
-<p><a href="https://www.runoob.com/docker/docker-command-manual.html">Docker 命令大全 | 菜鸟教程 (runoob.com)</a></p>
-<p><strong>创建镜像后能做什么</strong> <strong>镜像的特性是什么</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240529201943078.png" alt="image-20240529201943078"></p>
-<h1 id="VS-Code-Remote-ssh-远程控制Windows主机-免密登录-内网穿透"><a href="#VS-Code-Remote-ssh-远程控制Windows主机-免密登录-内网穿透" class="headerlink" title="VS Code Remote-ssh 远程控制Windows主机 + 免密登录 + 内网穿透"></a>VS Code Remote-ssh 远程控制Windows主机 + 免密登录 + 内网穿透</h1><h2 id="VS-Code-Remote-ssh-远程控制Windows主机-免密登录-内网穿透-1"><a href="#VS-Code-Remote-ssh-远程控制Windows主机-免密登录-内网穿透-1" class="headerlink" title="VS Code Remote-ssh 远程控制Windows主机 + 免密登录 + 内网穿透"></a>VS Code Remote-ssh 远程控制Windows主机 + 免密登录 + 内网穿透</h2><p>1 我们为什么需要远程连接服务器？（使用需求+场景）<br>炼丹的研究生：在我们炼丹过程中，经常需要连接远程的服务器（通常是实验室的服务器）进行炼丹。通常情况下，我们会使用Pycharm的远程开发功能，同步服务器与本地的项目文件，使用远程解释器进行开发。但是使用过的同学都知道，重量级的Pycharm每次远程同步、加载远程解释器都需要相当长的时间。如果我们想要随时切换工位、宿舍、家里的各个场景，Pycharm的同步、加载就成了一场噩梦。特别是当我们的python环境安装了很多依赖包，项目生成了大量文件的时候更是这样。<strong>直到VS Code推出了Remote Development开发包，便完全解决了这个问题。让我可以在不同的场景快速切换，无需等待同步文件、环境。</strong>因为VS Code远程开发完全是运行在服务器上的，我们本地的VS Code只是一个前端界面，所以<strong>根本无需同步服务器上的文件</strong>、解释器依赖库就可以体验到与本地开发完全相同的体验。在远程连接服务器后，只需要使用可以随身携带的笔记本进行Coding，而炼丹就交由服务器来完成。优雅！<br>2 远程办公：<strong>将自己的台式机当成一个服务器在服务器上训练&#x2F;测试模型。这样自己远程办公时，可以通过ssh远程连接到自己的台式机在公司开会时，用笔记本远程连接自己的台式机</strong><br>3 以上只是列举出来的一些常见的使用场景，但具体到每个人都是不尽相同的，但是需求都是相似的——优化我们的工作流。</p>
-<h2 id="为什么需要内网穿透？"><a href="#为什么需要内网穿透？" class="headerlink" title="为什么需要内网穿透？"></a>为什么需要内网穿透？</h2><p>通常<strong>服务器是在一个局域网下的，没有公网ip，需要通过局域网内的NAT</strong>（Network Address Translation）讲局域网内的私有IP地址转换为公网IP才能正常通信。如果想要远程连接，要么和服务器处在同一个局域网下，但这通常限制了我们使用场景，如果离开这个局域网，就没法远程开发了。因此需要内网穿透，解决处于使用了NAT设备的私有TCP&#x2F;IP网络中的主机之间建立连接的问题。但是如果你有公网IP，就没有这么多b事了。但是99%的可能你都没有公网IP，其中的原因也比较简单，公网IP地址是一种稀缺的有限的资源，而Internet是老美搞的，简单讲有人多了，就一定会有人少了，就得通各种各样的方式来提高我们为数不多的公网IP地址的利用率，以满足我国人民日益增长的上网需求doge。<br>什么是内网穿透？<br>内网穿透是一种网络技术，它允许在私有局域网（内网）中的设备或服务可以通过公共网络（如互联网）进行访问。通常情况下，内网设备由于NAT 设备屏蔽或防火墙等网络设备所保护，无法直接从公网访问。通过使用内网穿透技术，可以建立起公网和内网之间的通道，使得外部用户可以通过公网连接到内网中的设备，就像这些设备直接连接在公网上一样。内网穿透简单来说就是<strong>将内网外网通过隧道打通,让内网的数据让外网可以获取</strong>。</p>
-<h3 id="什么是SSH？"><a href="#什么是SSH？" class="headerlink" title="什么是SSH？"></a>什么是SSH？</h3><p>安全外壳协议（Secure Shell Protocol，简称SSH）<strong>是一种运行在应用层的（默认端口号为22）加密的网络传输协议，可在不安全的网络中为网络服务提供安全的传输环境。</strong>SSH通过在网络中建立安全隧道来实现SSH客户端与服务器之间的连接。最早的时候，互联网通信都是明文通信，一旦被截获，内容就暴露无疑。SSH最常见的用途是远程登录系统，人们通常利用SSH来传输命令行界面和远程执行命令。SSH使用频率最高的场合是类Unix系统，但是Windows操作系统也能有限度地使用SSH。<strong>2015年，微软宣布将在未来的操作系统中提供原生SSH协议支持，Windows 10 1803版本已提供OpenSSH工具。</strong><br>SSH以非对称加密实现身份验证。身份验证有多种途径：</p>
-<p>其中一种方法是使用自<strong>动生成的公钥-私钥对来简单地加密网络连接，随后使用密码认证进行登录</strong>；<br>另一种方法是<strong>人工生成一对公钥和私钥，通过生成的密钥进行认证，这样就可以在不输入密码的情况下登录。任何人都可以自行生成密钥。</strong>公钥需要放在待访问的电脑之中，而对应的私钥需要由用户自行保管。认证过程基于生成出来的私钥，但整个认证过程中私钥本身不会传输到网络中。其中公钥用于让对方加密信息，而自己的私钥可以解密经过自己公钥加密后的信息，这就是非对称加密。</p>
-<p>SSH以非对称加密实现身份验证。身份验证有多种途径：</p>
-<p>其中一种方法是使用自动生成的公钥-私钥对来简单地加密网络连接，随后使用密码认证进行登录；<br>另一种方法是人工生成一对公钥和私钥，通过生成的密钥进行认证，这样就可以在不输入密码的情况下登录。任何人都可以自行生成密钥。公钥需要放在待访问的电脑之中，而对应的私钥需要由用户自行保管。认证过程基于生成出来的私钥，但整个认证过程中私钥本身不会传输到网络中。其中公钥用于让对方加密信息，而自己的私钥可以解密经过自己公钥加密后的信息，这就是非对称加密。</p>
-<h3 id="SSH远程连接之后能干什么？"><a href="#SSH远程连接之后能干什么？" class="headerlink" title="SSH远程连接之后能干什么？"></a>SSH远程连接之后能干什么？</h3><p>SSH远程连接之后，就可以像操作本地的机器一样操作远程机器。当需要操控的机器不在本地时就可以使用ssh协议远程连接操控。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240606153525709.png" alt="image-20240606153525709"></p>
-<p><strong>在Powershell（管理员）中确保添加了防火墙规则</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在Powershell（管理员）中确保添加了防火墙规则</span><br><span class="line"></span><br><span class="line"># 启动sshd服务</span><br><span class="line">Start-Service sshd</span><br><span class="line"></span><br><span class="line"># 将sshd服务设置为自动启动，若不设置需要在每次重启后重新开启sshd</span><br><span class="line">Set-Service -Name sshd -StartupType &#x27;Automatic&#x27;</span><br><span class="line"></span><br><span class="line"># 确认防火墙规则，一般在安装时会配置好</span><br><span class="line">Get-NetFirewallRule -Name *ssh*</span><br><span class="line"></span><br><span class="line"># 若安装时未添加防火墙规则&quot;OpenSSH-Server-In-TCP&quot;，则通过以下命令添加</span><br><span class="line">New-NetFirewallRule -Name sshd -DisplayName &#x27;OpenSSH Server (sshd)&#x27; -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>第二步：连接到 OpenSSH 服务器<br><strong>在第一次连接之前，我们先来了解两个概念</strong>：<strong>username和servername&#x2F;hostname。在windows的SSH服务器中也就是在你的远程主机中</strong></p>
-<p>username可以用你激活电脑时使用的用户名，即文件资源管理器中C:\Users\username的username。<br>而servername则是“设置”&gt;“系统”&gt;“关于”里的“设备名称”<br>其中输入密码应该是你的远程主机的开机密码，并且这一次连接应该确保是在同一网络下进行的，因为我们并没有进行内网穿透操作</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240606154856346.png" alt="image-20240606154856346"></p>
-<p><strong>如果你成果的看到了以下输出，恭喜你成功的连接上了你的远程主机，并且已经成功了一大半了。接下来我们去VS Code中连接，操作都是类似的。</strong></p>
-<h3 id="在VS-Code中连接你的远程主机"><a href="#在VS-Code中连接你的远程主机" class="headerlink" title="在VS Code中连接你的远程主机"></a>在VS Code中连接你的远程主机</h3><p>这部分内容遵循VS Code的官方教程，但在此基础上做了精简，官方教程写的好的部分会直接贴出来。这一次的连接同样应该确保是在同一网络下进行的，因为我们并没有进行内网穿透操作。<br><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240606155050660.png" alt="image-20240606155050660"></p>
-<h1 id="Vscode远程连接Docker"><a href="#Vscode远程连接Docker" class="headerlink" title="Vscode远程连接Docker"></a>Vscode远程连接<strong>Docker</strong></h1><p>Author ：探姬</p>
-<p>原文于语雀发布，地址为：<a href="https://www.yuque.com/probius/cs_wp/fegz0w">https://www.yuque.com/probius/cs_wp/fegz0w</a></p>
-<p>本文也有配套视频，建议结合食用：(给个三连吧www)</p>
-<p><a href="https://www.bilibili.com/video/BV1684y1z7L6">https://www.bilibili.com/video/BV1684y1z7L6</a></p>
-<h2 id="About"><a href="#About" class="headerlink" title="About"></a>About</h2><p>本文档完整的流程可以帮助您在<strong>Kali Linux</strong>上完成Docker环境，并且基于Vscode的Remote功能，利用SSH协议，构建 VSCODE + SSH + Docker 的工作流，提高效率。</p>
-<p>同样，本文档也考虑了非Kali，用于开发&#x2F;生产环境的 <strong>Ubuntu &#x2F; Debian</strong> 系统 ，如果您想要在开发&#x2F;生产中使用该工作流，可以直接从<strong>Get Docker</strong> 或者 <strong>Build SSH＋vscode + docker Workflow</strong> 章节开始。</p>
-<p>笔者水平有限，错误疏漏之处在所难免，烦请各位师傅斧正。</p>
-<p>以及非常感谢 <strong>陈橘墨(@<strong>Randark_JMT</strong>)师傅</strong>提供的帮助。</p>
-<h2 id="Get-Kali"><a href="#Get-Kali" class="headerlink" title="Get Kali"></a>Get Kali</h2><h3 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h3><p>在Kali官网下载即可，建议直接下载封装好的虚拟机版本：</p>
-<p><a href="https://www.kali.org/get-kali/#kali-virtual-machines">https://www.kali.org/get-kali/#kali-virtual-machines</a></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665941610725-938968ad-7947-4e8b-9030-e3758268b763.png" alt="img"></p>
-<p>解压下载好的压缩包到您想要放置虚拟机的位置，然后双击配置文件直接打开自动添加，或者在VMware中手动添加：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665941724211-28de32c3-f423-4a93-9834-e73779c30df1.png" alt="img"></p>
-<p>添加完成后，启动即可：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665941756080-5769f591-f33d-4acb-bc6d-d3e6b05d214f.png" alt="img"></p>
-<p>（当然，作为DockerRuner，您可能需要设置一个稍微大点的内存值）</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665941814497-37c98101-8d6b-4c1d-80c1-a63fc7952de8.png" alt="img"></p>
-<h3 id="ChangeResource？"><a href="#ChangeResource？" class="headerlink" title="ChangeResource？"></a>ChangeResource？</h3><p>笔者并不建议换源，Kali官方源的速度还是不错的，换源可能会导致您软件管理出现问题。</p>
-<h1 id="虚拟机迁移发现远程连接消失"><a href="#虚拟机迁移发现远程连接消失" class="headerlink" title="虚拟机迁移发现远程连接消失?"></a>虚拟机迁移发现远程连接消失?</h1><p>VM虚拟机移动后IP修改，要做一些什么操作，就可以在自己电脑上使用了<br>第一步：我们打开虚拟机<br>你要在虚拟机文件的里面打开你创建保存的虚拟机文件：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240609004828634.png" alt="image-20240609004828634"></p>
-<p>打开后是这样的：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240609004907612.png" alt="image-20240609004907612"></p>
-<p>你可以打开并且允许虚拟机了，但是他就是连不上xshell，这个是问题是你的那个虚拟编辑器上面的网关和xshell之前的网关不一样，所以他就连接不上。<br>打开虚拟编辑器</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240609004921035.png" alt="image-20240609004921035"><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240609004934951.png" alt="image-20240609004934951"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240609004955897.png" alt="image-20240609004955897"></p>
-<p>看看上面箭头的有没有钩选上。其中将主机虚拟机适配器连接到网络和使用本地DHCP必须选择上，不然你的虚拟机就是另外一个问题。</p>
-<p>记住自己的子网ip:192.168.xxx.xxx</p>
-<p>我们先:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 dhclient  自己获取IP的一个命令</span><br><span class="line">2 然后 ip add</span><br><span class="line">3 查看自动获取的ip地址</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240609005029453.png" alt="image-20240609005029453"></p>
-<p>我们输入下面这个可以修改网关的ip的命令</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 vi /etc/sysconfig/network-scripts/ifcfg-ens33</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240609005049558.png" alt="image-20240609005049558"></p>
-<p>上这个图片是和7有个参考，如果你是拷贝其他人的虚拟机，就改那个IPADDR就行，因为，其他的别人都改好的。</p>
-<p>IPPADDR，我们最好改成我们刚刚ip add 自动获取的那个ip.</p>
-<p>改好后我们保存退出：</p>
-<p>按esc wq保存退出：</p>
-<p>下面我们开始重新启动网卡：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 systemctl restart network.service</span><br><span class="line">2 如果这个命令不行就用：service network restart 重新启动网关</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>重新启动后面，我们就再</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 ip add</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>后面，我试试虚拟机连接网络：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ping www.baidu.com</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-<h2 id="Get-Docker"><a href="#Get-Docker" class="headerlink" title="Get Docker"></a>Get Docker</h2><h3 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h3><p>docker安装目前有两个版本，一个是官方的<strong>docker.ce</strong>版本，一个是有Debian团队维护的<strong>docker.io</strong>版本。</p>
-<p>之前有争议说 docker.io 是旧版本的docker 而新版的docker是 dockers.ce</p>
-<p>然而docker.io的版本有时会比docker.ce高，事实上，两者只是负责维护的组织不同，前者是Debian官方维护，后者则为Docker官方维护，并没后新旧之分：</p>
-<p><a href="https://stackoverflow.com/questions/45023363/what-is-docker-io-in-relation-to-docker-ce-and-docker-ee-now-called-mirantis-k">https://stackoverflow.com/questions/45023363/what-is-docker-io-in-relation-to-docker-ce-and-docker-ee-now-called-mirantis-k</a></p>
-<h4 id="docker-io"><a href="#docker-io" class="headerlink" title="docker.io"></a>docker.io</h4><p>该版本由Debian团队维护，采用 apt 的方式管理依赖</p>
-<p>安装过程：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665991778767-3780c1b4-c778-4896-b0eb-70651e627778.png" alt="img"></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install docker.io</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665991813089-2477e73a-9650-4eae-b3b4-0f338801b331.png" alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665991905446-84b04c96-1d8d-46b7-a569-945ed7041921.png" alt="img"></p>
-<h4 id="docker-ce"><a href="#docker-ce" class="headerlink" title="docker.ce"></a>docker.ce</h4><p> 由docker官方维护的版本，采用 go 的方式管理依赖，如果您要在开发&#x2F;生产环境中使用docker，推荐使用该版本。</p>
-<p>如果您的Linux版本为Ubuntu&#x2F;Debian，可以使用一下命令自动安装：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -qO- https://get.docker.com/ | sh</span><br></pre></td></tr></table></figure>
-
-<p>（注意，Docker并不支持Kali一键安装，同样笔者也不推荐您用kali作为开发生产环境，Kali满足日常需要，使用io版本即可，当然您也可以使用.ce版本的手动安装）</p>
-<p>手动安装：</p>
-<p>可以参考Docker官方的 Docker Engine安装步骤：</p>
-<p><a href="https://docs.docker.com/engine/install/debian/">https://docs.docker.com/engine/install/debian/</a></p>
-<p>但是该步骤在 Kali Linux上面可能会存在一定问题，以Kali为例，完整的按照流程如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install \</span><br><span class="line">    ca-certificates \</span><br><span class="line">    curl \</span><br><span class="line">    gnupg \</span><br><span class="line">    lsb-release</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666080331410-5ec0dec8-2032-404b-82a4-ae31e0ad436d.png" alt="img"></p>
-<p>选项选择Yes就好。</p>
-<p>然后按照官网提示，添加Docker官方的 GPG key：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> -p /etc/apt/keyrings</span><br><span class="line">curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg</span><br></pre></td></tr></table></figure>
-
-<p>然后设置仓库：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> \</span><br><span class="line">  <span class="string">&quot;deb [arch=<span class="subst">$(dpkg --print-architecture)</span> signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \</span></span><br><span class="line"><span class="string">  <span class="subst">$(lsb_release -cs)</span> stable&quot;</span> | sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br></pre></td></tr></table></figure>
-
-<p>然后开始安装：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin</span><br></pre></td></tr></table></figure>
-
-<p>随后，如果您是Kali Linux，您可能会遭遇以下报错：</p>
-<p><a href="https://unix.stackexchange.com/questions/630643/how-to-install-docker-ce-in-kali-linux">How to install docker-ce in kali-linux?</a></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666080964792-ad4bf959-2049-4979-9924-48c11bc2641d.png" alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666080978683-d1a1900c-fea3-4134-b2cb-98ed2d2c5a42.png" alt="img"></p>
-<p>这是由于Docker官方并没有提供直接支持Kali的源，所以我们使用Debian的源就好：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span> <span class="string">&quot;%s\n&quot;</span> <span class="string">&quot;deb [arch=amd64] https://download.docker.com/linux/debian buster stable&quot;</span> |\</span><br><span class="line">sudo <span class="built_in">tee</span> /etc/apt/sources.list.d/docker-ce.list</span><br></pre></td></tr></table></figure>
-
-<p>并且添加对应的密钥：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -</span><br></pre></td></tr></table></figure>
-
-<p>注意不要忘了给密钥相应权限：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> a+r /etc/apt/keyrings/docker.gpg</span><br></pre></td></tr></table></figure>
-
-<p>此时再跑一次 <code>sudo apt-get update</code>:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
-
-<p>您可能会遇到一个找不到的源，这个是正常的。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666081542730-3abaa686-0c14-4ee9-835b-c9244e7a601c.png" alt="img"></p>
-<p>接下来安装docker：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin</span><br></pre></td></tr></table></figure>
-
-<p>就能正常获取了：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666081606647-ba60b180-36d3-4d71-9696-63ff6fb0068f.png" alt="img"></p>
-<p>安装完成后，执行hello-world，得到图示则安装成功。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo docker run hello-world</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666083076099-29da6da2-2c69-4862-a93b-0d343b5e78f7.png" alt="img"></p>
-<h3 id="DockerHub"><a href="#DockerHub" class="headerlink" title="DockerHub"></a>DockerHub</h3><p><a href="https://hub.docker.com/">https://hub.docker.com/</a></p>
-<p>尝试登录您的<code>**DockerHub**</code>账号：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665992062442-9121927b-e352-4d24-8494-e073942e856a.png" alt="img"></p>
-<p>如果出现类似错误，请手动配置DNS：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/resolv.conf</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665992104653-95449c6a-2e19-49a3-8ccc-f57ecf3b0b93.png" alt="img"></p>
-<p>保存，再次尝试即可成功登录：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665992136237-ce188b31-9008-4375-95ef-f06d4ac013a7.png" alt="img"></p>
-<h2 id="Build-SSH＋vscode-docker-Workflow"><a href="#Build-SSH＋vscode-docker-Workflow" class="headerlink" title="Build SSH＋vscode + docker Workflow"></a>Build SSH＋vscode + docker Workflow</h2><p>该步骤适用于支持SSH协议的Linux（废话，哪个Linux没有个SSH），除了在本地的Kali或者其他Linux上面构建，也支持远程构建该工作流。</p>
-<h3 id="Start-SSH-Service"><a href="#Start-SSH-Service" class="headerlink" title="Start SSH Service"></a>Start SSH Service</h3><h4 id="Kali-Linux"><a href="#Kali-Linux" class="headerlink" title="Kali Linux"></a>Kali Linux</h4><p>Kali虚拟机默认是没有开启ssh服务的 （ssh状态：<code>/etc/init.d/ssh status</code>）</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665992570893-88f65a45-ca5e-4295-a9fb-932fc2f9db2f.png" alt="img"></p>
-<p>所以需要手动启动一下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo /etc/init.d/ssh start </span><br></pre></td></tr></table></figure>
-
-<p>当然，为了方便，我们将ssh添加到开机自启中：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo update-rc.d ssh <span class="built_in">enable</span></span><br><span class="line"><span class="comment"># Or use:</span></span><br><span class="line">systemctl <span class="built_in">enable</span> ssh.service</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665992653697-a499a2eb-da24-435e-87f3-4fda32a2669d.png" alt="img"></p>
-<p>启动之后就可以开始后面的步骤了。</p>
-<h4 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h4><p>由于ubuntu默认不自带openssh-server，所以这里需要手动安装。</p>
-<p>安装openssh-server：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure>
-
-<p>安装完成后启动服务：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service ssh start</span><br></pre></td></tr></table></figure>
-
-<h3 id="Get-Remote-SSH"><a href="#Get-Remote-SSH" class="headerlink" title="Get Remote - SSH"></a>Get Remote - SSH</h3><p>为了使用vscode的远程ssh功能 您可能需要在扩展中安装<code> Remote - SSH</code>插件：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666002987439-4e307846-0b99-4578-9b54-ddd628aefd77.png" alt="img"></p>
-<h3 id="Let-Vscode-Connect-to-host"><a href="#Let-Vscode-Connect-to-host" class="headerlink" title="Let Vscode Connect to host"></a>Let Vscode Connect to host</h3><p>连接方式有两种：<code>密码连接</code> 和 <code>ssh的公私钥</code>。</p>
-<p>一般情况下我们使用密码连接，这样的方法安全性较低，而且每次连接和每次切换目录的时候都会要求输入密码，所以在确保能够密码连接情况下，我们可以进一步使用公私钥验证的方式来提升安全性和优化操作友好性。</p>
-<h4 id="Using-password-connection"><a href="#Using-password-connection" class="headerlink" title="Using password connection"></a>Using password connection</h4><p>打开vscode，点击左下角的远程连接（绿色的部分）</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665992886788-3aa8ff94-7d9f-461a-a1fb-4e108cffd83d.png" alt="img"></p>
-<p>接着在弹出的窗口中选择 Connect to Host</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665992849406-4490a1c9-c017-4952-9930-c7845e7efd7e.png" alt="img"></p>
-<p>选择 <code>Add New SSH Host</code>：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665992979730-8b19217b-f803-4298-8537-fcd5af749130.png" alt="img"></p>
-<p>按照要求输入对应的指令：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993031322-111547cb-b185-4ca5-a767-e8c3ee49506f.png" alt="img"></p>
-<p>IP可通过 <code>ip a</code> 获取</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993103994-c44e4858-ef69-45d9-9b5d-38150e83f710.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh kali@192.168.28.145 -A</span><br></pre></td></tr></table></figure>
-
-<p>保存位置默认第一个就好：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993185976-069830bf-af5d-4a79-9a1d-3958e9b99274.png" alt="img"></p>
-<p>然后连接：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993196349-e231aea3-bdd0-422d-b475-c4669252a75d.png" alt="img"></p>
-<p>选择对应的系统：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993227789-8b0ec6b0-d9eb-4bcb-b0fd-94368350a908.png" alt="img"></p>
-<p>选择继续：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993257173-dfc7b2ab-a5ee-4821-9e7e-3a7af8ac7cc7.png" alt="img"></p>
-<p>输入密码：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993277058-231f6520-9afc-4375-9bf4-7c42f1718163.png" alt="img"></p>
-<p>初始化完成后就连接上了：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993334466-214c5073-08fc-4492-9674-29b9e6e8fff3.png" alt="img"></p>
-<h4 id="Using-public-and-private-keys"><a href="#Using-public-and-private-keys" class="headerlink" title="Using public and private keys"></a>Using public and private keys</h4><h5 id="Create-public-and-private-keys"><a href="#Create-public-and-private-keys" class="headerlink" title="Create public and private keys"></a>Create public and private keys</h5><p>首先在本机上生成对应的公钥私钥：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666022363207-1faad277-da27-4d65-9a77-7f65f22cc0d3.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Enter file in which to save the key (C:\Users\Probius/.ssh/id_rsa):</span><br></pre></td></tr></table></figure>
-
-<p>输入保存路径，如果为空默认为 <code>C:\Users\USERNAME/.ssh/id_rsa</code>，这里笔者直接输入了名字，让其以该名字直接保存在当前目录</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Enter passphrase (empty for no passphrase):</span><br></pre></td></tr></table></figure>
-
-<p>输入私钥密码，为空则没有</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Enter same passphrase again:</span><br></pre></td></tr></table></figure>
-
-<p>注意：如果您使用了私钥密码，那么在进行ssh登录的时候，会提示您输入私钥密码，相当于再使用公私钥登录的情况下又加了一层密码，安全性有很大的提升，但是这样会变得和密码登录一样每次都要输入，这里笔者建议，如果是本地一路回车就好了，如果是远程资源的管理，可以综合安全性考虑</p>
-<p>生成过后，得到的<code>id_rsa.pub</code>(Kali_test.pub)是<strong>公钥</strong>，<code>id_rsa</code>(Kali_test)是<strong>私钥</strong> </p>
-<p>将得到的私钥放在我们的.ssh(C:\Users\USERNAME.ssh)中。</p>
-<p>(您也可以在生成的时候就让他防止在此，当然这并不是重点）</p>
-<h5 id="Configuring-Remote-Host"><a href="#Configuring-Remote-Host" class="headerlink" title="Configuring Remote Host"></a>Configuring Remote Host</h5><p>将得到的公钥上传到 Kali&#x2F;服务器中对应用户的.ssh文件夹中(请确保该文件夹至少有700的权限)：</p>
-<p>（注意 kali默认没有该文件夹，需要用户手动创建，并且赋700权限 <code>mkdir ~/.ssh</code> ）</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666023486280-3163a1ad-2809-44a8-a9e2-a8f29b452de3.png" alt="img"></p>
-<p>在此处打开终端，用公钥文件来生成 authorized_keys：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cat</span> id_ras.pub &gt;&gt; authorized_keys</span><br><span class="line"><span class="comment"># 此处既 cat Kali_test.pub &gt;&gt; authorized_keys</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666023722693-73b3cecc-1273-4a42-88f8-9ed336a90588.png" alt="img"></p>
-<p>由于Linux系统对.ssh拥有比较严格的权限限制，请确保权限配置正确：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> 600 authorized_keys</span><br><span class="line">sudo <span class="built_in">chmod</span> 700 ~/.ssh</span><br></pre></td></tr></table></figure>
-
-<p>编辑ssh配置文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
-
-<p>确保拥有以下条目：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">RSAAuthentication <span class="built_in">yes</span></span><br><span class="line">PubkeyAuthentication <span class="built_in">yes</span></span><br></pre></td></tr></table></figure>
-
-<p>注意Kali的ssh默认配置是没有上诉两项的，需要自行添加：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666026484050-a32d3cb9-76dc-4635-bfa1-087cc833ee2d.png" alt="img"></p>
-<p>然后搞定一切后 重启SSH服务：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service ssh restart</span><br></pre></td></tr></table></figure>
-
-<p>Linux部分的配置这样就搞定啦~</p>
-<p>（在您确保您的连接无误后，如果是服务器等远程设备，可以在config中关闭密码登录以提升安全性：</p>
-<p><code>PasswordAuthentication no</code>）</p>
-<h5 id="Configuring-Local-Host"><a href="#Configuring-Local-Host" class="headerlink" title="Configuring Local Host"></a>Configuring Local Host</h5><p>然后是Windows，也就是vscode这边的配置：</p>
-<p>添加NewHost：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666028378220-501e16a9-549c-4312-8afd-3e73b559abe5.png" alt="img"></p>
-<p>使用：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh USERNAME@IP -i C:\\Users\\Probius\\.ssh\\RAS_ID</span><br></pre></td></tr></table></figure>
-
-<p>（注意使用指令添加时，务必使用双斜杠）</p>
-<p>当然，也可以在已经添加的配置文件上改：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Host 192.168.28.145</span><br><span class="line">	HostName 192.168.28.145</span><br><span class="line">	User kali</span><br><span class="line">	IdentityFile C:\Users\Probius\.ssh\Kali_test</span><br></pre></td></tr></table></figure>
-
-<p>如果操作无误，且没有设置私钥密码，那么点击连接之后无需其他额外操作即可连接；如果设置了私钥密码，那么按照提示输入即可。</p>
-<h5 id="Other-About-SSH-key-login"><a href="#Other-About-SSH-key-login" class="headerlink" title="Other_About SSH key login"></a>Other_About SSH key login</h5><p>关于ssh密钥登录的更多知识可以看这一篇文章：</p>
-<p><a href="https://wangdoc.com/ssh/key.html">https://wangdoc.com/ssh/key.html</a></p>
-<h3 id="Get-The-Docker-Extension"><a href="#Get-The-Docker-Extension" class="headerlink" title="Get The Docker Extension"></a>Get The Docker Extension</h3><h4 id="Install-extension"><a href="#Install-extension" class="headerlink" title="Install extension"></a>Install extension</h4><p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993503285-4cad91c3-c5be-42f1-949b-b06dd63b3dce.png" alt="img"></p>
-<p>（当然 如果显示的是 <code>安装</code>也是一样的）</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993640582-33e0292d-1a01-4a4e-bdb4-5052a3cc658d.png" alt="img"></p>
-<h4 id="Solve-error"><a href="#Solve-error" class="headerlink" title="Solve error"></a>Solve error</h4><p>如果您使用自动安装，应该不会遇到该问题，自动安装的sh会自动完成用户组添加的操作。</p>
-<p>由于权限原因，我们可能无法访问到  <code>/var/run/docker.sock</code></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666085731016-37a5a8a0-770c-4759-ac00-4c124fcd5165.png" alt="img"></p>
-<h5 id="By-add-user-group"><a href="#By-add-user-group" class="headerlink" title="By add user group"></a>By add user group</h5><p>一劳永逸的解决权限问题，将当前用户组添加到docker组即可。</p>
-<p>创建docker用户组，默认安装时就会自动创建，所以执行可能会显示<code>exist</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo groupadd docker </span><br></pre></td></tr></table></figure>
-
-<p>添加当前用户到该组：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo usermod -aG docker <span class="variable">$&#123;USER&#125;</span> </span><br></pre></td></tr></table></figure>
-
-<p>然后重新启动容器服务：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo systemctl restart docker </span><br></pre></td></tr></table></figure>
-
-<p>再次重新登入即可，如果重新登录之后依旧报错无法读取，请尝试重启：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
-
-<h5 id="By-chmod"><a href="#By-chmod" class="headerlink" title="By chmod"></a>By chmod</h5><p>也可以使用<code> sudo chmod 777 /var/run/docker.sock</code>，但是每次重启之后权限都会重置，不推荐</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993792130-55218849-ff43-4565-8b31-b7a7d81a99f6.png" alt="img"></p>
-<p>然后就能正常访问了：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665993848043-242f6244-7db2-4cd0-bfe4-5f1c5456ce0b.png" alt="img"></p>
-<h3 id="Start-Use"><a href="#Start-Use" class="headerlink" title="Start Use"></a>Start Use</h3><p>（以下操作使用<strong>DockerHub</strong>演示）</p>
-<p>因为在安装Docker的时候登录过DockerHub所以这里连接之后，系统会自动获取您的凭证，您可以在这查看您的DockerHub仓库：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665994063185-82918af8-46ea-43a3-a524-f5a66280d2b2.png" alt="img"></p>
-<p>当然，您也可以添加其他仓库，具体的用法可以参考官方文档：</p>
-<p><a href="https://code.visualstudio.com/docs/containers/quickstart-container-registries">https://code.visualstudio.com/docs/containers/quickstart-container-registries</a></p>
-<h4 id="Pull-Image"><a href="#Pull-Image" class="headerlink" title="Pull Image"></a>Pull Image</h4><p>当然 对于自己仓库的镜像还是比较方便的233：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665995599834-3c92a723-9476-43d9-aa8f-9553055a3403.png" alt="img"></p>
-<p>当然如果是公开镜像的话 还是免不了指令啦，不过还是比较方便的，旁边就是终端：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665995757090-9bd04c4b-fb0b-47a1-b96c-c6393e110ba4.png" alt="img"></p>
-<p>完成之后就能在IMAGES栏看到了：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665995915572-4b40f768-d4d5-4f32-a536-ffadb2421c86.png" alt="img"></p>
-<h4 id="Run-Docker"><a href="#Run-Docker" class="headerlink" title="Run Docker"></a>Run Docker</h4><p>运行容器有两个选项Run &#x2F; Run Ineractive</p>
-<h5 id="Run"><a href="#Run" class="headerlink" title="Run"></a>Run</h5><p>默认后台运行，Run执行后效果和在Linux执行 -d的效果相同：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666116092112-5dc775b4-197e-48b1-a345-3bde2132a8ac.png" alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665997253030-26e1cb0b-0014-4c19-b2e6-f219945e510a.png" alt="img"></p>
-<h5 id="Run-Interacitve"><a href="#Run-Interacitve" class="headerlink" title="Run Interacitve"></a>Run Interacitve</h5><p>该选项运行执行后，除了运行容器，还会跳到容器的汇总shell处，这里会实时打印容器日志，</p>
-<p>效果和 <code>View Log</code>效果相同：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666116324737-328fd245-853d-416c-acf7-6adfd5f1e7e3.png" alt="img"></p>
-<h4 id="View-Log"><a href="#View-Log" class="headerlink" title="View Log"></a>View Log</h4><p>直达容器后台日志，如果在运行的时候选择<code>Run Interacitve</code>那么也会跳转到该log页面。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665998996602-944ea384-cf80-4711-9989-b937c4bd02a6.png" alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665999366319-2a41bc0f-4f89-4b63-9cd5-253b54bcd031.png" alt="img"></p>
-<h4 id="Attach-Shell"><a href="#Attach-Shell" class="headerlink" title="Attach Shell"></a>Attach Shell</h4><p>右键选中之后可以直接建立一个容器内部的shell，省去<code>docker exec -i -t  ID /bin/bash</code></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665998911154-243825b7-d7be-47fa-9a30-214d7591f75f.png" alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665999322527-061fab7c-02b4-471c-92bd-b64a716ee583.png" alt="img"></p>
-<h4 id="Edit-Container"><a href="#Edit-Container" class="headerlink" title="Edit Container"></a>Edit Container</h4><p>在CONTAINERS中下拉一个容器的file可以对其进行查看和编辑：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665997210054-cc018f63-7e66-4201-a27c-2aa6c78d7b0a.png" alt="img"></p>
-<p>可以看到对于容器来说 修改是即时的（支持热更新的）</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665997987509-8642ebda-72c7-45a8-b2f4-9e1ef04ac2da.png" alt="img"></p>
-<h4 id="Attach-Container（Advanced-Edit？）"><a href="#Attach-Container（Advanced-Edit？）" class="headerlink" title="Attach Container（Advanced Edit？）"></a>Attach Container（Advanced Edit？）</h4><p>我们也可以用Vscode建立类似SSH的连接，直接连接到整个容器：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665998467833-cf59f140-9f33-43c1-a2b2-c635c6662598.png" alt="img"></p>
-<p>并且操作同步：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665998565856-6d6953de-1afd-4a98-b99f-a9076387a9b3.png" alt="img"></p>
-<p>而且容器支持文件拖拽，相比单纯的COPY指令 拥有更好的体验（个人感觉</p>
-<h4 id="Port-Forward"><a href="#Port-Forward" class="headerlink" title="Port Forward"></a>Port Forward</h4><p>通过SSH直接将远程端口转发到本地，免除防火墙困扰ww</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1665999460970-c81a131d-6712-4ab9-9b30-d0fd0084a6cb.png" alt="img"></p>
-<p>一般来讲在您启动容器的时候 vscode会自动配置 当然为了更好的区分和避免冲突 也可以手动分配</p>
-<p>配置如图：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666000511669-34c924ab-ac4a-42d5-92cb-8b658afe39f1.png" alt="img"></p>
-<h4 id="Open-in-Borrow"><a href="#Open-in-Borrow" class="headerlink" title="Open in Borrow"></a>Open in Borrow</h4><p>如果您配置完成了端口转发(或者vscode自动为您完成配置）那么点击Open in Borrow将在您的默认浏览器中快速打开该端口对应的页面：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666117172873-9d4b7fb4-574d-426d-8dd3-b62b5c1b71e1.png" alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666117247770-7b5c5b4c-a8f9-4c70-9bdc-61b21790fb28.png" alt="img"></p>
-<h4 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h4><p>其他用法，就请佬们自行探索啦ww</p>
-<h2 id="ExtensionRecommend"><a href="#ExtensionRecommend" class="headerlink" title="ExtensionRecommend"></a>ExtensionRecommend</h2><h3 id="Thunder-Client"><a href="#Thunder-Client" class="headerlink" title="Thunder Client"></a>Thunder Client</h3><p>Thunder Client is a lightweight Rest API Client Extension for Visual Studio Code, hand-crafted by Ranga Vadhineni with simple and clean design.</p>
-<p>要注意的是 该插件基于远程运行（既本体在虚拟机&#x2F;服务器上），在测试的时候请确保url指向正确。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/21803058/1666002204613-bd552d8b-851a-4528-baf0-fbe018d7ad51.png" alt="img"></p>
-<h1 id="win11虚拟机部署pikachu"><a href="#win11虚拟机部署pikachu" class="headerlink" title="win11虚拟机部署pikachu"></a>win11虚拟机部署pikachu</h1><p>Phpstudy，Phpstorm，pikachu、外加的话浏览器别太老。<br>Phpstudy：<a href="https://www.xp.cn/">https://www.xp.cn/</a><br>Phpstorm：<a href="https://www.jetbrains.com/zh-cn/phpstorm/">https://www.jetbrains.com/zh-cn/phpstorm/</a><br>pikachu：<a href="https://github.com/zhuifengshaonianhanlu/pikachu">https://github.com/zhuifengshaonianhanlu/pikachu</a></p>
-<p>这里我并没有一步一步截图，因为碰壁很多次，所以，我将针对我所遇到的问题以及解决方法展开阐述，仅供参考。<br>1、win11本机搭建步骤</p>
-<p>1、安装Phpstudy以及Phpstorm软件，并启动apacha以及mysql<br><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240530151311289.png" alt="image-20240530151311289"><br>其实，这里一个版本就行。</p>
-<p>2、这下去pikachu的那个文件进行把mysql的root密码写进去，这里如果你的密码不是初始密码root的话，那么这里则需要修改两个Php中的密码：</p>
-<p>3、修改密码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240530151238531.png" alt="image-20240530151238531"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240530151250834.png" alt="image-20240530151250834"></p>
-<p>4、ctrl+c以及ctrl+v将修改之后的pikachu文件放在phpstudy安装之后文件夹的www文件目录中；</p>
-<p>5、修改完之后我就又碰见了问题四，也就是执行127.0.0.1&#x2F;pikachu之后报错<br>说有个文件的14行有错误。详见问题四：</p>
-<p>6、直接进入浏览器输入127.0.0.1&#x2F;pikachu<br><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240530151224015.png" alt="image-20240530151224015"><br>7、当然，这里是win主机搭建的靶机，而且即使到这一步依旧没有结束<br>因为还要进行安装初始化：<br>所以，在URL输入框中，我们输入127.0.0.1&#x2F;pikachu&#x2F;install.php<br>然后回车就可以看到安装以及初始化了：<br><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240530151158114.png" alt="image-20240530151158114"><br>我所碰见的问题以及解决方式：</p>
-<p>1、文件打不开，也就是pikachu的那个ins配置文件直接打不开，这个我觉得和电脑以及环境有关，我使用的是win11，之前win10还没碰见过这种情况：<br>解决方式：<br>这里我采用的是直接关机重启，这里注意进程，最好别有什么系统程序执行</p>
-<p>2、至于上面pikachu配置文件更改，也就是给那个里面写入root的密码，双击那个文件直接卡住的情况：<br>解决方式：<br>这里直接打开Phpstorm软件进行选中文件打开，这里自己找到文件的路径进行打开。<br>这里路径不好找？可以去搜everthing官网进行下载（搜索文件很快）。<br><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240530150821979.png" alt="image-20240530150821979"></p>
-<p>3、主机与虚拟机win2012进行连接实现文件传输达不到，使用moba以及winSCP都无法连接到，那么文件该如何传输到虚拟机中？<br><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240530150808530.png" alt="image-20240530150808530"><br>解决方式：<br>这里用到了VMware tools，首先，我们将win2012先关闭客户机：<br>然后点击编辑虚拟机设置——&gt;选项——&gt;共享文件夹<br><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240530150759674.png" alt="image-20240530150759674">这里创建一个共享文件夹实现本机与win2012的文件互通。</p>
-<p>4、这里浏览器输出127.0.0.1&#x2F;pikachu的图像，这里报错了，很明显可以看到是mysql的密码导致的错误，可这里并没有出错，两个文件都配置的是root用户名以及root密码：<br>解决方式：<br>这里在小皮也就是Phpstudy中添加创建一个数据库：<br><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240530150749344.png" alt="image-20240530150749344"><br>点击上面的创建数据库，如果出现了root密码未修改，那么一修改，然后继续创建数据库，同样设置6位以上的密码，没什么讲究的。这下即可成功进入靶场。</p>
-<p>5、我进行安装以及初始化之后，浏览器中改变URL之后回车，链接后面便加上一个#号，同时界面是一个固定的界面，不能进行跳转界面：<br>解决方法：<br>嗯······我当时使用的是win2012的浏览器，这里换个浏览器重新在虚拟机访问127.0.0.1&#x2F;pikachu便好······没什么技术要求，以及在本机访问中，也就不会出现这样的情况了。</p>
-<p>好了，pikachu靶场搭建就分享到这，希望能帮到各位。<br>————————————————</p>
-<p>原文链接：<a href="https://blog.csdn.net/weixin_63172698/article/details/131498908">https://blog.csdn.net/weixin_63172698/article/details/131498908</a></p>
-<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><p><a href="https://www.runoob.com/mysql/mysql-tutorial.html">MySQL 教程 | 菜鸟教程 (runoob.com)</a></p>
-<p>可以使用phpstudy自带的sql_front或navicat通过pikachu数据库进行一系列实践</p>
-<p>或者我之前的个人笔记也有的</p>
-<h1 id="Docker网络"><a href="#Docker网络" class="headerlink" title="Docker网络"></a>Docker网络</h1><h2 id="Docker网络理论"><a href="#Docker网络理论" class="headerlink" title="Docker网络理论"></a>Docker网络理论</h2><p>容器网络实际上是<strong>由Docker为应用程序所创造的虚拟环境的一部分，它能够使应用从宿主机操作系统的网络系统中独立出来。</strong>形成容器自有的网络设备、IP 协议栈、端口套接字、IP 路由表、防火墙等等与网络相关的模块。</p>
-<h3 id="CNM"><a href="#CNM" class="headerlink" title="CNM"></a><strong>CNM</strong></h3><p>Docker 网络架构采用的设计规范是 CNM（Container Network Model）：<strong>CNM 中规定了 Docker 网络的基础组成要素：Sandbox、Endpoint、Network。如图所示，</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240604004145261.png" alt="image-20240604004145261"></p>
-<ul>
-<li>Sandbox，提供了<strong>容器的虚拟网络栈</strong>，也即端口套接字、IP 路由表、防火墙、DNS 配置等内容。<strong>主要用于隔离容器网络与宿主机网络</strong>，形成了完全独立的容器网络环境。</li>
-<li>Network，Docker 内部的虚拟子网，网络内的参与者相互可见并能够进行通讯。<strong>Docker 的虚拟网路和宿主机网络是存在隔离关系的，其目的主要是形成容器间的安全通讯环境。</strong></li>
-<li>Endpoint，<strong>就是虚拟网络的接口</strong>，就像普通网络接口一样，Endpoint 的主要职责是<strong>负责创建连接。在 CNM 中，终端负责将沙盒连接到网络。</strong>个人理解：Endpoint 与常见的网络适配器类似，也就意味着 Endpoint 只能接入某一个网络。<strong>因此，如果容器需要接入到多个网络，就需要多个 Endpoint。</strong></li>
-</ul>
-<h3 id="Libnetwork"><a href="#Libnetwork" class="headerlink" title="Libnetwork"></a><strong>Libnetwork</strong></h3><p>Libnetwork 是 CNM 的标准实现。Libnetwork 是开源库，采用 Go 语言编写（跨平台的），也是 Docker 所使用的库，Docker 网络架构的核心代码都在这个库中。</p>
-<h2 id="驱动"><a href="#驱动" class="headerlink" title="驱动"></a><strong>驱动</strong></h2><p>“驱动”在计算机和电子设备领域中，通常指的是设备驱动程序（Device Driver），是一种特殊的软件程序，负责控制硬件设备的操作并与操作系统进行通信。<strong>驱动程序充当硬件与操作系统或应用程序之间的中介，</strong>使得软件可以通过标准化的接口与硬件设备进行交互，而无需了解硬件设备的具体实现细节。</p>
-<h3 id="驱动的主要功能"><a href="#驱动的主要功能" class="headerlink" title="驱动的主要功能"></a>驱动的主要功能</h3><ol>
-<li><p><strong>硬件初始化</strong>：</p>
-<ul>
-<li>驱动程序在设备启动时初始化硬件，使其处于可以正常工作的状态。</li>
-</ul>
-</li>
-<li><p><strong>中断处理</strong>：</p>
-<ul>
-<li>处理来自硬件设备的中断信号，并将相应的信息传递给操作系统或应用程序。</li>
-</ul>
-</li>
-<li><p><strong>数据传输</strong>：</p>
-<ul>
-<li>管理硬件设备的数据传输，包括读取和写入操作。比如，从硬盘读取数据或向打印机发送打印作业。</li>
-</ul>
-</li>
-<li><p><strong>提供接口</strong>：</p>
-<ul>
-<li>提供标准化的接口，使得操作系统和应用程序能够通过统一的方法访问硬件设备的功能。</li>
-</ul>
-</li>
-</ol>
-<h3 id="驱动程序的类型"><a href="#驱动程序的类型" class="headerlink" title="驱动程序的类型"></a>驱动程序的类型</h3><p>驱动程序可以根据不同的设备类型进行分类，以下是一些常见的驱动程序类型：</p>
-<ol>
-<li><p><strong>设备驱动程序</strong>：</p>
-<ul>
-<li>控制特定硬件设备的驱动程序，如键盘、鼠标、打印机、硬盘等。</li>
-</ul>
-</li>
-<li><p><strong>内核驱动程序</strong>：</p>
-<ul>
-<li>运行在操作系统内核中的驱动程序，<strong>提供低级别的硬件控制和管理。</strong></li>
-</ul>
-</li>
-<li><p><strong>文件系统驱动程序</strong>：</p>
-<ul>
-<li>负责管理文件系统的驱动程序，使得操作系统能够读取和写入存储设备上的文件。</li>
-</ul>
-</li>
-<li><p><strong>网络驱动程序</strong>：</p>
-<ul>
-<li>管理网络接口卡（NIC）或其他网络设备的驱动程序，负责网络通信和数据传输。</li>
-</ul>
-</li>
-</ol>
-<h3 id="驱动程序的安装与更新"><a href="#驱动程序的安装与更新" class="headerlink" title="驱动程序的安装与更新"></a>驱动程序的安装与更新</h3><p>驱动程序通常由硬件设备制造商提供，可以通过以下几种方式安装和更新：</p>
-<ol>
-<li><p><strong>操作系统自带</strong>：</p>
-<ul>
-<li>操作系统通常自带一些常用硬件设备的驱动程序，安装操作系统时会自动安装这些驱动程序。</li>
-</ul>
-</li>
-<li><p><strong>设备制造商提供</strong>：</p>
-<ul>
-<li>硬件设备通常附带驱动程序安装光盘或下载链接，用户可以通过制造商的网站下载最新的驱动程序。</li>
-</ul>
-</li>
-<li><p><strong>自动更新</strong>：</p>
-<ul>
-<li>现代操作系统（如Windows Update）提供自动更新功能，可以自动检测并安装最新的驱动程序。</li>
-</ul>
-</li>
-</ol>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>以下是一些具体的驱动程序示例：</p>
-<ol>
-<li><p><strong>显卡驱动程序（Graphics Driver）</strong>：</p>
-<ul>
-<li>控制显卡硬件，提供图形显示和渲染功能。例如，NVIDIA或AMD提供的显卡驱动程序。</li>
-</ul>
-</li>
-<li><p><strong>声卡驱动程序（Audio Driver）</strong>：</p>
-<ul>
-<li>控制声卡硬件，提供音频输入和输出功能。例如，Realtek声卡驱动程序。</li>
-</ul>
-</li>
-<li><p><strong>网络适配器驱动程序（Network Adapter Driver）</strong>：</p>
-<ul>
-<li>控制网络适配器硬件，提供网络连接和数据传输功能。例如，Intel或Broadcom网络适配器驱动程序。</li>
-</ul>
-</li>
-</ol>
-<h3 id="驱动程序的工作原理"><a href="#驱动程序的工作原理" class="headerlink" title="驱动程序的工作原理"></a>驱动程序的工作原理</h3><p>驱动程序通常包括以下几个主要部分：</p>
-<ol>
-<li><p><strong>硬件接口</strong>：</p>
-<ul>
-<li>直接与硬件设备交互，发送命令和接收数据。</li>
-</ul>
-</li>
-<li><p><strong>操作系统接口</strong>：</p>
-<ul>
-<li>提供给操作系统的标准化接口，使得操作系统能够通过系统调用与硬件设备交互。</li>
-</ul>
-</li>
-<li><p><strong>中断处理</strong>：</p>
-<ul>
-<li>处理硬件设备发出的中断信号，并通知操作系统进行相应的处理。</li>
-</ul>
-</li>
-<li><p><strong>内存管理</strong>：</p>
-<ul>
-<li>管理硬件设备使用的内存空间，包括数据缓冲区和控制寄存器。</li>
-</ul>
-</li>
-</ol>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p><strong>驱动程序在计算机系统中扮演着关键角色，通过提供标准化的接口，使得操作系统和应用程序能够高效、安全地与各种硬件设备进行交互。</strong>了解驱动程序的基本原理和类型，有助于更好地管理和维护计算机系统，确保硬件设备的正常运行和最佳性能。</p>
-<h3 id="驱动-for-Docker"><a href="#驱动-for-Docker" class="headerlink" title="驱动　 for　Ｄｏｃｋｅｒ"></a>驱动　 for　Ｄｏｃｋｅｒ</h3><p>驱动就负责实现数据层。比如<strong>网络的连通性和隔离性是由驱动来处理的</strong>。驱动通过实现特定网络类型的方式扩展了 Docker 网络栈，例如桥接网络和覆盖网络。</p>
-<p>Docker 内置了若干驱动，通常被称作原生驱动或者本地驱动。比如 <strong>Bridge Driver</strong>、<strong>Host Driver</strong>、<strong>Overlay Driver</strong>、<strong>MacLan Driver</strong>、<strong>None Driver</strong> 等等。第三方也可以编写 Docker 网络驱动，这些驱动被叫做远程驱动，例如 Calico、Contiv、Kuryr 以及 Weave 等。每个驱动负责创建其上所有网络资源的创建和管理。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240604004633142.png" alt="image-20240604004633142"></p>
-<p>在 Docker 安装时，会自动安装一块 Docker 网卡称为 docker0，用于 Docker 各容器及宿主机的网络通信。</p>
-<h1 id="桥接网络基本概念"><a href="#桥接网络基本概念" class="headerlink" title="桥接网络基本概念"></a>桥接网络基本概念</h1><p>桥接网络（Bridging Network）是一种网络配置方法，通过使用网络桥接（network bridging）技术将两个或多个网络段连接在一起，使它们能够作为一个统一的网络进行通信。这种技术常用于局域网（LAN）环境中，以扩展网络的覆盖范围或连接不同的网络类型。</p>
-<h4 id="网络桥接的基本概念"><a href="#网络桥接的基本概念" class="headerlink" title="网络桥接的基本概念"></a>网络桥接的基本概念</h4><p>网络桥接的基本概念包括以下几个方面：</p>
-<ol>
-<li><p><strong>网络桥（Bridge）</strong>：</p>
-<ul>
-<li>网络桥是一种网络设备，可以是专用硬件设备或软件实现的虚拟桥。<strong>其主要功能是连接两个或多个网络段，使它们能够互相通信</strong>。</li>
-<li>桥接设备会在<strong>不同的网络段之间转发数据包</strong>，使用媒体访问控制（MAC）地址来决定数据包的转发路径。</li>
-</ul>
-</li>
-<li><p><strong>透明桥（Transparent Bridge）</strong>：</p>
-<ul>
-<li>透明桥是最常见的一种网络桥，它在连接的网络段之间转发数据包，而不会对网络协议进行任何修改。</li>
-<li>透明桥通过学习网络设备的MAC地址来建立内部地址表，从而智能地转发数据包，仅将数据包发送到目标网络段。</li>
-</ul>
-</li>
-</ol>
-<h4 id="桥接网络的用途"><a href="#桥接网络的用途" class="headerlink" title="桥接网络的用途"></a>桥接网络的用途</h4><p>桥接网络可以用于多种用途，包括但不限于：</p>
-<ol>
-<li><p><strong>扩展网络覆盖范围</strong>：</p>
-<ul>
-<li>通过将两个或多个物理分开的网络段桥接在一起，可以扩展网络的覆盖范围，使更多的设备能够互相通信。</li>
-</ul>
-</li>
-<li><p><strong>连接不同类型的网络</strong>：</p>
-<ul>
-<li>桥接可以<strong>连接不同类型的网络，例如以太网和无线网络</strong>，使得有线设备和无线设备能够在同一个网络中通信。</li>
-</ul>
-</li>
-<li><p><strong>增强网络性能</strong>：</p>
-<ul>
-<li>通过合理的桥接配置，可以减少网络中的广播域，从而减少网络拥塞，提高整体网络性能。</li>
-</ul>
-</li>
-</ol>
-<h4 id="桥接网络的类型"><a href="#桥接网络的类型" class="headerlink" title="桥接网络的类型"></a>桥接网络的类型</h4><p>桥接网络可以有多种配置方式，以下是几种常见的类型：</p>
-<ol>
-<li><p><strong>以太网桥接（Ethernet Bridging）</strong>：</p>
-<ul>
-<li>通过以太网桥将多个以太网段连接在一起，使它们成为一个逻辑上的单一网络。</li>
-</ul>
-</li>
-<li><p><strong>无线桥接（Wireless Bridging）</strong>：</p>
-<ul>
-<li>使用无线设备（如无线接入点）将两个或多个无线网络段连接在一起，常用于扩展无线网络的覆盖范围。</li>
-</ul>
-</li>
-<li><p><strong>混合桥接（Hybrid Bridging）</strong>：</p>
-<ul>
-<li>结合有线和无线桥接，将有线网络段和无线网络段连接在一起。</li>
-</ul>
-</li>
-</ol>
-<h4 id="桥接网络的实现"><a href="#桥接网络的实现" class="headerlink" title="桥接网络的实现"></a>桥接网络的实现</h4><p>桥接网络可以通过硬件设备或软件配置来实现：</p>
-<ol>
-<li><p><strong>硬件实现</strong>：</p>
-<ul>
-<li>使用专用的网络桥设备或交换机（具有桥接功能）来连接不同的网络段。</li>
-</ul>
-</li>
-<li><p><strong>软件实现</strong>：</p>
-<ul>
-<li>在操作系统中使用虚拟桥接软件（如Linux的<code>brctl</code>工具或Windows的网络桥接功能）来实现桥接网络。</li>
-</ul>
-</li>
-</ol>
-<h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h4><p>假设有两个局域网（LAN），分别位于两个不同的楼层，每个楼层都有一个交换机连接所有的计算机。通过在两个交换机之间连接一个网络桥，可以使两个楼层的计算机互相通信，如同它们在同一个网络中一样。</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>桥接网络是一种有效的网络配置方法，可以扩展网络的覆盖范围、连接不同类型的网络和增强网络性能。通过使用网络桥设备或软件实现桥接网络，可以将多个物理上分离的网络段连接在一起，形成一个逻辑上的统一网络。</p>
-<p><strong>Docker 的 bridge 网络采用内置的 bridge 驱动，而 bridge 的底层采用的是</strong> <strong>Linux</strong> <strong>内核中 Linux bridge 技术</strong>（这意味着 bridge 是高性能并且是非常稳定的）。</p>
-<h2 id="桥接网络-for-Docker"><a href="#桥接网络-for-Docker" class="headerlink" title="桥接网络 for Docker"></a>桥接网络 for Docker</h2><p>Docker 的 bridge 网络采用内置的 bridge 驱动，而 bridge 的底层采用的是 Linux 内核中 Linux bridge 技术（这意味着 bridge 是高性能并且是非常稳定的）。</p>
-<p><strong>由于容器运行在自己单独的 network namespace 中，所以有单独的协议栈。</strong>容器中配置网关为 172.17.0.1，发出去的数据包<strong>先到达 br0</strong>，然后交给主机的协议栈，由于<strong>目的 IP 是外网 IP</strong>，且主机会开启 IP forward 功能，于是<strong>数据包通过主机的 eth0 发出去</strong>。由于 172.17.0.1 是内网 IP ，所以一般发出去之前会做 NAT 转换。由于要进过主机的协议栈并且要做 NAT 转换，所以性能上可能会差点，<strong>但是优点就是容器处于内网中，安全性相对要高点。</strong></p>
-<p>默认情况下，创建的容器在没有使用 –network 参数指定要加入的 docker 网络时，默认都是加入 Docker 默认的单机桥接网络，也就是下面的 name 为 bridge 的网络。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ docker network ls</span><br><span class="line">NETWORK ID          NAME                DRIVER              SCOPE</span><br><span class="line">0dda6f303b8b        bridge              bridge              local</span><br></pre></td></tr></table></figure>
-
-<h4 id="创建新的单机桥接网络"><a href="#创建新的单机桥接网络" class="headerlink" title="创建新的单机桥接网络"></a><strong>创建新的单机桥接网络</strong></h4><p>使用 <code>docker network create</code> 命令，我们可创建一个名为 “localnet” 的单机桥接网络，并且在内核中还会多出一个新的 Linux 网桥。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ docker network create -d bridge localnet</span><br><span class="line"></span><br><span class="line">$ docker network ls</span><br><span class="line">NETWORK ID          NAME                DRIVER              SCOPE</span><br><span class="line">			......</span><br><span class="line">f55943e20201        localnet            bridge              local</span><br></pre></td></tr></table></figure>
-
-<p>在创建完之后，我们可以通过 brctl 工具来查看系统中的 Linux 网桥。可以看到，<strong>输出的内容中包含了两个网桥，docker0 是默认的 Docker bridge 网络所使用的网桥，br-f55943e20201 是 Docker localnet 网络所使用的网桥。</strong>这两个网桥目前都没有任何设备接入（看 interface 列）。这两个网桥所处的网段是不同的，</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240604084900918.png" alt="image-20240604084900918"></p>
-<h4 id="同个网络中的容器间通信"><a href="#同个网络中的容器间通信" class="headerlink" title="同个网络中的容器间通信"></a><strong>同个网络中的容器间通信</strong></h4><p>使用下面这条命令即可运行一个新的容器，并且让这个新容器加入到 localnet 这个网络中的。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ docker container run -d --name demo1 --network localnet alpine sleep 3600</span><br></pre></td></tr></table></figure>
-
-<p>我们查看网桥的情况，<strong>demo1</strong> 的网络接口连接到了网桥 br-f55943e20201 上，如图所示。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ brctl show</span><br><span class="line">bridge name     bridge id               STP enabled     interfaces</span><br><span class="line">br-f55943e20201 8000.02421d9aa3e1       no              vethf6a3fba</span><br><span class="line">docker0         8000.0242be6b61dc       no</span><br></pre></td></tr></table></figure>
-
-<p>如果在<strong>相同的网络中继续接入新的容器，那么新接入的容器是可以通过 demo1 这个名称来 ping 通的</strong>。如下所示，我们创建了一个新的容器（demo2），并且在这个容器中直接 ping demo1 发现可以的 ping 通的。<strong>这是因为，demo2 运行了一个本地 DNS 解析器，该解析器会将该请求转发到 Docker 内部 DNS 服务器中。</strong>DNS 服务器中记录了容器启动时通过 –name 或者 –net-alias 参数指定的名称和容器之间的和映射关系。</p>
-<h5 id="详细解释"><a href="#详细解释" class="headerlink" title="详细解释"></a>详细解释</h5><p>在你提供的例子中，<code>demo2</code> 容器中可以 <code>ping</code> 通 <code>demo1</code> 容器。这意味着 <code>demo2</code> 容器能够通过网络与 <code>demo1</code> 容器进行通信，<code>demo2</code> 可以成功发送 ICMP 回显请求数据包到 <code>demo1</code>，并接收到 <code>demo1</code> 的应答数据包。这种情况表明：</p>
-<ol>
-<li>两个容器处于同一个网络（如同一个 Docker 网络中）。</li>
-<li>容器之间的 DNS 解析功能正常，<code>demo2</code> 能够通过容器名称 <code>demo1</code> 找到其对应的 IP 地址。</li>
-<li>容器之间的网络连通性是正常的，没有防火墙等网络设备阻碍两者通信。</li>
-</ol>
-<p>下面是你提供的示例中的具体过程：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">javascript复制代码# ping demo1</span><br><span class="line">PING demo1 (172.18.0.2): 56 data bytes</span><br><span class="line">64 bytes from 172.18.0.2: seq=0 ttl=64 time=0.230 ms</span><br><span class="line">64 bytes from 172.18.0.2: seq=1 ttl=64 time=0.161 ms</span><br></pre></td></tr></table></figure>
-
-<p>在这个例子中：</p>
-<ul>
-<li>你在 <code>demo2</code> 容器中执行 <code>ping demo1</code> 命令。</li>
-<li><code>demo2</code> 容器通过内部 DNS 解析 <code>demo1</code> 的名称并找到其 IP 地址 <code>172.18.0.2</code>。</li>
-<li><code>demo2</code> 容器向 <code>172.18.0.2</code> 发送 ICMP 回显请求。</li>
-<li><code>demo1</code> 容器接收到请求并返回 ICMP 回显应答。</li>
-<li><code>demo2</code> 容器接收到应答，表明 <code>demo1</code> 容器是可达的，网络连通性正常。</li>
-</ul>
-<p>这就是为什么你可以在 <code>demo2</code> 中 <code>ping</code> 通 <code>demo1</code>。</p>
-<hr>
-<p>除此之外，我们可以看到 demo1 的 IP 地址是 172.18.0.2，这个与网桥 br-f55943e20201 是处于同一个网段内的。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/ # ls</span><br><span class="line">bin    dev    etc    home   lib    media  mnt    opt    proc   root   run    sbin   srv    sys    tmp    usr    var</span><br><span class="line">/ # ping demo1</span><br><span class="line">PING demo1 (172.18.0.2): 56 data bytes</span><br><span class="line">64 bytes from 172.18.0.2: seq=0 ttl=64 time=0.230 ms</span><br><span class="line">64 bytes from 172.18.0.2: seq=1 ttl=64 time=0.161 ms</span><br></pre></td></tr></table></figure>
-
-<h4 id=""><a href="#" class="headerlink" title=""></a></h4><h2 id="ping的解释"><a href="#ping的解释" class="headerlink" title="ping的解释"></a>ping的解释</h2><p>当然，以下是对 <code>ping</code> 命令作用以及 “ping 通” 解释的详细说明：</p>
-<h3 id="ping-命令的作用"><a href="#ping-命令的作用" class="headerlink" title="ping 命令的作用"></a><code>ping</code> 命令的作用</h3><p><code>ping</code>（Packet Internet Groper）是一个用于测试网络连接的命令行工具。其主要作用如下：</p>
-<ol>
-<li><p><strong>检测网络连通性</strong>：<code>ping</code> 可以用来检查一个设备是否能够与另一个设备进行网络通信。通过向目标地址发送ICMP（Internet Control Message Protocol）回显请求数据包，并等待回显应答来判断网络是否连通。</p>
-</li>
-<li><p><strong>测量网络延迟</strong>：<code>ping</code> 会显示从发送请求到接收应答所需的时间。这有助于测量网络的响应时间或延迟。</p>
-</li>
-<li><p><strong>诊断网络问题</strong>：通过观察 <code>ping</code> 的结果，可以帮助诊断网络中可能存在的问题。例如，如果 <code>ping</code> 不通，可能意味着网络不通、目标设备关闭或防火墙阻止了 ICMP 数据包。</p>
-</li>
-<li><h4 id="-1"><a href="#-1" class="headerlink" title=""></a></h4></li>
-</ol>
-<h3 id="“ping-通”-的解释"><a href="#“ping-通”-的解释" class="headerlink" title="“ping 通” 的解释"></a>“ping 通” 的解释</h3><p>“ping 通” 指的是通过 <code>ping</code> 命令成功发送 ICMP 回显请求并收到目标设备的回显应答。这表明两个设备之间的网络连接正常，能够相互通信。具体来说：</p>
-<ul>
-<li>当你运行 <code>ping</code> 命令时，系统会向目标 IP 地址或域名发送 ICMP 回显请求数据包。</li>
-<li>如果目标设备接收到这个数据包并回送一个回显应答数据包，那么 <code>ping</code> 命令就会在控制台上显示应答的信息，包括应答时间、数据包大小和 TTL（生存时间）。</li>
-<li>多次 <code>ping</code> 通表示网络连接稳定，并且没有丢包或超时的情况。</li>
-</ul>
-<p>在你提供的示例中，<code>demo2</code> 容器通过 <code>ping demo1</code> 命令发送 ICMP 回显请求，并成功收到 <code>demo1</code> 容器的回显应答。这说明 <code>demo2</code> 和 <code>demo1</code> 之间的网络连接是正常的，可以相互通信。</p>
-<h2 id="暴露端口"><a href="#暴露端口" class="headerlink" title="暴露端口"></a><strong>暴露端口</strong></h2><p>同一个网络中的容器之间虽然可以互相 ping 通，但是并不意味着可以任意访问容器中的任何服务。Docker 为容器增加了一套安全机制，<strong>只有容器自身允许的端口，才能被其他容器所访问。如下所示，我们可以通过 <code>docker container ls</code> 命令可以看到容器暴露给其他容器访问的端口是 80，那么我们只能容器的 80 端口进行访问，而不能对没有开放的 22 端口进行访问。</strong></p>
-<p>我们可以在<strong>镜像创建的时候定义要暴露的端口，也可以在容器创建时定义要暴露的端口</strong>，使用 –expose。如下所示，就额外暴露了 20、22 这两个端口。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ docker container run -d --name web --expose 22 --expose 20 nginx</span><br><span class="line"></span><br><span class="line">$ docker container ls</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES</span><br><span class="line">4749dac32711        nginx               &quot;/docker-entrypoint.…&quot;   12 seconds ago      Up 10 seconds       20/tcp, 22/tcp, 80/tcp   web</span><br></pre></td></tr></table></figure>
-
-<h4 id="端口映射"><a href="#端口映射" class="headerlink" title="端口映射"></a><strong>端口映射</strong></h4><p>上面提到的桥接网络中的容器只能与位于相同网络中的容器进行通信，假如一个容器想对外提供服务的话，需要进行端口映射。端口映射将容器的某个端口映射到 Docker 主机端口上。那么任何发送到该端口的流量，都会被转发到容器中。如图所示，容器内部开放端口为 80，该端口被映射到了 Docker 主机的 10.0.0.15 的 5000 端口上。最终访问 10.0.0.15:5000 的所有流量都会被转发到容器的 80 端口。</p>
-<h3 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a><strong>相关命令</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 列出运行在本地 docker 主机上的全部网络</span><br><span class="line">docker network ls</span><br><span class="line"></span><br><span class="line"># 提供 Docker 网络的详细配置信息</span><br><span class="line">docker network inspect &lt;NETWORK_NAME&gt;</span><br><span class="line"></span><br><span class="line"># 创建新的单机桥接网络，名为 localnet，其中 -d 不指定的话，默认是 bridge 驱动。并且主机内核中也会创建一个新的网桥。</span><br><span class="line">docker network create -d bridge localnet</span><br><span class="line"></span><br><span class="line"># 删除 Docker 主机上指定的网络</span><br><span class="line">docker network rm</span><br><span class="line"></span><br><span class="line"># 删除主机上全部未使用的网络</span><br><span class="line">docker network prune</span><br><span class="line"></span><br><span class="line"># 运行一个新的容器，并且让这个容器加入 Docker 的 localnet 这个网络中</span><br><span class="line">docker container run -d --name demo1 --network localnet alpine sleep 3600</span><br><span class="line"></span><br><span class="line"># 运行一个新的容器，并且让这个容器暴露 22、20 两个端口</span><br><span class="line">docker container run -d --name web --expose 22 --expose 20 nginx</span><br><span class="line"></span><br><span class="line"># 运行一个新的容器，并且将这个容器的 80 端口映射到主机的 5000 端口</span><br><span class="line">docker container run -d --name web --network localnet -p 5000:80 nginx</span><br><span class="line"></span><br><span class="line"># 查看系统中的网桥</span><br><span class="line">brctl show</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Penetration Testing</category>
-      </categories>
-      <tags>
-        <tag>tools</tag>
       </tags>
   </entry>
 </search>
