@@ -734,6 +734,17 @@ article table pre {
     color: #f45542;
   }
 }
+#toc {
+  background-color: #eee;
+  font-size: 0.8em;
+  color: color-link;
+}
+#toc .toc-link {
+  list-style: none;
+}
+#toc .toc-child {
+  list-style: none;
+}
 article.archive {
   padding: 0;
   margin: 2em auto;

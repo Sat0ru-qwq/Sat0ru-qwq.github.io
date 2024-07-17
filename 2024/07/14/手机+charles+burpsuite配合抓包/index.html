@@ -84,20 +84,28 @@
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="微信小程序-公众号抓包的主流方式"><a href="#微信小程序-公众号抓包的主流方式" class="headerlink" title="微信小程序&#x2F;公众号抓包的主流方式"></a>微信小程序&#x2F;公众号抓包的主流方式</h1><p>目前有以下几种：</p>
+        
+    <div id="toc">
+        <strong class="sidebar-title">目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">微信小程序&#x2F;公众号抓包的主流方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">1、Charles官网下载安装包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">2、Burpsuite下载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">3、Charles破解</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">二、Charles设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">1、Charles设置代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">2、关闭对windows端的抓包（每次打开软件都是默认开启的，记得关闭）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">3、配置PC端证书</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-text">4.移动端证书配置（我这里使用苹果手机测试）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">4.1手机连接电脑热点，并配置端口</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-text">4.2证书下载后手机能直接识别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">同样的　我们也可以在模拟器如此部署</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">游戏封包技术</span></a></li></ol>
+    </div>
+
+
+
+        <h1><span id="微信小程序x2f公众号抓包的主流方式">微信小程序&#x2F;公众号抓包的主流方式</span></h1><p>目前有以下几种：</p>
 <p>1、Windows+Burp+Proxifier（配置困难，数据包卡顿)</p>
 <p>2、Burp+安卓模拟器（模拟器卡顿）</p>
 <p>3、Burp+Charles（本文测试，抓包完整，放包流畅）</p>
 <p>一、下载</p>
-<h4 id="1、Charles官网下载安装包"><a href="#1、Charles官网下载安装包" class="headerlink" title="1、Charles官网下载安装包"></a>1、Charles官网下载安装包</h4><p><a target="_blank" rel="noopener" href="https://www.charlesproxy.com/download/latest-release/">https://www.charlesproxy.com/download/latest-release/</a></p>
-<h4 id="2、Burpsuite下载"><a href="#2、Burpsuite下载" class="headerlink" title="2、Burpsuite下载"></a>2、Burpsuite下载</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://portswigger.net/burp/releases</span><br></pre></td></tr></table></figure>
+<h4><span id="1-charles官网下载安装包">1、Charles官网下载安装包</span></h4><p><a target="_blank" rel="noopener" href="https://www.charlesproxy.com/download/latest-release/">https://www.charlesproxy.com/download/latest-release/</a></p>
+<h4><span id="2-burpsuite下载">2、Burpsuite下载</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://portswigger.net/burp/releases</span><br></pre></td></tr></table></figure>
 
-<h4 id="3、Charles破解"><a href="#3、Charles破解" class="headerlink" title="3、Charles破解"></a>3、Charles破解</h4><p>进入链接，输入任意内容作为用户名，获取注册码。</p>
+<h4><span id="3-charles破解">3、Charles破解</span></h4><p>进入链接，输入任意内容作为用户名，获取注册码。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.zzzmode.com/mytools/charles/</span><br></pre></td></tr></table></figure>
 
 <p>打开Charles,打开上方工具栏中Help—Register Charles，输入用户名和激活码</p>
 <p>打开Charles,打开上方工具栏中Help—Register Charles，输入用户名和激活码</p>
-<h3 id="二、Charles设置"><a href="#二、Charles设置" class="headerlink" title="二、Charles设置"></a>二、Charles设置</h3><h4 id="1、Charles设置代理"><a href="#1、Charles设置代理" class="headerlink" title="1、Charles设置代理"></a>1、Charles设置代理</h4><p>打开工具栏中Proxy-Proxy Settings</p>
+<h3><span id="二-charles设置">二、Charles设置</span></h3><h4><span id="1-charles设置代理">1、Charles设置代理</span></h4><p>打开工具栏中Proxy-Proxy Settings</p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/d8c24248e8ee40169178ecc42a62836f.png" alt="img"></p>
 <p>设置为如下格式</p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/03f1ce83357c4a478a1c23b3a573ef16.png" alt="img"></p>
@@ -110,23 +118,23 @@
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/41cb4950910e481c8ed2b31f31ed58d8.png" alt="img"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/4f367272290a44edac26e6f90f6286ea.png" alt="img"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/4fb4ca3b468a4e32a82bdf13c28f5091.png" alt="img"></p>
-<h4 id="2、关闭对windows端的抓包（每次打开软件都是默认开启的，记得关闭）"><a href="#2、关闭对windows端的抓包（每次打开软件都是默认开启的，记得关闭）" class="headerlink" title="2、关闭对windows端的抓包（每次打开软件都是默认开启的，记得关闭）"></a>2、关闭对windows端的抓包（每次打开软件都是默认开启的，记得关闭）</h4><p>因为主要是联动手机对微信抓包，所以可以关闭windows端的抓包，避免干扰。</p>
+<h4><span id="2-关闭对windows端的抓包每次打开软件都是默认开启的记得关闭">2、关闭对windows端的抓包（每次打开软件都是默认开启的，记得关闭）</span></h4><p>因为主要是联动手机对微信抓包，所以可以关闭windows端的抓包，避免干扰。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/a9aed4740923446fbb449694c92f5a13.png" alt="img"></p>
-<h4 id="3、配置PC端证书"><a href="#3、配置PC端证书" class="headerlink" title="3、配置PC端证书"></a>3、配置PC端证书</h4><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/b5ef86e515634c1099c51d03f981eae0.png" alt="img"></p>
+<h4><span id="3-配置pc端证书">3、配置PC端证书</span></h4><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/b5ef86e515634c1099c51d03f981eae0.png" alt="img"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/c7f39dd9529940e59a8c97313062e2b9.png" alt="img"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/e6604a88a8a44b6d9152d69c24520b1e.png" alt="img"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/c7750c91696b40e9b555f08b270c0501.png" alt="img"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/10cd0da8757444da9fd7ef640f1c2169.png" alt="img"></p>
 <p>点击下一步，再点击完成，PC显示导入完成就完成PC端证书配置了。</p>
-<h4 id="4-移动端证书配置（我这里使用苹果手机测试）"><a href="#4-移动端证书配置（我这里使用苹果手机测试）" class="headerlink" title="4.移动端证书配置（我这里使用苹果手机测试）"></a>4.移动端证书配置（我这里使用苹果手机测试）</h4><p>在这里出现了两种可能性，依次进行即可：</p>
-<h5 id="4-1手机连接电脑热点，并配置端口"><a href="#4-1手机连接电脑热点，并配置端口" class="headerlink" title="4.1手机连接电脑热点，并配置端口"></a>4.1手机连接电脑热点，并配置端口</h5><p>开启电脑热点</p>
+<h4><span id="4移动端证书配置我这里使用苹果手机测试">4.移动端证书配置（我这里使用苹果手机测试）</span></h4><p>在这里出现了两种可能性，依次进行即可：</p>
+<h5><span id="41手机连接电脑热点并配置端口">4.1手机连接电脑热点，并配置端口</span></h5><p>开启电脑热点</p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/4c3aea78624043ee81d75414ffa5d693.png" alt="img"></p>
 <p>手机连接热点，然后在Charles中进行如下操作：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/506f55c1d8b843bfaf4eff5c4f57a0e1.png" alt="img"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/186401f5edfa444fbb4dcea3daf5b8de.png" alt="img"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/d754328f2a1f433a84ca9d9fd52be0f2.png" alt="img"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/41b6e5105fac43e8a77eaf56d2d422d6.jpeg" alt="img"></p>
-<h5 id="4-2证书下载后手机能直接识别"><a href="#4-2证书下载后手机能直接识别" class="headerlink" title="4.2证书下载后手机能直接识别"></a>4.2证书下载后手机能直接识别</h5><p>在手机上使用chrome浏览器访问下面这个网址</p>
+<h5><span id="42证书下载后手机能直接识别">4.2证书下载后手机能直接识别</span></h5><p>在手机上使用chrome浏览器访问下面这个网址</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chls.pro/ssl</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/fcdc424fd5874c5d8af17e280e4dbff4.jpeg" alt="img"></p>
@@ -139,8 +147,8 @@
 <p>2.打开burp。on&#x2F;off拦截或者放包。</p>
 <p>3.打开电脑热点，手机连接电脑热点。（如果生活中正常使用电脑热点记得把ip代理改回自动）</p>
 <p>4.手机访问小程序或者公众号，在Charles和burp都可以看到包。</p>
-<h3 id="同样的-我们也可以在模拟器如此部署"><a href="#同样的-我们也可以在模拟器如此部署" class="headerlink" title="同样的　我们也可以在模拟器如此部署"></a>同样的　我们也可以在模拟器如此部署</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43910861/article/details/123851267">burp+逍遥模拟器 app抓包 （导入证书到系统的解决方案）_逍遥导入证书失败-CSDN博客</a></p>
-<h1 id="游戏封包技术"><a href="#游戏封包技术" class="headerlink" title="游戏封包技术"></a>游戏封包技术</h1><p>第一步：下载所需要的环境</p>
+<h3><span id="同样的-我们也可以在模拟器如此部署">同样的　我们也可以在模拟器如此部署</span></h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43910861/article/details/123851267">burp+逍遥模拟器 app抓包 （导入证书到系统的解决方案）_逍遥导入证书失败-CSDN博客</a></p>
+<h1><span id="游戏封包技术">游戏封包技术</span></h1><p>第一步：下载所需要的环境</p>
 <p>雷电模拟器</p>
 <p>雷电安卓模拟器-手游模拟器安卓版_android手机模拟器电脑版_雷电模拟器官网</p>
 <p>ProxyDroid</p>

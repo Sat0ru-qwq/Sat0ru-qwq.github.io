@@ -84,11 +84,19 @@
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="如读者有未授权渗透行为，后果自负，本站仅作学习用途"><a href="#如读者有未授权渗透行为，后果自负，本站仅作学习用途" class="headerlink" title="如读者有未授权渗透行为，后果自负，本站仅作学习用途"></a>如读者有未授权渗透行为，后果自负，本站仅作学习用途</h1><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112339739.png" alt="image-20240717112339739"></p>
-<h2 id="fofa"><a href="#fofa" class="headerlink" title="fofa"></a>fofa</h2><p><em>Posted by hackeyes on April 17, 2021</em></p>
+        
+    <div id="toc">
+        <strong class="sidebar-title">目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">如读者有未授权渗透行为，后果自负，本站仅作学习用途</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text">fofa</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">高级搜索</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">语法</span></a></li></ol>
+    </div>
+
+
+
+        <h1><span id="如读者有未授权渗透行为后果自负本站仅作学习用途">如读者有未授权渗透行为，后果自负，本站仅作学习用途</span></h1><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112339739.png" alt="image-20240717112339739"></p>
+<h2><span id="fofa">fofa</span></h2><p><em>Posted by hackeyes on April 17, 2021</em></p>
 <p>直接输入查询语句，将从标题，html内容，http头信息，url字段中搜索；如果查询表达式有多个与或关系，尽量在外面用（）包含起来；</p>
 <p>&#x3D;&#x3D;完全匹配的符号，可以加快搜索速度，比如查找qq.com所有host，可以是domain&#x3D;&#x3D;”qq.com”</p>
-<h1 id="高级搜索"><a href="#高级搜索" class="headerlink" title="高级搜索"></a>高级搜索</h1><table>
+<h1><span id="高级搜索">高级搜索</span></h1><table>
 <thead>
 <tr>
 <th>可以使用括号 和 &amp;&amp;</th>
@@ -104,7 +112,7 @@
 </tbody></table>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title=&quot;powered by&quot; &amp;&amp; title!=&quot;discuz&quot; </span><br><span class="line"></span><br><span class="line">body=&quot;content=WordPress&quot; || (header=&quot;X-Pingback&quot; &amp;&amp; header=&quot;/xmlrpc.php&quot; &amp;&amp; body=&quot;/wp-includes/&quot;) &amp;&amp; host=&quot;gov.cn&quot;</span><br></pre></td></tr></table></figure>
 
-<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>title&#x3D;”beijing” 从标题中搜索“北京”</p>
+<h1><span id="语法">语法</span></h1><p>title&#x3D;”beijing” 从标题中搜索“北京”</p>
 <p>header&#x3D;”elastic” 从http头中搜索“elastic”</p>
 <p>body&#x3D;”网络空间测绘” 从html正文中搜索“网络空间测绘”</p>
 <p>domain&#x3D;”qq.com” 搜索根域名带有qq.com的网站。</p>
