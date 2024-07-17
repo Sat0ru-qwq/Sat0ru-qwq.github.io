@@ -1,0 +1,185 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Sat0ru_G0j0 | むりょうくうきょ</title>
+
+  
+  <meta name="author" content="Satoru">
+  
+
+  
+  <meta name="description" content="不当了 不当高手！">
+  
+
+  
+  <meta name="keywords" content="Penetration Testing">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+
+  <meta property="og:site_name" content="Sat0ru_G0j0"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Sat0ru_G0j0" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Sat0ru_G0j0</a>
+    </h1>
+    <p class="site-description">むりょうくうきょ</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/archives">文档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span></span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2024/07/11/从3开始的渗透/" rel="bookmark">
+        <time class="entry-date published" datetime="2024-07-11T06:33:00.000Z">
+          2024-07-11
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Day4-30余种加解密编码进制-Web-数据库-系统-代码-参数值"><a href="#Day4-30余种加解密编码进制-Web-数据库-系统-代码-参数值" class="headerlink" title="Day4:30余种加解密编码进制&amp;Web &amp;数据库&amp;系统&amp;代码&amp;参数值"></a>Day4:30余种加解密编码进制&amp;Web &amp;数据库&amp;系统&amp;代码&amp;参数值</h1><h2 id="加解密编码进制"><a href="#加解密编码进制" class="headerlink" title="加解密编码进制"></a>加解密编码进制</h2><p>识别算法编码类型</p>
+<p>1.看密文位数</p>
+<p>2.看密文的特征（数字，字符，大小写，符号等）</p>
+<p>3.看当前密文存在的地方（Web，数据库，操作系统等应用）</p>
+<p>演示案例如下，接下来会从这些方面出发</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715163704329.png" alt="image-20240715163704329"></p>
+<p>详细列举</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715163856227.png" alt="image-20240715163856227"></p>
+<p>对于一些密码算法，类似md5这类不可逆的密码算法</p>
+<p>这个时候解密的方式就有：<strong>枚举和碰撞</strong></p>
+<p><strong>解密不通过算法解密，而是尝试生成很多的加密或对应明文的字符来枚举</strong></p>
+<p>同时加密的应用场景比较多，这里列举出这些</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715164423363.png" alt="image-20240715164423363"></p>
+<p>加密存储相对明文存储而言，不同之处就在于在攻防过程中，如果你的密文设置的足够复杂，其实也可以防止攻击端进一步攻击网络资产。</p>
+<p>—-1—</p>
+<p>类似于最基本的md5加密，类似个人博客这种最基本的站点，一般会采取md5加密，这个时候假设你进入了数据库，可以直接利用某些线上工具完成解密</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715170018370.png" alt="10"></p>
+<p>—2—</p>
+<p>对应了<strong>国外论坛discuz类的站点</strong>采用了md5+salt加密的方式，在本身就用md5加密的条件下还额外加入了“salt“字段，这个时候使加密更加完善，攻击者在未知网站信息或存储机制的情况下难以进一步操作</p>
+<p>不过还是有机会通过一些信息的收集得知其加密的机制的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715165911780.png" alt="image-20240715165911780"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715170242476.png" alt="image-20240715170242476"></p>
+<p>密算法是不可能第一时间就能知道的，而是要对这个站点采取信息收集，收集过后找到对应的架构是怎么样的**(Web站点之间的不同？还是对应想要查看的是某个操作系统？)**，架构知道了，那么这个加密算法具体怎么实现的也就可以通过网上的信息，甚至是自己搭一个这样的站点，对应这些思路自然也就一通百通。</p>
+<p>这里介绍一个工具，mimikatz，它是用于获取windows系统上所有的明文和密钥进行获取。 不过这个不一定有用，因为mimikatz对应在windows2008后版本取消显示明文密码过后，作用并不是那么明显。</p>
+<p>不过从这里可以看出，不管是什么样的架构都有迹可循。</p>
+<p>这样就能防止我们单纯的拿到明文过后却无计可施。 </p>
+<p><strong>不只是有存储类的加密</strong>，<strong>就连代码也会有对应的代码加密</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715205508717.png" alt="image-20240715205508717"></p>
+<p>对应的 数据库也有对应的密文加密方式</p>
+<p>以及浏览器也是对应有其加密方式</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715211129660.png" alt="image-20240715211129660"></p>
+<p>这些只要掌握大概，以及懂得工具的使用就可以了</p>
+<h1 id="Day5：资产架构-端口-应用-CDN-WAF-站库分离-负载均衡"><a href="#Day5：资产架构-端口-应用-CDN-WAF-站库分离-负载均衡" class="headerlink" title="Day5：资产架构&amp;端口&amp;应用&amp;CDN&amp;WAF&amp;站库分离&amp;负载均衡"></a>Day5：资产架构&amp;端口&amp;应用&amp;CDN&amp;WAF&amp;站库分离&amp;负载均衡</h1><p>本阶段复现可能需要基于<strong>阿里云服务器+完整备案后域名+宝塔面板&#x2F;github上自主部署服务。</strong></p>
+<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZqNyI04OHsCJqTXg5b9F0RmJpBNvbD9ZF0Q&s" alt="关注永雏塔菲谢谢喵什么梗- 抖音"></p>
+<h2 id="资产架构-端口-目录-插件接口-多站点-多应用"><a href="#资产架构-端口-目录-插件接口-多站点-多应用" class="headerlink" title="资产架构-端口&amp;目录&amp;插件接口&amp;多站点&amp;多应用"></a>资产架构-端口&amp;目录&amp;插件接口&amp;多站点&amp;多应用</h2><p> 这里由于Satoru前期部署网站和域名备案等琐事，时间线拉长的让人寒心，只能找Wells要了个子域名，所以这里也懒得用我已经部署好的网站重新演示一遍（主要是完整的站点目录我只拿着一个子域名也很难复现（戳手手））</p>
+<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHNG07AZ4KHRaS7k_YotkiGRnl7kIwbX9hMQ&s" alt="塔菲盒官方下载-永雏塔菲盒(Taffy盒)下载v1.0 安卓版-100手游网"></p>
+<p>这里已经通过域名解析服务器IP，后续宝塔面板一键部署在该域名解析的服务器上实现了建站。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717095245678.png" alt="image-20240717095245678"></p>
+<h2 id="番外安全-域名-服务器本身-服务厂商-管理人员"><a href="#番外安全-域名-服务器本身-服务厂商-管理人员" class="headerlink" title="番外安全-域名&amp;服务器本身&amp;服务厂商&amp;管理人员"></a>番外安全-域名&amp;服务器本身&amp;服务厂商&amp;管理人员</h2><h2 id="考虑阻碍-站库分离-CDN-WAP-负载均衡-主机防护"><a href="#考虑阻碍-站库分离-CDN-WAP-负载均衡-主机防护" class="headerlink" title="考虑阻碍-站库分离&amp;CDN&amp;WAP&amp;负载均衡&amp;主机防护"></a>考虑阻碍-站库分离&amp;CDN&amp;WAP&amp;负载均衡&amp;主机防护</h2>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/source/categories/Penetration-Testing-Basic/">Penetration Testing Basic</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/source/tags/pr0gram/">pr0gram</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2024 Satoru
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

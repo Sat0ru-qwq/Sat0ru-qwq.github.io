@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>从0开始的渗透基础desu | Sat0ru_G0j0 | むりょうくうきょ</title>
+  <title>从0开始的渗透Day1-3desu | Sat0ru_G0j0 | むりょうくうきょ</title>
 
   
   <meta name="author" content="Satoru">
@@ -21,7 +21,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="从0开始的渗透基础desu"/>
+  <meta property="og:title" content="从0开始的渗透Day1-3desu"/>
 
   <meta property="og:site_name" content="Sat0ru_G0j0"/>
 
@@ -64,7 +64,7 @@
 
   
     
-    <h3 class="article-title"><span>从0开始的渗透基础desu</span></h3>
+    <h3 class="article-title"><span>从0开始的渗透Day1-3desu</span></h3>
     
   
 
@@ -250,10 +250,25 @@
 <p>步骤：</p>
 <p>1.首先在模拟器中先装上代理机器人</p>
 <p>2.对应的打开ccproxy设置代理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">四件套示意图</span><br><span class="line">apk --&gt; ccproxy  --&gt;wpe监听cc进程，实现封包抓包</span><br><span class="line"></span><br><span class="line">burp charles</span><br><span class="line">模拟器设置证书后，设置代理，运行工具的本机IP 端口</span><br><span class="line">burpsuite茶杯 配置代理 监听抓取</span><br><span class="line"></span><br><span class="line">wireshark 科来  不需要设置任何东西</span><br><span class="line">只是监听全频段网络接口</span><br></pre></td></tr></table></figure>
+
+<p>这里也可以用<strong>下雪的傻瓜式封包监听工具</strong>，不过现在一般模拟器都已经上了一层防护了，不会轻易的让你使用模拟器对应的进程名，所以这个时候更新工具版本或者选择一些老版本模拟器（）说不定有奇效</p>
+<p>当然这是因为WPE工具已经太老了，基本的原理连逍遥安卓论坛都能讲明白，加上一层比较基本的防护器就可以防御住了，这后面再细说</p>
+<p>雷电模拟器的进程一般是这个</p>
+<p>X64进程名|Ld9BoxHeadless.exe|PID|30320</p>
+<p>但是进程ID可能会实时改变（？）</p>
+<p>在我封包成功一次过后雷电模拟器好像把PID给换了，细思极恐</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715145004014.png" alt="image-20240715145004014"></p>
 <h1 id="抓包应用协议"><a href="#抓包应用协议" class="headerlink" title="抓包应用协议"></a>抓包应用协议</h1><p>分为Web协议和非Web协议</p>
-<h1 id="抓包应用支持"><a href="#抓包应用支持" class="headerlink" title="抓包应用支持"></a>抓包应用支持</h1><h1 id="抓包应用意义"><a href="#抓包应用意义" class="headerlink" title="抓包应用意义"></a>抓包应用意义</h1><p>把app中的一些数据或者一些信息提取出来，就是这么简单，然后将这些信息用于对应的安全攻防。</p>
+<h1 id="抓包应用意义"><a href="#抓包应用意义" class="headerlink" title="抓包应用意义"></a>抓包应用意义</h1><p>把app中的一些数据或者一些信息提取出来，就是这么简单，然后将这些信息用于对应的安全攻防。</p>
 <h1 id="封包应用意义"><a href="#封包应用意义" class="headerlink" title="封包应用意义"></a>封包应用意义</h1><p><strong>WPE四件套封包&amp;科来网络分析系统  Wireshark</strong></p>
 <p><strong>Burpsuite&amp;Charles&amp;Fiddler</strong></p>
+<h2 id="傻瓜式封包流程"><a href="#傻瓜式封包流程" class="headerlink" title="傻瓜式封包流程"></a>傻瓜式封包流程</h2><p>封包工具可以将类似于游戏这种实时交互的网站做完整的监听而非拦截</p>
+<h3 id="进程获取"><a href="#进程获取" class="headerlink" title="进程获取"></a>进程获取</h3><p>没有发现模拟器对应的进程，那么封包也是天方夜谭</p>
+<p>首先通过Wireshark或者科来网络分析系统监听本机进程，并在游戏中多进行释放技能，领取奖励等数据包交互很多的操作，可以发现对应的字节波动大的进程，通过进程名推敲一下看看是否就是这个模拟器的进程。</p>
+<h3 id="最后封包"><a href="#最后封包" class="headerlink" title="最后封包"></a>最后封包</h3><p>后续直接用封包工具对模拟器起一个监听，然后打开监听，在游戏内进行想要封包的操作（例如回城等），点击回城后关闭监听开始测试抓取到的数据包，如果选中的数据包发送后能够成功实现该功能，则说明封包成功（虽然Burpsuite其实也能做到直接监听对应模拟器配置的虚拟网卡）</p>
+<h2 id="进阶封包流程"><a href="#进阶封包流程" class="headerlink" title="进阶封包流程"></a>进阶封包流程</h2><p>进阶的封包无非是在模拟器中装入代理机器人，后续代理机器人将抓到的数据包传回到本机的CCproxy（也是工具），CCproxy（也是工具）对应的进程则被WPE所监听，但由于这个流程已经太老了，模拟器以及游戏本身可能都有对应的防护，所以一般傻瓜式封包会比进阶封包更容易抓到包。</p>
+<p><strong>后续有条件一定要自己尝试写出来封包监听工具，毕竟公开的工具会被ban，但公开的原理不会，通过进阶封包这里学得原理，自己做个封包监听工具又有何不可呢。</strong></p>
 
       
     </div>
