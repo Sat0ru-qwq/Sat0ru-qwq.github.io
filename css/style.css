@@ -716,13 +716,10 @@ article table pre {
   article {
     color: #f6f2f5;
   }
-  article .article-title {
+  article .article-title color $articleTitleDarkColor {
     color: #f6f2f5;
   }
-  article .article-title a {
-    color: #f6f2f5;
-  }
-  article .article-title a:hover {
+  article .article-title color $articleTitleDarkColor:hover {
     color: #f6f2f5;
   }
   article .article-excerpt,
@@ -735,7 +732,7 @@ article table pre {
   }
 }
 #toc {
-  background-color: #eee;
+  background-color: #000;
   font-size: 0.8em;
   color: color-link;
 }
