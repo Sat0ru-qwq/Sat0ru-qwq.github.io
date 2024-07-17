@@ -84,7 +84,7 @@
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="Day1-基础入门-操作系统-名词-文件下载-反弹shell-防火墙绕过"><a href="#Day1-基础入门-操作系统-名词-文件下载-反弹shell-防火墙绕过" class="headerlink" title="Day1:基础入门-操作系统&amp;名词&amp;文件下载&amp;反弹shell&amp;防火墙绕过"></a>Day1:基础入门-操作系统&amp;名词&amp;文件下载&amp;反弹shell&amp;防火墙绕过</h1><h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sunny11/p/13583083.html">https://www.cnblogs.com/sunny11/p/13583083.html</a></p>
+        <h1 id="如读者有未授权渗透行为，后果自负，本站仅作学习用途"><a href="#如读者有未授权渗透行为，后果自负，本站仅作学习用途" class="headerlink" title="如读者有未授权渗透行为，后果自负，本站仅作学习用途"></a>如读者有未授权渗透行为，后果自负，本站仅作学习用途</h1><h1 id="Day1-基础入门-操作系统-名词-文件下载-反弹shell-防火墙绕过"><a href="#Day1-基础入门-操作系统-名词-文件下载-反弹shell-防火墙绕过" class="headerlink" title="Day1:基础入门-操作系统&amp;名词&amp;文件下载&amp;反弹shell&amp;防火墙绕过"></a>Day1:基础入门-操作系统&amp;名词&amp;文件下载&amp;反弹shell&amp;防火墙绕过</h1><h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sunny11/p/13583083.html">https://www.cnblogs.com/sunny11/p/13583083.html</a></p>
 <h1 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h1><p><a target="_blank" rel="noopener" href="https://forum.ywhack.com/bountytips.php?download">https://forum.ywhack.com/bountytips.php?download</a></p>
 <p><strong>在渗透的过程中，如果我们要在对方的服务里面下载我们制作好的病毒文件等，是不可能通过打开对方的浏览器进而进行下载的，因此弹出shell后我们也要掌握一些基本的文件下载命令，并且自己搭建一个小型的渗透站点用于传输一些安全脚本或者安全文件作为攻击手段。</strong></p>
 <h1 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h1><p>反弹shell主要用于<strong>命令发送后无回显的情况</strong>，<strong>大部分 的安全工具都是一条命令发送过后便了无音讯</strong>，服务器接收了但并没有给我们对应的反馈，这个时候就需要反弹shell。</p>
@@ -267,7 +267,7 @@
 <h3 id="进程获取"><a href="#进程获取" class="headerlink" title="进程获取"></a>进程获取</h3><p>没有发现模拟器对应的进程，那么封包也是天方夜谭</p>
 <p>首先通过Wireshark或者科来网络分析系统监听本机进程，并在游戏中多进行释放技能，领取奖励等数据包交互很多的操作，可以发现对应的字节波动大的进程，通过进程名推敲一下看看是否就是这个模拟器的进程。</p>
 <h3 id="最后封包"><a href="#最后封包" class="headerlink" title="最后封包"></a>最后封包</h3><p>后续直接用封包工具对模拟器起一个监听，然后打开监听，在游戏内进行想要封包的操作（例如回城等），点击回城后关闭监听开始测试抓取到的数据包，如果选中的数据包发送后能够成功实现该功能，则说明封包成功（虽然Burpsuite其实也能做到直接监听对应模拟器配置的虚拟网卡）</p>
-<h2 id="进阶封包流程"><a href="#进阶封包流程" class="headerlink" title="进阶封包流程"></a>进阶封包流程</h2><p>进阶的封包无非是在模拟器中装入代理机器人，后续代理机器人将抓到的数据包传回到本机的CCproxy（也是工具），CCproxy（也是工具）对应的进程则被WPE所监听，但由于这个流程已经太老了，模拟器以及游戏本身可能都有对应的防护，所以一般傻瓜式封包会比进阶封包更容易抓到包。</p>
+<h2 id="进阶封包流程"><a href="#进阶封包流程" class="headerlink" title="进阶封包流程"></a>进阶封包流程</h2><p>进阶的封包无非是在模拟器中装入代理机器人，后续代理机器人将抓到的数据包传回到本机的CCproxy（也是工具），CCproxy对应的进程则被WPE所监听，但由于这个流程已经太老了，模拟器以及游戏本身可能都有对应的防护，所以一般傻瓜式封包会比进阶封包更容易抓到包。</p>
 <p><strong>后续有条件一定要自己尝试写出来封包监听工具，毕竟公开的工具会被ban，但公开的原理不会，通过进阶封包这里学得原理，自己做个封包监听工具又有何不可呢。</strong></p>
 
       

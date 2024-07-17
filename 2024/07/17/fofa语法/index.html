@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>fofa常用语法 | Sat0ru_G0j0 | むりょうくうきょ</title>
+
+  
+  <meta name="author" content="Satoru">
+  
+
+  
+  <meta name="description" content="不当了 不当高手！">
+  
+
+  
+  <meta name="keywords" content="Penetration Testing">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="fofa常用语法"/>
+
+  <meta property="og:site_name" content="Sat0ru_G0j0"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Sat0ru_G0j0" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Sat0ru_G0j0</a>
+    </h1>
+    <p class="site-description">むりょうくうきょ</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/archives">文档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>fofa常用语法</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2024/07/17/fofa语法/" rel="bookmark">
+        <time class="entry-date published" datetime="2024-07-17T02:55:07.000Z">
+          2024-07-17
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="如读者有未授权渗透行为，后果自负，本站仅作学习用途"><a href="#如读者有未授权渗透行为，后果自负，本站仅作学习用途" class="headerlink" title="如读者有未授权渗透行为，后果自负，本站仅作学习用途"></a>如读者有未授权渗透行为，后果自负，本站仅作学习用途</h1><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112339739.png" alt="image-20240717112339739"></p>
+<h2 id="fofa"><a href="#fofa" class="headerlink" title="fofa"></a>fofa</h2><p><em>Posted by hackeyes on April 17, 2021</em></p>
+<p>直接输入查询语句，将从标题，html内容，http头信息，url字段中搜索；如果查询表达式有多个与或关系，尽量在外面用（）包含起来；</p>
+<p>&#x3D;&#x3D;完全匹配的符号，可以加快搜索速度，比如查找qq.com所有host，可以是domain&#x3D;&#x3D;”qq.com”</p>
+<h1 id="高级搜索"><a href="#高级搜索" class="headerlink" title="高级搜索"></a>高级搜索</h1><table>
+<thead>
+<tr>
+<th>可以使用括号 和 &amp;&amp;</th>
+<th></th>
+<th>!&#x3D;等符号，如</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title=&quot;powered by&quot; &amp;&amp; title!=&quot;discuz&quot; </span><br><span class="line"></span><br><span class="line">body=&quot;content=WordPress&quot; || (header=&quot;X-Pingback&quot; &amp;&amp; header=&quot;/xmlrpc.php&quot; &amp;&amp; body=&quot;/wp-includes/&quot;) &amp;&amp; host=&quot;gov.cn&quot;</span><br></pre></td></tr></table></figure>
+
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>title&#x3D;”beijing” 从标题中搜索“北京”</p>
+<p>header&#x3D;”elastic” 从http头中搜索“elastic”</p>
+<p>body&#x3D;”网络空间测绘” 从html正文中搜索“网络空间测绘”</p>
+<p>domain&#x3D;”qq.com” 搜索根域名带有qq.com的网站。</p>
+<p>icon_hash&#x3D;”-247388890” 搜索使用此icon的资产。 仅限FOFA高级会员使用</p>
+<p>host&#x3D;”.gov.cn” 从url中搜索”.gov.cn” 搜索要用host作为名称</p>
+<p>port&#x3D;”6379” 查找对应“6379”端口的资产</p>
+<p>icp&#x3D;”京ICP证030173号” 查找备案号为“京ICP证030173号”的网站 搜索网站类型资产</p>
+<p>ip&#x3D;”1.1.1.1” 从ip中搜索包含“1.1.1.1”的网站 搜索要用ip作为名称</p>
+<p>ip&#x3D;”220.181.111.1&#x2F;24” 查询IP为“220.181.111.1”的C网段资产</p>
+<p>status_code&#x3D;”402” 查询服务器状态为“402”的资产</p>
+<p>protocol&#x3D;”quic” 查询quic协议资产 搜索指定协议类型(在开启端口扫描的情况下有效)</p>
+<p>country&#x3D;”CN” 搜索指定国家(编码)的资产。</p>
+<p>region&#x3D;”HeNan” 搜索指定行政区的资产。</p>
+<p>city&#x3D;”HanDan” 搜索指定城市的资产。</p>
+<p>cert&#x3D;”baidu” 搜索证书(https或者imaps等)中带有baidu的资产。</p>
+<p>cert.subject&#x3D;”Oracle Corporation” 搜索证书持有者是Oracle Corporation的资产</p>
+<p>cert.issuer&#x3D;”DigiCert” 搜索证书颁发者为DigiCert Inc的资产</p>
+<p>cert.is_valid&#x3D;true 验证证书是否有效，true有效，false无效，仅限FOFA高级会员使用</p>
+<p>banner&#x3D;users &amp;&amp; protocol&#x3D;ftp 搜索FTP协议中带有users文本的资产。</p>
+<p>type&#x3D;service 搜索所有协议资产，支持subdomain和service两种。</p>
+<p>os&#x3D;”centos” 搜索操作系统为CentOS资产。</p>
+<p>server&#x3D;&#x3D;”Microsoft-IIS&#x2F;10” 搜索IIS 10服务器。</p>
+<p>app&#x3D;”Microsoft-Exchange” 搜索Microsoft-Exchange设备</p>
+<p>after&#x3D;”2017” &amp;&amp; before&#x3D;”2017-10-01” 时间范围段搜索</p>
+<p>asn&#x3D;”19551” 搜索指定asn的资产。</p>
+<p>org&#x3D;”Amazon.com, Inc.” 搜索指定org(组织)的资产。</p>
+<p>base_protocol&#x3D;”udp” 搜索指定udp协议的资产。</p>
+<p>is_fraud&#x3D;false 排除仿冒&#x2F;欺诈数据</p>
+<p>is_honeypot&#x3D;false 排除蜜罐数据，仅限FOFA高级会员使用</p>
+<p>is_ipv6&#x3D;true 搜索ipv6的资产,只接受true和false。</p>
+<p>is_domain&#x3D;true 搜索域名的资产,只接受true和false。</p>
+<p>port_size&#x3D;”6” 查询开放端口数量等于”6”的资产，仅限FOFA会员使用</p>
+<p>port_size_gt&#x3D;”6” 查询开放端口数量大于”6”的资产，仅限FOFA会员使用</p>
+<p>port_size_lt&#x3D;”12” 查询开放端口数量小于”12”的资产，仅限FOFA会员使用</p>
+<p>ip_ports&#x3D;”80,161” 搜索同时开放80和161端口的ip资产(以ip为单位的资产数据)</p>
+<p>ip_country&#x3D;”CN” 搜索中国的ip资产(以ip为单位的资产数据)。</p>
+<p>ip_region&#x3D;”Zhejiang” 搜索指定行政区的ip资产(以ip为单位的资产数据)。</p>
+<p>ip_city&#x3D;”Hangzhou” 搜索指定城市的ip资产(以ip为单位的资产数据)。</p>
+<p>ip_after&#x3D;”2021-03-18” 搜索2021-03-18以后的ip资产(以ip为单位的资产数据)。</p>
+<p>ip_before&#x3D;”2019-09-09” 搜索2019-09-09以前的ip资产(以ip为单位的资产数据)。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/source/categories/Penetration-Testing-Basic/">Penetration Testing Basic</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/source/tags/info/">info</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2024 Satoru
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

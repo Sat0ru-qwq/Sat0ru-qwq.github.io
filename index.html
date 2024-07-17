@@ -65,14 +65,14 @@
 
   
     
-    <h3 class="article-title"><a href="/2024/07/17/子域名建站/"><span></span></a></h3>
+    <h3 class="article-title"><a href="/2024/07/17/fofa语法/"><span>fofa常用语法</span></a></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/2024/07/17/子域名建站/" rel="bookmark">
-        <time class="entry-date published" datetime="2024-07-17T01:41:05.356Z">
+      <a href="/2024/07/17/fofa语法/" rel="bookmark">
+        <time class="entry-date published" datetime="2024-07-17T02:55:07.000Z">
           2024-07-17
         </time>
       </a>
@@ -85,7 +85,68 @@
   <div class="article-content">
     <div class="entry">
       
-        
+        <h1 id="如读者有未授权渗透行为，后果自负，本站仅作学习用途"><a href="#如读者有未授权渗透行为，后果自负，本站仅作学习用途" class="headerlink" title="如读者有未授权渗透行为，后果自负，本站仅作学习用途"></a>如读者有未授权渗透行为，后果自负，本站仅作学习用途</h1><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112339739.png" alt="image-20240717112339739"></p>
+<h2 id="fofa"><a href="#fofa" class="headerlink" title="fofa"></a>fofa</h2><p><em>Posted by hackeyes on April 17, 2021</em></p>
+<p>直接输入查询语句，将从标题，html内容，http头信息，url字段中搜索；如果查询表达式有多个与或关系，尽量在外面用（）包含起来；</p>
+<p>&#x3D;&#x3D;完全匹配的符号，可以加快搜索速度，比如查找qq.com所有host，可以是domain&#x3D;&#x3D;”qq.com”</p>
+<h1 id="高级搜索"><a href="#高级搜索" class="headerlink" title="高级搜索"></a>高级搜索</h1><table>
+<thead>
+<tr>
+<th>可以使用括号 和 &amp;&amp;</th>
+<th></th>
+<th>!&#x3D;等符号，如</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title=&quot;powered by&quot; &amp;&amp; title!=&quot;discuz&quot; </span><br><span class="line"></span><br><span class="line">body=&quot;content=WordPress&quot; || (header=&quot;X-Pingback&quot; &amp;&amp; header=&quot;/xmlrpc.php&quot; &amp;&amp; body=&quot;/wp-includes/&quot;) &amp;&amp; host=&quot;gov.cn&quot;</span><br></pre></td></tr></table></figure>
+
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><p>title&#x3D;”beijing” 从标题中搜索“北京”</p>
+<p>header&#x3D;”elastic” 从http头中搜索“elastic”</p>
+<p>body&#x3D;”网络空间测绘” 从html正文中搜索“网络空间测绘”</p>
+<p>domain&#x3D;”qq.com” 搜索根域名带有qq.com的网站。</p>
+<p>icon_hash&#x3D;”-247388890” 搜索使用此icon的资产。 仅限FOFA高级会员使用</p>
+<p>host&#x3D;”.gov.cn” 从url中搜索”.gov.cn” 搜索要用host作为名称</p>
+<p>port&#x3D;”6379” 查找对应“6379”端口的资产</p>
+<p>icp&#x3D;”京ICP证030173号” 查找备案号为“京ICP证030173号”的网站 搜索网站类型资产</p>
+<p>ip&#x3D;”1.1.1.1” 从ip中搜索包含“1.1.1.1”的网站 搜索要用ip作为名称</p>
+<p>ip&#x3D;”220.181.111.1&#x2F;24” 查询IP为“220.181.111.1”的C网段资产</p>
+<p>status_code&#x3D;”402” 查询服务器状态为“402”的资产</p>
+<p>protocol&#x3D;”quic” 查询quic协议资产 搜索指定协议类型(在开启端口扫描的情况下有效)</p>
+<p>country&#x3D;”CN” 搜索指定国家(编码)的资产。</p>
+<p>region&#x3D;”HeNan” 搜索指定行政区的资产。</p>
+<p>city&#x3D;”HanDan” 搜索指定城市的资产。</p>
+<p>cert&#x3D;”baidu” 搜索证书(https或者imaps等)中带有baidu的资产。</p>
+<p>cert.subject&#x3D;”Oracle Corporation” 搜索证书持有者是Oracle Corporation的资产</p>
+<p>cert.issuer&#x3D;”DigiCert” 搜索证书颁发者为DigiCert Inc的资产</p>
+<p>cert.is_valid&#x3D;true 验证证书是否有效，true有效，false无效，仅限FOFA高级会员使用</p>
+<p>banner&#x3D;users &amp;&amp; protocol&#x3D;ftp 搜索FTP协议中带有users文本的资产。</p>
+<p>type&#x3D;service 搜索所有协议资产，支持subdomain和service两种。</p>
+<p>os&#x3D;”centos” 搜索操作系统为CentOS资产。</p>
+<p>server&#x3D;&#x3D;”Microsoft-IIS&#x2F;10” 搜索IIS 10服务器。</p>
+<p>app&#x3D;”Microsoft-Exchange” 搜索Microsoft-Exchange设备</p>
+<p>after&#x3D;”2017” &amp;&amp; before&#x3D;”2017-10-01” 时间范围段搜索</p>
+<p>asn&#x3D;”19551” 搜索指定asn的资产。</p>
+<p>org&#x3D;”Amazon.com, Inc.” 搜索指定org(组织)的资产。</p>
+<p>base_protocol&#x3D;”udp” 搜索指定udp协议的资产。</p>
+<p>is_fraud&#x3D;false 排除仿冒&#x2F;欺诈数据</p>
+<p>is_honeypot&#x3D;false 排除蜜罐数据，仅限FOFA高级会员使用</p>
+<p>is_ipv6&#x3D;true 搜索ipv6的资产,只接受true和false。</p>
+<p>is_domain&#x3D;true 搜索域名的资产,只接受true和false。</p>
+<p>port_size&#x3D;”6” 查询开放端口数量等于”6”的资产，仅限FOFA会员使用</p>
+<p>port_size_gt&#x3D;”6” 查询开放端口数量大于”6”的资产，仅限FOFA会员使用</p>
+<p>port_size_lt&#x3D;”12” 查询开放端口数量小于”12”的资产，仅限FOFA会员使用</p>
+<p>ip_ports&#x3D;”80,161” 搜索同时开放80和161端口的ip资产(以ip为单位的资产数据)</p>
+<p>ip_country&#x3D;”CN” 搜索中国的ip资产(以ip为单位的资产数据)。</p>
+<p>ip_region&#x3D;”Zhejiang” 搜索指定行政区的ip资产(以ip为单位的资产数据)。</p>
+<p>ip_city&#x3D;”Hangzhou” 搜索指定城市的ip资产(以ip为单位的资产数据)。</p>
+<p>ip_after&#x3D;”2021-03-18” 搜索2021-03-18以后的ip资产(以ip为单位的资产数据)。</p>
+<p>ip_before&#x3D;”2019-09-09” 搜索2019-09-09以前的ip资产(以ip为单位的资产数据)。</p>
+
       
     </div>
 
@@ -95,7 +156,21 @@
     <div class="article-meta pull-left">
 
     
+      
 
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/source/categories/Penetration-Testing-Basic/">Penetration Testing Basic</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/source/tags/info/">info</a>
+    </span>
     
 
     </div>
@@ -256,6 +331,139 @@
 
   
     
+    <h3 class="article-title"><a href="/2024/07/11/从3开始的渗透/"><span></span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2024/07/11/从3开始的渗透/" rel="bookmark">
+        <time class="entry-date published" datetime="2024-07-11T06:33:00.000Z">
+          2024-07-11
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="如读者有未授权渗透行为，后果自负，本站仅作学习用途"><a href="#如读者有未授权渗透行为，后果自负，本站仅作学习用途" class="headerlink" title="如读者有未授权渗透行为，后果自负，本站仅作学习用途"></a>如读者有未授权渗透行为，后果自负，本站仅作学习用途</h1><h1 id="Day4-30余种加解密编码进制-Web-数据库-系统-代码-参数值"><a href="#Day4-30余种加解密编码进制-Web-数据库-系统-代码-参数值" class="headerlink" title="Day4:30余种加解密编码进制&amp;Web &amp;数据库&amp;系统&amp;代码&amp;参数值"></a>Day4:30余种加解密编码进制&amp;Web &amp;数据库&amp;系统&amp;代码&amp;参数值</h1><h1 id="y未授权"><a href="#y未授权" class="headerlink" title="y未授权"></a>y未授权</h1><h1 id="Day4-30余种加解密编码进制-Web-数据库-系统-代码-参数值-1"><a href="#Day4-30余种加解密编码进制-Web-数据库-系统-代码-参数值-1" class="headerlink" title="Day4:30余种加解密编码进制&amp;Web &amp;数据库&amp;系统&amp;代码&amp;参数值"></a>Day4:30余种加解密编码进制&amp;Web &amp;数据库&amp;系统&amp;代码&amp;参数值</h1><h2 id="加解密编码进制"><a href="#加解密编码进制" class="headerlink" title="加解密编码进制"></a>加解密编码进制</h2><p>识别算法编码类型</p>
+<p>1.看密文位数</p>
+<p>2.看密文的特征（数字，字符，大小写，符号等）</p>
+<p>3.看当前密文存在的地方（Web，数据库，操作系统等应用）</p>
+<p>演示案例如下，接下来会从这些方面出发</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715163704329.png" alt="image-20240715163704329"></p>
+<p>详细列举</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715163856227.png" alt="image-20240715163856227"></p>
+<p>对于一些密码算法，类似md5这类不可逆的密码算法</p>
+<p>这个时候解密的方式就有：<strong>枚举和碰撞</strong></p>
+<p><strong>解密不通过算法解密，而是尝试生成很多的加密或对应明文的字符来枚举</strong></p>
+<p>同时加密的应用场景比较多，这里列举出这些</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715164423363.png" alt="image-20240715164423363"></p>
+<p>加密存储相对明文存储而言，不同之处就在于在攻防过程中，如果你的密文设置的足够复杂，其实也可以防止攻击端进一步攻击网络资产。</p>
+<p>—-1—</p>
+<p>类似于最基本的md5加密，类似个人博客这种最基本的站点，一般会采取md5加密，这个时候假设你进入了数据库，可以直接利用某些线上工具完成解密</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715170018370.png" alt="10"></p>
+<p>—2—</p>
+<p>对应了<strong>国外论坛discuz类的站点</strong>采用了md5+salt加密的方式，在本身就用md5加密的条件下还额外加入了“salt“字段，这个时候使加密更加完善，攻击者在未知网站信息或存储机制的情况下难以进一步操作</p>
+<p>不过还是有机会通过一些信息的收集得知其加密的机制的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715165911780.png" alt="image-20240715165911780"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715170242476.png" alt="image-20240715170242476"></p>
+<p>密算法是不可能第一时间就能知道的，而是要对这个站点采取信息收集，收集过后找到对应的架构是怎么样的**(Web站点之间的不同？还是对应想要查看的是某个操作系统？)**，架构知道了，那么这个加密算法具体怎么实现的也就可以通过网上的信息，甚至是自己搭一个这样的站点，对应这些思路自然也就一通百通。</p>
+<p>这里介绍一个工具，mimikatz，它是用于获取windows系统上所有的明文和密钥进行获取。 不过这个不一定有用，因为mimikatz对应在windows2008后版本取消显示明文密码过后，作用并不是那么明显。</p>
+<p>不过从这里可以看出，不管是什么样的架构都有迹可循。</p>
+<p>这样就能防止我们单纯的拿到明文过后却无计可施。 </p>
+<p><strong>不只是有存储类的加密</strong>，<strong>就连代码也会有对应的代码加密</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715205508717.png" alt="image-20240715205508717"></p>
+<p>对应的 数据库也有对应的密文加密方式</p>
+<p>以及浏览器也是对应有其加密方式</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715211129660.png" alt="image-20240715211129660"></p>
+<p>这些只要掌握大概，以及懂得工具的使用就可以了</p>
+<h1 id="Day5：资产架构-端口-应用-CDN-WAF-站库分离-负载均衡"><a href="#Day5：资产架构-端口-应用-CDN-WAF-站库分离-负载均衡" class="headerlink" title="Day5：资产架构&amp;端口&amp;应用&amp;CDN&amp;WAF&amp;站库分离&amp;负载均衡"></a>Day5：资产架构&amp;端口&amp;应用&amp;CDN&amp;WAF&amp;站库分离&amp;负载均衡</h1><p>本阶段复现可能需要基于<strong>阿里云服务器+完整备案后域名+宝塔面板&#x2F;github上自主部署服务。</strong></p>
+<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZqNyI04OHsCJqTXg5b9F0RmJpBNvbD9ZF0Q&s" alt="关注永雏塔菲谢谢喵什么梗- 抖音"></p>
+<h2 id="资产架构-端口-目录-插件接口-多站点-多应用"><a href="#资产架构-端口-目录-插件接口-多站点-多应用" class="headerlink" title="资产架构-端口&amp;目录&amp;插件接口&amp;多站点&amp;多应用"></a>资产架构-端口&amp;目录&amp;插件接口&amp;多站点&amp;多应用</h2><h3 id="站点结构"><a href="#站点结构" class="headerlink" title="站点结构"></a>站点结构</h3><h4 id="目录型"><a href="#目录型" class="headerlink" title="目录型"></a>目录型</h4><p> 这里由于Satoru前期部署网站和域名备案等琐事，时间线拉长的让人寒心，只能找Wells要了个子域名，所以这里也懒得用我已经部署好的网站重新演示一遍（主要是完整的站点目录我只拿着一个子域名也很难复现（戳手手））</p>
+<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHNG07AZ4KHRaS7k_YotkiGRnl7kIwbX9hMQ&s" alt="塔菲盒官方下载-永雏塔菲盒(Taffy盒)下载v1.0 安卓版-100手游网"></p>
+<p>这里已经通过域名解析服务器IP，后续宝塔面板一键部署该域名解析的服务器上实现了建站。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717095245678.png" alt="image-20240717095245678"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717102335544.png" alt="image-20240717102335544"></p>
+<p>现在只是单独一个网站，那么假设我在对应的域名目录下新建除了这个网站目录之外的博客目录，并在里面部署网站的话，那么这个站点则也会出现在这个域名的目录结构下，那么会呈现的效果也就是这样</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717102620385.png" alt="image-20240717102620385"></p>
+<p>​					<strong>对应的目录型站点也就成立了</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717102705476.png"></p>
+<p>结构也就显而易见了</p>
+<p><strong>bbs.xiaodi8.com —对应主目录网站</strong> </p>
+<p><strong>bbs.xiaodi8.com&#x2F;blog —wordpress程序</strong></p>
+<p>一个网站，两个程序，作为目录型站点，任何一个程序出现漏洞，都可以进入安全测试</p>
+<h4 id="端口型"><a href="#端口型" class="headerlink" title="端口型"></a>端口型</h4><p>新的网站部署过程中，可以采用对域名bbs.xiaodi8.com额外划出88端口这样的操作，这个时候也是实现了一个网站多个程序的效果</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717103213134.png" alt="image-20240717103213134"></p>
+<p>这个其实本质上也不用我额外多说，就是类似这样的结构</p>
+<p><strong>bbs.xiaodi8.com –主网站</strong></p>
+<p><strong>bbs.xiaodi8.com:8081  –wordpress程序</strong></p>
+<h4 id="多个站点"><a href="#多个站点" class="headerlink" title="多个站点"></a>多个站点</h4><p>多个站点类的网站其实原理也比较通俗，就是通过一些子域名实现多程序的部署</p>
+<p>类似这里直接给即将部署的服务额外的域名edu.xiaodi8.com</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717103544082.png" alt="image-20240717103544082"></p>
+<p><strong>对应这两个域名解析都指向服务器IP</strong></p>
+<p><strong>给定目标是bbs.xiaodi8.com 交给你渗透，我们也就可以尝试对服务下 edu.xiaodi8.com进行安全测试。毕竟二者指向IP相同</strong></p>
+<p>这三种网络结构，也给了我们更多的可能性和更多的目标。 </p>
+<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>一般的站长，为了满足网站更多的功能亦或是让自己管理更加方便，可能都会安装一些插件，在安装插件的过程中，如果插件爆出了问题，那么也是会对网站本身造成危害。</p>
+<p>web源码插件</p>
+<p>web应用插件  类似phpmyadmin -设计是便于管理数据库的</p>
+<p>类似的使用fofa就能找到很多部署在公网上的phpmyadmin站点</p>
+<p>对应的fofa站点：<a href="fofa.so">fofa</a></p>
+<p>fofa搜索语法：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717105107703.png" alt="image-20240717105107703"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112530642.png" alt="image-20240717112530642"></p>
+<p><strong>方便了管理者管理数据库，也拓展了攻击者通过这个接口攻击不支持外链数据库的可能性。</strong></p>
+<h3 id="服务器应用"><a href="#服务器应用" class="headerlink" title="服务器应用"></a>服务器应用</h3><p><strong>ftp</strong>  方便管理员进行文件传输操作，也方便攻击者攻击ftp协议服务 比如上传一些后门文件等等</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>电子功能越多，对应的可攻击点越多</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112447372.png" alt="image-20240717112447372"></p>
+<h2 id="番外安全-域名-服务器本身-服务厂商-管理人员"><a href="#番外安全-域名-服务器本身-服务厂商-管理人员" class="headerlink" title="番外安全-域名&amp;服务器本身&amp;服务厂商&amp;管理人员"></a>番外安全-域名&amp;服务器本身&amp;服务厂商&amp;管理人员</h2><h2 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h2><p>对于一个由服务器+域名组成的服务：</p>
+<p><strong>假设</strong> </p>
+<p>如果攻击者能够得到阿里云本身的账号密码，那么登录进去就可以进行这个域名的解析管理：</p>
+<p>所以作为攻击者，如果可以收集到对应域名的注册商，对这个域名的使用人员采取社工学的信息收集（直接爆破域名注册平台风险是非常大的，同时对于这种未授权行为是由一套非常严格的管控措施的，所以请读者不要进行一些未授权的行为！如有）</p>
+<h2 id="考虑阻碍-站库分离-CDN-WAP-负载均衡-主机防护"><a href="#考虑阻碍-站库分离-CDN-WAP-负载均衡-主机防护" class="headerlink" title="考虑阻碍-站库分离&amp;CDN&amp;WAP&amp;负载均衡&amp;主机防护"></a>考虑阻碍-站库分离&amp;CDN&amp;WAP&amp;负载均衡&amp;主机防护</h2><h1 id="Day6"><a href="#Day6" class="headerlink" title="Day6"></a>Day6</h1>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/source/categories/Penetration-Testing-Basic/">Penetration Testing Basic</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/source/tags/pr0gram/">pr0gram</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2024/07/11/从0开始的渗透/"><span>从0开始的渗透Day1-3desu</span></a></h3>
     
   
@@ -276,7 +484,7 @@
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="Day1-基础入门-操作系统-名词-文件下载-反弹shell-防火墙绕过"><a href="#Day1-基础入门-操作系统-名词-文件下载-反弹shell-防火墙绕过" class="headerlink" title="Day1:基础入门-操作系统&amp;名词&amp;文件下载&amp;反弹shell&amp;防火墙绕过"></a>Day1:基础入门-操作系统&amp;名词&amp;文件下载&amp;反弹shell&amp;防火墙绕过</h1><h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sunny11/p/13583083.html">https://www.cnblogs.com/sunny11/p/13583083.html</a></p>
+        <h1 id="如读者有未授权渗透行为，后果自负，本站仅作学习用途"><a href="#如读者有未授权渗透行为，后果自负，本站仅作学习用途" class="headerlink" title="如读者有未授权渗透行为，后果自负，本站仅作学习用途"></a>如读者有未授权渗透行为，后果自负，本站仅作学习用途</h1><h1 id="Day1-基础入门-操作系统-名词-文件下载-反弹shell-防火墙绕过"><a href="#Day1-基础入门-操作系统-名词-文件下载-反弹shell-防火墙绕过" class="headerlink" title="Day1:基础入门-操作系统&amp;名词&amp;文件下载&amp;反弹shell&amp;防火墙绕过"></a>Day1:基础入门-操作系统&amp;名词&amp;文件下载&amp;反弹shell&amp;防火墙绕过</h1><h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sunny11/p/13583083.html">https://www.cnblogs.com/sunny11/p/13583083.html</a></p>
 <h1 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h1><p><a target="_blank" rel="noopener" href="https://forum.ywhack.com/bountytips.php?download">https://forum.ywhack.com/bountytips.php?download</a></p>
 <p><strong>在渗透的过程中，如果我们要在对方的服务里面下载我们制作好的病毒文件等，是不可能通过打开对方的浏览器进而进行下载的，因此弹出shell后我们也要掌握一些基本的文件下载命令，并且自己搭建一个小型的渗透站点用于传输一些安全脚本或者安全文件作为攻击手段。</strong></p>
 <h1 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h1><p>反弹shell主要用于<strong>命令发送后无回显的情况</strong>，<strong>大部分 的安全工具都是一条命令发送过后便了无音讯</strong>，服务器接收了但并没有给我们对应的反馈，这个时候就需要反弹shell。</p>
@@ -459,106 +667,9 @@
 <h3 id="进程获取"><a href="#进程获取" class="headerlink" title="进程获取"></a>进程获取</h3><p>没有发现模拟器对应的进程，那么封包也是天方夜谭</p>
 <p>首先通过Wireshark或者科来网络分析系统监听本机进程，并在游戏中多进行释放技能，领取奖励等数据包交互很多的操作，可以发现对应的字节波动大的进程，通过进程名推敲一下看看是否就是这个模拟器的进程。</p>
 <h3 id="最后封包"><a href="#最后封包" class="headerlink" title="最后封包"></a>最后封包</h3><p>后续直接用封包工具对模拟器起一个监听，然后打开监听，在游戏内进行想要封包的操作（例如回城等），点击回城后关闭监听开始测试抓取到的数据包，如果选中的数据包发送后能够成功实现该功能，则说明封包成功（虽然Burpsuite其实也能做到直接监听对应模拟器配置的虚拟网卡）</p>
-<h2 id="进阶封包流程"><a href="#进阶封包流程" class="headerlink" title="进阶封包流程"></a>进阶封包流程</h2><p>进阶的封包无非是在模拟器中装入代理机器人，后续代理机器人将抓到的数据包传回到本机的CCproxy（也是工具），CCproxy（也是工具）对应的进程则被WPE所监听，但由于这个流程已经太老了，模拟器以及游戏本身可能都有对应的防护，所以一般傻瓜式封包会比进阶封包更容易抓到包。</p>
+<h2 id="进阶封包流程"><a href="#进阶封包流程" class="headerlink" title="进阶封包流程"></a>进阶封包流程</h2><p>进阶的封包无非是在模拟器中装入代理机器人，后续代理机器人将抓到的数据包传回到本机的CCproxy（也是工具），CCproxy对应的进程则被WPE所监听，但由于这个流程已经太老了，模拟器以及游戏本身可能都有对应的防护，所以一般傻瓜式封包会比进阶封包更容易抓到包。</p>
 <p><strong>后续有条件一定要自己尝试写出来封包监听工具，毕竟公开的工具会被ban，但公开的原理不会，通过进阶封包这里学得原理，自己做个封包监听工具又有何不可呢。</strong></p>
 
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/source/categories/Penetration-Testing-Basic/">Penetration Testing Basic</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/source/tags/pr0gram/">pr0gram</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2024/07/11/从3开始的渗透/"><span></span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2024/07/11/从3开始的渗透/" rel="bookmark">
-        <time class="entry-date published" datetime="2024-07-11T06:33:00.000Z">
-          2024-07-11
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="Day4-30余种加解密编码进制-Web-数据库-系统-代码-参数值"><a href="#Day4-30余种加解密编码进制-Web-数据库-系统-代码-参数值" class="headerlink" title="Day4:30余种加解密编码进制&amp;Web &amp;数据库&amp;系统&amp;代码&amp;参数值"></a>Day4:30余种加解密编码进制&amp;Web &amp;数据库&amp;系统&amp;代码&amp;参数值</h1><h2 id="加解密编码进制"><a href="#加解密编码进制" class="headerlink" title="加解密编码进制"></a>加解密编码进制</h2><p>识别算法编码类型</p>
-<p>1.看密文位数</p>
-<p>2.看密文的特征（数字，字符，大小写，符号等）</p>
-<p>3.看当前密文存在的地方（Web，数据库，操作系统等应用）</p>
-<p>演示案例如下，接下来会从这些方面出发</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715163704329.png" alt="image-20240715163704329"></p>
-<p>详细列举</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715163856227.png" alt="image-20240715163856227"></p>
-<p>对于一些密码算法，类似md5这类不可逆的密码算法</p>
-<p>这个时候解密的方式就有：<strong>枚举和碰撞</strong></p>
-<p><strong>解密不通过算法解密，而是尝试生成很多的加密或对应明文的字符来枚举</strong></p>
-<p>同时加密的应用场景比较多，这里列举出这些</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715164423363.png" alt="image-20240715164423363"></p>
-<p>加密存储相对明文存储而言，不同之处就在于在攻防过程中，如果你的密文设置的足够复杂，其实也可以防止攻击端进一步攻击网络资产。</p>
-<p>—-1—</p>
-<p>类似于最基本的md5加密，类似个人博客这种最基本的站点，一般会采取md5加密，这个时候假设你进入了数据库，可以直接利用某些线上工具完成解密</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715170018370.png" alt="10"></p>
-<p>—2—</p>
-<p>对应了<strong>国外论坛discuz类的站点</strong>采用了md5+salt加密的方式，在本身就用md5加密的条件下还额外加入了“salt“字段，这个时候使加密更加完善，攻击者在未知网站信息或存储机制的情况下难以进一步操作</p>
-<p>不过还是有机会通过一些信息的收集得知其加密的机制的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715165911780.png" alt="image-20240715165911780"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715170242476.png" alt="image-20240715170242476"></p>
-<p>密算法是不可能第一时间就能知道的，而是要对这个站点采取信息收集，收集过后找到对应的架构是怎么样的**(Web站点之间的不同？还是对应想要查看的是某个操作系统？)**，架构知道了，那么这个加密算法具体怎么实现的也就可以通过网上的信息，甚至是自己搭一个这样的站点，对应这些思路自然也就一通百通。</p>
-<p>这里介绍一个工具，mimikatz，它是用于获取windows系统上所有的明文和密钥进行获取。 不过这个不一定有用，因为mimikatz对应在windows2008后版本取消显示明文密码过后，作用并不是那么明显。</p>
-<p>不过从这里可以看出，不管是什么样的架构都有迹可循。</p>
-<p>这样就能防止我们单纯的拿到明文过后却无计可施。 </p>
-<p><strong>不只是有存储类的加密</strong>，<strong>就连代码也会有对应的代码加密</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715205508717.png" alt="image-20240715205508717"></p>
-<p>对应的 数据库也有对应的密文加密方式</p>
-<p>以及浏览器也是对应有其加密方式</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715211129660.png" alt="image-20240715211129660"></p>
-<p>这些只要掌握大概，以及懂得工具的使用就可以了</p>
-<h1 id="Day5：资产架构-端口-应用-CDN-WAF-站库分离-负载均衡"><a href="#Day5：资产架构-端口-应用-CDN-WAF-站库分离-负载均衡" class="headerlink" title="Day5：资产架构&amp;端口&amp;应用&amp;CDN&amp;WAF&amp;站库分离&amp;负载均衡"></a>Day5：资产架构&amp;端口&amp;应用&amp;CDN&amp;WAF&amp;站库分离&amp;负载均衡</h1><p>本阶段复现可能需要基于<strong>阿里云服务器+完整备案后域名+宝塔面板&#x2F;github上自主部署服务。</strong></p>
-<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZqNyI04OHsCJqTXg5b9F0RmJpBNvbD9ZF0Q&s" alt="关注永雏塔菲谢谢喵什么梗- 抖音"></p>
-<h2 id="资产架构-端口-目录-插件接口-多站点-多应用"><a href="#资产架构-端口-目录-插件接口-多站点-多应用" class="headerlink" title="资产架构-端口&amp;目录&amp;插件接口&amp;多站点&amp;多应用"></a>资产架构-端口&amp;目录&amp;插件接口&amp;多站点&amp;多应用</h2><p> 这里由于Satoru前期部署网站和域名备案等琐事，时间线拉长的让人寒心，只能找Wells要了个子域名，所以这里也懒得用我已经部署好的网站重新演示一遍（主要是完整的站点目录我只拿着一个子域名也很难复现（戳手手））</p>
-<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHNG07AZ4KHRaS7k_YotkiGRnl7kIwbX9hMQ&s" alt="塔菲盒官方下载-永雏塔菲盒(Taffy盒)下载v1.0 安卓版-100手游网"></p>
-<p>这里已经通过域名解析服务器IP，后续宝塔面板一键部署在该域名解析的服务器上实现了建站。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717095245678.png" alt="image-20240717095245678"></p>
-<h2 id="番外安全-域名-服务器本身-服务厂商-管理人员"><a href="#番外安全-域名-服务器本身-服务厂商-管理人员" class="headerlink" title="番外安全-域名&amp;服务器本身&amp;服务厂商&amp;管理人员"></a>番外安全-域名&amp;服务器本身&amp;服务厂商&amp;管理人员</h2><h2 id="考虑阻碍-站库分离-CDN-WAP-负载均衡-主机防护"><a href="#考虑阻碍-站库分离-CDN-WAP-负载均衡-主机防护" class="headerlink" title="考虑阻碍-站库分离&amp;CDN&amp;WAP&amp;负载均衡&amp;主机防护"></a>考虑阻碍-站库分离&amp;CDN&amp;WAP&amp;负载均衡&amp;主机防护</h2>
       
     </div>
 
@@ -617,7 +728,7 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>想要学好渗透测试，需要很多努力，不同于以往的学习体系抛给你漏洞原理和payload那么简单，是从底层慢慢摸索，甚至站在运维的角度，站在开发者站在甲方的角度去看问题，自然所要掌握的知识会多得多，但学会渗透测试其实并不难，市面上流通的工具和套路足够你成为所谓的脚本小子了，那么我们就从学会做一个脚本小子开始，依靠调试几个参数和市面上给定的脚本完成最基本的渗透吧！</p>
+        <h1 id="如读者有未授权渗透行为，后果自负，本站仅作学习用途"><a href="#如读者有未授权渗透行为，后果自负，本站仅作学习用途" class="headerlink" title="如读者有未授权渗透行为，后果自负，本站仅作学习用途"></a>如读者有未授权渗透行为，后果自负，本站仅作学习用途</h1><p>要学好渗透测试，需要很多努力，不同于以往的学习体系抛给你漏洞原理和payload那么简单，是从底层慢慢摸索，甚至站在运维的角度，站在开发者站在甲方的角度去看问题，自然所要掌握的知识会多得多，但学会渗透测试其实并不难，市面上流通的工具和套路足够你成为所谓的脚本小子了，那么我们就从学会做一个脚本小子开始，依靠调试几个参数和市面上给定的脚本完成最基本的渗透吧！</p>
 <p>这篇文章主要是讲解通常情况下的一些信息泄露和渗透者如何进行各方面的信息收集的，信息泄露和信息收集二者所指的概念统一却又相互分离，等到具体接触就会明白这是什么了</p>
 <h1 id="Web之信息泄露"><a href="#Web之信息泄露" class="headerlink" title="Web之信息泄露"></a>Web之信息泄露</h1><p>这里不好意思通篇复制，可以转到这里看看信息泄露是怎么样的</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/a597934448/article/details/105431367">CTFHUBWeb技能树——信息泄露writeup_ctfhub web writeup-CSDN博客</a></p>
