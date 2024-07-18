@@ -804,22 +804,22 @@
 .parallax > use:nth-child(1) {
   animation-delay: -2s;
   animation-duration: 7s;
-  fill: #f7f9febd;
+  fill: #2d4d9cbd;
 }
 .parallax > use:nth-child(2) {
   animation-delay: -3s;
   animation-duration: 10s;
-  fill: #f7f9fe82;
+  fill: #a1b6ec82;
 }
 .parallax > use:nth-child(3) {
   animation-delay: -4s;
   animation-duration: 13s;
-  fill: #f7f9fe36;
+  fill: #8faaeec4;
 }
 .parallax > use:nth-child(4) {
   animation-delay: -5s;
   animation-duration: 20s;
-  fill: #f7f9fe;
+  fill: #5765e2ab;
 }
 
 [data-theme="dark"] .parallax > use:nth-child(1) {
