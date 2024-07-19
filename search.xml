@@ -1,78 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>fofa常用语法</title>
-    <url>/2024/07/17/fofa%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<h1><span id="如读者有未授权渗透行为后果自负本站仅作学习用途">如读者有未授权渗透行为，后果自负，本站仅作学习用途</span></h1><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112339739.png" alt="image-20240717112339739"></p>
-<h2><span id="fofa">fofa</span></h2><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717192204406.png" alt="image-20240717192204406"></p>
-<p>直接输入查询语句，将从标题，html内容，http头信息，url字段中搜索；如果查询表达式有多个与或关系，尽量在外面用（）包含起来；</p>
-<p>&#x3D;&#x3D;完全匹配的符号，可以加快搜索速度，比如查找qq.com所有host，可以是domain&#x3D;&#x3D;”qq.com”</p>
-<h1><span id="高级搜索">高级搜索</span></h1><table>
-<thead>
-<tr>
-<th>可以使用括号 和 &amp;&amp;</th>
-<th></th>
-<th>!&#x3D;等符号，如</th>
-</tr>
-</thead>
-<tbody><tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">title=&quot;powered by&quot; &amp;&amp; title!=&quot;discuz&quot; </span><br><span class="line"></span><br><span class="line">body=&quot;content=WordPress&quot; || (header=&quot;X-Pingback&quot; &amp;&amp; header=&quot;/xmlrpc.php&quot; &amp;&amp; body=&quot;/wp-includes/&quot;) &amp;&amp; host=&quot;gov.cn&quot;</span><br></pre></td></tr></table></figure>
-
-<h1><span id="语法">语法</span></h1><p>title&#x3D;”beijing” 从标题中搜索“北京”</p>
-<p>header&#x3D;”elastic” 从http头中搜索“elastic”</p>
-<p>body&#x3D;”网络空间测绘” 从html正文中搜索“网络空间测绘”</p>
-<p>domain&#x3D;”qq.com” 搜索根域名带有qq.com的网站。</p>
-<p>icon_hash&#x3D;”-247388890” 搜索使用此icon的资产。 仅限FOFA高级会员使用</p>
-<p>host&#x3D;”.gov.cn” 从url中搜索”.gov.cn” 搜索要用host作为名称</p>
-<p>port&#x3D;”6379” 查找对应“6379”端口的资产</p>
-<p>icp&#x3D;”京ICP证030173号” 查找备案号为“京ICP证030173号”的网站 搜索网站类型资产</p>
-<p>ip&#x3D;”1.1.1.1” 从ip中搜索包含“1.1.1.1”的网站 搜索要用ip作为名称</p>
-<p>ip&#x3D;”220.181.111.1&#x2F;24” 查询IP为“220.181.111.1”的C网段资产</p>
-<p>status_code&#x3D;”402” 查询服务器状态为“402”的资产</p>
-<p>protocol&#x3D;”quic” 查询quic协议资产 搜索指定协议类型(在开启端口扫描的情况下有效)</p>
-<p>country&#x3D;”CN” 搜索指定国家(编码)的资产。</p>
-<p>region&#x3D;”HeNan” 搜索指定行政区的资产。</p>
-<p>city&#x3D;”HanDan” 搜索指定城市的资产。</p>
-<p>cert&#x3D;”baidu” 搜索证书(https或者imaps等)中带有baidu的资产。</p>
-<p>cert.subject&#x3D;”Oracle Corporation” 搜索证书持有者是Oracle Corporation的资产</p>
-<p>cert.issuer&#x3D;”DigiCert” 搜索证书颁发者为DigiCert Inc的资产</p>
-<p>cert.is_valid&#x3D;true 验证证书是否有效，true有效，false无效，仅限FOFA高级会员使用</p>
-<p>banner&#x3D;users &amp;&amp; protocol&#x3D;ftp 搜索FTP协议中带有users文本的资产。</p>
-<p>type&#x3D;service 搜索所有协议资产，支持subdomain和service两种。</p>
-<p>os&#x3D;”centos” 搜索操作系统为CentOS资产。</p>
-<p>server&#x3D;&#x3D;”Microsoft-IIS&#x2F;10” 搜索IIS 10服务器。</p>
-<p>app&#x3D;”Microsoft-Exchange” 搜索Microsoft-Exchange设备</p>
-<p>after&#x3D;”2017” &amp;&amp; before&#x3D;”2017-10-01” 时间范围段搜索</p>
-<p>asn&#x3D;”19551” 搜索指定asn的资产。</p>
-<p>org&#x3D;”Amazon.com, Inc.” 搜索指定org(组织)的资产。</p>
-<p>base_protocol&#x3D;”udp” 搜索指定udp协议的资产。</p>
-<p>is_fraud&#x3D;false 排除仿冒&#x2F;欺诈数据</p>
-<p>is_honeypot&#x3D;false 排除蜜罐数据，仅限FOFA高级会员使用</p>
-<p>is_ipv6&#x3D;true 搜索ipv6的资产,只接受true和false。</p>
-<p>is_domain&#x3D;true 搜索域名的资产,只接受true和false。</p>
-<p>port_size&#x3D;”6” 查询开放端口数量等于”6”的资产，仅限FOFA会员使用</p>
-<p>port_size_gt&#x3D;”6” 查询开放端口数量大于”6”的资产，仅限FOFA会员使用</p>
-<p>port_size_lt&#x3D;”12” 查询开放端口数量小于”12”的资产，仅限FOFA会员使用</p>
-<p>ip_ports&#x3D;”80,161” 搜索同时开放80和161端口的ip资产(以ip为单位的资产数据)</p>
-<p>ip_country&#x3D;”CN” 搜索中国的ip资产(以ip为单位的资产数据)。</p>
-<p>ip_region&#x3D;”Zhejiang” 搜索指定行政区的ip资产(以ip为单位的资产数据)。</p>
-<p>ip_city&#x3D;”Hangzhou” 搜索指定城市的ip资产(以ip为单位的资产数据)。</p>
-<p>ip_after&#x3D;”2021-03-18” 搜索2021-03-18以后的ip资产(以ip为单位的资产数据)。</p>
-<p>ip_before&#x3D;”2019-09-09” 搜索2019-09-09以前的ip资产(以ip为单位的资产数据)。</p>
-]]></content>
-      <categories>
-        <category>Penetration Testing Basic</category>
-      </categories>
-      <tags>
-        <tag>info</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SQL注入 二开desu</title>
     <url>/2024/07/08/SQL%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<h1><span id="sql注入二开">SQL注入二开</span></h1><p>本教程基于SQL i-Labs,pikachu,dvwa等靶场做拓展</p>
@@ -594,127 +522,75 @@
       </tags>
   </entry>
   <entry>
-    <title>从0开始的渗透Day4-6desu</title>
-    <url>/2024/07/15/%E4%BB%8E3%E5%BC%80%E5%A7%8B%E7%9A%84%E6%B8%97%E9%80%8F1/</url>
-    <content><![CDATA[<h1><span id="如读者有未授权渗透行为后果自负本站仅作学习用途">如读者有未授权渗透行为，后果自负，本站仅作学习用途</span></h1><h1><span id="day430余种加解密编码进制ampweb-amp数据库amp系统amp代码amp参数值">Day4:30余种加解密编码进制&amp;Web &amp;数据库&amp;系统&amp;代码&amp;参数值</span></h1><h2><span id="加解密编码进制">加解密编码进制</span></h2><p>识别算法编码类型</p>
-<p>1.看密文位数</p>
-<p>2.看密文的特征（数字，字符，大小写，符号等）</p>
-<p>3.看当前密文存在的地方（Web，数据库，操作系统等应用）</p>
-<p>演示案例如下，接下来会从这些方面出发</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715163704329.png" alt="image-20240715163704329"></p>
-<p>详细列举</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715163856227.png" alt="image-20240715163856227"></p>
-<p>对于一些密码算法，类似md5这类不可逆的密码算法</p>
-<p>这个时候解密的方式就有：<strong>枚举和碰撞</strong></p>
-<p><strong>解密不通过算法解密，而是尝试生成很多的加密或对应明文的字符来枚举</strong></p>
-<p>同时加密的应用场景比较多，这里列举出这些</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715164423363.png" alt="image-20240715164423363"></p>
-<p>加密存储相对明文存储而言，不同之处就在于在攻防过程中，如果你的密文设置的足够复杂，其实也可以防止攻击端进一步攻击网络资产。</p>
-<p>—-1—</p>
-<p>类似于最基本的md5加密，类似个人博客这种最基本的站点，一般会采取md5加密，这个时候假设你进入了数据库，可以直接利用某些线上工具完成解密</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715170018370.png" alt="10"></p>
-<p>—2—</p>
-<p>对应了<strong>国外论坛discuz类的站点</strong>采用了md5+salt加密的方式，在本身就用md5加密的条件下还额外加入了“salt“字段，这个时候使加密更加完善，攻击者在未知网站信息或存储机制的情况下难以进一步操作</p>
-<p>不过还是有机会通过一些信息的收集得知其加密的机制的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715165911780.png" alt="image-20240715165911780"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715170242476.png" alt="image-20240715170242476"></p>
-<p>密算法是不可能第一时间就能知道的，而是要对这个站点采取信息收集，收集过后找到对应的架构是怎么样的**Web站点 **了，那么这个加密算法具体怎么实现的也就可以通过网上的信息，甚至是自己搭一个这样的站点，对应这些思路自然也就一通百通。</p>
-<p>这里介绍一个工具，mimikatz，它是用于获取windows系统上所有的明文和密钥进行获取。 不过这个不一定有用，因为mimikatz对应在windows2008后版本取消显示明文密码过后，作用并不是那么明显。</p>
-<p>不过从这里可以看出，不管是什么样的架构都有迹可循。</p>
-<p>这样就能防止我们单纯的拿到明文过后却无计可施。 </p>
-<p><strong>不只是有存储类的加密</strong>，<strong>就连代码也会有对应的代码加密</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715205508717.png" alt="image-20240715205508717"></p>
-<p>对应的 数据库也有对应的密文加密方式</p>
-<p>以及浏览器也是对应有其加密方式</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715211129660.png" alt="image-20240715211129660"></p>
-<p>这些只要掌握大概，以及懂得工具的使用就可以了</p>
-<h1><span id="day5资产架构amp端口amp应用ampcdnampwafamp站库分离amp负载均衡">Day5：资产架构&amp;端口&amp;应用&amp;CDN&amp;WAF&amp;站库分离&amp;负载均衡</span></h1><p>本阶段复现可能需要基于<strong>阿里云服务器+完整备案后域名+宝塔面板&#x2F;github上自主部署服务。</strong></p>
-<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZqNyI04OHsCJqTXg5b9F0RmJpBNvbD9ZF0Q&s" alt="关注永雏塔菲谢谢喵什么梗- 抖音"></p>
-<h2><span id="资产架构-端口amp目录amp插件接口amp多站点amp多应用">资产架构-端口&amp;目录&amp;插件接口&amp;多站点&amp;多应用</span></h2><h3><span id="站点结构">站点结构</span></h3><h4><span id="目录型">目录型</span></h4><p> 这里由于Satoru前期部署网站和域名备案等琐事，时间线拉长的让人寒心，只能找Wells要了个子域名，所以这里也懒得用我已经部署好的网站重新演示一遍（主要是完整的站点目录我只拿着一个子域名也很难复现（戳手手））</p>
-<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHNG07AZ4KHRaS7k_YotkiGRnl7kIwbX9hMQ&s" alt="塔菲盒官方下载-永雏塔菲盒(Taffy盒)下载v1.0 安卓版-100手游网"></p>
-<p>这里已经通过域名解析服务器IP，后续宝塔面板一键部署该域名解析的服务器上实现了建站。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717095245678.png" alt="image-20240717095245678"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717102335544.png" alt="image-20240717102335544"></p>
-<p>现在只是单独一个网站，那么假设我在对应的域名目录下新建除了这个网站目录之外的博客目录，并在里面部署网站的话，那么这个站点则也会出现在这个域名的目录结构下，那么会呈现的效果也就是这样</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717102620385.png" alt="image-20240717102620385"></p>
-<p>​					<strong>对应的目录型站点也就成立了</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717102705476.png"></p>
-<p>结构也就显而易见了</p>
-<p><strong>bbs.xiaodi8.com —对应主目录网站</strong> </p>
-<p><strong>bbs.xiaodi8.com&#x2F;blog —wordpress程序</strong></p>
-<p>一个网站，两个程序，作为目录型站点，任何一个程序出现漏洞，都可以进入安全测试</p>
-<h4><span id="端口型">端口型</span></h4><p>新的网站部署过程中，可以采用对域名bbs.xiaodi8.com额外划出88端口这样的操作，这个时候也是实现了一个网站多个程序的效果</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717103213134.png" alt="image-20240717103213134"></p>
-<p>这个其实本质上也不用我额外多说，就是类似这样的结构</p>
-<p><strong>bbs.xiaodi8.com –主网站</strong></p>
-<p><strong>bbs.xiaodi8.com:8081  –wordpress程序</strong></p>
-<h4><span id="多个站点">多个站点</span></h4><p>多个站点类的网站其实原理也比较通俗，就是通过一些子域名实现多程序的部署</p>
-<p>类似这里直接给即将部署的服务额外的域名edu.xiaodi8.com</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717103544082.png" alt="image-20240717103544082"></p>
-<p><strong>对应这两个域名解析都指向服务器IP</strong></p>
-<p><strong>给定目标是bbs.xiaodi8.com 交给你渗透，我们也就可以尝试对服务下 edu.xiaodi8.com进行安全测试。毕竟二者指向IP相同</strong></p>
-<p>这三种网络结构，也给了我们更多的可能性和更多的目标。 </p>
-<h3><span id="插件">插件</span></h3><p>一般的站长，为了满足网站更多的功能亦或是让自己管理更加方便，可能都会安装一些插件，在安装插件的过程中，如果插件爆出了问题，那么也是会对网站本身造成危害。</p>
-<p>web源码插件</p>
-<p>web应用插件  类似phpmyadmin -设计是便于管理数据库的</p>
-<p>类似的使用fofa就能找到很多部署在公网上的phpmyadmin站点</p>
-<p>对应的fofa站点：<a href="fofa.so">fofa</a></p>
-<p>fofa搜索语法：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717105107703.png" alt="image-20240717105107703"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112530642.png" alt="image-20240717112530642"></p>
-<p><strong>方便了管理者管理数据库，也拓展了攻击者通过这个接口攻击不支持外链数据库的可能性。</strong></p>
-<h3><span id="服务器应用">服务器应用</span></h3><p><strong>ftp</strong>  方便管理员进行文件传输操作，也方便攻击者攻击ftp协议服务 比如上传一些后门文件等等</p>
-<h3><span id="总结">总结</span></h3><p><strong>电子功能越多，对应的可攻击点越多</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112447372.png" alt="image-20240717112447372"></p>
-<h2><span id="番外安全-域名amp服务器本身amp服务厂商amp管理人员">番外安全-域名&amp;服务器本身&amp;服务厂商&amp;管理人员</span></h2><h3><span id="域名">域名</span></h3><p>对于一个由服务器+域名组成的服务：</p>
-<p><strong>假设</strong> </p>
-<p>如果攻击者能够得到阿里云本身的账号密码，那么登录进去就可以进行这个域名的解析管理：</p>
-<p>所以作为攻击者，如果可以收集到对应域名的注册商，对这个域名的使用人员采取社工学的信息收集（<strong>直接爆破域名注册平台风险是非常大的，同时对于这种未授权行为是由一套非常严格的管控措施的，所以请读者不要进行一些未授权的行为！如有违规行为后果自负</strong>）</p>
-<p><strong>对使用人员的信息收集可以从其在不同站点的使用库入手</strong>，对应的推敲出这个平台的号码，可以发掘这个域名注册平台注册密码时是否需要大写或者特殊符号等，然后结合其他站点这个使用人员的个人习惯推敲对应的账号密码。</p>
-<p>抑或是通过<strong>搭建钓鱼站点以及钓鱼邮件</strong>的方式，对照域名注册平台的要求设置注册密码时的框架，这个时候大体上该使用者极有可能会采取同一套密码进行注册</p>
-<p><strong>甚至可以直接对使用者本人进行一些诱导，直接和使用者本人进行接触</strong>并进行多维度的渗透，看看这个使用者当前阶段所做的事，投其所好攻其必救，直接将密码凭据拿走。这就是点对点的攻击desu</p>
-<p>因为本质上，服务器就是人管理的</p>
-<h3><span id="实战">实战</span></h3><h4><span id="日edu">日edu</span></h4><p><strong>这个素材是21年左右的，不过还是有实践意义的</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717153941814.png" alt="image-20240717153941814"></p>
-<p><strong>信息点1</strong></p>
-<p>采用的是DMU email 虽然不知道是不是学校本身的logo之类的，但也可以搜一下看看</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717154900573.png" alt="image-20240717154900573"></p>
-<p>可以发现确实是他们学校自己的logo，这边2024年已经出台了很多对应的管理办法等等提高用户安全意识了，不过也可以趁此机会看看有没有过滤器，过滤的点是什么。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717155310868.png" alt="image-20240717155310868"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717155602753.png" alt="image-20240717155602753"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717155634953.png" alt="image-20240717155634953"></p>
-<p><strong>信息点2</strong></p>
-<p>爆破端口发现了8080上部署了一个网关类服务，采用的是eYou邮件网关，去网上搜一下对应的有没有存在什么漏洞。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717154944753.png" alt="image-20240717154944753"></p>
-<p>好家伙，已经明摆着让我们攻击了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717155047976.png" alt="image-20240717155047976"></p>
-<p>也就是在这个网站上，对应的两个服务中只要有一个被我成功应用到了，那就有机会把整个服务器拿下。</p>
-<p>这里对应了端口类服务</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717161623661.png" alt="image-20240717161623661"></p>
-<p>目前已修复成这样，大概是外包给安全公司了，大家就暂时别想了（）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717154729681.png" alt="image-20240717154729681"></p>
-<h4><span id="日企业站点">日企业站点</span></h4><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717161706580.png" alt="image-20240717161706580"></p>
-<p><strong>甚至phpmyadmin也是暴露在8081上的，那么可以考虑一下这个第三方应用有没有弱口令可以作为攻击点</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717161721031.png" alt="image-20240717161721031"></p>
-<h4><span id="日网站">日网站</span></h4><p>在这里略显无从下手，无法找到明面上的太多漏洞</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717161916481.png" alt="image-20240717161916481"></p>
-<p>这个时候也是通过信息收集，发现其管理者为了方便上了ftp服务，这里就可以直接这么利用</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717162306688.png" alt="image-20240717162306688"></p>
-<p>这就是安装了服务器应用的网站典型，ftp协议也成为了对应的攻击点</p>
-<h2><span id="考虑阻碍-站库分离ampcdnampwapamp负载均衡amp主机防护">考虑阻碍-站库分离&amp;CDN&amp;WAP&amp;负载均衡&amp;主机防护</span></h2><h3><span id="站库分离">站库分离</span></h3><p>搭建网站的过程中，一般会填写一些数据库的信息。那么有一种情况，管理者将源码放在一个IP，数据库则对应部署在另一个IP，这么做就属于网站建立后会调用远端的数据库，形成一个站库分离。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717162645305.png" alt="image-20240717162645305"></p>
-<p>站库分离的好处是容易导致攻击者陷入下面的情境：</p>
-<p>攻击者攻击的漏洞是基于攻击数据库的</p>
-<p>攻击者拿下了网站源码对应的服务器，但是发现数据库不在服务器上</p>
-<p>这真是想想就会让攻击者红温</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/008jCdW0gy1hriyt8rqkwj30xd0xinbv.jpg" alt="img"></p>
-<h3><span id="cdn加速服务">CDN加速服务</span></h3><p>CDN就是为了解决网络访问输入的一个服务，具体详参<a href="https://xzb666-hub.github.io/2024/07/10/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E4%B8%8E%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">这篇文章</a></p>
-<h1><span id="day6">Day6</span></h1>]]></content>
+    <title>fofa常用语法</title>
+    <url>/2024/07/17/fofa%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<h1><span id="如读者有未授权渗透行为后果自负本站仅作学习用途">如读者有未授权渗透行为，后果自负，本站仅作学习用途</span></h1><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112339739.png" alt="image-20240717112339739"></p>
+<h2><span id="fofa">fofa</span></h2><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717192204406.png" alt="image-20240717192204406"></p>
+<p>直接输入查询语句，将从标题，html内容，http头信息，url字段中搜索；如果查询表达式有多个与或关系，尽量在外面用（）包含起来；</p>
+<p>&#x3D;&#x3D;完全匹配的符号，可以加快搜索速度，比如查找qq.com所有host，可以是domain&#x3D;&#x3D;”qq.com”</p>
+<h1><span id="高级搜索">高级搜索</span></h1><table>
+<thead>
+<tr>
+<th>可以使用括号 和 &amp;&amp;</th>
+<th></th>
+<th>!&#x3D;等符号，如</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">title=&quot;powered by&quot; &amp;&amp; title!=&quot;discuz&quot; </span><br><span class="line"></span><br><span class="line">body=&quot;content=WordPress&quot; || (header=&quot;X-Pingback&quot; &amp;&amp; header=&quot;/xmlrpc.php&quot; &amp;&amp; body=&quot;/wp-includes/&quot;) &amp;&amp; host=&quot;gov.cn&quot;</span><br></pre></td></tr></table></figure>
+
+<h1><span id="语法">语法</span></h1><p>title&#x3D;”beijing” 从标题中搜索“北京”</p>
+<p>header&#x3D;”elastic” 从http头中搜索“elastic”</p>
+<p>body&#x3D;”网络空间测绘” 从html正文中搜索“网络空间测绘”</p>
+<p>domain&#x3D;”qq.com” 搜索根域名带有qq.com的网站。</p>
+<p>icon_hash&#x3D;”-247388890” 搜索使用此icon的资产。 仅限FOFA高级会员使用</p>
+<p>host&#x3D;”.gov.cn” 从url中搜索”.gov.cn” 搜索要用host作为名称</p>
+<p>port&#x3D;”6379” 查找对应“6379”端口的资产</p>
+<p>icp&#x3D;”京ICP证030173号” 查找备案号为“京ICP证030173号”的网站 搜索网站类型资产</p>
+<p>ip&#x3D;”1.1.1.1” 从ip中搜索包含“1.1.1.1”的网站 搜索要用ip作为名称</p>
+<p>ip&#x3D;”220.181.111.1&#x2F;24” 查询IP为“220.181.111.1”的C网段资产</p>
+<p>status_code&#x3D;”402” 查询服务器状态为“402”的资产</p>
+<p>protocol&#x3D;”quic” 查询quic协议资产 搜索指定协议类型(在开启端口扫描的情况下有效)</p>
+<p>country&#x3D;”CN” 搜索指定国家(编码)的资产。</p>
+<p>region&#x3D;”HeNan” 搜索指定行政区的资产。</p>
+<p>city&#x3D;”HanDan” 搜索指定城市的资产。</p>
+<p>cert&#x3D;”baidu” 搜索证书(https或者imaps等)中带有baidu的资产。</p>
+<p>cert.subject&#x3D;”Oracle Corporation” 搜索证书持有者是Oracle Corporation的资产</p>
+<p>cert.issuer&#x3D;”DigiCert” 搜索证书颁发者为DigiCert Inc的资产</p>
+<p>cert.is_valid&#x3D;true 验证证书是否有效，true有效，false无效，仅限FOFA高级会员使用</p>
+<p>banner&#x3D;users &amp;&amp; protocol&#x3D;ftp 搜索FTP协议中带有users文本的资产。</p>
+<p>type&#x3D;service 搜索所有协议资产，支持subdomain和service两种。</p>
+<p>os&#x3D;”centos” 搜索操作系统为CentOS资产。</p>
+<p>server&#x3D;&#x3D;”Microsoft-IIS&#x2F;10” 搜索IIS 10服务器。</p>
+<p>app&#x3D;”Microsoft-Exchange” 搜索Microsoft-Exchange设备</p>
+<p>after&#x3D;”2017” &amp;&amp; before&#x3D;”2017-10-01” 时间范围段搜索</p>
+<p>asn&#x3D;”19551” 搜索指定asn的资产。</p>
+<p>org&#x3D;”Amazon.com, Inc.” 搜索指定org(组织)的资产。</p>
+<p>base_protocol&#x3D;”udp” 搜索指定udp协议的资产。</p>
+<p>is_fraud&#x3D;false 排除仿冒&#x2F;欺诈数据</p>
+<p>is_honeypot&#x3D;false 排除蜜罐数据，仅限FOFA高级会员使用</p>
+<p>is_ipv6&#x3D;true 搜索ipv6的资产,只接受true和false。</p>
+<p>is_domain&#x3D;true 搜索域名的资产,只接受true和false。</p>
+<p>port_size&#x3D;”6” 查询开放端口数量等于”6”的资产，仅限FOFA会员使用</p>
+<p>port_size_gt&#x3D;”6” 查询开放端口数量大于”6”的资产，仅限FOFA会员使用</p>
+<p>port_size_lt&#x3D;”12” 查询开放端口数量小于”12”的资产，仅限FOFA会员使用</p>
+<p>ip_ports&#x3D;”80,161” 搜索同时开放80和161端口的ip资产(以ip为单位的资产数据)</p>
+<p>ip_country&#x3D;”CN” 搜索中国的ip资产(以ip为单位的资产数据)。</p>
+<p>ip_region&#x3D;”Zhejiang” 搜索指定行政区的ip资产(以ip为单位的资产数据)。</p>
+<p>ip_city&#x3D;”Hangzhou” 搜索指定城市的ip资产(以ip为单位的资产数据)。</p>
+<p>ip_after&#x3D;”2021-03-18” 搜索2021-03-18以后的ip资产(以ip为单位的资产数据)。</p>
+<p>ip_before&#x3D;”2019-09-09” 搜索2019-09-09以前的ip资产(以ip为单位的资产数据)。</p>
+]]></content>
       <categories>
         <category>Penetration Testing Basic</category>
       </categories>
       <tags>
-        <tag>pr0gram</tag>
+        <tag>info</tag>
       </tags>
   </entry>
   <entry>
@@ -905,6 +781,186 @@
 <h3><span id="最后封包">最后封包</span></h3><p>后续直接用封包工具对模拟器起一个监听，然后打开监听，在游戏内进行想要封包的操作（例如回城等），点击回城后关闭监听开始测试抓取到的数据包，如果选中的数据包发送后能够成功实现该功能，则说明封包成功（虽然Burpsuite其实也能做到直接监听对应模拟器配置的虚拟网卡）</p>
 <h2><span id="进阶封包流程">进阶封包流程</span></h2><p>进阶的封包无非是在模拟器中装入代理机器人，后续代理机器人将抓到的数据包传回到本机的CCproxy（也是工具），CCproxy对应的进程则被WPE所监听，但由于这个流程已经太老了，模拟器以及游戏本身可能都有对应的防护，所以一般傻瓜式封包会比进阶封包更容易抓到包。</p>
 <p><strong>后续有条件一定要自己尝试写出来封包监听工具，毕竟公开的工具会被ban，但公开的原理不会，通过进阶封包这里学得原理，自己做个封包监听工具又有何不可呢。</strong></p>
+]]></content>
+      <categories>
+        <category>Penetration Testing Basic</category>
+      </categories>
+      <tags>
+        <tag>pr0gram</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从0开始的渗透Day4-6desu</title>
+    <url>/2024/07/15/%E4%BB%8E3%E5%BC%80%E5%A7%8B%E7%9A%84%E6%B8%97%E9%80%8F1/</url>
+    <content><![CDATA[<h1><span id="如读者有未授权渗透行为后果自负本站仅作学习用途">如读者有未授权渗透行为，后果自负，本站仅作学习用途</span></h1><h1><span id="day430余种加解密编码进制ampweb-amp数据库amp系统amp代码amp参数值">Day4:30余种加解密编码进制&amp;Web &amp;数据库&amp;系统&amp;代码&amp;参数值</span></h1><h2><span id="加解密编码进制">加解密编码进制</span></h2><p>识别算法编码类型</p>
+<p>1.看密文位数</p>
+<p>2.看密文的特征（数字，字符，大小写，符号等）</p>
+<p>3.看当前密文存在的地方（Web，数据库，操作系统等应用）</p>
+<p>演示案例如下，接下来会从这些方面出发</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715163704329.png" alt="image-20240715163704329"></p>
+<p>详细列举</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715163856227.png" alt="image-20240715163856227"></p>
+<p>对于一些密码算法，类似md5这类不可逆的密码算法</p>
+<p>这个时候解密的方式就有：<strong>枚举和碰撞</strong></p>
+<p><strong>解密不通过算法解密，而是尝试生成很多的加密或对应明文的字符来枚举</strong></p>
+<p>同时加密的应用场景比较多，这里列举出这些</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715164423363.png" alt="image-20240715164423363"></p>
+<p>加密存储相对明文存储而言，不同之处就在于在攻防过程中，如果你的密文设置的足够复杂，其实也可以防止攻击端进一步攻击网络资产。</p>
+<p>—-1—</p>
+<p>类似于最基本的md5加密，类似个人博客这种最基本的站点，一般会采取md5加密，这个时候假设你进入了数据库，可以直接利用某些线上工具完成解密</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715170018370.png" alt="10"></p>
+<p>—2—</p>
+<p>对应了<strong>国外论坛discuz类的站点</strong>采用了md5+salt加密的方式，在本身就用md5加密的条件下还额外加入了“salt“字段，这个时候使加密更加完善，攻击者在未知网站信息或存储机制的情况下难以进一步操作</p>
+<p>不过还是有机会通过一些信息的收集得知其加密的机制的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715165911780.png" alt="image-20240715165911780"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715170242476.png" alt="image-20240715170242476"></p>
+<p>密算法是不可能第一时间就能知道的，而是要对这个站点采取信息收集，收集过后找到对应的架构是怎么样的**Web站点 **了，那么这个加密算法具体怎么实现的也就可以通过网上的信息，甚至是自己搭一个这样的站点，对应这些思路自然也就一通百通。</p>
+<p>这里介绍一个工具，mimikatz，它是用于获取windows系统上所有的明文和密钥进行获取。 不过这个不一定有用，因为mimikatz对应在windows2008后版本取消显示明文密码过后，作用并不是那么明显。</p>
+<p>不过从这里可以看出，不管是什么样的架构都有迹可循。</p>
+<p>这样就能防止我们单纯的拿到明文过后却无计可施。 </p>
+<p><strong>不只是有存储类的加密</strong>，<strong>就连代码也会有对应的代码加密</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715205508717.png" alt="image-20240715205508717"></p>
+<p>对应的 数据库也有对应的密文加密方式</p>
+<p>以及浏览器也是对应有其加密方式</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240715211129660.png" alt="image-20240715211129660"></p>
+<p>这些只要掌握大概，以及懂得工具的使用就可以了</p>
+<h1><span id="day5资产架构amp端口amp应用ampcdnampwafamp站库分离amp负载均衡">Day5：资产架构&amp;端口&amp;应用&amp;CDN&amp;WAF&amp;站库分离&amp;负载均衡</span></h1><p>本阶段复现可能需要基于<strong>阿里云服务器+完整备案后域名+宝塔面板&#x2F;github上自主部署服务。</strong></p>
+<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZqNyI04OHsCJqTXg5b9F0RmJpBNvbD9ZF0Q&s" alt="关注永雏塔菲谢谢喵什么梗- 抖音"></p>
+<h2><span id="资产架构-端口amp目录amp插件接口amp多站点amp多应用">资产架构-端口&amp;目录&amp;插件接口&amp;多站点&amp;多应用</span></h2><h3><span id="站点结构">站点结构</span></h3><h4><span id="目录型">目录型</span></h4><p> 这里由于Satoru前期部署网站和域名备案等琐事，时间线拉长的让人寒心，只能找Wells要了个子域名，所以这里也懒得用我已经部署好的网站重新演示一遍（主要是完整的站点目录我只拿着一个子域名也很难复现（戳手手））</p>
+<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHNG07AZ4KHRaS7k_YotkiGRnl7kIwbX9hMQ&s" alt="塔菲盒官方下载-永雏塔菲盒(Taffy盒)下载v1.0 安卓版-100手游网"></p>
+<p>这里已经通过域名解析服务器IP，后续宝塔面板一键部署该域名解析的服务器上实现了建站。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717095245678.png" alt="image-20240717095245678"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717102335544.png" alt="image-20240717102335544"></p>
+<p>现在只是单独一个网站，那么假设我在对应的域名目录下新建除了这个网站目录之外的博客目录，并在里面部署网站的话，那么这个站点则也会出现在这个域名的目录结构下，那么会呈现的效果也就是这样</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717102620385.png" alt="image-20240717102620385"></p>
+<p>​					<strong>对应的目录型站点也就成立了</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717102705476.png"></p>
+<p>结构也就显而易见了</p>
+<p><strong>bbs.xiaodi8.com —对应主目录网站</strong> </p>
+<p><strong>bbs.xiaodi8.com&#x2F;blog —wordpress程序</strong></p>
+<p>一个网站，两个程序，作为目录型站点，任何一个程序出现漏洞，都可以进入安全测试</p>
+<h4><span id="端口型">端口型</span></h4><p>新的网站部署过程中，可以采用对域名bbs.xiaodi8.com额外划出88端口这样的操作，这个时候也是实现了一个网站多个程序的效果</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717103213134.png" alt="image-20240717103213134"></p>
+<p>这个其实本质上也不用我额外多说，就是类似这样的结构</p>
+<p><strong>bbs.xiaodi8.com –主网站</strong></p>
+<p><strong>bbs.xiaodi8.com:8081  –wordpress程序</strong></p>
+<h4><span id="多个站点">多个站点</span></h4><p>多个站点类的网站其实原理也比较通俗，就是通过一些子域名实现多程序的部署</p>
+<p>类似这里直接给即将部署的服务额外的域名edu.xiaodi8.com</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717103544082.png" alt="image-20240717103544082"></p>
+<p><strong>对应这两个域名解析都指向服务器IP</strong></p>
+<p><strong>给定目标是bbs.xiaodi8.com 交给你渗透，我们也就可以尝试对服务下 edu.xiaodi8.com进行安全测试。毕竟二者指向IP相同</strong></p>
+<p>这三种网络结构，也给了我们更多的可能性和更多的目标。 </p>
+<h3><span id="插件">插件</span></h3><p>一般的站长，为了满足网站更多的功能亦或是让自己管理更加方便，可能都会安装一些插件，在安装插件的过程中，如果插件爆出了问题，那么也是会对网站本身造成危害。</p>
+<p>web源码插件</p>
+<p>web应用插件  类似phpmyadmin -设计是便于管理数据库的</p>
+<p>类似的使用fofa就能找到很多部署在公网上的phpmyadmin站点</p>
+<p>对应的fofa站点：<a href="fofa.so">fofa</a></p>
+<p>fofa搜索语法：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717105107703.png" alt="image-20240717105107703"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112530642.png" alt="image-20240717112530642"></p>
+<p><strong>方便了管理者管理数据库，也拓展了攻击者通过这个接口攻击不支持外链数据库的可能性。</strong></p>
+<h3><span id="服务器应用">服务器应用</span></h3><p><strong>ftp</strong>  方便管理员进行文件传输操作，也方便攻击者攻击ftp协议服务 比如上传一些后门文件等等</p>
+<h3><span id="总结">总结</span></h3><p><strong>电子功能越多，对应的可攻击点越多</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112447372.png" alt="image-20240717112447372"></p>
+<h2><span id="番外安全-域名amp服务器本身amp服务厂商amp管理人员">番外安全-域名&amp;服务器本身&amp;服务厂商&amp;管理人员</span></h2><h3><span id="域名">域名</span></h3><p>对于一个由服务器+域名组成的服务：</p>
+<p><strong>假设</strong> </p>
+<p>如果攻击者能够得到阿里云本身的账号密码，那么登录进去就可以进行这个域名的解析管理：</p>
+<p>所以作为攻击者，如果可以收集到对应域名的注册商，对这个域名的使用人员采取社工学的信息收集（<strong>直接爆破域名注册平台风险是非常大的，同时对于这种未授权行为是由一套非常严格的管控措施的，所以请读者不要进行一些未授权的行为！如有违规行为后果自负</strong>）</p>
+<p><strong>对使用人员的信息收集可以从其在不同站点的使用库入手</strong>，对应的推敲出这个平台的号码，可以发掘这个域名注册平台注册密码时是否需要大写或者特殊符号等，然后结合其他站点这个使用人员的个人习惯推敲对应的账号密码。</p>
+<p>抑或是通过<strong>搭建钓鱼站点以及钓鱼邮件</strong>的方式，对照域名注册平台的要求设置注册密码时的框架，这个时候大体上该使用者极有可能会采取同一套密码进行注册</p>
+<p><strong>甚至可以直接对使用者本人进行一些诱导，直接和使用者本人进行接触</strong>并进行多维度的渗透，看看这个使用者当前阶段所做的事，投其所好攻其必救，直接将密码凭据拿走。这就是点对点的攻击desu</p>
+<p>因为本质上，服务器就是人管理的</p>
+<h3><span id="实战">实战</span></h3><h4><span id="日edu">日edu</span></h4><p><strong>这个素材是21年左右的，不过还是有实践意义的</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717153941814.png" alt="image-20240717153941814"></p>
+<p><strong>信息点1</strong></p>
+<p>采用的是DMU email 虽然不知道是不是学校本身的logo之类的，但也可以搜一下看看</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717154900573.png" alt="image-20240717154900573"></p>
+<p>可以发现确实是他们学校自己的logo，这边2024年已经出台了很多对应的管理办法等等提高用户安全意识了，不过也可以趁此机会看看有没有过滤器，过滤的点是什么。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717155310868.png" alt="image-20240717155310868"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717155602753.png" alt="image-20240717155602753"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717155634953.png" alt="image-20240717155634953"></p>
+<p><strong>信息点2</strong></p>
+<p>爆破端口发现了8080上部署了一个网关类服务，采用的是eYou邮件网关，去网上搜一下对应的有没有存在什么漏洞。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717154944753.png" alt="image-20240717154944753"></p>
+<p>好家伙，已经明摆着让我们攻击了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717155047976.png" alt="image-20240717155047976"></p>
+<p>也就是在这个网站上，对应的两个服务中只要有一个被我成功应用到了，那就有机会把整个服务器拿下。</p>
+<p>这里对应了端口类服务</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717161623661.png" alt="image-20240717161623661"></p>
+<p>目前已修复成这样，大概是外包给安全公司了，大家就暂时别想了（）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717154729681.png" alt="image-20240717154729681"></p>
+<h4><span id="日企业站点">日企业站点</span></h4><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717161706580.png" alt="image-20240717161706580"></p>
+<p><strong>甚至phpmyadmin也是暴露在8081上的，那么可以考虑一下这个第三方应用有没有弱口令可以作为攻击点</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717161721031.png" alt="image-20240717161721031"></p>
+<h4><span id="日网站">日网站</span></h4><p>在这里略显无从下手，无法找到明面上的太多漏洞</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717161916481.png" alt="image-20240717161916481"></p>
+<p>这个时候也是通过信息收集，发现其管理者为了方便上了ftp服务，这里就可以直接这么利用</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717162306688.png" alt="image-20240717162306688"></p>
+<p>这就是安装了服务器应用的网站典型，ftp协议也成为了对应的攻击点</p>
+<h2><span id="考虑阻碍-站库分离ampcdnampwapamp负载均衡amp主机防护">考虑阻碍-站库分离&amp;CDN&amp;WAP&amp;负载均衡&amp;主机防护</span></h2><h3><span id="站库分离">站库分离</span></h3><p>搭建网站的过程中，一般会填写一些数据库的信息。那么有一种情况，管理者将源码放在一个IP，数据库则对应部署在另一个IP，这么做就属于网站建立后会调用远端的数据库，形成一个站库分离。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717162645305.png" alt="image-20240717162645305"></p>
+<p>站库分离的好处是容易导致攻击者陷入下面的情境：</p>
+<p>攻击者攻击的漏洞是基于攻击数据库的</p>
+<p>攻击者拿下了网站源码对应的服务器，但是发现数据库不在服务器上</p>
+<p>这真是想想就会让攻击者红温</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/008jCdW0gy1hriyt8rqkwj30xd0xinbv.jpg" alt="img"></p>
+<h3><span id="cdn加速服务">CDN加速服务</span></h3><p>CDN就是为了解决网络访问输入的一个服务，具体详参<a href="https://xzb666-hub.github.io/2024/07/10/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E4%B8%8E%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">这篇文章</a></p>
+<p>比如我们访问<strong>Baidu.com</strong>，这时因为Baidu.com想提升用户的体验，那么在冰岛的我访问<strong>Baidu.com</strong>就对应了Baidu在冰岛部署的一个节点所提供的服务，用CDN这样的效果达到提高用户访问效率。</p>
+<p>节点就意味着一种缓存，类似迅雷下载的<a href="https://www.cnblogs.com/erwin/archive/2009/07/24/1529809.html">p2p机制</a>,比如我们从迅雷上下载某个软件，本质上下载的是上一个用户下载后留下的缓存，这种缓存机制本来是为了缓解网站通讯紧张的一种解决方案，但还是留给了安全测试者一个难题，面对访问的网站可能只是浏览器在最近节点爬下来的，而不是真实储存的IP，这个时候的攻击是没有任何危害的，而对于攻击者来说，这个时候是否还有攻击的必要? </p>
+<h3><span id="负载均衡">负载均衡</span></h3><p><a href="https://developer.aliyun.com/article/1486102">负载均衡</a>是在运维里经常出现的概念，其实本质就是一种<strong>防累积</strong>的机制。</p>
+<p>比如京东，淘宝这种网站，对于大规模的用户群里大量的攻击，即使服务器安全，但也排除不了服务器硬件突然崩溃或者累积。</p>
+<p>所以为了防止这种情况，它就会选择多台服务器作为备用机，也就相当于矛盾转移，一台服务器崩溃了那么剩下的服务器就可以顶上。</p>
+<p>宝塔面板中也有这种服务（只是付费，建议自己以后建站搜个教程学）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240718200538430.png" alt="image-20240718200538430"></p>
+<p>也就是说，对于安全测试者，进行安全测试的时候有可能是备用机提供的服务，也就是攻击的服务器极有可能还不是那台核心服务器，拿到的权限可能只是备用机的权限，比如我要得到里面什么东西或者得到flag需要root权限，但备用机只有普通用户权限，这个时候攻击的性价比就难以衡量了。</p>
+<h3><span id="waf防火墙">WAF防火墙</span></h3><p>其实本质就是防止漏洞攻击的一个防护器</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240718201646676.png" alt="image-20240718201646676"></p>
+<h3><span id="主机防护">主机防护</span></h3><p>本质就是杀毒软件，会检测木马or病毒，主机防护还会监听对应的用户操作，比如上传文件等。</p>
+<p>典例：安全狗</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240718201835136.png" alt="image-20240718201835136"></p>
+<p>所以在安全测试中，哪怕攻击点很多，但也还是会遇到很多阻碍，而后续的渗透文章中则会基于如何绕过这些防护器开始说明，同时也会对更多的内容做进一步的拓展。</p>
+<h1><span id="day6信息打点-web架构篇amp域名amp语言amp中间件amp数据库amp系统amp源码获取">Day6：信息打点-Web架构篇&amp;域名&amp;语言&amp;中间件&amp;数据库&amp;系统&amp;源码获取</span></h1><p>一般其实是叫信息收集的，但这里模仿红队的外网打点这一说法，也就叫做信息打点得了。今天主要围绕这些知识点desu</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240718203421598.png" alt="image-20240718203421598"></p>
+<p>信息收集本质收集的其实就这几样：</p>
+<p>基础信息，系统信息，应用信息，防护信息，人员信息，其他信息等</p>
+<h1><span id="源码">源码</span></h1><p><strong>源码获取是十分重要的，后期80%的攻击其实都是基于前面信息收集对该网站构成组的分析</strong></p>
+<p>按照上述知识点所讲述的：</p>
+<p>（1） 第一类源码的区分标准大家都很好理解，就是对应不同的组成特性去爬取我们需要的信息（比如历史漏洞或者补丁等）。</p>
+<p>（2）第二类源码的区分就比较有门道了，它是相对于Web源码开源和收费两种进行区分，如果这个源码是开源的，那么很简单，这也就是可下载的内容，甚至可以扒下来丢给GPT，<strong>那么闭源甚至自主研发这种找不到的呢？</strong>这个该怎么通过被加密甚至是根本拿不到的核心源码，就此找到漏洞，这个就是更为困难的点。</p>
+<p>不过对应的，这些也跟站点本身牵涉到的利益有关。假设是我这个博客，最多也就是网站被挂到孙吧供广大黄牌参观，于我何加焉？？？</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240718204818716.png" alt="image-20240718204818716"></p>
+<h2><span id="案例一个人博客">案例一：个人博客</span></h2><p>xiaodi8.com也是老演员了，该怎么追溯这个网站的组成呢？其实打开浏览器然后对应审查network基本上就可以从默认加载的地址里面找到一些信息 比如后缀.php</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240718205640400.png" alt="image-20240718205640400"></p>
+<p>也可以从上图中的响应头比如server对应的中间件或者X-powered-by对应的语言，当然也可以访问一下版权头之类的看看它采用的程序是否有CMS开源的源码，</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240718205822546.png" alt="image-20240718205822546"></p>
+<p>类似xiaodi8.com采用的就是开源的ZBlog框架以及php语言，同时中间件是基础的Apache，</p>
+<h3><span id="该怎么查询数据库和操作系统嘞">该怎么查询数据库和操作系统嘞</span></h3><h4><span id="操作系统">操作系统</span></h4><p>其实可以在网站的URL栏对应的GET传参中，将类似id&#x3D;6这种传入参数的操作改成ID&#x3D;6，如果仍然满足查询，那么极有可能是windows系统（大小写不敏感），反之则极有可能是Linux系统。</p>
+<p>亦或者可以使用ping命令，通过对应的TTL值去判断操作系统</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240718211654318.png" alt="image-20240718211654318"></p>
+<p> 不过刚刚ping了两个服务器，好像值都不是很契合，这是为什么呢（）挖个坑</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240718211249858.png" alt="image-20240718211249858"></p>
+<p>这里填坑：</p>
+<p>这里一般是判断离哪个大众的TTL值比较近，操作系统对应的就是哪一个。</p>
+<p>而且ping域名和ping真实ip的ping值是相同的，如果给你两个可疑的IP和一个真实的域名，也可以直接用ping和TTL值判断喵！</p>
+<p>这里Satoru拿了Wells的ip作为案例ping了一下，发现对应的TTL值是89，对应的已知他的服务器是阿里云上买的，阿里云市面上的镜像有Linux和windows，那么这里大胆推测Linux（毕竟不信他会自定义一个莫名的SunOS镜像），然后在fofa上对应的搜索一下，就是Linux镜像没错了。</p>
+<h4><span id="数据库的判定">数据库的判定</span></h4><p>数据库的判定一般可能会思考市面上的搭建组合，亦或是采用端口扫描工具直接获取信息，这也同样适用于中间件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20240718212710.png" alt="“”"></p>
+<p>类似于php这种脚本语言，就可以这么搜：php和哪个数据库最搭配？</p>
+<p><strong>甚至可以这样社工你对应测试站点的哥们。。。</strong></p>
+<p>对应的数据库很多，对应的有<strong>access，mysql，redis，mssql，mongDB，oracle，postgresql。</strong></p>
+<p>这些数据库运营的时候很有可能会开放一个端口，这些数据库对应的都有其很常用的端口，这些也可以网上直接搜。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240718213121767.png" alt="不过"></p>
+<p>对应的工具也就推荐一下Nmap等，不过只有手工学好了，用工具才得心应手。</p>
+<p>当然查询的过程中分为主动查询和被动查询，主动查询是类似在<strong>SRC规则中某些应用严令禁止的大流量查询，比如说Nmap等一堆工具直接下去开扫，这样扫的好处是省事省心，那么顺带进去喝个茶其实也就是顺带</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/008jCdW0gy1hriyt8rqkwj30xd0xinbv.jpg" alt="img"></p>
+<p>或者可以被动式查询，从网络上进行一些已知信息的汲取，或者某些工具搭载了被动扫描，<strong>虽然需要我们人为点击然后它对对应的站点发送一些payload，不过只要目标精确也不是什么大问题，这样做甚至可以模仿着人的流量，使攻击更为隐蔽化。</strong></p>
+<p>当然这里更推荐端口扫描的过程中利用一些网上现成的端口扫描工具（反正是这个接口的事），或者全程开着虚拟机作为一个全隔离的测试环境。</p>
+<p>源码得到过后–直接利用公开的漏洞尝试安全测试</p>
+<p>源码-白盒代码审计 挖漏洞</p>
+<p>然后对应的收集信息就可以如此往下拓展</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240718225746116.png" alt="image-20240718225746116"></p>
+<h3><span id="案例二某违法app-面具约会">案例二：某违法app  面具约会</span></h3><p>对应的在模拟器打开该神秘软件，通过burp监听对应的网卡。对应的分析数据包</p>
+<p>对应的，通过分析这个数据包可得， 这个app的接口是借用百度来整的活。</p>
 ]]></content>
       <categories>
         <category>Penetration Testing Basic</category>
