@@ -309,6 +309,8 @@
 
 /* 分类页样式 */
 
+
+
 #page .tag-cloud-list {
   margin: 5em 0 3em;
 }
@@ -354,6 +356,7 @@
 }
 
 /* 标签页样式 */
+
 
 
 #recent-posts > .recent-post-item .post_cover {
