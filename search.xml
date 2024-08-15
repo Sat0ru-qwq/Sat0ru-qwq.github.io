@@ -992,6 +992,390 @@
       </tags>
   </entry>
   <entry>
+    <title></title>
+    <url>/2024/07/20/%E4%BB%8E7%E5%BC%80%E5%A7%8B%E7%9A%84%E6%B8%97%E9%80%8F/</url>
+    <content><![CDATA[<h1><span id="如读者有未授权渗透行为后果自负本站仅作学习用途">如读者有未授权渗透行为，后果自负，本站仅作学习用途</span></h1><h1><span id="day7信息打点-资产泄露ampcms识别ampgit监控ampsvnampds_storeamp备份">Day7:信息打点-资产泄露&amp;CMS识别&amp;Git监控&amp;SVN&amp;DS_Store&amp;备份</span></h1><h1><span id="源码泄露原因">源码泄露原因：</span></h1><p>1.从源码本身的特性入口</p>
+<p>2.从管理员不好的习惯入手</p>
+<p>3.从管理员不好的配置入手</p>
+<p>4.从管理员不好的意识入手</p>
+<p>5.从资源配置入手</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240805164357281.png" alt="image-20240805164357281"></p>
+<h2><span id="tag1">tag1:</span></h2><p>直接获取，比如一些开源的CMS或者市场上可见的CMS，都可以通过类似yunsee平台</p>
+<p>yunsee平台是需要邀请码的，这个可以通过提交市面上比较新的CMS指纹信息</p>
+<h2><span id="tag2">tag2;</span></h2><p>习惯不好，在公网上放了一些备用性文件。这些一般是通过扫描工具直接扫出来的，本质上是管理员自己不好的习惯</p>
+<h2><span id="tag3">tag3:</span></h2><p>配置不当，git泄露–git是开源的分布式版本控制系统，如果开发者执行git init这类初始化目录的操作，创建了.git目录，他们为了防止自己不小心删除一些重要的代码，然后就会采用git，当开发者将代码写好后，忙着上架源码却遗留了git信息，攻击者就可以通过它恢复源代码。</p>
+<p>SVN同理</p>
+<h2><span id="tag4">tag4:</span></h2><p>配置不当.DS_store泄露,DS_store是Mac下用来保存如何展示 文件&#x2F;文件夹 的数据集文件</p>
+<h2><span id="tag5">tag5：</span></h2><p>composer.json是php的管理性文件，可以通过目录扫描开始获得当前目录的一系列信息。</p>
+<h2><span id="tag6">tag6：</span></h2><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240808171007411.png" alt="image-20240808171007411"></p>
+<p>就是从配置文件中找到网站的结构</p>
+<h1><span id="git监控">Git监控</span></h1><p>通过脚本实时监控某些CMS源码的更新程度，第一时间展开审计</p>
+<h1><span id="day8信息打点-系统篇-端口扫描-cdn服务-负载均衡-waf防火墙">Day8:信息打点-系统篇-端口扫描-CDN服务-负载均衡-WAF防火墙</span></h1><h2><span id="网络信息获取-服务厂商amp网络架构">网络信息获取 – 服务厂商&amp;网络架构</span></h2><p>从服务器厂商类似阿里云等入手 但这一般是无奈之举</p>
+<p><a href="IP138.com">IP138.com</a></p>
+<p>网络架构  </p>
+<p>也就是类似这样的情景：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240809221500518.png" alt="image-20240809221500518"></p>
+<p>类似这种情况，我们扫描外网地址没有办法获得内网的信息的</p>
+<p>然后对应的内网资产就是类似的FTP SSH redis各种服务</p>
+<p>同时也会收集类似网段上的信息</p>
+<p>比如在目标对应的某台特定服务器上无法取得信息，但我们取得了同一个网段上的服务器，那么就可以采用一些基本的内网安全测试手段</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240809222225980.png" alt="image-20240809222225980"></p>
+<p>对于内网部署的服务，其映射到外网过后 扫描器就只能扫描到外网的出口地址，那么自然扫不到什么东西。这就是所谓的<strong>内网隔离</strong></p>
+<p>这样的话，也就无法获取所谓的服务器上的完整数据。</p>
+<h2><span id="服务信息获取应用协议amp内网资产">服务信息获取–应用协议&amp;内网资产</span></h2><p>要对常用端口有基本的认识</p>
+<h3><span id="文件共享服务端口">文件共享服务端口</span></h3><table>
+<thead>
+<tr>
+<th align="left">端口号</th>
+<th align="left">端口说明</th>
+<th>攻击方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">21&#x2F;22&#x2F;69</td>
+<td align="left">Ftp&#x2F;TFtp文件传输协议</td>
+<td>匿名上传、下载、爆破和嗅探</td>
+</tr>
+<tr>
+<td align="left">2049</td>
+<td align="left">Nfs服务</td>
+<td>配置不当</td>
+</tr>
+<tr>
+<td align="left">139</td>
+<td align="left">Samba服务</td>
+<td>爆破、未授权访问、远程代码执行</td>
+</tr>
+<tr>
+<td align="left">389</td>
+<td align="left">Ldap目录访问协议</td>
+<td>注入允许、匿名访问、弱口令</td>
+</tr>
+</tbody></table>
+<h3><span id="远程链接服务端口">远程链接服务端口</span></h3><table>
+<thead>
+<tr>
+<th align="left">端口号</th>
+<th align="left">端口说明</th>
+<th align="left">攻击方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">22</td>
+<td align="left">SSH远程连接</td>
+<td align="left">爆破、SSH隧道及内网代理转发、文件传输</td>
+</tr>
+<tr>
+<td align="left">23</td>
+<td align="left">Telnet远程连接</td>
+<td align="left">爆破、嗅探、弱口令</td>
+</tr>
+<tr>
+<td align="left">3389</td>
+<td align="left">Rdp远程桌面连接</td>
+<td align="left">Shift后门(Win sever 2003以下系统)、爆破</td>
+</tr>
+<tr>
+<td align="left">5900</td>
+<td align="left">VNC</td>
+<td align="left">弱口令爆破</td>
+</tr>
+<tr>
+<td align="left">5632</td>
+<td align="left">PyAnywhere服务</td>
+<td align="left">抓密码、代码执行</td>
+</tr>
+</tbody></table>
+<h3><span id="web应用服务端口">Web应用服务端口</span></h3><table>
+<thead>
+<tr>
+<th align="left">端口号</th>
+<th align="left">端口说明</th>
+<th align="left">攻击方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">80&#x2F;443&#x2F;8080</td>
+<td align="left">常见web服务端口</td>
+<td align="left">web攻击、爆破、对应服务器版本漏洞</td>
+</tr>
+<tr>
+<td align="left">7001&#x2F;7002</td>
+<td align="left">weblogic控制台</td>
+<td align="left">Java反序列化、弱口令</td>
+</tr>
+<tr>
+<td align="left">8080&#x2F;8089</td>
+<td align="left">Jboss&#x2F;Resin?Jetty&#x2F;Jenkins</td>
+<td align="left">反序列化、控制台弱口令</td>
+</tr>
+<tr>
+<td align="left">9090</td>
+<td align="left">WebShphere控制台</td>
+<td align="left">Java反序列化、弱口令</td>
+</tr>
+<tr>
+<td align="left">4848</td>
+<td align="left">GlassFish控制台</td>
+<td align="left">弱口令</td>
+</tr>
+<tr>
+<td align="left">1352</td>
+<td align="left">Lotus domino邮件服务</td>
+<td align="left">弱口令、信息泄露、爆破</td>
+</tr>
+<tr>
+<td align="left">10000</td>
+<td align="left">Webmin-Web控制面板</td>
+<td align="left">弱口令</td>
+</tr>
+</tbody></table>
+<h3><span id="数据库服务端口">数据库服务端口</span></h3><table>
+<thead>
+<tr>
+<th align="left">端口号</th>
+<th align="left">端口说明</th>
+<th align="left">攻击方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">3306</td>
+<td align="left">Mysql</td>
+<td align="left">注入、提权、爆破</td>
+</tr>
+<tr>
+<td align="left">1433</td>
+<td align="left">MSSQL数据库</td>
+<td align="left">注入、提权、SA弱口令、爆破</td>
+</tr>
+<tr>
+<td align="left">1521</td>
+<td align="left">Oracle数据库</td>
+<td align="left">TNS爆破、注入、反弹Shell</td>
+</tr>
+<tr>
+<td align="left">5432</td>
+<td align="left">PostgreSQL</td>
+<td align="left">爆破、注入、弱口令</td>
+</tr>
+<tr>
+<td align="left">27017&#x2F;27018</td>
+<td align="left">MongoDB</td>
+<td align="left">爆破、未授权访问</td>
+</tr>
+<tr>
+<td align="left">6379</td>
+<td align="left">Redis数据库</td>
+<td align="left">可尝试未授权访问、弱口令、爆破</td>
+</tr>
+<tr>
+<td align="left">5000</td>
+<td align="left">SysBase&#x2F;DB2数据库</td>
+<td align="left">爆破、注入</td>
+</tr>
+</tbody></table>
+<h3><span id="邮件服务端口">邮件服务端口</span></h3><table>
+<thead>
+<tr>
+<th align="left">端口号</th>
+<th align="left">端口说明</th>
+<th align="left">攻击方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">25</td>
+<td align="left">SMTP邮件服务</td>
+<td align="left">邮件伪造</td>
+</tr>
+<tr>
+<td align="left">110</td>
+<td align="left">POP3协议</td>
+<td align="left">爆破、嗅探</td>
+</tr>
+<tr>
+<td align="left">143</td>
+<td align="left">IMAP协议</td>
+<td align="left">爆破</td>
+</tr>
+</tbody></table>
+<h3><span id="网络常见协议端口">网络常见协议端口</span></h3><table>
+<thead>
+<tr>
+<th align="left">端口号</th>
+<th align="left">端口说明</th>
+<th align="left">攻击方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">53</td>
+<td align="left">DNS域名系统</td>
+<td align="left">允许区域传送、DNS劫持、缓存投毒、欺骗</td>
+</tr>
+<tr>
+<td align="left">67&#x2F;68</td>
+<td align="left">DHCP服务</td>
+<td align="left">劫持、欺骗</td>
+</tr>
+<tr>
+<td align="left">161</td>
+<td align="left">SNMP协议</td>
+<td align="left">爆破、搜集目标内网信息</td>
+</tr>
+</tbody></table>
+<h3><span id="特殊服务端口">特殊服务端口</span></h3><table>
+<thead>
+<tr>
+<th align="left">端口号</th>
+<th align="left">端口说明</th>
+<th align="left">攻击方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">2181</td>
+<td align="left">Zookeeper服务</td>
+<td align="left">未授权访问</td>
+</tr>
+<tr>
+<td align="left">8069</td>
+<td align="left">Zabbix服务</td>
+<td align="left">远程执行、SQL注入</td>
+</tr>
+<tr>
+<td align="left">9200&#x2F;9300</td>
+<td align="left">Elastcsearch服务</td>
+<td align="left">远程执行</td>
+</tr>
+<tr>
+<td align="left">11211</td>
+<td align="left">Memcache服务</td>
+<td align="left">未授权访问</td>
+</tr>
+<tr>
+<td align="left">512&#x2F;513&#x2F;514</td>
+<td align="left">Linux Rexec服务</td>
+<td align="left">爆破、Rlogin登陆</td>
+</tr>
+<tr>
+<td align="left">873</td>
+<td align="left">Rsync服务</td>
+<td align="left">匿名访问、文件上传</td>
+</tr>
+<tr>
+<td align="left">6390</td>
+<td align="left">Svn服务</td>
+<td align="left">Svn泄露、未授权访问</td>
+</tr>
+<tr>
+<td align="left">50000</td>
+<td align="left">SAPManagement Console</td>
+<td align="left">远程代码执行</td>
+</tr>
+</tbody></table>
+<p>可以用Nmap进行扫描</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240810071259400.png" alt="image-20240810071259400"></p>
+<p>对应的扫描获取资产后，就可以查询类似的CVE。</p>
+<p>但不止可以扫单个IP，也可以对旁注或C段入手。</p>
+<p>旁注：同服务器喜爱的不同WEB应用查询服务</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240810071953373.png" alt="image-20240810071953373"></p>
+<p>倘若整个服务器都没有什么安全测试头绪，就可以从C段入手</p>
+<p>C段：同网段下的不同服务器IP下不同的WEB应用查询服务</p>
+<h2><span id="阻碍信息获取-cdnampwafamp负载均衡">阻碍信息获取-CDN&amp;WAF&amp;负载均衡</span></h2><p>这个阻碍本质并非防止攻击，但也会对信息收集和漏洞利用造成影响。</p>
+<p>CDN就是多地缓存以保证用户体验，也就是渗透过程中有时渗透到的只是无关紧要的节点，对本站是没有影响的。</p>
+<p>想看一个站是否部署了CDN服务，就可以通过多地ping的方式</p>
+<p> WAF</p>
+<p>最直接的一般可以<strong>通过看图识waf</strong></p>
+<p><a href="https://www.cnblogs.com/charon1937/p/13799467.html">看图识WAF——搜集常见WAF拦截页面 - Charon·1937 - 博客园 (cnblogs.com)</a></p>
+<p>或者使用waf00f工具</p>
+<h1><span id="day9cdn绕过amp漏洞回链amp接口探针amp全网扫描amp反向邮件">Day9:CDN绕过&amp;漏洞回链&amp;接口探针&amp;全网扫描&amp;反向邮件</span></h1>]]></content>
+      <categories>
+        <category>Penetration Testing Basic</category>
+      </categories>
+      <tags>
+        <tag>pr0gram</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>更底层的指纹收集</title>
+    <url>/2024/07/23/%E4%BF%A1%E6%81%AF%E6%89%93%E7%82%B9/</url>
+    <content><![CDATA[<h1><span id="如读者有未授权渗透行为后果自负本站仅作学习用途">如读者有未授权渗透行为，后果自负，本站仅作学习用途</span></h1><h1><span id="更底层更曲线的指纹信息收集">更底层更曲线的指纹信息收集</span></h1><p>一个站点的指纹信息收集我们往往可以通过一些基本的数据包或者更改大小写路径得到，更简单更高效的方法还可以下一个wappalyzer插件，但其实这个并没有表面可视化那么轻松。</p>
+<p>下面带来更底层更详细的指纹信息收集</p>
+<p>如果采用上面这些方法，依然没办法找到源码，说<strong>明目标系统是那种小众或者商业类型的</strong></p>
+<p> 这个时候，我们便可以采用曲线思路，<strong>通过寻找本网站根目录下的备份文件，源代码包进行下载，（可以利用目录扫描器）</strong></p>
+<p>如果仍然没有找到，则去寻找同套系统的其他网站，扫描这些网站目录下的备份文件和源代码包，从而获取到系统源码。</p>
+<p>可以划分为下面几个步骤来完成。</p>
+<h1><span id="提取特征">提取特征</span></h1><p>重点收集主页特征</p>
+<h2><span id="logo-特征">logo 特征</span></h2><p>请求favicon.ico获取hash</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/8a92b79b2d6142ef01d74c3f30220102.jpeg" alt="image-20210801001330490"></p>
+<h2><span id="关键词特征">关键词特征</span></h2><p>网站title、网站版权信息、javascript关键字信息、html源码结构信息、http返回头特征。</p>
+<p>在渗透测试中，信息收集是关键的第一步。获取和利用网站的基本信息（如网站标题、版权信息、JavaScript 关键字、HTML 源码结构以及 HTTP 返回头特征）可以帮助你了解目标系统的架构、技术堆栈以及潜在的漏洞。以下是如何获取和利用这些信息的详细步骤：</p>
+<h3><span id="1-获取网站标题">1. 获取网站标题</span></h3><h4><span id="获取方法">获取方法</span></h4><ul>
+<li><strong>查看浏览器标签</strong>：直接在浏览器中打开目标网站，查看标签栏的标题。</li>
+<li><strong>查看 HTML 源码</strong>：右键点击页面并选择“查看页面源代码”，找到 <code>&lt;title&gt;</code> 标签。</li>
+</ul>
+<h4><span id="利用方法">利用方法</span></h4><ul>
+<li><strong>识别网站类型和用途</strong>：标题通常包含网站的名称和用途，有助于快速了解目标网站的类型。</li>
+<li><strong>搜索公开信息</strong>：使用标题在搜索引擎中查找与目标网站相关的公开信息，可能会发现有用的背景资料。</li>
+</ul>
+<h3><span id="2-获取网站版权信息">2. 获取网站版权信息</span></h3><h4><span id="获取方法">获取方法</span></h4><ul>
+<li><strong>页面底部查看</strong>：版权信息通常位于网页底部的页脚。</li>
+<li><strong>查看 HTML 源码</strong>：在查看源码时搜索关键词如 “©”, “版权所有”, “Copyright”。</li>
+</ul>
+<h4><span id="利用方法">利用方法</span></h4><ul>
+<li><strong>确定所有者信息</strong>：版权信息可以帮助你确认网站的所有者或开发公司。</li>
+<li><strong>收集联系信息</strong>：有时版权信息会包含联系方式，便于后续的社会工程学攻击或责任报告。</li>
+</ul>
+<h3><span id="3-获取-javascript-关键字信息">3. 获取 JavaScript 关键字信息</span></h3><h4><span id="获取方法">获取方法</span></h4><ul>
+<li><strong>查看 HTML 源码</strong>：在查看源码时搜索 <code>&lt;script&gt;</code> 标签。</li>
+<li><strong>使用开发者工具</strong>：打开浏览器的开发者工具（F12），在“控制台”或“源代码”标签中查看加载的 JavaScript 文件。</li>
+</ul>
+<h4><span id="利用方法">利用方法</span></h4><ul>
+<li><strong>识别使用的框架和库</strong>：JavaScript 文件名称和内容可以揭示使用的前端框架和库（如 jQuery, React, Angular）。</li>
+<li><strong>查找潜在漏洞</strong>：了解使用的库版本后，可以查找已知漏洞和安全公告，寻找可能的攻击向量。</li>
+</ul>
+<h3><span id="4-获取-html-源码结构信息">4. 获取 HTML 源码结构信息</span></h3><h4><span id="获取方法">获取方法</span></h4><ul>
+<li><strong>查看页面源代码</strong>：右键点击页面并选择“查看页面源代码”。</li>
+<li><strong>使用抓取工具</strong>：使用工具如 Wget 或 cURL 来下载整个网站的 HTML 源码。</li>
+</ul>
+<h4><span id="利用方法">利用方法</span></h4><ul>
+<li><strong>分析页面结构</strong>：了解页面的 DOM 结构，有助于识别隐藏的表单字段、注释和未引用的资源。</li>
+<li><strong>发现输入点</strong>：定位所有用户输入点（如表单、查询参数），便于后续的注入攻击测试。</li>
+</ul>
+<h3><span id="5-获取-http-返回头特征">5. 获取 HTTP 返回头特征</span></h3><h4><span id="获取方法">获取方法</span></h4><ul>
+<li><strong>使用浏览器开发者工具</strong>：在“网络”标签中查看 HTTP 响应头。</li>
+<li><strong>使用命令行工具</strong>：使用工具如 cURL 或 telnet 查看 HTTP 响应头。<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">curl -I http://example.com</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4><span id="利用方法">利用方法</span></h4><ul>
+<li><strong>识别服务器软件和版本</strong>：从 <code>Server</code> 头部字段可以获取服务器软件的信息（如 Apache, Nginx），有助于查找特定版本的已知漏洞。</li>
+<li><strong>分析安全配置</strong>：检查 HTTP 头部字段如 <code>X-Frame-Options</code>, <code>X-Content-Type-Options</code>, <code>Content-Security-Policy</code> 等，评估网站的安全配置。</li>
+<li><strong>识别会话管理机制</strong>：从 <code>Set-Cookie</code> 头部字段中提取会话管理相关的信息，评估是否存在会话劫持的风险。</li>
+</ul>
+<h3><span id="实践工具">实践工具</span></h3><ol>
+<li><strong>Nmap</strong>：网络扫描工具，可以用于发现开放端口、服务和操作系统信息。</li>
+<li><strong>Burp Suite</strong>：强大的安全测试工具，支持抓包、修改请求和自动化扫描。</li>
+<li><strong>Nikto</strong>：Web 服务器扫描工具，能够检测常见的漏洞和错误配置。</li>
+<li><strong>WhatWeb</strong>：识别网站使用的技术堆栈。</li>
+<li><strong>Wappalyzer</strong>：浏览器插件，快速识别网站使用的技术和平台。</li>
+</ol>
+<h3><span id="结合以上信息进行渗透测试">结合以上信息进行渗透测试</span></h3><ol>
+<li><strong>初步侦察</strong>：通过网站标题和版权信息，了解网站的基本信息和所有者。</li>
+<li><strong>技术栈分析</strong>：通过 JavaScript 关键字、HTML 源码和 HTTP 返回头信息，识别网站使用的技术和框架。</li>
+<li><strong>漏洞扫描</strong>：使用识别出的技术栈信息，在相关漏洞数据库（如 CVE）中查找已知漏洞，进行漏洞扫描和测试。</li>
+<li><strong>输入点测试</strong>：根据 HTML 源码结构信息，定位所有用户输入点，进行注入攻击和 XSS 测试。</li>
+<li><strong>安全配置评估</strong>：通过 HTTP 返回头特征，评估网站的安全配置，查找配置漏洞和潜在风险。</li>
+</ol>
+<h2><span id="资产收集">资产收集</span></h2><h2><span id="fofaviewer">fofaviewer</span></h2><p>下载地址:<a href="https://github.com/wgpsec/fofa_viewer">https://github.com/wgpsec/fofa_viewer</a></p>
+<p>需要fofa API会员key 可以搭配学生认证使用</p>
+<h2><span id="自建插件">自建插件</span></h2><p>挖个坑，后续会填</p>
+<p><a href="https://gitee.com/nuwa-project/nuclei">nuclei: 基于可配置模板的快速漏洞扫描引擎，漏洞库模板1100+ (gitee.com)</a></p>
+]]></content>
+      <categories>
+        <category>Penetration Testing Basic</category>
+      </categories>
+      <tags>
+        <tag>info</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>更底层更方便的一些部署</title>
     <url>/2024/08/07/vscode%E5%92%8Chtml%EF%BC%8Cjavascript%E5%92%8CDocker/</url>
     <content><![CDATA[<p>WARNING ：<strong>请先有一定的linux命令基础再接触并进行部署</strong></p>
@@ -1630,390 +2014,6 @@
       </categories>
       <tags>
         <tag>tools</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>更底层的指纹收集</title>
-    <url>/2024/07/23/%E4%BF%A1%E6%81%AF%E6%89%93%E7%82%B9/</url>
-    <content><![CDATA[<h1><span id="如读者有未授权渗透行为后果自负本站仅作学习用途">如读者有未授权渗透行为，后果自负，本站仅作学习用途</span></h1><h1><span id="更底层更曲线的指纹信息收集">更底层更曲线的指纹信息收集</span></h1><p>一个站点的指纹信息收集我们往往可以通过一些基本的数据包或者更改大小写路径得到，更简单更高效的方法还可以下一个wappalyzer插件，但其实这个并没有表面可视化那么轻松。</p>
-<p>下面带来更底层更详细的指纹信息收集</p>
-<p>如果采用上面这些方法，依然没办法找到源码，说<strong>明目标系统是那种小众或者商业类型的</strong></p>
-<p> 这个时候，我们便可以采用曲线思路，<strong>通过寻找本网站根目录下的备份文件，源代码包进行下载，（可以利用目录扫描器）</strong></p>
-<p>如果仍然没有找到，则去寻找同套系统的其他网站，扫描这些网站目录下的备份文件和源代码包，从而获取到系统源码。</p>
-<p>可以划分为下面几个步骤来完成。</p>
-<h1><span id="提取特征">提取特征</span></h1><p>重点收集主页特征</p>
-<h2><span id="logo-特征">logo 特征</span></h2><p>请求favicon.ico获取hash</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/8a92b79b2d6142ef01d74c3f30220102.jpeg" alt="image-20210801001330490"></p>
-<h2><span id="关键词特征">关键词特征</span></h2><p>网站title、网站版权信息、javascript关键字信息、html源码结构信息、http返回头特征。</p>
-<p>在渗透测试中，信息收集是关键的第一步。获取和利用网站的基本信息（如网站标题、版权信息、JavaScript 关键字、HTML 源码结构以及 HTTP 返回头特征）可以帮助你了解目标系统的架构、技术堆栈以及潜在的漏洞。以下是如何获取和利用这些信息的详细步骤：</p>
-<h3><span id="1-获取网站标题">1. 获取网站标题</span></h3><h4><span id="获取方法">获取方法</span></h4><ul>
-<li><strong>查看浏览器标签</strong>：直接在浏览器中打开目标网站，查看标签栏的标题。</li>
-<li><strong>查看 HTML 源码</strong>：右键点击页面并选择“查看页面源代码”，找到 <code>&lt;title&gt;</code> 标签。</li>
-</ul>
-<h4><span id="利用方法">利用方法</span></h4><ul>
-<li><strong>识别网站类型和用途</strong>：标题通常包含网站的名称和用途，有助于快速了解目标网站的类型。</li>
-<li><strong>搜索公开信息</strong>：使用标题在搜索引擎中查找与目标网站相关的公开信息，可能会发现有用的背景资料。</li>
-</ul>
-<h3><span id="2-获取网站版权信息">2. 获取网站版权信息</span></h3><h4><span id="获取方法">获取方法</span></h4><ul>
-<li><strong>页面底部查看</strong>：版权信息通常位于网页底部的页脚。</li>
-<li><strong>查看 HTML 源码</strong>：在查看源码时搜索关键词如 “©”, “版权所有”, “Copyright”。</li>
-</ul>
-<h4><span id="利用方法">利用方法</span></h4><ul>
-<li><strong>确定所有者信息</strong>：版权信息可以帮助你确认网站的所有者或开发公司。</li>
-<li><strong>收集联系信息</strong>：有时版权信息会包含联系方式，便于后续的社会工程学攻击或责任报告。</li>
-</ul>
-<h3><span id="3-获取-javascript-关键字信息">3. 获取 JavaScript 关键字信息</span></h3><h4><span id="获取方法">获取方法</span></h4><ul>
-<li><strong>查看 HTML 源码</strong>：在查看源码时搜索 <code>&lt;script&gt;</code> 标签。</li>
-<li><strong>使用开发者工具</strong>：打开浏览器的开发者工具（F12），在“控制台”或“源代码”标签中查看加载的 JavaScript 文件。</li>
-</ul>
-<h4><span id="利用方法">利用方法</span></h4><ul>
-<li><strong>识别使用的框架和库</strong>：JavaScript 文件名称和内容可以揭示使用的前端框架和库（如 jQuery, React, Angular）。</li>
-<li><strong>查找潜在漏洞</strong>：了解使用的库版本后，可以查找已知漏洞和安全公告，寻找可能的攻击向量。</li>
-</ul>
-<h3><span id="4-获取-html-源码结构信息">4. 获取 HTML 源码结构信息</span></h3><h4><span id="获取方法">获取方法</span></h4><ul>
-<li><strong>查看页面源代码</strong>：右键点击页面并选择“查看页面源代码”。</li>
-<li><strong>使用抓取工具</strong>：使用工具如 Wget 或 cURL 来下载整个网站的 HTML 源码。</li>
-</ul>
-<h4><span id="利用方法">利用方法</span></h4><ul>
-<li><strong>分析页面结构</strong>：了解页面的 DOM 结构，有助于识别隐藏的表单字段、注释和未引用的资源。</li>
-<li><strong>发现输入点</strong>：定位所有用户输入点（如表单、查询参数），便于后续的注入攻击测试。</li>
-</ul>
-<h3><span id="5-获取-http-返回头特征">5. 获取 HTTP 返回头特征</span></h3><h4><span id="获取方法">获取方法</span></h4><ul>
-<li><strong>使用浏览器开发者工具</strong>：在“网络”标签中查看 HTTP 响应头。</li>
-<li><strong>使用命令行工具</strong>：使用工具如 cURL 或 telnet 查看 HTTP 响应头。<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">curl -I http://example.com</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4><span id="利用方法">利用方法</span></h4><ul>
-<li><strong>识别服务器软件和版本</strong>：从 <code>Server</code> 头部字段可以获取服务器软件的信息（如 Apache, Nginx），有助于查找特定版本的已知漏洞。</li>
-<li><strong>分析安全配置</strong>：检查 HTTP 头部字段如 <code>X-Frame-Options</code>, <code>X-Content-Type-Options</code>, <code>Content-Security-Policy</code> 等，评估网站的安全配置。</li>
-<li><strong>识别会话管理机制</strong>：从 <code>Set-Cookie</code> 头部字段中提取会话管理相关的信息，评估是否存在会话劫持的风险。</li>
-</ul>
-<h3><span id="实践工具">实践工具</span></h3><ol>
-<li><strong>Nmap</strong>：网络扫描工具，可以用于发现开放端口、服务和操作系统信息。</li>
-<li><strong>Burp Suite</strong>：强大的安全测试工具，支持抓包、修改请求和自动化扫描。</li>
-<li><strong>Nikto</strong>：Web 服务器扫描工具，能够检测常见的漏洞和错误配置。</li>
-<li><strong>WhatWeb</strong>：识别网站使用的技术堆栈。</li>
-<li><strong>Wappalyzer</strong>：浏览器插件，快速识别网站使用的技术和平台。</li>
-</ol>
-<h3><span id="结合以上信息进行渗透测试">结合以上信息进行渗透测试</span></h3><ol>
-<li><strong>初步侦察</strong>：通过网站标题和版权信息，了解网站的基本信息和所有者。</li>
-<li><strong>技术栈分析</strong>：通过 JavaScript 关键字、HTML 源码和 HTTP 返回头信息，识别网站使用的技术和框架。</li>
-<li><strong>漏洞扫描</strong>：使用识别出的技术栈信息，在相关漏洞数据库（如 CVE）中查找已知漏洞，进行漏洞扫描和测试。</li>
-<li><strong>输入点测试</strong>：根据 HTML 源码结构信息，定位所有用户输入点，进行注入攻击和 XSS 测试。</li>
-<li><strong>安全配置评估</strong>：通过 HTTP 返回头特征，评估网站的安全配置，查找配置漏洞和潜在风险。</li>
-</ol>
-<h2><span id="资产收集">资产收集</span></h2><h2><span id="fofaviewer">fofaviewer</span></h2><p>下载地址:<a href="https://github.com/wgpsec/fofa_viewer">https://github.com/wgpsec/fofa_viewer</a></p>
-<p>需要fofa API会员key 可以搭配学生认证使用</p>
-<h2><span id="自建插件">自建插件</span></h2><p>挖个坑，后续会填</p>
-<p><a href="https://gitee.com/nuwa-project/nuclei">nuclei: 基于可配置模板的快速漏洞扫描引擎，漏洞库模板1100+ (gitee.com)</a></p>
-]]></content>
-      <categories>
-        <category>Penetration Testing Basic</category>
-      </categories>
-      <tags>
-        <tag>info</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2024/07/20/%E4%BB%8E7%E5%BC%80%E5%A7%8B%E7%9A%84%E6%B8%97%E9%80%8F/</url>
-    <content><![CDATA[<h1><span id="如读者有未授权渗透行为后果自负本站仅作学习用途">如读者有未授权渗透行为，后果自负，本站仅作学习用途</span></h1><h1><span id="day7信息打点-资产泄露ampcms识别ampgit监控ampsvnampds_storeamp备份">Day7:信息打点-资产泄露&amp;CMS识别&amp;Git监控&amp;SVN&amp;DS_Store&amp;备份</span></h1><h1><span id="源码泄露原因">源码泄露原因：</span></h1><p>1.从源码本身的特性入口</p>
-<p>2.从管理员不好的习惯入手</p>
-<p>3.从管理员不好的配置入手</p>
-<p>4.从管理员不好的意识入手</p>
-<p>5.从资源配置入手</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240805164357281.png" alt="image-20240805164357281"></p>
-<h2><span id="tag1">tag1:</span></h2><p>直接获取，比如一些开源的CMS或者市场上可见的CMS，都可以通过类似yunsee平台</p>
-<p>yunsee平台是需要邀请码的，这个可以通过提交市面上比较新的CMS指纹信息</p>
-<h2><span id="tag2">tag2;</span></h2><p>习惯不好，在公网上放了一些备用性文件。这些一般是通过扫描工具直接扫出来的，本质上是管理员自己不好的习惯</p>
-<h2><span id="tag3">tag3:</span></h2><p>配置不当，git泄露–git是开源的分布式版本控制系统，如果开发者执行git init这类初始化目录的操作，创建了.git目录，他们为了防止自己不小心删除一些重要的代码，然后就会采用git，当开发者将代码写好后，忙着上架源码却遗留了git信息，攻击者就可以通过它恢复源代码。</p>
-<p>SVN同理</p>
-<h2><span id="tag4">tag4:</span></h2><p>配置不当.DS_store泄露,DS_store是Mac下用来保存如何展示 文件&#x2F;文件夹 的数据集文件</p>
-<h2><span id="tag5">tag5：</span></h2><p>composer.json是php的管理性文件，可以通过目录扫描开始获得当前目录的一系列信息。</p>
-<h2><span id="tag6">tag6：</span></h2><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240808171007411.png" alt="image-20240808171007411"></p>
-<p>就是从配置文件中找到网站的结构</p>
-<h1><span id="git监控">Git监控</span></h1><p>通过脚本实时监控某些CMS源码的更新程度，第一时间展开审计</p>
-<h1><span id="day8信息打点-系统篇-端口扫描-cdn服务-负载均衡-waf防火墙">Day8:信息打点-系统篇-端口扫描-CDN服务-负载均衡-WAF防火墙</span></h1><h2><span id="网络信息获取-服务厂商amp网络架构">网络信息获取 – 服务厂商&amp;网络架构</span></h2><p>从服务器厂商类似阿里云等入手 但这一般是无奈之举</p>
-<p><a href="IP138.com">IP138.com</a></p>
-<p>网络架构  </p>
-<p>也就是类似这样的情景：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240809221500518.png" alt="image-20240809221500518"></p>
-<p>类似这种情况，我们扫描外网地址没有办法获得内网的信息的</p>
-<p>然后对应的内网资产就是类似的FTP SSH redis各种服务</p>
-<p>同时也会收集类似网段上的信息</p>
-<p>比如在目标对应的某台特定服务器上无法取得信息，但我们取得了同一个网段上的服务器，那么就可以采用一些基本的内网安全测试手段</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240809222225980.png" alt="image-20240809222225980"></p>
-<p>对于内网部署的服务，其映射到外网过后 扫描器就只能扫描到外网的出口地址，那么自然扫不到什么东西。这就是所谓的<strong>内网隔离</strong></p>
-<p>这样的话，也就无法获取所谓的服务器上的完整数据。</p>
-<h2><span id="服务信息获取应用协议amp内网资产">服务信息获取–应用协议&amp;内网资产</span></h2><p>要对常用端口有基本的认识</p>
-<h3><span id="文件共享服务端口">文件共享服务端口</span></h3><table>
-<thead>
-<tr>
-<th align="left">端口号</th>
-<th align="left">端口说明</th>
-<th>攻击方向</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">21&#x2F;22&#x2F;69</td>
-<td align="left">Ftp&#x2F;TFtp文件传输协议</td>
-<td>匿名上传、下载、爆破和嗅探</td>
-</tr>
-<tr>
-<td align="left">2049</td>
-<td align="left">Nfs服务</td>
-<td>配置不当</td>
-</tr>
-<tr>
-<td align="left">139</td>
-<td align="left">Samba服务</td>
-<td>爆破、未授权访问、远程代码执行</td>
-</tr>
-<tr>
-<td align="left">389</td>
-<td align="left">Ldap目录访问协议</td>
-<td>注入允许、匿名访问、弱口令</td>
-</tr>
-</tbody></table>
-<h3><span id="远程链接服务端口">远程链接服务端口</span></h3><table>
-<thead>
-<tr>
-<th align="left">端口号</th>
-<th align="left">端口说明</th>
-<th align="left">攻击方向</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">22</td>
-<td align="left">SSH远程连接</td>
-<td align="left">爆破、SSH隧道及内网代理转发、文件传输</td>
-</tr>
-<tr>
-<td align="left">23</td>
-<td align="left">Telnet远程连接</td>
-<td align="left">爆破、嗅探、弱口令</td>
-</tr>
-<tr>
-<td align="left">3389</td>
-<td align="left">Rdp远程桌面连接</td>
-<td align="left">Shift后门(Win sever 2003以下系统)、爆破</td>
-</tr>
-<tr>
-<td align="left">5900</td>
-<td align="left">VNC</td>
-<td align="left">弱口令爆破</td>
-</tr>
-<tr>
-<td align="left">5632</td>
-<td align="left">PyAnywhere服务</td>
-<td align="left">抓密码、代码执行</td>
-</tr>
-</tbody></table>
-<h3><span id="web应用服务端口">Web应用服务端口</span></h3><table>
-<thead>
-<tr>
-<th align="left">端口号</th>
-<th align="left">端口说明</th>
-<th align="left">攻击方向</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">80&#x2F;443&#x2F;8080</td>
-<td align="left">常见web服务端口</td>
-<td align="left">web攻击、爆破、对应服务器版本漏洞</td>
-</tr>
-<tr>
-<td align="left">7001&#x2F;7002</td>
-<td align="left">weblogic控制台</td>
-<td align="left">Java反序列化、弱口令</td>
-</tr>
-<tr>
-<td align="left">8080&#x2F;8089</td>
-<td align="left">Jboss&#x2F;Resin?Jetty&#x2F;Jenkins</td>
-<td align="left">反序列化、控制台弱口令</td>
-</tr>
-<tr>
-<td align="left">9090</td>
-<td align="left">WebShphere控制台</td>
-<td align="left">Java反序列化、弱口令</td>
-</tr>
-<tr>
-<td align="left">4848</td>
-<td align="left">GlassFish控制台</td>
-<td align="left">弱口令</td>
-</tr>
-<tr>
-<td align="left">1352</td>
-<td align="left">Lotus domino邮件服务</td>
-<td align="left">弱口令、信息泄露、爆破</td>
-</tr>
-<tr>
-<td align="left">10000</td>
-<td align="left">Webmin-Web控制面板</td>
-<td align="left">弱口令</td>
-</tr>
-</tbody></table>
-<h3><span id="数据库服务端口">数据库服务端口</span></h3><table>
-<thead>
-<tr>
-<th align="left">端口号</th>
-<th align="left">端口说明</th>
-<th align="left">攻击方向</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">3306</td>
-<td align="left">Mysql</td>
-<td align="left">注入、提权、爆破</td>
-</tr>
-<tr>
-<td align="left">1433</td>
-<td align="left">MSSQL数据库</td>
-<td align="left">注入、提权、SA弱口令、爆破</td>
-</tr>
-<tr>
-<td align="left">1521</td>
-<td align="left">Oracle数据库</td>
-<td align="left">TNS爆破、注入、反弹Shell</td>
-</tr>
-<tr>
-<td align="left">5432</td>
-<td align="left">PostgreSQL</td>
-<td align="left">爆破、注入、弱口令</td>
-</tr>
-<tr>
-<td align="left">27017&#x2F;27018</td>
-<td align="left">MongoDB</td>
-<td align="left">爆破、未授权访问</td>
-</tr>
-<tr>
-<td align="left">6379</td>
-<td align="left">Redis数据库</td>
-<td align="left">可尝试未授权访问、弱口令、爆破</td>
-</tr>
-<tr>
-<td align="left">5000</td>
-<td align="left">SysBase&#x2F;DB2数据库</td>
-<td align="left">爆破、注入</td>
-</tr>
-</tbody></table>
-<h3><span id="邮件服务端口">邮件服务端口</span></h3><table>
-<thead>
-<tr>
-<th align="left">端口号</th>
-<th align="left">端口说明</th>
-<th align="left">攻击方向</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">25</td>
-<td align="left">SMTP邮件服务</td>
-<td align="left">邮件伪造</td>
-</tr>
-<tr>
-<td align="left">110</td>
-<td align="left">POP3协议</td>
-<td align="left">爆破、嗅探</td>
-</tr>
-<tr>
-<td align="left">143</td>
-<td align="left">IMAP协议</td>
-<td align="left">爆破</td>
-</tr>
-</tbody></table>
-<h3><span id="网络常见协议端口">网络常见协议端口</span></h3><table>
-<thead>
-<tr>
-<th align="left">端口号</th>
-<th align="left">端口说明</th>
-<th align="left">攻击方向</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">53</td>
-<td align="left">DNS域名系统</td>
-<td align="left">允许区域传送、DNS劫持、缓存投毒、欺骗</td>
-</tr>
-<tr>
-<td align="left">67&#x2F;68</td>
-<td align="left">DHCP服务</td>
-<td align="left">劫持、欺骗</td>
-</tr>
-<tr>
-<td align="left">161</td>
-<td align="left">SNMP协议</td>
-<td align="left">爆破、搜集目标内网信息</td>
-</tr>
-</tbody></table>
-<h3><span id="特殊服务端口">特殊服务端口</span></h3><table>
-<thead>
-<tr>
-<th align="left">端口号</th>
-<th align="left">端口说明</th>
-<th align="left">攻击方向</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">2181</td>
-<td align="left">Zookeeper服务</td>
-<td align="left">未授权访问</td>
-</tr>
-<tr>
-<td align="left">8069</td>
-<td align="left">Zabbix服务</td>
-<td align="left">远程执行、SQL注入</td>
-</tr>
-<tr>
-<td align="left">9200&#x2F;9300</td>
-<td align="left">Elastcsearch服务</td>
-<td align="left">远程执行</td>
-</tr>
-<tr>
-<td align="left">11211</td>
-<td align="left">Memcache服务</td>
-<td align="left">未授权访问</td>
-</tr>
-<tr>
-<td align="left">512&#x2F;513&#x2F;514</td>
-<td align="left">Linux Rexec服务</td>
-<td align="left">爆破、Rlogin登陆</td>
-</tr>
-<tr>
-<td align="left">873</td>
-<td align="left">Rsync服务</td>
-<td align="left">匿名访问、文件上传</td>
-</tr>
-<tr>
-<td align="left">6390</td>
-<td align="left">Svn服务</td>
-<td align="left">Svn泄露、未授权访问</td>
-</tr>
-<tr>
-<td align="left">50000</td>
-<td align="left">SAPManagement Console</td>
-<td align="left">远程代码执行</td>
-</tr>
-</tbody></table>
-<p>可以用Nmap进行扫描</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240810071259400.png" alt="image-20240810071259400"></p>
-<p>对应的扫描获取资产后，就可以查询类似的CVE。</p>
-<p>但不止可以扫单个IP，也可以对旁注或C段入手。</p>
-<p>旁注：同服务器喜爱的不同WEB应用查询服务</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240810071953373.png" alt="image-20240810071953373"></p>
-<p>倘若整个服务器都没有什么安全测试头绪，就可以从C段入手</p>
-<p>C段：同网段下的不同服务器IP下不同的WEB应用查询服务</p>
-<h2><span id="阻碍信息获取-cdnampwafamp负载均衡">阻碍信息获取-CDN&amp;WAF&amp;负载均衡</span></h2><p>这个阻碍本质并非防止攻击，但也会对信息收集和漏洞利用造成影响。</p>
-<p>CDN就是多地缓存以保证用户体验，也就是渗透过程中有时渗透到的只是无关紧要的节点，对本站是没有影响的。</p>
-<p>想看一个站是否部署了CDN服务，就可以通过多地ping的方式</p>
-<p> WAF</p>
-<p>最直接的一般可以<strong>通过看图识waf</strong></p>
-<p><a href="https://www.cnblogs.com/charon1937/p/13799467.html">看图识WAF——搜集常见WAF拦截页面 - Charon·1937 - 博客园 (cnblogs.com)</a></p>
-<p>或者使用waf00f工具</p>
-<h1><span id="day9cdn绕过amp漏洞回链amp接口探针amp全网扫描amp反向邮件">Day9:CDN绕过&amp;漏洞回链&amp;接口探针&amp;全网扫描&amp;反向邮件</span></h1>]]></content>
-      <categories>
-        <category>Penetration Testing Basic</category>
-      </categories>
-      <tags>
-        <tag>pr0gram</tag>
       </tags>
   </entry>
   <entry>
