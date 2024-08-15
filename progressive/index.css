@@ -1,0 +1,30 @@
+#page-header {
+    background-color: #d76d6d;
+  }
+  
+  .pl-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .pl-img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1s;
+  }
+  
+  .pl-visible {
+    opacity: 1;
+  }
+  
+  .pl-blur {
+    /* 小图锯齿多，增加高斯模糊 */
+    filter: blur(50px);
+  }

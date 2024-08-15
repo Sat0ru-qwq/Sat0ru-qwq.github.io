@@ -1,0 +1,448 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Sat0ru_G0j0 | Sat0ru_G0j0</title><meta name="author" content="Satoru"><meta name="copyright" content="Satoru"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="如读者有未授权渗透行为，后果自负，本站仅作学习用途Day7:信息打点-资产泄露&amp;CMS识别&amp;Git监控&amp;SVN&amp;DS_Store&amp;备份源码泄露原因：1.从源码本身的特性入口 2.从管理员不好的习惯入手 3.从管理员不好的配置入手 4.从管理员不好的意识入手 5.从资源配置入手  tag1:直接获取，比如一些开源的CMS或者市场上可见的CMS，都可以通过类似y">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sat0ru_G0j0">
+<meta property="og:url" content="http://example.com/2024/07/20/%E4%BB%8E7%E5%BC%80%E5%A7%8B%E7%9A%84%E6%B8%97%E9%80%8F/index.html">
+<meta property="og:site_name" content="Sat0ru_G0j0">
+<meta property="og:description" content="如读者有未授权渗透行为，后果自负，本站仅作学习用途Day7:信息打点-资产泄露&amp;CMS识别&amp;Git监控&amp;SVN&amp;DS_Store&amp;备份源码泄露原因：1.从源码本身的特性入口 2.从管理员不好的习惯入手 3.从管理员不好的配置入手 4.从管理员不好的意识入手 5.从资源配置入手  tag1:直接获取，比如一些开源的CMS或者市场上可见的CMS，都可以通过类似y">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/cyber.jpg">
+<meta property="article:published_time" content="2024-07-20T07:33:00.000Z">
+<meta property="article:modified_time" content="2024-08-15T01:03:44.716Z">
+<meta property="article:author" content="Satoru">
+<meta property="article:tag" content="pr0gram">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/cyber.jpg"><link rel="shortcut icon" href="/img/Satoru.png"><link rel="canonical" href="http://example.com/2024/07/20/%E4%BB%8E7%E5%BC%80%E5%A7%8B%E7%9A%84%E6%B8%97%E9%80%8F/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Sat0ru_G0j0',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-08-15 09:03:44'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><script src="/live2d-widget/autoload.js"></script><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/style.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn2.codesign.qq.com/icons/XMx86jzlQw0brz3/latest/iconfont.css"><link rel="stylesheet" href="/common/progressive/index.css"><link rel="stylesheet" href="/css/project.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/86.gif" onerror="onerror=null;src='https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112339739.png'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">9</div></a><a href="/source/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/source/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><div class="icat_menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div></div><div class="menus_item"><div class="icat_menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文档</span></a></div></div><div class="menus_item"><div class="icat_menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div><div class="menus_item"><div class="icat_menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div class="menus_item"><div class="icat_menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div class="menus_item"><div class="icat_menus_item"><a class="site-page" href="/project/"><i class="fa-fw fas fa-tasks"></i><span> 待办</span></a></div></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/cyber.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Sat0ru_G0j0"><img class="site-icon" src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717171614467.png# image"/><span class="site-name">Sat0ru_G0j0</span></a></span><div id="menus"></div><div class="menus_items"><div class="menus_item"><div class="icat_menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div></div><div class="menus_item"><div class="icat_menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文档</span></a></div></div><div class="menus_item"><div class="icat_menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div><div class="menus_item"><div class="icat_menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div class="menus_item"><div class="icat_menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div class="menus_item"><div class="icat_menus_item"><a class="site-page" href="/project/"><i class="fa-fw fas fa-tasks"></i><span> 待办</span></a></div></div></div><div id="nav-right"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Untitled</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-07-20T07:33:00.000Z" title="Created 2024-07-20 15:33:00">2024-07-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-08-15T01:03:44.716Z" title="Updated 2024-08-15 09:03:44">2024-08-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/source/categories/Penetration-Testing-Basic/">Penetration Testing Basic</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><nav id="nav"><span id="blog-info"><a href="/" title="Sat0ru_G0j0"><img class="site-icon" src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717171614467.png# image"/><span class="site-name">Sat0ru_G0j0</span></a></span><div id="menus"></div><div class="menus_items"><div class="menus_item"><div class="icat_menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div></div><div class="menus_item"><div class="icat_menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文档</span></a></div></div><div class="menus_item"><div class="icat_menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div><div class="menus_item"><div class="icat_menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div class="menus_item"><div class="icat_menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div class="menus_item"><div class="icat_menus_item"><a class="site-page" href="/project/"><i class="fa-fw fas fa-tasks"></i><span> 待办</span></a></div></div></div><div id="nav-right"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Untitled</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-07-20T07:33:00.000Z" title="Created 2024-07-20 15:33:00">2024-07-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-08-15T01:03:44.716Z" title="Updated 2024-08-15 09:03:44">2024-08-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/source/categories/Penetration-Testing-Basic/">Penetration Testing Basic</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1><span id="如读者有未授权渗透行为后果自负本站仅作学习用途">如读者有未授权渗透行为，后果自负，本站仅作学习用途</span></h1><h1><span id="day7信息打点-资产泄露ampcms识别ampgit监控ampsvnampds_storeamp备份">Day7:信息打点-资产泄露&amp;CMS识别&amp;Git监控&amp;SVN&amp;DS_Store&amp;备份</span></h1><h1><span id="源码泄露原因">源码泄露原因：</span></h1><p>1.从源码本身的特性入口</p>
+<p>2.从管理员不好的习惯入手</p>
+<p>3.从管理员不好的配置入手</p>
+<p>4.从管理员不好的意识入手</p>
+<p>5.从资源配置入手</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240805164357281.png" alt="image-20240805164357281"></p>
+<h2><span id="tag1">tag1:</span></h2><p>直接获取，比如一些开源的CMS或者市场上可见的CMS，都可以通过类似yunsee平台</p>
+<p>yunsee平台是需要邀请码的，这个可以通过提交市面上比较新的CMS指纹信息</p>
+<h2><span id="tag2">tag2;</span></h2><p>习惯不好，在公网上放了一些备用性文件。这些一般是通过扫描工具直接扫出来的，本质上是管理员自己不好的习惯</p>
+<h2><span id="tag3">tag3:</span></h2><p>配置不当，git泄露–git是开源的分布式版本控制系统，如果开发者执行git init这类初始化目录的操作，创建了.git目录，他们为了防止自己不小心删除一些重要的代码，然后就会采用git，当开发者将代码写好后，忙着上架源码却遗留了git信息，攻击者就可以通过它恢复源代码。</p>
+<p>SVN同理</p>
+<h2><span id="tag4">tag4:</span></h2><p>配置不当.DS_store泄露,DS_store是Mac下用来保存如何展示 文件&#x2F;文件夹 的数据集文件</p>
+<h2><span id="tag5">tag5：</span></h2><p>composer.json是php的管理性文件，可以通过目录扫描开始获得当前目录的一系列信息。</p>
+<h2><span id="tag6">tag6：</span></h2><p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240808171007411.png" alt="image-20240808171007411"></p>
+<p>就是从配置文件中找到网站的结构</p>
+<h1><span id="git监控">Git监控</span></h1><p>通过脚本实时监控某些CMS源码的更新程度，第一时间展开审计</p>
+<h1><span id="day8信息打点-系统篇-端口扫描-cdn服务-负载均衡-waf防火墙">Day8:信息打点-系统篇-端口扫描-CDN服务-负载均衡-WAF防火墙</span></h1><h2><span id="网络信息获取-服务厂商amp网络架构">网络信息获取 – 服务厂商&amp;网络架构</span></h2><p>从服务器厂商类似阿里云等入手 但这一般是无奈之举</p>
+<p><a href="IP138.com">IP138.com</a></p>
+<p>网络架构  </p>
+<p>也就是类似这样的情景：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240809221500518.png" alt="image-20240809221500518"></p>
+<p>类似这种情况，我们扫描外网地址没有办法获得内网的信息的</p>
+<p>然后对应的内网资产就是类似的FTP SSH redis各种服务</p>
+<p>同时也会收集类似网段上的信息</p>
+<p>比如在目标对应的某台特定服务器上无法取得信息，但我们取得了同一个网段上的服务器，那么就可以采用一些基本的内网安全测试手段</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240809222225980.png" alt="image-20240809222225980"></p>
+<p>对于内网部署的服务，其映射到外网过后 扫描器就只能扫描到外网的出口地址，那么自然扫不到什么东西。这就是所谓的<strong>内网隔离</strong></p>
+<p>这样的话，也就无法获取所谓的服务器上的完整数据。</p>
+<h2><span id="服务信息获取应用协议amp内网资产">服务信息获取–应用协议&amp;内网资产</span></h2><p>要对常用端口有基本的认识</p>
+<h3><span id="文件共享服务端口">文件共享服务端口</span></h3><table>
+<thead>
+<tr>
+<th align="left">端口号</th>
+<th align="left">端口说明</th>
+<th>攻击方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">21&#x2F;22&#x2F;69</td>
+<td align="left">Ftp&#x2F;TFtp文件传输协议</td>
+<td>匿名上传、下载、爆破和嗅探</td>
+</tr>
+<tr>
+<td align="left">2049</td>
+<td align="left">Nfs服务</td>
+<td>配置不当</td>
+</tr>
+<tr>
+<td align="left">139</td>
+<td align="left">Samba服务</td>
+<td>爆破、未授权访问、远程代码执行</td>
+</tr>
+<tr>
+<td align="left">389</td>
+<td align="left">Ldap目录访问协议</td>
+<td>注入允许、匿名访问、弱口令</td>
+</tr>
+</tbody></table>
+<h3><span id="远程链接服务端口">远程链接服务端口</span></h3><table>
+<thead>
+<tr>
+<th align="left">端口号</th>
+<th align="left">端口说明</th>
+<th align="left">攻击方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">22</td>
+<td align="left">SSH远程连接</td>
+<td align="left">爆破、SSH隧道及内网代理转发、文件传输</td>
+</tr>
+<tr>
+<td align="left">23</td>
+<td align="left">Telnet远程连接</td>
+<td align="left">爆破、嗅探、弱口令</td>
+</tr>
+<tr>
+<td align="left">3389</td>
+<td align="left">Rdp远程桌面连接</td>
+<td align="left">Shift后门(Win sever 2003以下系统)、爆破</td>
+</tr>
+<tr>
+<td align="left">5900</td>
+<td align="left">VNC</td>
+<td align="left">弱口令爆破</td>
+</tr>
+<tr>
+<td align="left">5632</td>
+<td align="left">PyAnywhere服务</td>
+<td align="left">抓密码、代码执行</td>
+</tr>
+</tbody></table>
+<h3><span id="web应用服务端口">Web应用服务端口</span></h3><table>
+<thead>
+<tr>
+<th align="left">端口号</th>
+<th align="left">端口说明</th>
+<th align="left">攻击方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">80&#x2F;443&#x2F;8080</td>
+<td align="left">常见web服务端口</td>
+<td align="left">web攻击、爆破、对应服务器版本漏洞</td>
+</tr>
+<tr>
+<td align="left">7001&#x2F;7002</td>
+<td align="left">weblogic控制台</td>
+<td align="left">Java反序列化、弱口令</td>
+</tr>
+<tr>
+<td align="left">8080&#x2F;8089</td>
+<td align="left">Jboss&#x2F;Resin?Jetty&#x2F;Jenkins</td>
+<td align="left">反序列化、控制台弱口令</td>
+</tr>
+<tr>
+<td align="left">9090</td>
+<td align="left">WebShphere控制台</td>
+<td align="left">Java反序列化、弱口令</td>
+</tr>
+<tr>
+<td align="left">4848</td>
+<td align="left">GlassFish控制台</td>
+<td align="left">弱口令</td>
+</tr>
+<tr>
+<td align="left">1352</td>
+<td align="left">Lotus domino邮件服务</td>
+<td align="left">弱口令、信息泄露、爆破</td>
+</tr>
+<tr>
+<td align="left">10000</td>
+<td align="left">Webmin-Web控制面板</td>
+<td align="left">弱口令</td>
+</tr>
+</tbody></table>
+<h3><span id="数据库服务端口">数据库服务端口</span></h3><table>
+<thead>
+<tr>
+<th align="left">端口号</th>
+<th align="left">端口说明</th>
+<th align="left">攻击方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">3306</td>
+<td align="left">Mysql</td>
+<td align="left">注入、提权、爆破</td>
+</tr>
+<tr>
+<td align="left">1433</td>
+<td align="left">MSSQL数据库</td>
+<td align="left">注入、提权、SA弱口令、爆破</td>
+</tr>
+<tr>
+<td align="left">1521</td>
+<td align="left">Oracle数据库</td>
+<td align="left">TNS爆破、注入、反弹Shell</td>
+</tr>
+<tr>
+<td align="left">5432</td>
+<td align="left">PostgreSQL</td>
+<td align="left">爆破、注入、弱口令</td>
+</tr>
+<tr>
+<td align="left">27017&#x2F;27018</td>
+<td align="left">MongoDB</td>
+<td align="left">爆破、未授权访问</td>
+</tr>
+<tr>
+<td align="left">6379</td>
+<td align="left">Redis数据库</td>
+<td align="left">可尝试未授权访问、弱口令、爆破</td>
+</tr>
+<tr>
+<td align="left">5000</td>
+<td align="left">SysBase&#x2F;DB2数据库</td>
+<td align="left">爆破、注入</td>
+</tr>
+</tbody></table>
+<h3><span id="邮件服务端口">邮件服务端口</span></h3><table>
+<thead>
+<tr>
+<th align="left">端口号</th>
+<th align="left">端口说明</th>
+<th align="left">攻击方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">25</td>
+<td align="left">SMTP邮件服务</td>
+<td align="left">邮件伪造</td>
+</tr>
+<tr>
+<td align="left">110</td>
+<td align="left">POP3协议</td>
+<td align="left">爆破、嗅探</td>
+</tr>
+<tr>
+<td align="left">143</td>
+<td align="left">IMAP协议</td>
+<td align="left">爆破</td>
+</tr>
+</tbody></table>
+<h3><span id="网络常见协议端口">网络常见协议端口</span></h3><table>
+<thead>
+<tr>
+<th align="left">端口号</th>
+<th align="left">端口说明</th>
+<th align="left">攻击方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">53</td>
+<td align="left">DNS域名系统</td>
+<td align="left">允许区域传送、DNS劫持、缓存投毒、欺骗</td>
+</tr>
+<tr>
+<td align="left">67&#x2F;68</td>
+<td align="left">DHCP服务</td>
+<td align="left">劫持、欺骗</td>
+</tr>
+<tr>
+<td align="left">161</td>
+<td align="left">SNMP协议</td>
+<td align="left">爆破、搜集目标内网信息</td>
+</tr>
+</tbody></table>
+<h3><span id="特殊服务端口">特殊服务端口</span></h3><table>
+<thead>
+<tr>
+<th align="left">端口号</th>
+<th align="left">端口说明</th>
+<th align="left">攻击方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">2181</td>
+<td align="left">Zookeeper服务</td>
+<td align="left">未授权访问</td>
+</tr>
+<tr>
+<td align="left">8069</td>
+<td align="left">Zabbix服务</td>
+<td align="left">远程执行、SQL注入</td>
+</tr>
+<tr>
+<td align="left">9200&#x2F;9300</td>
+<td align="left">Elastcsearch服务</td>
+<td align="left">远程执行</td>
+</tr>
+<tr>
+<td align="left">11211</td>
+<td align="left">Memcache服务</td>
+<td align="left">未授权访问</td>
+</tr>
+<tr>
+<td align="left">512&#x2F;513&#x2F;514</td>
+<td align="left">Linux Rexec服务</td>
+<td align="left">爆破、Rlogin登陆</td>
+</tr>
+<tr>
+<td align="left">873</td>
+<td align="left">Rsync服务</td>
+<td align="left">匿名访问、文件上传</td>
+</tr>
+<tr>
+<td align="left">6390</td>
+<td align="left">Svn服务</td>
+<td align="left">Svn泄露、未授权访问</td>
+</tr>
+<tr>
+<td align="left">50000</td>
+<td align="left">SAPManagement Console</td>
+<td align="left">远程代码执行</td>
+</tr>
+</tbody></table>
+<p>可以用Nmap进行扫描</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240810071259400.png" alt="image-20240810071259400"></p>
+<p>对应的扫描获取资产后，就可以查询类似的CVE。</p>
+<p>但不止可以扫单个IP，也可以对旁注或C段入手。</p>
+<p>旁注：同服务器喜爱的不同WEB应用查询服务</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240810071953373.png" alt="image-20240810071953373"></p>
+<p>倘若整个服务器都没有什么安全测试头绪，就可以从C段入手</p>
+<p>C段：同网段下的不同服务器IP下不同的WEB应用查询服务</p>
+<h2><span id="阻碍信息获取-cdnampwafamp负载均衡">阻碍信息获取-CDN&amp;WAF&amp;负载均衡</span></h2><p>这个阻碍本质并非防止攻击，但也会对信息收集和漏洞利用造成影响。</p>
+<p>CDN就是多地缓存以保证用户体验，也就是渗透过程中有时渗透到的只是无关紧要的节点，对本站是没有影响的。</p>
+<p>想看一个站是否部署了CDN服务，就可以通过多地ping的方式</p>
+<p> WAF</p>
+<p>最直接的一般可以<strong>通过看图识waf</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/charon1937/p/13799467.html">看图识WAF——搜集常见WAF拦截页面 - Charon·1937 - 博客园 (cnblogs.com)</a></p>
+<p>或者使用waf00f工具</p>
+<h1><span id="day9cdn绕过amp漏洞回链amp接口探针amp全网扫描amp反向邮件">Day9:CDN绕过&amp;漏洞回链&amp;接口探针&amp;全网扫描&amp;反向邮件</span></h1></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">Satoru</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2024/07/20/%E4%BB%8E7%E5%BC%80%E5%A7%8B%E7%9A%84%E6%B8%97%E9%80%8F/">http://example.com/2024/07/20/%E4%BB%8E7%E5%BC%80%E5%A7%8B%E7%9A%84%E6%B8%97%E9%80%8F/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/source/tags/pr0gram/">pr0gram</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/cyber.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/07/23/%E4%BF%A1%E6%81%AF%E6%89%93%E7%82%B9/" title="更底层的指纹收集"><img class="cover" src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20240723233924.png" onerror="onerror=null;src='https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112339739.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">更底层的指纹收集</div></div></a></div><div class="next-post pull-right"><a href="/2024/07/17/fofa%E8%AF%AD%E6%B3%95/" title="fofa常用语法"><img class="cover" src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717192204406.png" onerror="onerror=null;src='https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/image-20240717112339739.png'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">fofa常用语法</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/07/11/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E7%9A%84%E6%B8%97%E9%80%8F/" title="从0开始的渗透Day1-3desu"><img class="cover" src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/cyber.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-11</div><div class="title">从0开始的渗透Day1-3desu</div></div></a></div><div><a href="/2024/07/15/%E4%BB%8E3%E5%BC%80%E5%A7%8B%E7%9A%84%E6%B8%97%E9%80%8F1/" title="从0开始的渗透Day4-6desu"><img class="cover" src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/cyber.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-15</div><div class="title">从0开始的渗透Day4-6desu</div></div></a></div><div><a href="/2024/07/14/%E6%89%8B%E6%9C%BA+charles+burpsuite%E9%85%8D%E5%90%88%E6%8A%93%E5%8C%85/" title="WX小程序抓包&amp;游戏封包技术"><img class="cover" src="https://cdn.jsdelivr.net/gh/xzb666-hub/myblogimage@img/image/20210605222711573.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-14</div><div class="title">WX小程序抓包&amp;游戏封包技术</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">如读者有未授权渗透行为，后果自负，本站仅作学习用途</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Day7:信息打点-资产泄露&amp;CMS识别&amp;Git监控&amp;SVN&amp;DS_Store&amp;备份</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">源码泄露原因：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.1.</span> <span class="toc-text">tag1:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.2.</span> <span class="toc-text">tag2;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.3.</span> <span class="toc-text">tag3:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.4.</span> <span class="toc-text">tag4:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.5.</span> <span class="toc-text">tag5：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.6.</span> <span class="toc-text">tag6：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">Git监控</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">Day8:信息打点-系统篇-端口扫描-CDN服务-负载均衡-WAF防火墙</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.1.</span> <span class="toc-text">网络信息获取 – 服务厂商&amp;网络架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.2.</span> <span class="toc-text">服务信息获取–应用协议&amp;内网资产</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.2.1.</span> <span class="toc-text">文件共享服务端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.2.2.</span> <span class="toc-text">远程链接服务端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.2.3.</span> <span class="toc-text">Web应用服务端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.2.4.</span> <span class="toc-text">数据库服务端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.2.5.</span> <span class="toc-text">邮件服务端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.2.6.</span> <span class="toc-text">网络常见协议端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.2.7.</span> <span class="toc-text">特殊服务端口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.3.</span> <span class="toc-text">阻碍信息获取-CDN&amp;WAF&amp;负载均衡</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">Day9:CDN绕过&amp;漏洞回链&amp;接口探针&amp;全网扫描&amp;反向邮件</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Satoru</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">从应用开始自顶向下</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer src="/js/cursor.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script async data-pjax src="/js/custom/randombg.js"></script><script src="/js/snowflake.js"></script><script src="/common/progressive/index.js"></script><script type="text/javascript" src="/js/memos/waterfall.min.js"></script><script type="text/javascript" src="/js/memos/project.js"></script><script src="{{ url_for('js/_custom.js') }}"></script><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
